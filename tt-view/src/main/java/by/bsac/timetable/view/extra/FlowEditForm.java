@@ -27,243 +27,243 @@ import by.bsac.timetable.view.util.FormInitializer;
 import components.OneColumnTable;
 
 public class FlowEditForm extends JDialog {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private static final Logger LOGGER = LogManager.getLogger(FlowEditForm.class.getName());
+  private static final Logger LOGGER = LogManager.getLogger(FlowEditForm.class.getName());
 
-	private JTable table;
-	private Flow flow;
-	private JTextField textField;
-	private JTextArea groupInFlowTextArea;
+  private JTable table;
+  private Flow flow;
+  private JTextField textField;
+  private JTextArea groupInFlowTextArea;
 
-	public FlowEditForm() {
+  public FlowEditForm() {
 
-		setBounds(100, 100, 590, 380);
-		setModal(true);
-		setResizable(false);
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		getContentPane().setLayout(new BorderLayout());
+    setBounds(100, 100, 590, 380);
+    setModal(true);
+    setResizable(false);
+    setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    getContentPane().setLayout(new BorderLayout());
 
-		JPanel contentPanel = new JPanel();
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-		addWindowListener(new java.awt.event.WindowAdapter() {
-			@Override
-			public void windowOpened(java.awt.event.WindowEvent evt) {
-				try {
-					FormInitializer.initFlowTable(table);
-				} catch (CommandException ex) {
-					LOGGER.error(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-				}
-			}
-		});
+    JPanel contentPanel = new JPanel();
+    contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+    getContentPane().add(contentPanel, BorderLayout.CENTER);
+    contentPanel.setLayout(null);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowOpened(java.awt.event.WindowEvent evt) {
+        try {
+          FormInitializer.initFlowTable(table);
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        }
+      }
+    });
 
-		JLabel label = new JLabel("Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ/Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ");
-		label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label.setBounds(323, 56, 220, 18);
-		contentPanel.add(label);
+    JLabel label = new JLabel("Ðåäàêòèðîâàíèå/Äîáàâëåíèå");
+    label.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label.setBounds(323, 56, 220, 18);
+    contentPanel.add(label);
 
-		JButton editButton = new JButton("Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ");
-		editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JButton editButton = new JButton("Èçìåíèòü");
+    editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton deleteButton = new JButton("Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ");
-		deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JButton deleteButton = new JButton("Óäàëèòü");
+    deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		editButton.setVisible(false);
-		editButton.setBounds(323, 126, 100, 26);
-		contentPanel.add(editButton);
+    editButton.setVisible(false);
+    editButton.setBounds(323, 126, 100, 26);
+    contentPanel.add(editButton);
 
-		editButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+    editButton.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
 
-				String nameFlow = textField.getText();
-				boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFlow);
+        String nameFlow = textField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFlow);
 
-				if (isTableHasNot) {
+        if (isTableHasNot) {
 
-					try {
-						editButton.setEnabled(false);
+          try {
+            editButton.setEnabled(false);
 
-						flow.setName(textField.getText());
+            flow.setName(textField.getText());
 
-						CommandFacade.updateFlow(flow);
-						FormInitializer.initFlowTable(table);
+            CommandFacade.updateFlow(flow);
+            FormInitializer.initFlowTable(table);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-					} finally {
-						editButton.setEnabled(true);
-						resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
-					}
-				}
-			}
-		});
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            editButton.setEnabled(true);
+            resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
+          }
+        }
+      }
+    });
 
-		deleteButton.setBounds(388, 163, 89, 23);
-		contentPanel.add(deleteButton);
-		deleteButton.setVisible(false);
-		deleteButton.addActionListener(new java.awt.event.ActionListener() {
+    deleteButton.setBounds(388, 163, 89, 23);
+    contentPanel.add(deleteButton);
+    deleteButton.setVisible(false);
+    deleteButton.addActionListener(new java.awt.event.ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int result = JOptionPane.showConfirmDialog(getContentPane(),
-						"ÐŸÐµÑ€ÐµÐ´ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸ÐµÐ¼ Ð¿Ð¾Ñ‚Ð¾ÐºÐ°, ÑƒÐ±ÐµÐ´Ð¸Ñ‚ÐµÑÑŒ, Ñ‡Ñ‚Ð¾ Ð¾Ð½ Ð½Ðµ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ Ð² Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¼ Ñ€Ð°ÑÐ¿Ð¸ÑÐ°Ð½Ð¸Ð¸", "Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ!",
-						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-				if (result == JOptionPane.YES_OPTION) {
-					try {
-						deleteButton.setEnabled(false);
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        int result = JOptionPane.showConfirmDialog(getContentPane(),
+            "Ïåðåä óäàëåíèåì ïîòîêà, óáåäèòåñü, ÷òî îí íå èñïîëüçóåòñÿ â òåêóùåì ðàñïèñàíèè",
+            "Âíèìàíèå!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+          try {
+            deleteButton.setEnabled(false);
 
-						CommandFacade.deleteFlow(flow);
-						FormInitializer.initFlowTable(table);
+            CommandFacade.deleteFlow(flow);
+            FormInitializer.initFlowTable(table);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
 
-					} finally {
-						deleteButton.setEnabled(true);
-						resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
-					}
-				}
-			}
-		});
+          } finally {
+            deleteButton.setEnabled(true);
+            resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
+          }
+        }
+      }
+    });
 
-		JButton addButton = new JButton("Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ");
-		addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JButton addButton = new JButton("Äîáàâèòü");
+    addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		addButton.setBounds(438, 126, 105, 26);
-		contentPanel.add(addButton);
+    addButton.setBounds(438, 126, 105, 26);
+    contentPanel.add(addButton);
 
-		addButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String nameFlow = textField.getText();
-				boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFlow);
+    addButton.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String nameFlow = textField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFlow);
 
-				if (isTableHasNot) {
-					try {
-						addButton.setEnabled(false);
+        if (isTableHasNot) {
+          try {
+            addButton.setEnabled(false);
 
-						flow = new FlowBuilder().buildName(nameFlow).build();
+            flow = new FlowBuilder().buildName(nameFlow).build();
 
-						CommandFacade.addFlow(flow);
-						FormInitializer.initFlowTable(table);
+            CommandFacade.addFlow(flow);
+            FormInitializer.initFlowTable(table);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-					} finally {
-						addButton.setEnabled(true);
-						resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
-					}
-				}
-			}
-		});
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            addButton.setEnabled(true);
+            resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
+          }
+        }
+      }
+    });
 
-		table = new OneColumnTable();
-		table.setCellSelectionEnabled(true);
+    table = new OneColumnTable();
+    table.setCellSelectionEnabled(true);
 
-		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		table.setFont(new Font("Verdana", Font.BOLD, 14));
+    table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    table.setFont(new Font("Verdana", Font.BOLD, 14));
 
-		JScrollPane tableScrollPane = new JScrollPane(table);
+    JScrollPane tableScrollPane = new JScrollPane(table);
 
-		tableScrollPane.setBounds(25, 40, 259, 245);
-		contentPanel.add(tableScrollPane);
+    tableScrollPane.setBounds(25, 40, 259, 245);
+    contentPanel.add(tableScrollPane);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(323, 222, 220, 67);
-		contentPanel.add(scrollPane);
+    JScrollPane scrollPane = new JScrollPane();
+    scrollPane.setBounds(323, 222, 220, 67);
+    contentPanel.add(scrollPane);
 
-		groupInFlowTextArea = new JTextArea();
-		groupInFlowTextArea.setColumns(1);
-		groupInFlowTextArea.setVisible(false);
-		groupInFlowTextArea.setEditable(false);
-		scrollPane.setViewportView(groupInFlowTextArea);
+    groupInFlowTextArea = new JTextArea();
+    groupInFlowTextArea.setColumns(1);
+    groupInFlowTextArea.setVisible(false);
+    groupInFlowTextArea.setEditable(false);
+    scrollPane.setViewportView(groupInFlowTextArea);
 
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		textField.setBounds(323, 95, 220, 20);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+    textField = new JTextField();
+    textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    textField.setBounds(323, 95, 220, 20);
+    contentPanel.add(textField);
+    textField.setColumns(10);
 
-		JLabel label_1 = new JLabel("Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð³Ñ€ÑƒÐ¿Ð¿ Ð´Ð°Ð½Ð½Ð¾Ð³Ð¾ Ð¿Ð¾Ñ‚Ð¾ÐºÐ°");
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label_1.setBounds(323, 197, 229, 17);
-		contentPanel.add(label_1);
+    JLabel label_1 = new JLabel("Ñïèñîê ãðóïï äàííîãî ïîòîêà");
+    label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label_1.setBounds(323, 197, 229, 17);
+    contentPanel.add(label_1);
 
-		table.addMouseListener(new java.awt.event.MouseAdapter() {
-			@Override
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				int columnIndex = table.getSelectedColumn();
-				int rowIndex = table.getSelectedRow();
-				if (rowIndex >= 0) {
-					flow = (Flow) table.getModel().getValueAt(rowIndex, columnIndex);
-					LOGGER.debug("selected flow:" + flow);
+    table.addMouseListener(new java.awt.event.MouseAdapter() {
+      @Override
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        int columnIndex = table.getSelectedColumn();
+        int rowIndex = table.getSelectedRow();
+        if (rowIndex >= 0) {
+          flow = (Flow) table.getModel().getValueAt(rowIndex, columnIndex);
+          LOGGER.debug("selected flow:" + flow);
 
-					resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
+          resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
 
-					try {
-						FormInitializer.initFlowGroupTextArea(groupInFlowTextArea, flow);
+          try {
+            FormInitializer.initFlowGroupTextArea(groupInFlowTextArea, flow);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-					} finally {
-						textField.setText(flow.getName());
-						editButton.setVisible(true);
-						deleteButton.setVisible(true);
-					}
-				}
-			}
-		});
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            textField.setText(flow.getName());
+            editButton.setVisible(true);
+            deleteButton.setVisible(true);
+          }
+        }
+      }
+    });
 
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+    {
+      JPanel buttonPane = new JPanel();
+      buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+      getContentPane().add(buttonPane, BorderLayout.SOUTH);
+      {
+        JButton okButton = new JButton("OK");
+        okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        okButton.setActionCommand("OK");
+        buttonPane.add(okButton);
+        getRootPane().setDefaultButton(okButton);
 
-				okButton.addActionListener(new java.awt.event.ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-			}
-		}
-	}
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            dispose();
+          }
+        });
+      }
+    }
+  }
 
-	private void resetComponents(JButton editButton, JButton deleteButton, JTextField textField,
-			JTextArea groupInFlowTextArea) {
-		editButton.setVisible(false);
-		deleteButton.setVisible(false);
-		textField.setText("");
-		groupInFlowTextArea.setVisible(false);
-		groupInFlowTextArea.setText("");
-	}
+  private void resetComponents(JButton editButton, JButton deleteButton, JTextField textField,
+      JTextArea groupInFlowTextArea) {
+    editButton.setVisible(false);
+    deleteButton.setVisible(false);
+    textField.setText("");
+    groupInFlowTextArea.setVisible(false);
+    groupInFlowTextArea.setText("");
+  }
 
-	private boolean isTableHasNotAlikeValue(JTable table, String nameFlow) {
-		int colCount = table.getColumnCount();
-		int rowCount = table.getRowCount();
-		for (int column = 0; column < colCount; column++)
-			for (int row = 0; row < rowCount; row++) {
-				Flow value = (Flow) table.getValueAt(row, column);
-				if (value.getName().equals(nameFlow)) {
-					LOGGER.warn("try to dublicete nameFlow:" + nameFlow);
-					JOptionPane.showMessageDialog(getContentPane(), "ÐŸÐ¾Ñ‚Ð¾Ðº Ñ Ñ‚Ð°ÐºÐ¸Ð¼ Ð¸Ð¼ÐµÐ½ÐµÐ¼ ÑƒÐ¶Ðµ ÐµÑÑ‚ÑŒ");
-					return false;
-				}
-			}
-		return true;
-	}
+  private boolean isTableHasNotAlikeValue(JTable table, String nameFlow) {
+    int colCount = table.getColumnCount();
+    int rowCount = table.getRowCount();
+    for (int column = 0; column < colCount; column++)
+      for (int row = 0; row < rowCount; row++) {
+        Flow value = (Flow) table.getValueAt(row, column);
+        if (value.getName().equals(nameFlow)) {
+          LOGGER.warn("try to dublicete nameFlow:" + nameFlow);
+          JOptionPane.showMessageDialog(getContentPane(), "Ïîòîê ñ òàêèì èìåíåì óæå åñòü");
+          return false;
+        }
+      }
+    return true;
+  }
 }

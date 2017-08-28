@@ -26,3 +26,8 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
+
+hibernate.cfg.xml
+hibernate.reveng.xml
+logs/
+*.log

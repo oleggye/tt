@@ -13,32 +13,31 @@ import by.bsac.timetable.service.exception.ServiceException;
 import components.MyComboBoxModel;
 
 public class ServiceEditFormInitializer {
-	private JFrame frame;
+  private JFrame frame;
 
-	public ServiceEditFormInitializer(JFrame frame) {
-		this.frame = frame;
-	}
+  public ServiceEditFormInitializer(JFrame frame) {
+    this.frame = frame;
+  }
 
-	/**
-	 * РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ ComboBox СЃС‚СЂРѕРєР°РјРё СЃ РЅР°Р·РІР°РЅРёСЏРјРё С„Р°РєСѓР»СЊС‚РµС‚РѕРІ
-	 *
-	 * @exception РїСЂРё
-	 *                РѕС€РёР±РєРµ SQL-Р·Р°РїСЂРѕСЃР°
-	 * @throws ServiceException
-	 */
-	public void initFacultyComboBox(JComboBox<Faculty> facultyComboBox) throws CommandException {
+  /**
+   * Инициализация ComboBox строками с названиями факультетов
+   *
+   * @exception при ошибке SQL-запроса
+   * @throws ServiceException
+   */
+  public void initFacultyComboBox(JComboBox<Faculty> facultyComboBox) throws CommandException {
 
-		//HibernateUtil.getSession();
-		try {
+    // HibernateUtil.getSession();
+    try {
 
-			List<Faculty> facultyList = CommandFacade.getFacultyList();
+      List<Faculty> facultyList = CommandFacade.getFacultyList();
 
-			if (!facultyList.isEmpty()) {
-				DefaultComboBoxModel<Faculty> model = new MyComboBoxModel<>(facultyList);
-				facultyComboBox.setModel(model);
-			}
-		} finally {
-			//HibernateUtil.closeSession();
-		}
-	}
+      if (!facultyList.isEmpty()) {
+        DefaultComboBoxModel<Faculty> model = new MyComboBoxModel<>(facultyList);
+        facultyComboBox.setModel(model);
+      }
+    } finally {
+      // HibernateUtil.closeSession();
+    }
+  }
 }

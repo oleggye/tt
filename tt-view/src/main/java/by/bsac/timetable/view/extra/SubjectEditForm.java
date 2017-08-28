@@ -35,275 +35,276 @@ import components.MyComboBox;
 import components.OneColumnTable;
 
 public class SubjectEditForm extends JDialog {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private static final Logger LOGGER = LogManager.getLogger(GroupEditForm.class.getName());
+  private static final Logger LOGGER = LogManager.getLogger(GroupEditForm.class.getName());
 
-	private JTable table;
-	private Subject subject;
+  private JTable table;
+  private Subject subject;
 
-	private boolean isNeedUpdate;
+  private boolean isNeedUpdate;
 
-	public SubjectEditForm(byte educationLevel) {
-		isNeedUpdate = false;
+  public SubjectEditForm(byte educationLevel) {
+    isNeedUpdate = false;
 
-		setBounds(100, 100, 590, 380);
-		setModal(true);
-		setResizable(false);
-		getContentPane().setLayout(new BorderLayout());
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    setBounds(100, 100, 590, 380);
+    setModal(true);
+    setResizable(false);
+    getContentPane().setLayout(new BorderLayout());
+    setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-		JComboBox<Chair> chairComboBox = new MyComboBox<>();
-		chairComboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JComboBox<Chair> chairComboBox = new MyComboBox<>();
+    chairComboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton addButton = new JButton("Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ");
-		addButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    JButton addButton = new JButton("Äîáàâèòü");
+    addButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		JButton editButton = new JButton("Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ");
-		editButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    JButton editButton = new JButton("Èçìåíèòü");
+    editButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		JButton deleteButton = new JButton("Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ");
-		deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    JButton deleteButton = new JButton("Óäàëèòü");
+    deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-		JTextField subjectNameTextField = new JTextField();
-		subjectNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JTextField subjectNameTextField = new JTextField();
+    subjectNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JLabel coincidenceLabel = new JLabel("Ð¡Ð¾Ð²Ð¿Ð°Ð´ÐµÐ½Ð¸Ñ");
-		coincidenceLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JLabel coincidenceLabel = new JLabel("Ñîâïàäåíèÿ");
+    coincidenceLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JTextArea coincidenceTextArea = new JTextArea();
-		coincidenceTextArea.setEditable(false);
-		coincidenceTextArea.setFont(new Font("Monospaced", Font.ITALIC, 14));
+    JTextArea coincidenceTextArea = new JTextArea();
+    coincidenceTextArea.setEditable(false);
+    coincidenceTextArea.setFont(new Font("Monospaced", Font.ITALIC, 14));
 
-		JPanel contentPanel = new JPanel();
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-		addWindowListener(new java.awt.event.WindowAdapter() {
-			@Override
-			public void windowOpened(java.awt.event.WindowEvent evt) {
-				try {
-					FormInitializer.initChairComboBox(chairComboBox);
-					Chair chair = (Chair) chairComboBox.getSelectedItem();
+    JPanel contentPanel = new JPanel();
+    contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+    getContentPane().add(contentPanel, BorderLayout.CENTER);
+    contentPanel.setLayout(null);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowOpened(java.awt.event.WindowEvent evt) {
+        try {
+          FormInitializer.initChairComboBox(chairComboBox);
+          Chair chair = (Chair) chairComboBox.getSelectedItem();
 
-					FormInitializer.initSubjectTable(table, chair, educationLevel);
-				} catch (CommandException ex) {
-					LOGGER.error(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), ex);
-				}
-			}
-		});
+          FormInitializer.initSubjectTable(table, chair, educationLevel);
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex);
+        }
+      }
+    });
 
-		JLabel lblNewLabel = new JLabel("ÐšÐ°Ñ„ÐµÐ´Ñ€Ð°");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+    JLabel lblNewLabel = new JLabel("Êàôåäðà");
+    lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 
-		lblNewLabel.setBounds(334, 11, 78, 18);
-		contentPanel.add(lblNewLabel);
+    lblNewLabel.setBounds(334, 11, 78, 18);
+    contentPanel.add(lblNewLabel);
 
-		JLabel label = new JLabel("Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ/Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ");
-		label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label.setBounds(334, 74, 234, 18);
-		contentPanel.add(label);
+    JLabel label = new JLabel("Ðåäàêòèðîâàíèå/Äîáàâëåíèå");
+    label.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label.setBounds(334, 74, 234, 18);
+    contentPanel.add(label);
 
-		chairComboBox.setBounds(334, 40, 234, 23);
-		contentPanel.add(chairComboBox);
-		chairComboBox.setToolTipText("");
+    chairComboBox.setBounds(334, 40, 234, 23);
+    contentPanel.add(chairComboBox);
+    chairComboBox.setToolTipText("");
 
-		chairComboBox.addItemListener(new java.awt.event.ItemListener() {
-			@Override
-			public void itemStateChanged(java.awt.event.ItemEvent evt) {
-				if (evt.getStateChange() == ItemEvent.SELECTED) {
-					try {
-						Chair chair = (Chair) chairComboBox.getSelectedItem();
+    chairComboBox.addItemListener(new java.awt.event.ItemListener() {
+      @Override
+      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+          try {
+            Chair chair = (Chair) chairComboBox.getSelectedItem();
 
-						FormInitializer.initSubjectTable(table, chair, educationLevel);
+            FormInitializer.initSubjectTable(table, chair, educationLevel);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex);
-					} finally {
-						refreshFormField(editButton, deleteButton, subjectNameTextField);
-					}
-				}
-			}
-		});
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex);
+          } finally {
+            refreshFormField(editButton, deleteButton, subjectNameTextField);
+          }
+        }
+      }
+    });
 
-		ImageIcon icon = new ImageIcon("C:\\Users\\hello\\Desktop\\add-icon.png");
-		Image img = icon.getImage();
-		Image newimg = img.getScaledInstance(37, 23, java.awt.Image.SCALE_SMOOTH);
-		icon = new ImageIcon(newimg);
+    ImageIcon icon = new ImageIcon("C:\\Users\\hello\\Desktop\\add-icon.png");
+    Image img = icon.getImage();
+    Image newimg = img.getScaledInstance(37, 23, java.awt.Image.SCALE_SMOOTH);
+    icon = new ImageIcon(newimg);
 
-		table = new OneColumnTable();
-		table.setCellSelectionEnabled(true);
-		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		table.setFont(new Font("Verdana", Font.BOLD, 14));
+    table = new OneColumnTable();
+    table.setCellSelectionEnabled(true);
+    table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    table.setFont(new Font("Verdana", Font.BOLD, 14));
 
-		JScrollPane scrollPane = new JScrollPane(table);
+    JScrollPane scrollPane = new JScrollPane(table);
 
-		scrollPane.setBounds(25, 40, 259, 245);
-		contentPanel.add(scrollPane);
+    scrollPane.setBounds(25, 40, 259, 245);
+    contentPanel.add(scrollPane);
 
-		JPanel panel = new JPanel();
-		panel.setBounds(334, 98, 234, 117);
-		contentPanel.add(panel);
-		panel.setLayout(null);
+    JPanel panel = new JPanel();
+    panel.setBounds(334, 98, 234, 117);
+    contentPanel.add(panel);
+    panel.setLayout(null);
 
-		subjectNameTextField.setBounds(20, 11, 200, 23);
-		panel.add(subjectNameTextField);
-		subjectNameTextField.setColumns(10);
+    subjectNameTextField.setBounds(20, 11, 200, 23);
+    panel.add(subjectNameTextField);
+    subjectNameTextField.setColumns(10);
 
-		editButton.setBounds(20, 45, 100, 23);
-		panel.add(editButton);
+    editButton.setBounds(20, 45, 100, 23);
+    panel.add(editButton);
 
-		addButton.setBounds(130, 45, 95, 23);
-		panel.add(addButton);
+    addButton.setBounds(130, 45, 95, 23);
+    panel.add(addButton);
 
-		deleteButton.setBounds(81, 79, 100, 23);
-		deleteButton.setVisible(false);
-		panel.add(deleteButton);
+    deleteButton.setBounds(81, 79, 100, 23);
+    deleteButton.setVisible(false);
+    panel.add(deleteButton);
 
-		JScrollPane coincidenceScrollPane = new JScrollPane();
-		coincidenceScrollPane.setBounds(334, 251, 234, 54);
-		coincidenceScrollPane.setVisible(false);
-		contentPanel.add(coincidenceScrollPane);
+    JScrollPane coincidenceScrollPane = new JScrollPane();
+    coincidenceScrollPane.setBounds(334, 251, 234, 54);
+    coincidenceScrollPane.setVisible(false);
+    contentPanel.add(coincidenceScrollPane);
 
-		coincidenceScrollPane.setViewportView(coincidenceTextArea);
-		subjectNameTextField.addKeyListener(new CoincidenceTextFieldController(this, Subject.class, coincidenceTextArea,
-				subjectNameTextField, coincidenceScrollPane, coincidenceLabel));
+    coincidenceScrollPane.setViewportView(coincidenceTextArea);
+    subjectNameTextField.addKeyListener(new CoincidenceTextFieldController(this, Subject.class,
+        coincidenceTextArea, subjectNameTextField, coincidenceScrollPane, coincidenceLabel));
 
-		coincidenceLabel.setForeground(Color.RED);
-		coincidenceLabel.setBounds(334, 226, 91, 14);
-		coincidenceLabel.setVisible(false);
-		contentPanel.add(coincidenceLabel);
+    coincidenceLabel.setForeground(Color.RED);
+    coincidenceLabel.setBounds(334, 226, 91, 14);
+    coincidenceLabel.setVisible(false);
+    contentPanel.add(coincidenceLabel);
 
-		addButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				addButton.setEnabled(false);
+    addButton.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        addButton.setEnabled(false);
 
-				try {
-					String lecturerName = subjectNameTextField.getText();
-					Chair chair = (Chair) chairComboBox.getSelectedItem();
-					Subject subject = new SubjectBuilder().buildChair(chair).buildEduLevel(educationLevel)
-							.buildNameSubject(lecturerName).build();
+        try {
+          String lecturerName = subjectNameTextField.getText();
+          Chair chair = (Chair) chairComboBox.getSelectedItem();
+          Subject subject = new SubjectBuilder().buildChair(chair).buildEduLevel(educationLevel)
+              .buildNameSubject(lecturerName).build();
 
-					CommandFacade.addSubject(subject);
-					FormInitializer.initSubjectTable(table, chair, educationLevel);
+          CommandFacade.addSubject(subject);
+          FormInitializer.initSubjectTable(table, chair, educationLevel);
 
-				} catch (CommandException ex) {
-					LOGGER.error(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), ex);
-				} finally {
-					addButton.setEnabled(true);
-					refreshFormField(editButton, deleteButton, subjectNameTextField);
-				}
-			}
-		});
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex);
+        } finally {
+          addButton.setEnabled(true);
+          refreshFormField(editButton, deleteButton, subjectNameTextField);
+        }
+      }
+    });
 
-		editButton.setVisible(false);
-		editButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+    editButton.setVisible(false);
+    editButton.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
 
-				editButton.setEnabled(false);
-				try {
+        editButton.setEnabled(false);
+        try {
 
-					String subjectName = subjectNameTextField.getText();
-					Chair chair = (Chair) chairComboBox.getSelectedItem();
-					subject.setChair(chair);
-					subject.setNameSubject(subjectName);
+          String subjectName = subjectNameTextField.getText();
+          Chair chair = (Chair) chairComboBox.getSelectedItem();
+          subject.setChair(chair);
+          subject.setNameSubject(subjectName);
 
-					CommandFacade.updateSubject(subject);
-					FormInitializer.initSubjectTable(table, chair, educationLevel);
+          CommandFacade.updateSubject(subject);
+          FormInitializer.initSubjectTable(table, chair, educationLevel);
 
-				} catch (CommandException ex) {
-					LOGGER.error(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), ex);
-				} finally {
-					editButton.setEnabled(true);
-					refreshFormField(editButton, deleteButton, subjectNameTextField);
-				}
-			}
-		});
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex);
+        } finally {
+          editButton.setEnabled(true);
+          refreshFormField(editButton, deleteButton, subjectNameTextField);
+        }
+      }
+    });
 
-		deleteButton.addActionListener(new java.awt.event.ActionListener() {
+    deleteButton.addActionListener(new java.awt.event.ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
 
-				int result = JOptionPane.showConfirmDialog(getContentPane(),
-						"Ð£Ð±ÐµÐ´Ð¸Ñ‚ÐµÑÑŒ, Ñ‡Ñ‚Ð¾ ÑƒÐ´Ð°Ð»ÑÐµÐ¼Ð°Ñ Ð´Ð¸ÑÑ†Ð¸Ð¿Ð»Ð¸Ð½Ð° Ð½Ðµ ÑÐ²ÑÐ·Ð°Ð½Ð° Ñ Ð·Ð°Ð¿Ð¸ÑÑÐ¼Ð¸ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ³Ð¾ Ñ€Ð°ÑÐ¿Ð¸ÑÐ°Ð½Ð¸Ñ", "Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ!",
-						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-				if (result == JOptionPane.YES_OPTION) {
-					deleteButton.setEnabled(false);
-					try {
-						CommandFacade.deleteSubject(subject);
-						Chair chair = (Chair) chairComboBox.getSelectedItem();
-						FormInitializer.initSubjectTable(table, chair, educationLevel);
+        int result = JOptionPane.showConfirmDialog(getContentPane(),
+            "Óáåäèòåñü, ÷òî óäàëÿåìàÿ äèñöèïëèíà íå ñâÿçàíà ñ çàïèñÿìè òåêóùåãî ðàñïèñàíèÿ",
+            "Âíèìàíèå!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+          deleteButton.setEnabled(false);
+          try {
+            CommandFacade.deleteSubject(subject);
+            Chair chair = (Chair) chairComboBox.getSelectedItem();
+            FormInitializer.initSubjectTable(table, chair, educationLevel);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex);
-					} finally {
-						deleteButton.setEnabled(true);
-						refreshFormField(editButton, deleteButton, subjectNameTextField);
-					}
-				}
-			}
-		});
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex);
+          } finally {
+            deleteButton.setEnabled(true);
+            refreshFormField(editButton, deleteButton, subjectNameTextField);
+          }
+        }
+      }
+    });
 
-		table.addMouseListener(new java.awt.event.MouseAdapter() {
-			@Override
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				int columnIndex = table.getSelectedColumn();
-				int rowIndex = table.getSelectedRow();
-				if (rowIndex >= 0) {
-					subject = (Subject) table.getModel().getValueAt(rowIndex, columnIndex);
+    table.addMouseListener(new java.awt.event.MouseAdapter() {
+      @Override
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        int columnIndex = table.getSelectedColumn();
+        int rowIndex = table.getSelectedRow();
+        if (rowIndex >= 0) {
+          subject = (Subject) table.getModel().getValueAt(rowIndex, columnIndex);
 
-					LOGGER.debug("selected subject:" + subject.getName());
+          LOGGER.debug("selected subject:" + subject.getName());
 
-					refreshFormField(editButton, deleteButton, subjectNameTextField);
+          refreshFormField(editButton, deleteButton, subjectNameTextField);
 
-					subjectNameTextField.setText(subject.getName());
+          subjectNameTextField.setText(subject.getName());
 
-					editButton.setVisible(true);
-					deleteButton.setVisible(true);
-				}
-			}
-		});
+          editButton.setVisible(true);
+          deleteButton.setVisible(true);
+        }
+      }
+    });
 
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+    {
+      JPanel buttonPane = new JPanel();
+      buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+      getContentPane().add(buttonPane, BorderLayout.SOUTH);
+      {
+        JButton okButton = new JButton("OK");
+        okButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        okButton.setActionCommand("OK");
+        buttonPane.add(okButton);
+        getRootPane().setDefaultButton(okButton);
 
-				okButton.addActionListener(new java.awt.event.ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-			}
-		}
-	}
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            dispose();
+          }
+        });
+      }
+    }
+  }
 
-	public void setNeedUpdate(boolean isNeedUpdate) {
-		this.isNeedUpdate = isNeedUpdate;
-	}
+  public void setNeedUpdate(boolean isNeedUpdate) {
+    this.isNeedUpdate = isNeedUpdate;
+  }
 
-	public boolean isNeedUpdate() {
-		return isNeedUpdate;
-	}
+  public boolean isNeedUpdate() {
+    return isNeedUpdate;
+  }
 
-	private void refreshFormField(JButton editButton, JButton deleteButton, JTextField groupNameTextField) {
-		editButton.setVisible(false);
-		deleteButton.setVisible(false);
-		groupNameTextField.setText("");
-	}
+  private void refreshFormField(JButton editButton, JButton deleteButton,
+      JTextField groupNameTextField) {
+    editButton.setVisible(false);
+    deleteButton.setVisible(false);
+    groupNameTextField.setText("");
+  }
 }

@@ -29,94 +29,94 @@ import components.MyComboBox;
 
 public class ChangeClassroomDialog extends JDialog {
 
-	private static final Logger LOGGER = LogManager.getLogger(ChangeClassroomDialog.class.getName());
+  private static final Logger LOGGER = LogManager.getLogger(ChangeClassroomDialog.class.getName());
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private final JPanel contentPanel = new JPanel();
+  private final JPanel contentPanel = new JPanel();
 
-	public ChangeClassroomDialog(Classroom oldClassroom) {
-		setModal(true);
-		setResizable(false);
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+  public ChangeClassroomDialog(Classroom oldClassroom) {
+    setModal(true);
+    setResizable(false);
+    setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-		JComboBox<Classroom> classroomComboBox = new MyComboBox<>();
+    JComboBox<Classroom> classroomComboBox = new MyComboBox<>();
 
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowOpened(WindowEvent e) {
-				try {
-					FormInitializer.initClassroomComboBox(classroomComboBox);
-					classroomComboBox.removeItem(oldClassroom);
+    addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowOpened(WindowEvent e) {
+        try {
+          FormInitializer.initClassroomComboBox(classroomComboBox);
+          classroomComboBox.removeItem(oldClassroom);
 
-					if (classroomComboBox.getItemCount() == 0) {
-						JOptionPane.showMessageDialog(getContentPane(), "РќРµС‚ РґСЂСѓРіРёС… Р°СѓРґРёС‚РѕСЂРёР№!", "РћС€РёР±РєР°",
-								JOptionPane.ERROR_MESSAGE);
-						dispose();
-					}
+          if (classroomComboBox.getItemCount() == 0) {
+            JOptionPane.showMessageDialog(getContentPane(), "Нет других аудиторий!", "Ошибка",
+                JOptionPane.ERROR_MESSAGE);
+            dispose();
+          }
 
-				} catch (CommandException ex) {
-					LOGGER.error(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage(), "РћС€РёР±РєР°",
-							JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		});
-		setResizable(false);
-		setBounds(100, 100, 222, 135);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage(), "Ошибка",
+              JOptionPane.ERROR_MESSAGE);
+        }
+      }
+    });
+    setResizable(false);
+    setBounds(100, 100, 222, 135);
+    getContentPane().setLayout(new BorderLayout());
+    contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+    getContentPane().add(contentPanel, BorderLayout.CENTER);
+    contentPanel.setLayout(null);
 
-		classroomComboBox.setBounds(10, 25, 185, 34);
-		contentPanel.add(classroomComboBox);
+    classroomComboBox.setBounds(10, 25, 185, 34);
+    contentPanel.add(classroomComboBox);
 
-		JLabel label = new JLabel("РџСЂРµРїРѕРґР°РІР°С‚РµР»Рё");
-		label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label.setBounds(10, 0, 156, 24);
-		contentPanel.add(label);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
+    JLabel label = new JLabel("Преподаватели");
+    label.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label.setBounds(10, 0, 156, 24);
+    contentPanel.add(label);
+    {
+      JPanel buttonPane = new JPanel();
+      buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+      getContentPane().add(buttonPane, BorderLayout.SOUTH);
+      {
+        JButton okButton = new JButton("OK");
+        okButton.setActionCommand("OK");
 
-				okButton.addActionListener(ItemEvent -> {
-					Classroom newClassroom = (Classroom) classroomComboBox.getSelectedItem();
-					LOGGER.debug("newClassroom:" + newClassroom);
+        okButton.addActionListener(ItemEvent -> {
+          Classroom newClassroom = (Classroom) classroomComboBox.getSelectedItem();
+          LOGGER.debug("newClassroom:" + newClassroom);
 
-					Request request = new Request();
-					try {
-						changeClassroom(oldClassroom, newClassroom, request);
-						CommandFacade.deleteClassroom(oldClassroom);
+          Request request = new Request();
+          try {
+            changeClassroom(oldClassroom, newClassroom, request);
+            CommandFacade.deleteClassroom(oldClassroom);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-					} finally {
-						/*
-						 * FIXME: Р° РµСЃР»Рё РЅРµ РїРѕРјРµРЅСЏР»Рё (РѕС€РёР±РєР°) С‚Рѕ РєР°Рє РІС‚РѕСЂРѕР№
-						 * С„РѕСЂРјРµ СѓР·РЅР°С‚СЊ РѕР± СЌС‚РѕРј (С‚.Рµ. Р·РЅР°С‡РёС‚ РµР№ РЅРµР»СЊР·СЏ СѓРґР°Р»СЏС‚СЊ
-						 * РёР»Рё СЏ СѓРґР°Р»СЏСЋ Р·РґРµСЃСЊ
-						 */
-						dispose();
-					}
-				});
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            /*
+             * FIXME: а если не поменяли (ошибка) то как второй форме узнать об этом (т.е. значит ей
+             * нельзя удалять или я удаляю здесь
+             */
+            dispose();
+          }
+        });
 
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-		}
-	}
-//FIXME: use CommandFacade method to change classroom
-	private void changeClassroom(Classroom oldClassroom, Classroom newClassroom, Request request)
-			throws CommandException {
-		ICommand command = CommandProvider.getInstance().getCommand(ActionMode.Change_Classroom);
-		request.putParam("oldClassroom", oldClassroom);
-		request.putParam("newClassroom", newClassroom);
-		command.execute(request);
-	}
+        buttonPane.add(okButton);
+        getRootPane().setDefaultButton(okButton);
+      }
+    }
+  }
+
+  // FIXME: use CommandFacade method to change classroom
+  private void changeClassroom(Classroom oldClassroom, Classroom newClassroom, Request request)
+      throws CommandException {
+    ICommand command = CommandProvider.getInstance().getCommand(ActionMode.Change_Classroom);
+    request.putParam("oldClassroom", oldClassroom);
+    request.putParam("newClassroom", newClassroom);
+    command.execute(request);
+  }
 }

@@ -26,214 +26,214 @@ import by.bsac.timetable.view.util.FormInitializer;
 import components.OneColumnTable;
 
 public class FacultyEditForm extends JDialog {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private static final Logger LOGGER = LogManager.getLogger(FacultyEditForm.class.getName());
+  private static final Logger LOGGER = LogManager.getLogger(FacultyEditForm.class.getName());
 
-	private JTable table;
-	private Faculty faculty;
+  private JTable table;
+  private Faculty faculty;
 
-	public FacultyEditForm() {
+  public FacultyEditForm() {
 
-		setBounds(100, 100, 590, 380);
-		setModal(true);
-		setResizable(false);
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		getContentPane().setLayout(new BorderLayout());
+    setBounds(100, 100, 590, 380);
+    setModal(true);
+    setResizable(false);
+    setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    getContentPane().setLayout(new BorderLayout());
 
-		JPanel contentPanel = new JPanel();
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-		addWindowListener(new java.awt.event.WindowAdapter() {
-			@Override
-			public void windowOpened(java.awt.event.WindowEvent evt) {
-				try {
-					FormInitializer.initFacultyTable(table);
-				} catch (CommandException ex) {
-					LOGGER.error(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-				}
-			}
-		});
+    JPanel contentPanel = new JPanel();
+    contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+    getContentPane().add(contentPanel, BorderLayout.CENTER);
+    contentPanel.setLayout(null);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowOpened(java.awt.event.WindowEvent evt) {
+        try {
+          FormInitializer.initFacultyTable(table);
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        }
+      }
+    });
 
-		JLabel label = new JLabel("Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ/Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ");
-		label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label.setBounds(323, 56, 220, 18);
-		contentPanel.add(label);
+    JLabel label = new JLabel("Ðåäàêòèðîâàíèå/Äîáàâëåíèå");
+    label.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label.setBounds(323, 56, 220, 18);
+    contentPanel.add(label);
 
-		JButton editButton = new JButton("Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ");
-		editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JButton editButton = new JButton("Èçìåíèòü");
+    editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton deleteButton = new JButton("Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ");
-		deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JButton deleteButton = new JButton("Óäàëèòü");
+    deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JTextArea textField = new JTextArea(1, 1);
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JTextArea textField = new JTextArea(1, 1);
+    textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JScrollPane scrollPane = new JScrollPane(textField);
-		scrollPane.setBounds(323, 85, 220, 46);
-		contentPanel.add(scrollPane);
+    JScrollPane scrollPane = new JScrollPane(textField);
+    scrollPane.setBounds(323, 85, 220, 46);
+    contentPanel.add(scrollPane);
 
-		textField.setColumns(1);
+    textField.setColumns(1);
 
-		editButton.setVisible(false);
-		editButton.setBounds(323, 142, 100, 26);
-		contentPanel.add(editButton);
+    editButton.setVisible(false);
+    editButton.setBounds(323, 142, 100, 26);
+    contentPanel.add(editButton);
 
-		editButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String nameFaculty = textField.getText();
-				boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFaculty);
+    editButton.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String nameFaculty = textField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFaculty);
 
-				if (isTableHasNot) {
-					try {
-						editButton.setEnabled(false);
+        if (isTableHasNot) {
+          try {
+            editButton.setEnabled(false);
 
-						faculty.setNameFaculty(nameFaculty);
+            faculty.setNameFaculty(nameFaculty);
 
-						CommandFacade.updateFaculty(faculty);
-						FormInitializer.initFacultyTable(table);
+            CommandFacade.updateFaculty(faculty);
+            FormInitializer.initFacultyTable(table);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-					} finally {
-						editButton.setEnabled(true);
-						resetComponents(editButton, deleteButton, textField);
-					}
-				}
-			}
-		});
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            editButton.setEnabled(true);
+            resetComponents(editButton, deleteButton, textField);
+          }
+        }
+      }
+    });
 
-		deleteButton.setBounds(395, 179, 89, 23);
-		contentPanel.add(deleteButton);
-		deleteButton.setVisible(false);
-		deleteButton.addActionListener(new java.awt.event.ActionListener() {
+    deleteButton.setBounds(395, 179, 89, 23);
+    contentPanel.add(deleteButton);
+    deleteButton.setVisible(false);
+    deleteButton.addActionListener(new java.awt.event.ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int result = JOptionPane.showConfirmDialog(getContentPane(),
-						"Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ñ„Ð°ÐºÑƒÐ»ÑŒÑ‚ÐµÑ‚Ð° Ð¿Ð¾Ð²Ð»ÐµÑ‡ÐµÐ½ Ð·Ð° ÑÐ¾Ð±Ð¾Ð¹ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ Ð²ÑÐµÑ… ÑÐ²ÑÐ·Ð°Ð½Ð½Ñ‹Ñ… Ñ Ð½Ð¸Ð¼ Ð³Ñ€ÑƒÐ¿Ð¿, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ, Ð² ÑÐ²Ð¾ÑŽ Ð¾Ñ‡ÐµÑ€ÐµÐ´ÑŒ, Ð¿Ñ€Ð¸Ð²ÐµÐ´ÑƒÑ‚ Ðº ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸ÑŽ ÑÐ²ÑÐ·Ð°Ð½Ð½Ñ‹Ñ… Ñ Ð½Ð¸Ð¼Ð¸ Ð·Ð°Ð½ÑÑ‚Ð¸Ð¹",
-						"Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-				if (result == JOptionPane.YES_OPTION) {
-					try {
-						deleteButton.setEnabled(false);
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        int result = JOptionPane.showConfirmDialog(getContentPane(),
+            "Óäàëåíèå ôàêóëüòåòà ïîâëå÷åí çà ñîáîé óäàëåíèå âñåõ ñâÿçàííûõ ñ íèì ãðóïï, êîòîðûå, â ñâîþ î÷åðåäü, ïðèâåäóò ê óäàëåíèþ ñâÿçàííûõ ñ íèìè çàíÿòèé",
+            "Âíèìàíèå!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+          try {
+            deleteButton.setEnabled(false);
 
-						CommandFacade.deleteFaculty(faculty);
-						FormInitializer.initFacultyTable(table);
+            CommandFacade.deleteFaculty(faculty);
+            FormInitializer.initFacultyTable(table);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-					} finally {
-						deleteButton.setEnabled(true);
-						resetComponents(editButton, deleteButton, textField);
-					}
-				}
-			}
-		});
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            deleteButton.setEnabled(true);
+            resetComponents(editButton, deleteButton, textField);
+          }
+        }
+      }
+    });
 
-		JButton addButton = new JButton("Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ");
-		addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JButton addButton = new JButton("Äîáàâèòü");
+    addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		addButton.setBounds(438, 142, 105, 26);
-		contentPanel.add(addButton);
+    addButton.setBounds(438, 142, 105, 26);
+    contentPanel.add(addButton);
 
-		addButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String nameFaculty = textField.getText();
-				boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFaculty);
+    addButton.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String nameFaculty = textField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFaculty);
 
-				if (isTableHasNot) {
-					try {
-						addButton.setEnabled(false);
-						faculty = new FacultyBuilder().buildName(nameFaculty).build();
+        if (isTableHasNot) {
+          try {
+            addButton.setEnabled(false);
+            faculty = new FacultyBuilder().buildName(nameFaculty).build();
 
-						CommandFacade.addFaculty(faculty);
-						FormInitializer.initFacultyTable(table);
+            CommandFacade.addFaculty(faculty);
+            FormInitializer.initFacultyTable(table);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-					} finally {
-						addButton.setEnabled(true);
-						resetComponents(editButton, deleteButton, textField);
-					}
-				}
-			}
-		});
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            addButton.setEnabled(true);
+            resetComponents(editButton, deleteButton, textField);
+          }
+        }
+      }
+    });
 
-		table = new OneColumnTable();
-		table.setCellSelectionEnabled(true);
+    table = new OneColumnTable();
+    table.setCellSelectionEnabled(true);
 
-		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		table.setFont(new Font("Verdana", Font.BOLD, 14));
+    table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    table.setFont(new Font("Verdana", Font.BOLD, 14));
 
-		JScrollPane tableScrollPane = new JScrollPane(table);
+    JScrollPane tableScrollPane = new JScrollPane(table);
 
-		tableScrollPane.setBounds(25, 40, 259, 245);
-		contentPanel.add(tableScrollPane);
+    tableScrollPane.setBounds(25, 40, 259, 245);
+    contentPanel.add(tableScrollPane);
 
-		table.addMouseListener(new java.awt.event.MouseAdapter() {
-			@Override
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				int columnIndex = table.getSelectedColumn();
-				int rowIndex = table.getSelectedRow();
-				if (rowIndex >= 0) {
-					faculty = (Faculty) table.getModel().getValueAt(rowIndex, columnIndex);
+    table.addMouseListener(new java.awt.event.MouseAdapter() {
+      @Override
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        int columnIndex = table.getSelectedColumn();
+        int rowIndex = table.getSelectedRow();
+        if (rowIndex >= 0) {
+          faculty = (Faculty) table.getModel().getValueAt(rowIndex, columnIndex);
 
-					LOGGER.debug("selected faculty:" + faculty);
-					resetComponents(editButton, deleteButton, textField);
+          LOGGER.debug("selected faculty:" + faculty);
+          resetComponents(editButton, deleteButton, textField);
 
-					textField.setText(faculty.getName());
-					editButton.setVisible(true);
-					deleteButton.setVisible(true);
-				}
-			}
-		});
+          textField.setText(faculty.getName());
+          editButton.setVisible(true);
+          deleteButton.setVisible(true);
+        }
+      }
+    });
 
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+    {
+      JPanel buttonPane = new JPanel();
+      buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+      getContentPane().add(buttonPane, BorderLayout.SOUTH);
+      {
+        JButton okButton = new JButton("OK");
+        okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        okButton.setActionCommand("OK");
+        buttonPane.add(okButton);
+        getRootPane().setDefaultButton(okButton);
 
-				okButton.addActionListener(new java.awt.event.ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-			}
-		}
-	}
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            dispose();
+          }
+        });
+      }
+    }
+  }
 
-	private void resetComponents(JButton editButton, JButton deleteButton, JTextArea textField) {
-		editButton.setVisible(false);
-		deleteButton.setVisible(false);
-		textField.setText("");
-	}
+  private void resetComponents(JButton editButton, JButton deleteButton, JTextArea textField) {
+    editButton.setVisible(false);
+    deleteButton.setVisible(false);
+    textField.setText("");
+  }
 
-	private boolean isTableHasNotAlikeValue(JTable table, String nameFaculty) {
-		int colCount = table.getColumnCount();
-		int rowCount = table.getRowCount();
-		for (int column = 0; column < colCount; column++)
-			for (int row = 0; row < rowCount; row++) {
-				Faculty value = (Faculty) table.getValueAt(row, column);
-				if (value.getNameFaculty().equals(nameFaculty)) {
-					LOGGER.warn("try to dublicete nameFaculty:" + nameFaculty);
-					JOptionPane.showMessageDialog(getContentPane(), "Ð¤Ð°ÐºÑƒÐ»ÑŒÑ‚ÐµÑ‚ Ñ Ñ‚Ð°ÐºÐ¸Ð¼ Ð¸Ð¼ÐµÐ½ÐµÐ¼ ÑƒÐ¶Ðµ ÐµÑÑ‚ÑŒ");
-					return false;
-				}
-			}
-		return true;
-	}
+  private boolean isTableHasNotAlikeValue(JTable table, String nameFaculty) {
+    int colCount = table.getColumnCount();
+    int rowCount = table.getRowCount();
+    for (int column = 0; column < colCount; column++)
+      for (int row = 0; row < rowCount; row++) {
+        Faculty value = (Faculty) table.getValueAt(row, column);
+        if (value.getNameFaculty().equals(nameFaculty)) {
+          LOGGER.warn("try to dublicete nameFaculty:" + nameFaculty);
+          JOptionPane.showMessageDialog(getContentPane(), "Ôàêóëüòåò ñ òàêèì èìåíåì óæå åñòü");
+          return false;
+        }
+      }
+    return true;
+  }
 }

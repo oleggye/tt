@@ -25,72 +25,72 @@ import by.bsac.timetable.view.AddNewRecordForm;
 
 public final class AddNewRecordInitializer {
 
-	private AddNewRecordForm form;
+  private AddNewRecordForm form;
 
-	public AddNewRecordInitializer(AddNewRecordForm frame) {
-		this.form = frame;
-	}
+  public AddNewRecordInitializer(AddNewRecordForm frame) {
+    this.form = frame;
+  }
 
-	/**
-	 * Method for initializing form field if we run form in adding mode
-	 * 
-	 * @param parent
-	 * @param lessonDate
-	 * @param group
-	 * @param weekNumber
-	 * @param weekDay
-	 * @param lessonOrdinalNumber
-	 */
-	public void initFormFieldList(JFrame parent, Date lessonDate, Group group, byte weekNumber, byte weekDay,
-			byte lessonOrdinalNumber) {
+  /**
+   * Method for initializing form field if we run form in adding mode
+   * 
+   * @param parent
+   * @param lessonDate
+   * @param group
+   * @param weekNumber
+   * @param weekDay
+   * @param lessonOrdinalNumber
+   */
+  public void initFormFieldList(JFrame parent, Date lessonDate, Group group, byte weekNumber,
+      byte weekDay, byte lessonOrdinalNumber) {
 
-		//HibernateUtil.getSession();
-		form.setParent(parent);
-		form.setAction(ActionMode.Add_Record);
+    // HibernateUtil.getSession();
+    form.setParent(parent);
+    form.setAction(ActionMode.Add_Record);
 
-		form.setLessonPeriod(LessonPeriod.FOR_ONE_DATE);
+    form.setLessonPeriod(LessonPeriod.FOR_ONE_DATE);
 
-		if (Checker.isGroupInFlow(group)) {
-			form.setLessonFor(LessonFor.FULL_FLOW);
-		} else {
-			form.setLessonFor(LessonFor.FULL_GROUP);
-		}
-		form.setLessonType(LessonType.LECTURE);
+    if (Checker.isGroupInFlow(group)) {
+      form.setLessonFor(LessonFor.FULL_FLOW);
+    } else {
+      form.setLessonFor(LessonFor.FULL_GROUP);
+    }
+    form.setLessonType(LessonType.LECTURE);
 
-		form.setCurrentWeekNumber(WeekNumber.getWeekNumberInstance(weekNumber));
-		form.getWeekSet().add(form.getCurrentWeekNumber());
-		form.setCurrentWeekDay(weekDay);
-		form.setLessonOrdinalNumber(lessonOrdinalNumber);
-		form.setEdu_level(group.getEduLevel());
+    form.setCurrentWeekNumber(WeekNumber.getWeekNumberInstance(weekNumber));
+    form.getWeekSet().add(form.getCurrentWeekNumber());
+    form.setCurrentWeekDay(weekDay);
+    form.setLessonOrdinalNumber(lessonOrdinalNumber);
+    form.setEdu_level(group.getEduLevel());
 
-		SubjectType subjectType = form.getLessonType().lessonTypeToSubjectType();
-		SubjectFor subjectFor = form.getLessonFor().lessonForToSubjectFor();
+    SubjectType subjectType = form.getLessonType().lessonTypeToSubjectType();
+    SubjectFor subjectFor = form.getLessonFor().lessonForToSubjectFor();
 
-		Record addRecord = new RecordBuilder().buildDateFrom(lessonDate).buildDateTo(lessonDate).buildGroup(group)
-				.buildSubjectFor(subjectFor).buildSubjectType(subjectType).buildWeekNumber(weekNumber)
-				.buildWeekDay(weekDay).buildSubjOrdinalNumber(lessonOrdinalNumber).build();
-		form.setAddRecord(addRecord);
-		//HibernateUtil.closeSession();
-	}
+    Record addRecord =
+        new RecordBuilder().buildDateFrom(lessonDate).buildDateTo(lessonDate).buildGroup(group)
+            .buildSubjectFor(subjectFor).buildSubjectType(subjectType).buildWeekNumber(weekNumber)
+            .buildWeekDay(weekDay).buildSubjOrdinalNumber(lessonOrdinalNumber).build();
+    form.setAddRecord(addRecord);
+    // HibernateUtil.closeSession();
+  }
 
-	/**
-	 * Method instantiate a new instance of {@link JDatePickerImpl} with certain
-	 * date
-	 * 
-	 * @param date
-	 * @return
-	 */
-	public JDatePickerImpl initDatePicker(Date date) {
-		/* Р·Р°РґР°РµРј РґР°С‚Сѓ РґР»СЏ РєР°Р»РµРЅРґР°СЂСЏ РІ РєР°С‡РµСЃС‚РІРµ РѕРїРѕСЂРЅРѕР№ */
+  /**
+   * Method instantiate a new instance of {@link JDatePickerImpl} with certain date
+   * 
+   * @param date
+   * @return
+   */
+  public JDatePickerImpl initDatePicker(Date date) {
+    /* задаем дату для календаря в качестве опорной */
 
-		UtilDateModel model = new UtilDateModel();
-		model.setValue(date);
+    UtilDateModel model = new UtilDateModel();
+    model.setValue(date);
 
-		Properties p = new Properties();
-		p.put("text.today", "РЎРµРіРѕРґРЅСЏ");
-		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-		return new JDatePickerImpl(datePanel, new DateLabelFormatter());
-	}
+    Properties p = new Properties();
+    p.put("text.today", "Сегодня");
+    JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+    return new JDatePickerImpl(datePanel, new DateLabelFormatter());
+  }
 
-	
+
 }

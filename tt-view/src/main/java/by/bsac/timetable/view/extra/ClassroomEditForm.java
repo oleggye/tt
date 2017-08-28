@@ -27,237 +27,235 @@ import by.bsac.timetable.view.util.FormInitializer;
 import components.OneColumnTable;
 
 public class ClassroomEditForm extends JDialog {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private static final Logger LOGGER = LogManager.getLogger(ClassroomEditForm.class.getName());
+  private static final Logger LOGGER = LogManager.getLogger(ClassroomEditForm.class.getName());
 
-	private JDialog frame;
-	private JTable table;
-	private Classroom classroom;
+  private JDialog frame;
+  private JTable table;
+  private Classroom classroom;
 
-	public ClassroomEditForm() {
-		frame = this;
+  public ClassroomEditForm() {
+    frame = this;
 
-		setBounds(100, 100, 590, 380);
-		setModal(true);
-		setResizable(false);
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		getContentPane().setLayout(new BorderLayout());
+    setBounds(100, 100, 590, 380);
+    setModal(true);
+    setResizable(false);
+    setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    getContentPane().setLayout(new BorderLayout());
 
-		JPanel contentPanel = new JPanel();
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
-		addWindowListener(new java.awt.event.WindowAdapter() {
-			@Override
-			public void windowOpened(java.awt.event.WindowEvent evt) {
-				try {
-					FormInitializer.initClassroomTable(table);
-				} catch (CommandException ex) {
-					LOGGER.error(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-				}
-			}
-		});
+    JPanel contentPanel = new JPanel();
+    contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+    getContentPane().add(contentPanel, BorderLayout.CENTER);
+    contentPanel.setLayout(null);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      @Override
+      public void windowOpened(java.awt.event.WindowEvent evt) {
+        try {
+          FormInitializer.initClassroomTable(table);
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        }
+      }
+    });
 
-		JLabel label = new JLabel("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ/Р”РѕР±Р°РІР»РµРЅРёРµ");
-		label.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label.setBounds(319, 39, 220, 18);
-		contentPanel.add(label);
+    JLabel label = new JLabel("Редактирование/Добавление");
+    label.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label.setBounds(319, 39, 220, 18);
+    contentPanel.add(label);
 
-		JButton editButton = new JButton("РР·РјРµРЅРёС‚СЊ");
-		editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JButton editButton = new JButton("Изменить");
+    editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JButton deleteButton = new JButton("РЈРґР°Р»РёС‚СЊ");
-		deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JButton deleteButton = new JButton("Удалить");
+    deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JTextField numberField = new JTextField();
-		contentPanel.add(numberField);
-		numberField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		numberField.setBounds(339, 117, 94, 26);
+    JTextField numberField = new JTextField();
+    contentPanel.add(numberField);
+    numberField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    numberField.setBounds(339, 117, 94, 26);
 
-		JLabel buildingLabel = new JLabel("<html>РќРѕРјРµСЂ<br>РєРѕСЂРїСѓСЃР°</html>");
-		buildingLabel.setForeground(Color.BLUE);
-		buildingLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		buildingLabel.setBounds(470, 68, 79, 38);
-		contentPanel.add(buildingLabel);
+    JLabel buildingLabel = new JLabel("<html>Номер<br>корпуса</html>");
+    buildingLabel.setForeground(Color.BLUE);
+    buildingLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+    buildingLabel.setBounds(470, 68, 79, 38);
+    contentPanel.add(buildingLabel);
 
-		JTextField buildingField = new JTextField();
-		buildingField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		buildingField.setColumns(1);
-		buildingField.setBounds(470, 117, 65, 26);
-		contentPanel.add(buildingField);
+    JTextField buildingField = new JTextField();
+    buildingField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    buildingField.setColumns(1);
+    buildingField.setBounds(470, 117, 65, 26);
+    contentPanel.add(buildingField);
 
-		JLabel label_1 = new JLabel("<html>РќРѕРјРµСЂ<br>Р°СѓРґРёС‚РѕСЂРёРё</html>");
-		label_1.setForeground(new Color(0, 128, 0));
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		label_1.setBounds(341, 68, 79, 38);
-		contentPanel.add(label_1);
+    JLabel label_1 = new JLabel("<html>Номер<br>аудитории</html>");
+    label_1.setForeground(new Color(0, 128, 0));
+    label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label_1.setBounds(341, 68, 79, 38);
+    contentPanel.add(label_1);
 
-		numberField.setColumns(1);
+    numberField.setColumns(1);
 
-		editButton.setVisible(false);
-		editButton.setBounds(333, 169, 100, 26);
-		contentPanel.add(editButton);
+    editButton.setVisible(false);
+    editButton.setBounds(333, 169, 100, 26);
+    contentPanel.add(editButton);
 
-		editButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
+    editButton.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
 
-				try {
-					editButton.setEnabled(false);
-					byte building = Byte.valueOf(buildingField.getText());
-					short number = Short.valueOf(numberField.getText());
+        try {
+          editButton.setEnabled(false);
+          byte building = Byte.valueOf(buildingField.getText());
+          short number = Short.valueOf(numberField.getText());
 
-					classroom.setBuilding(building);
-					classroom.setNumber(number);
+          classroom.setBuilding(building);
+          classroom.setNumber(number);
 
-					CommandFacade.updateClassroom(classroom);
-					FormInitializer.initClassroomTable(table);
+          CommandFacade.updateClassroom(classroom);
+          FormInitializer.initClassroomTable(table);
 
-				} catch (CommandException ex) {
-					LOGGER.error(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-				} catch (NumberFormatException ex) {
-					LOGGER.warn(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), "Р’РІРµРґРµРЅС‹ РЅРµ РІРµСЂРЅС‹Рµ С‡РёСЃР»Р°");
-				} finally {
-					editButton.setEnabled(true);
-					resetComponents(editButton, deleteButton, numberField, buildingField);
-				}
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } catch (NumberFormatException ex) {
+          LOGGER.warn(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
+        } finally {
+          editButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, numberField, buildingField);
+        }
 
-			}
-		});
+      }
+    });
 
-		deleteButton.setBounds(394, 206, 89, 23);
-		contentPanel.add(deleteButton);
-		deleteButton.setVisible(false);
-		deleteButton.addActionListener(new java.awt.event.ActionListener() {
+    deleteButton.setBounds(394, 206, 89, 23);
+    contentPanel.add(deleteButton);
+    deleteButton.setVisible(false);
+    deleteButton.addActionListener(new java.awt.event.ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
+      @Override
+      public void actionPerformed(ActionEvent e) {
 
-				int result = JOptionPane.showConfirmDialog(getContentPane(),
-						"РџРµСЂРµРґ СѓРґР°Р»РµРЅРёРµРј, РІР°Рј РЅРµРѕР±С…РѕРґРёРјРѕ РїРµСЂРµРЅР°Р·РЅР°С‡РёС‚СЊ Р°СѓРґРёС‚РѕСЂРёСЋ РґР»СЏ Р·Р°РЅСЏС‚РёР№ РІ С‚РµРєСѓС‰РµРј СЂР°СЃРїРёСЃР°РЅРёРё",
-						"Р’РЅРёРјР°РЅРёРµ!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-				if (result == JOptionPane.YES_OPTION) {
-					deleteButton.setEnabled(false);
+        int result = JOptionPane.showConfirmDialog(getContentPane(),
+            "Перед удалением, вам необходимо переназначить аудиторию для занятий в текущем расписании",
+            "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (result == JOptionPane.YES_OPTION) {
+          deleteButton.setEnabled(false);
 
-					ChangeClassroomDialog dialog = new ChangeClassroomDialog(classroom);
-					dialog.setLocationRelativeTo(frame);
-					dialog.setVisible(true);
+          ChangeClassroomDialog dialog = new ChangeClassroomDialog(classroom);
+          dialog.setLocationRelativeTo(frame);
+          dialog.setVisible(true);
 
-					try {
+          try {
 
-						/*
-						 * ICommand command =
-						 * CommandProvider.getInstance().getCommand(ActionMode.
-						 * Delete_Classroom); Request request = new Request();
-						 * request.putParam("classroom", classroom);
-						 * command.execute(request);
-						 */
+            /*
+             * ICommand command = CommandProvider.getInstance().getCommand(ActionMode.
+             * Delete_Classroom); Request request = new Request(); request.putParam("classroom",
+             * classroom); command.execute(request);
+             */
 
-						FormInitializer.initClassroomTable(table);
+            FormInitializer.initClassroomTable(table);
 
-					} catch (CommandException ex) {
-						LOGGER.error(ex.getCause().getMessage(), ex);
-						JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-					} finally {
-						deleteButton.setEnabled(true);
-						resetComponents(editButton, deleteButton, numberField, buildingField);
-					}
-				}
-			}
-		});
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            deleteButton.setEnabled(true);
+            resetComponents(editButton, deleteButton, numberField, buildingField);
+          }
+        }
+      }
+    });
 
-		JButton addButton = new JButton("Р”РѕР±Р°РІРёС‚СЊ");
-		addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    JButton addButton = new JButton("Добавить");
+    addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		addButton.setBounds(444, 169, 105, 26);
-		contentPanel.add(addButton);
+    addButton.setBounds(444, 169, 105, 26);
+    contentPanel.add(addButton);
 
-		addButton.addActionListener(new java.awt.event.ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					addButton.setEnabled(false);
-					byte building = Byte.valueOf(buildingField.getText());
-					short number = Short.valueOf(numberField.getText());
+    addButton.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        try {
+          addButton.setEnabled(false);
+          byte building = Byte.valueOf(buildingField.getText());
+          short number = Short.valueOf(numberField.getText());
 
-					classroom = new ClassroomBuilder().buildBuilding(building).buildNumber(number).build();
+          classroom = new ClassroomBuilder().buildBuilding(building).buildNumber(number).build();
 
-					CommandFacade.addClassroom(classroom);
-					FormInitializer.initClassroomTable(table);
+          CommandFacade.addClassroom(classroom);
+          FormInitializer.initClassroomTable(table);
 
-				} catch (CommandException ex) {
-					LOGGER.error(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-				} catch (NumberFormatException ex) {
-					LOGGER.warn(ex.getCause().getMessage(), ex);
-					JOptionPane.showMessageDialog(getContentPane(), "Р’РІРµРґРµРЅС‹ РЅРµ РІРµСЂРЅС‹Рµ С‡РёСЃР»Р°");
-				} finally {
-					addButton.setEnabled(true);
-					resetComponents(editButton, deleteButton, numberField, buildingField);
-				}
-			}
-		});
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } catch (NumberFormatException ex) {
+          LOGGER.warn(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
+        } finally {
+          addButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, numberField, buildingField);
+        }
+      }
+    });
 
-		table = new OneColumnTable();
-		table.setCellSelectionEnabled(true);
+    table = new OneColumnTable();
+    table.setCellSelectionEnabled(true);
 
-		table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		table.setFont(new Font("Verdana", Font.BOLD, 14));
+    table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    table.setFont(new Font("Verdana", Font.BOLD, 14));
 
-		JScrollPane tableScrollPane = new JScrollPane(table);
+    JScrollPane tableScrollPane = new JScrollPane(table);
 
-		tableScrollPane.setBounds(25, 40, 259, 245);
-		contentPanel.add(tableScrollPane);
+    tableScrollPane.setBounds(25, 40, 259, 245);
+    contentPanel.add(tableScrollPane);
 
-		table.addMouseListener(new java.awt.event.MouseAdapter() {
-			@Override
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				int columnIndex = table.getSelectedColumn();
-				int rowIndex = table.getSelectedRow();
-				if (rowIndex >= 0) {
-					classroom = (Classroom) table.getModel().getValueAt(rowIndex, columnIndex);
+    table.addMouseListener(new java.awt.event.MouseAdapter() {
+      @Override
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        int columnIndex = table.getSelectedColumn();
+        int rowIndex = table.getSelectedRow();
+        if (rowIndex >= 0) {
+          classroom = (Classroom) table.getModel().getValueAt(rowIndex, columnIndex);
 
-					LOGGER.debug("selected classroom:" + classroom);
-					resetComponents(editButton, deleteButton, numberField, buildingField);
+          LOGGER.debug("selected classroom:" + classroom);
+          resetComponents(editButton, deleteButton, numberField, buildingField);
 
-					buildingField.setText(String.valueOf(classroom.getBuilding()));
-					numberField.setText(String.valueOf(classroom.getNumber()));
-					editButton.setVisible(true);
-					deleteButton.setVisible(true);
-				}
-			}
-		});
+          buildingField.setText(String.valueOf(classroom.getBuilding()));
+          numberField.setText(String.valueOf(classroom.getNumber()));
+          editButton.setVisible(true);
+          deleteButton.setVisible(true);
+        }
+      }
+    });
 
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+    {
+      JPanel buttonPane = new JPanel();
+      buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+      getContentPane().add(buttonPane, BorderLayout.SOUTH);
+      {
+        JButton okButton = new JButton("OK");
+        okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        okButton.setActionCommand("OK");
+        buttonPane.add(okButton);
+        getRootPane().setDefaultButton(okButton);
 
-				okButton.addActionListener(new java.awt.event.ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						dispose();
-					}
-				});
-			}
-		}
-	}
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            dispose();
+          }
+        });
+      }
+    }
+  }
 
-	private void resetComponents(JButton editButton, JButton deleteButton, JTextField numberTextFiled,
-			JTextField buildingTextFiled) {
-		editButton.setVisible(false);
-		deleteButton.setVisible(false);
-		numberTextFiled.setText("");
-		buildingTextFiled.setText("");
-	}
+  private void resetComponents(JButton editButton, JButton deleteButton, JTextField numberTextFiled,
+      JTextField buildingTextFiled) {
+    editButton.setVisible(false);
+    deleteButton.setVisible(false);
+    numberTextFiled.setText("");
+    buildingTextFiled.setText("");
+  }
 }

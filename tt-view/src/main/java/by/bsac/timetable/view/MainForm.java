@@ -59,7 +59,7 @@ import components.MyComboBox;
 import tableClasses.TablesArray;
 
 /**
- * РљР»Р°СЃСЃ РіР»Р°РІРЅРѕР№ С„РѕСЂРјС‹ РїСЂРёР»РѕР¶РµРЅРёСЏ
+ * Класс главной формы приложения
  *
  * @author Maksimovich Oleg
  * @version 2.0
@@ -69,16 +69,16 @@ public class MainForm extends JFrame{
 
 	private static final Logger LOGGER = LogManager.getLogger(MainForm.class.getName());
 
-	private JFrame mainFrame;// РїРµСЂРµРјРµРЅРЅР°СЏ С„РѕСЂРјС‹
+	private JFrame mainFrame;// переменная формы
 	private TablesArray tableArray = new TablesArray(7, 4);
 
 	private JButton showRecordsButton;
-	private List<Record> mainRecordList; // РјР°СЃСЃРёРІ-РєРѕР»-С†РёСЏ РґР»СЏ
-											// Р·Р°РїРёСЃРµР№ РіСЂСѓРїРїС‹
-	private JComboBox<Faculty> facultyComboBox; // combobox СЃ РЅР°Р·РІР°РЅРёСЏРјРё
-												// С„Р°РєСѓР»СЊС‚РµС‚РѕРІ
-	private JComboBox<Group> groupComboBox; // combobox СЃ РЅР°Р·РІР°РЅРёСЏРјРё РіСЂСѓРїРї
-	private byte educationLevel = 1;// РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ СѓСЂРѕРІРЅСЏ РѕР±СЂР°Р·РѕРІР°РЅРёСЏ
+	private List<Record> mainRecordList; // массив-кол-ция для
+											// записей группы
+	private JComboBox<Faculty> facultyComboBox; // combobox с названиями
+												// факультетов
+	private JComboBox<Group> groupComboBox; // combobox с названиями групп
+	private byte educationLevel = 1;// переменная для уровня образования
 
 	private JDatePickerImpl datePicker;
 
@@ -88,7 +88,7 @@ public class MainForm extends JFrame{
 	 * Launch the application.
 	 *
 	 * @param args
-	 *            РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ
+	 *            не используется
 	 * @see Exception
 	 */
 	public static void main(String[] args) {
@@ -118,13 +118,13 @@ public class MainForm extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() throws IOException {
-		mainFrame = new JFrame("Р Р°СЃРїРёСЃР°РЅРёРµ РЈРћ \"Р‘Р“РђРЎ\"");
+		mainFrame = new JFrame("Расписание УО \"БГАС\"");
 		mainFrame.setBounds(100, 100, 770, 533);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(new BorderLayout(0, 0));
 		mainFrame.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("images/table.png")).getImage());
 
-		JLabel progressBarLbl = new JLabel("Р—Р°РіСЂСѓР·РєР°");
+		JLabel progressBarLbl = new JLabel("Загрузка");
 		JProgressBar progressBar = new javax.swing.JProgressBar();
 
 		JPanel topPanel = new JPanel();
@@ -141,10 +141,10 @@ public class MainForm extends JFrame{
 		JMenuBar menuBar = new JMenuBar();
 		menuPanel.add(menuBar);
 
-		JMenu mnFile = new JMenu("Р“Р»Р°РІРЅР°СЏ");
+		JMenu mnFile = new JMenu("Главная");
 		menuBar.add(mnFile);
 
-		JMenuItem mntmNewFile = new JMenuItem("РЈСЂРѕРІРµРЅСЊ РѕР±СЂР°Р·РѕРІР°РЅРёСЏ");
+		JMenuItem mntmNewFile = new JMenuItem("Уровень образования");
 		mntmNewFile.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				try {
@@ -160,7 +160,7 @@ public class MainForm extends JFrame{
 		JMenu mnNewMenu = new JMenu("\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438");
 		menuBar.add(mnNewMenu);
 
-		JMenuItem changeFacultyMenuItem = new JMenuItem("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ С„Р°РєСѓР»СЊС‚РµС‚РѕРІ");
+		JMenuItem changeFacultyMenuItem = new JMenuItem("Редактирование факультетов");
 		changeFacultyMenuItem.addActionListener((ActionEvent e) -> {
 			FacultyEditForm dialog = new FacultyEditForm();
 			dialog.setLocationRelativeTo(mainFrame);
@@ -169,7 +169,7 @@ public class MainForm extends JFrame{
 		});
 		mnNewMenu.add(changeFacultyMenuItem);
 
-		JMenuItem changeFlowMenuItem = new JMenuItem("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїРѕС‚РѕРєРѕРІ");
+		JMenuItem changeFlowMenuItem = new JMenuItem("Редактирование потоков");
 		changeFlowMenuItem.addActionListener((ActionEvent e) -> {
 			FlowEditForm edf = new FlowEditForm();
 			edf.setLocationRelativeTo(mainFrame);
@@ -178,7 +178,7 @@ public class MainForm extends JFrame{
 		});
 		mnNewMenu.add(changeFlowMenuItem);
 
-		JMenuItem changeChairMenuItem = new JMenuItem("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РєР°С„РµРґСЂ");
+		JMenuItem changeChairMenuItem = new JMenuItem("Редактирование кафедр");
 		changeChairMenuItem.addActionListener((ActionEvent e) -> {
 			ChairEditForm dialog = new ChairEditForm();
 			dialog.setLocationRelativeTo(mainFrame);
@@ -187,7 +187,7 @@ public class MainForm extends JFrame{
 		});
 		mnNewMenu.add(changeChairMenuItem);
 
-		JMenuItem changeGroupMenuItem = new JMenuItem("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РіСЂСѓРїРїС‹");
+		JMenuItem changeGroupMenuItem = new JMenuItem("Редактирование группы");
 		changeGroupMenuItem.addActionListener((ActionEvent e) -> {
 			GroupEditForm edf = new GroupEditForm(educationLevel);
 			edf.setLocationRelativeTo(mainFrame);
@@ -196,7 +196,7 @@ public class MainForm extends JFrame{
 		});
 		mnNewMenu.add(changeGroupMenuItem);
 
-		JMenuItem changeSubjectMenuItem = new JMenuItem("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїСЂРµРґРјРµС‚РѕРІ");
+		JMenuItem changeSubjectMenuItem = new JMenuItem("Редактирование предметов");
 		changeSubjectMenuItem.addActionListener((ActionEvent e) -> {
 			EditForm edf = new EditForm(mainFrame, 2, 1, educationLevel);
 			edf.setLocationRelativeTo(mainFrame);
@@ -205,7 +205,7 @@ public class MainForm extends JFrame{
 		});
 		mnNewMenu.add(changeSubjectMenuItem);
 
-		JMenuItem changeLecturerMenuItem = new JMenuItem("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїСЂРµРїРѕРґР°РІР°С‚РµР»РµР№");
+		JMenuItem changeLecturerMenuItem = new JMenuItem("Редактирование преподавателей");
 		changeLecturerMenuItem.addActionListener((ActionEvent e) -> {
 			// EditForm edf = new EditForm(mainFrame, 2, 3, educationLevel);
 			LecturerEditForm edf = new LecturerEditForm();
@@ -215,7 +215,7 @@ public class MainForm extends JFrame{
 		});
 		mnNewMenu.add(changeLecturerMenuItem);
 
-		JMenuItem changeClassroomMenuItem = new JMenuItem("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р°СѓРґРёС‚РѕСЂРёР№");
+		JMenuItem changeClassroomMenuItem = new JMenuItem("Редактирование аудиторий");
 		changeClassroomMenuItem.addActionListener((ActionEvent e) -> {
 			ClassroomEditForm edf = new ClassroomEditForm();
 			edf.setLocationRelativeTo(mainFrame);
@@ -224,7 +224,7 @@ public class MainForm extends JFrame{
 		});
 		mnNewMenu.add(changeClassroomMenuItem);
 
-		JMenu mnNewMenu_1 = new JMenu("Рћ РїСЂРѕРіСЂР°РјРјРµ");
+		JMenu mnNewMenu_1 = new JMenu("О программе");
 		mnNewMenu_1.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				AboutForm edf = new AboutForm();
@@ -239,7 +239,7 @@ public class MainForm extends JFrame{
 		fl_FCSubpanel.setAlignment(FlowLayout.LEFT);
 		topPanel.add(FCSubpanel);
 
-		FCSubpanel.add(new JLabel("Р¤Р°РєСѓР»СЊС‚РµС‚: "));
+		FCSubpanel.add(new JLabel("Факультет: "));
 		facultyComboBox = new MyComboBox<>();
 		FCSubpanel.add(facultyComboBox);
 
@@ -259,7 +259,7 @@ public class MainForm extends JFrame{
 				}
 			}
 		});
-		FCSubpanel.add(new JLabel("Р“СЂСѓРїРїР°: "));
+		FCSubpanel.add(new JLabel("Группа: "));
 		groupComboBox = new MyComboBox<>();
 		FCSubpanel.add(groupComboBox);
 		groupComboBox.addItemListener((ItemEvent e) -> {
@@ -269,13 +269,13 @@ public class MainForm extends JFrame{
 				showRecordsButton.setEnabled(true);
 			}
 		});
-		FCSubpanel.add(new JLabel("РћРїРѕСЂРЅР°СЏ РґР°С‚Р°: "));
-		// Р·Р°РґР°РµРј С‚РµРєСѓС‰СѓСЋ РґР°С‚Сѓ РґР»СЏ РєР°Р»РµРЅРґР°СЂСЏ РІ РєР°С‡РµСЃС‚РІРµ РѕРїРѕСЂРЅРѕР№
+		FCSubpanel.add(new JLabel("Опорная дата: "));
+		// задаем текущую дату для календаря в качестве опорной
 		UtilDateModel model = new UtilDateModel();
 		Calendar calendar = Calendar.getInstance();
 		model.setValue(calendar.getTime());
 		Properties p = new Properties();
-		p.put("text.today", "РЎРµРіРѕРґРЅСЏ");
+		p.put("text.today", "Сегодня");
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		datePicker.addActionListener((ActionEvent e) -> {
@@ -284,7 +284,7 @@ public class MainForm extends JFrame{
 		FCSubpanel.add(datePicker);
 
 		/* 27/10/16 was changed */
-		showRecordsButton = new JButton("РџРѕРєР°Р·Р°С‚СЊ");
+		showRecordsButton = new JButton("Показать");
 		FCSubpanel.add(showRecordsButton);
 		showRecordsButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/toolbar_find.png")));
 		showRecordsButton.addActionListener(new ShowBtnActionEvent(this, tableArray, datePicker, groupComboBox));
@@ -298,7 +298,7 @@ public class MainForm extends JFrame{
 		JPanel bottomPanel = new JPanel();
 		mainFrame.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
 
-		// РґРѕР±Р°РІР»СЏРµРј progressbar Рё progresslabel РЅР° РїР°РЅРµР»СЊ
+		// добавляем progressbar и progresslabel на панель
 		bottomPanel.add(progressBarLbl);
 		bottomPanel.add(progressBar);
 
@@ -308,7 +308,7 @@ public class MainForm extends JFrame{
 
 		MouseListener listener = new CellTableMouseClickedEvent(this, tableArray, groupComboBox, datePicker);
 
-		// Р·Р°РґР°РµРј РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ С‚Р°Р±Р»РёС† РІ РґРІСѓРјРµСЂРЅРѕРј РјР°СЃСЃРёРІРµ С‚Р°Р±Р»РёС†
+		// задаем предварительные значения для таблиц в двумерном массиве таблиц
 		tableArray.initArray(mainRecordList, centralPanel, listener);
 		// ********************************************************************************
 
@@ -317,7 +317,7 @@ public class MainForm extends JFrame{
 	}
 
 	private boolean getEduLevel(boolean isJustStarted) {
-		EduForm edf = new EduForm();
+		ChoseEducationLevelForm edf = new ChoseEducationLevelForm();
 		edf.setLocationRelativeTo(mainFrame);
 		edf.setVisible(true);
 		byte new_eduLvl = edf.getEduLevel();
@@ -336,7 +336,7 @@ public class MainForm extends JFrame{
 		mainFrame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		try {
 			// TODO add your handling code here:
-			if (getEduLevel(isJustStarted))// СѓСЂРѕРІРµРЅСЊ РѕР±СЂР°Р·РѕРІР°РЅРёСЏ
+			if (getEduLevel(isJustStarted))// уровень образования
 			{
 				mainFrame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 				FormInitializer.initMainForm(facultyComboBox, groupComboBox, progressBarLbl, progressBar,
@@ -351,8 +351,8 @@ public class MainForm extends JFrame{
 		} catch (Throwable ex) {
 			LOGGER.error(ex.getCause().getMessage(), ex);
 			JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
-			JOptionPane.showMessageDialog(mainFrame.getContentPane(), "РћР±СЂР°С‚РёС‚РµСЃСЊ Рє Р°РґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂСѓ!");
-			JOptionPane.showMessageDialog(mainFrame.getContentPane(), "РџСЂРёР»РѕР¶РµРЅРёРµ Р±СѓРґРµС‚ Р·Р°РєСЂС‹С‚Рѕ!");
+			JOptionPane.showMessageDialog(mainFrame.getContentPane(), "Обратитесь к администратору!");
+			JOptionPane.showMessageDialog(mainFrame.getContentPane(), "Приложение будет закрыто!");
 			mainFrame.dispose();
 
 		} finally {
@@ -360,7 +360,7 @@ public class MainForm extends JFrame{
 		}
 	}
 
-	private void actOrDeactivateButton() { // РґР»СЏ РєРЅРѕРїРєРё
+	private void actOrDeactivateButton() { // для кнопки
 		if (this.groupComboBox.getItemCount() < 1) {
 			this.showRecordsButton.setEnabled(false);
 		} else {
@@ -369,8 +369,8 @@ public class MainForm extends JFrame{
 	}
 
 	/**
-	 * РЎР±СЂР°СЃС‹РІР°РµРј РІС‹РґРµР»РµРЅРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІ {@link #facultyComboBox} РћС‡РёС€Р°РµРј РґР°РЅРЅС‹Рµ
-	 * РІРѕ РІСЃРµС… С‚Р°Р±Р»РёС†Р°С…, Р° С‚Р°Рє Р¶Рµ СЃР±СЂР°СЃС‹РІР°РµРј С„Р»Р°Рі
+	 * Сбрасываем выделенный элемент в {@link #facultyComboBox} Очишаем данные
+	 * во всех таблицах, а так же сбрасываем флаг
 	 */
 	private void resetTimetable() {
 		facultyComboBox.setSelectedIndex(facultyComboBox.getItemCount() - 1 - facultyComboBox.getSelectedIndex());
@@ -408,7 +408,7 @@ public class MainForm extends JFrame{
 			} catch (ServiceException | ApplicationException ex) {
 				LOGGER.error(ex.getCause().getMessage(), ex);
 				JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
-				progressBarLbl.setText("РћС€РёР±РєР°");
+				progressBarLbl.setText("Ошибка");
 				progressBar.setValue(progressBar.getMaximum());
 			} finally {
 				mainFrame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
