@@ -13,7 +13,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "faculty", catalog = "timetable",
+@Table(name = "faculty",
     uniqueConstraints = @UniqueConstraint(columnNames = "name_faculty"))
 public class Faculty implements java.io.Serializable, Cloneable, IName {
 

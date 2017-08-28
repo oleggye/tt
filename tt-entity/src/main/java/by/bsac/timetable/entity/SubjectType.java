@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "subject_type", catalog = "timetable")
+@Table(name = "subject_type")
 public class SubjectType implements java.io.Serializable, Cloneable {
 
   private static final long serialVersionUID = -4158964098924310875L;

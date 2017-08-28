@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 
 
 @Entity
-@Table(name = "lecturer", catalog = "timetable")
+@Table(name = "lecturer")
 public class Lecturer implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = -1097849435762885350L;

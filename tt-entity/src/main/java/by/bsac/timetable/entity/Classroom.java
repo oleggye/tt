@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "classroom", catalog = "timetable",
+@Table(name = "classroom",
     uniqueConstraints = @UniqueConstraint(columnNames = {"number", "building"}))
 public class Classroom implements java.io.Serializable, Cloneable, IName {
 

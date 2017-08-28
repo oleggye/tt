@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "cancellation", catalog = "timetable")
+@Table(name = "cancellation")
 public class Cancellation implements java.io.Serializable {
 
   private static final long serialVersionUID = -9036988939820334961L;

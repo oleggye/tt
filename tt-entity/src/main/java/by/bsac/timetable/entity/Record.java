@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "record", catalog = "timetable")
+@Table(name = "record")
 public class Record implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = -6066965208149766799L;

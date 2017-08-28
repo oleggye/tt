@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "flow", catalog = "timetable",
+@Table(name = "flow",
     uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Flow implements java.io.Serializable, Cloneable, IName {
 

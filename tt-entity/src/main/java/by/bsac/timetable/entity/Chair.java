@@ -13,8 +13,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "chair", catalog = "timetable",
-    uniqueConstraints = @UniqueConstraint(columnNames = "name_chair"))
+@Table(name = "chair", uniqueConstraints = @UniqueConstraint(columnNames = "name_chair"))
 public class Chair implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = -3503528652713972743L;
@@ -38,7 +37,7 @@ public class Chair implements java.io.Serializable, Cloneable, IName {
   }
 
   @Id
- /* @GeneratedValue(strategy = IDENTITY)*/
+  /* @GeneratedValue(strategy = IDENTITY) */
   @Column(name = "id_chair", unique = true, nullable = false)
   public Byte getIdChair() {
     return this.idChair;
@@ -58,8 +57,10 @@ public class Chair implements java.io.Serializable, Cloneable, IName {
     this.nameChair = nameChair;
   }
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "chair"/*, cascade = CascadeType.ALL,
-      orphanRemoval = true*/)
+  @OneToMany(fetch = FetchType.LAZY,
+      mappedBy = "chair"/*
+                         * , cascade = CascadeType.ALL, orphanRemoval = true
+                         */)
   public Set<Lecturer> getLecturers() {
     return this.lecturers;
   }
@@ -68,8 +69,10 @@ public class Chair implements java.io.Serializable, Cloneable, IName {
     this.lecturers = lecturers;
   }
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "chair"/*, cascade = CascadeType.ALL,
-      orphanRemoval = true*/)
+  @OneToMany(fetch = FetchType.LAZY,
+      mappedBy = "chair"/*
+                         * , cascade = CascadeType.ALL, orphanRemoval = true
+                         */)
   public Set<Subject> getSubjects() {
     return this.subjects;
   }

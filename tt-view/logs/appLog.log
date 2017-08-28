@@ -33,3 +33,22 @@
 2017-08-28T20:27:25,177 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
 2017-08-28T20:27:25,342 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
 2017-08-28T20:27:32,322 [AWT-EventQueue-0] DEBUG dao.Impl.RecordDAOImpl - getRecordListByGroupAndDate
+2017-08-28T20:32:57,197 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
+2017-08-28T20:32:58,098 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-08-28T20:33:02,301 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
+2017-08-28T20:33:03,209 [AWT-EventQueue-0] DEBUG view.extra.FacultyEditForm - selected faculty:Faculty [idFaculty=3, nameFaculty=Факультет заочного и дистанционного образования]
+2017-08-28T20:33:06,365 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
+2017-08-28T20:33:07,967 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
+2017-08-28T20:33:09,093 [AWT-EventQueue-0] DEBUG view.extra.ClassroomEditForm - selected classroom:Classroom [idClassroom=10, number=118, building=2, isReserved=false]
+2017-08-28T20:33:09,932 [AWT-EventQueue-0] DEBUG view.extra.ClassroomEditForm - selected classroom:Classroom [idClassroom=4, number=212, building=1, isReserved=false]
+2017-08-28T20:33:10,604 [AWT-EventQueue-0] DEBUG view.extra.ClassroomEditForm - selected classroom:Classroom [idClassroom=9, number=155, building=2, isReserved=false]
+2017-08-28T20:33:11,536 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-08-28T20:33:15,786 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
+2017-08-28T20:33:17,073 [AWT-EventQueue-0] DEBUG dao.Impl.RecordDAOImpl - getRecordListByGroupAndDate
+2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:4
+2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:2
+2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
+2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 0, rowIndex: 0
+2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
+2017-08-28T20:33:18,335 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
+2017-08-28T20:33:18,483 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
