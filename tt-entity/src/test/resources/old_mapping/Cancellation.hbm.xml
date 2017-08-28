@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Aug 26, 2017 12:43:22 PM by Hibernate Tools 5.2.3.Final -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="true">
+	<class dynamic-insert="false" dynamic-update="false" mutable="true"
+		name="by.bsac.timetable.hibernateFiles.entity.Cancellation"
+		optimistic-lock="version" polymorphism="implicit"
+		select-before-update="false" table="cancellation">
+		<id name="idCancellation" type="java.lang.Integer">
+			<column name="id_cancellation" />
+			<generator class="identity" />
+		</id>
+		<many-to-one class="by.bsac.timetable.hibernateFiles.entity.Record"
+			embed-xml="true" fetch="select" insert="true" name="record"
+			not-found="exception" optimistic-lock="true" unique="false" update="true">
+			<column name="id_record" not-null="true" />
+		</many-to-one>
+		<property generated="never" lazy="false" name="dateTo"
+			optimistic-lock="true" type="date" unique="false">
+			<column length="10" name="date_to" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="dateFrom"
+			optimistic-lock="true" type="date" unique="false">
+			<column length="10" name="date_from" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+ 		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+             http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:db/db.properties</value>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="myEmf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="by.bsac.timetable.entity" />
+		<!-- <property name="mappingResources"> <list> <value>mapping/Chair.hbm.xml</value> 
+			<value>mapping/SubjectType.hbm.xml</value> <value>mapping/Faculty.hbm.xml</value> 
+			<value>mapping/Lecturer.hbm.xml</value> <value>mapping/Classroom.hbm.xml</value> 
+			<value>mapping/SubjectFor.hbm.xml</value> <value>mapping/Subject.hbm.xml</value> 
+			<value>mapping/Flow.hbm.xml</value> <value>mapping/Group.hbm.xml</value> 
+			<value>mapping/Record.hbm.xml</value> <value>mapping/Cancellation.hbm.xml</value> 
+			</list> </property> -->
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="generateDdl" value="true" />
+				<property name="showSql" value="true" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<!-- <prop key="hibernate.default_schema">timetable</prop> -->
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+				<!-- <prop key="connection.useUnicode">true</prop>
+				<prop key="connection.characterEncoding">UTF-8</prop> -->
+				<prop key="hibernate.hbm2ddl.import_files_sql_extractor">
+					org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<tx:annotation-driven />
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="myEmf" />
+	</bean>
+
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+</beans>

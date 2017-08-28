@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Aug 26, 2017 12:43:22 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="true">
+	<class dynamic-insert="false" dynamic-update="false" mutable="true"
+		name="by.bsac.timetable.hibernateFiles.entity.Subject"
+		optimistic-lock="version" polymorphism="implicit"
+		select-before-update="false" table="subject">
+		<id name="idSubject" type="short">
+			<column name="id_subject" />
+			<generator class="assigned" />
+		</id>
+		<many-to-one class="by.bsac.timetable.hibernateFiles.entity.Chair"
+			embed-xml="true" fetch="select" insert="true" name="chair" not-found="exception"
+			optimistic-lock="true" unique="false" update="true">
+			<column name="id_chair" not-null="true" />
+		</many-to-one>
+		<property generated="never" lazy="false" name="nameSubject"
+			optimistic-lock="true" type="string" unique="false">
+			<column length="80" name="name_subject" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="eduLevel"
+			optimistic-lock="true" type="byte" unique="false">
+			<column name="edu_level" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="abnameSubject"
+			optimistic-lock="true" type="string" unique="false">
+			<column length="20" name="abname_subject" not-null="true" />
+		</property>
+		<set embed-xml="true" fetch="select" inverse="true" lazy="true"
+			mutable="true" name="records" optimistic-lock="true" sort="unsorted"
+			table="record">
+			<key on-delete="noaction">
+				<column name="id_subject" not-null="true" />
+			</key>
+			<one-to-many class="by.bsac.timetable.hibernateFiles.entity.Record"
+				embed-xml="true" not-found="exception" />
+		</set>
+	</class>
+</hibernate-mapping>

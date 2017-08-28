@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Aug 26, 2017 12:43:22 PM by Hibernate Tools 5.2.3.Final -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="true">
+	<class dynamic-insert="false" dynamic-update="false" mutable="true"
+		name="by.bsac.timetable.hibernateFiles.entity.Chair" optimistic-lock="version"
+		polymorphism="implicit" select-before-update="false" table="chair">
+		
+		<id name="idChair" type="java.lang.Short">
+			<column name="id_chair" />
+			<generator class="identity" />
+		</id>
+		<property generated="never" lazy="false" name="nameChair"
+			optimistic-lock="true" type="string" unique="false">
+			<column length="70" name="name_chair" not-null="true" unique="true" />
+		</property>
+		<set embed-xml="true" fetch="select" inverse="true" lazy="true"
+			mutable="true" name="lecturers" optimistic-lock="true" sort="unsorted"
+			table="lecturer">
+			<key on-delete="noaction">
+				<column name="id_chair" not-null="true" />
+			</key>
+			<one-to-many class="by.bsac.timetable.hibernateFiles.entity.Lecturer"
+				embed-xml="true" not-found="exception" />
+		</set>
+		<set embed-xml="true" fetch="select" inverse="true" lazy="true"
+			mutable="true" name="subjects" optimistic-lock="true" sort="unsorted"
+			table="subject" cascade="save-update, delete">
+			<key on-delete="noaction">
+				<column name="id_chair" not-null="true" />
+			</key>
+			<one-to-many class="by.bsac.timetable.hibernateFiles.entity.Subject"
+				embed-xml="true" not-found="exception" />
+		</set>
+	</class>
+</hibernate-mapping>

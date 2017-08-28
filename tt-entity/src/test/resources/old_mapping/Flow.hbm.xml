@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Aug 26, 2017 12:43:22 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="true">
+	<class dynamic-insert="false" dynamic-update="false" mutable="true"
+		name="by.bsac.timetable.hibernateFiles.entity.Flow" optimistic-lock="version"
+		polymorphism="implicit" select-before-update="false" table="flow">
+		<id name="idFlow" type="short">
+			<column name="id_flow" />
+			<generator class="assigned" />
+		</id>
+		<property generated="never" lazy="false" name="name"
+			optimistic-lock="true" type="string" unique="false">
+			<column length="45" name="name" not-null="true" unique="true" />
+		</property>
+		<set embed-xml="true" fetch="select" inverse="true" lazy="true"
+			mutable="true" name="groups" optimistic-lock="true" sort="unsorted"
+			table="group">
+			<key on-delete="noaction">
+				<column name="id_flow" />
+			</key>
+			<one-to-many class="by.bsac.timetable.hibernateFiles.entity.Group"
+				embed-xml="true" not-found="exception" />
+		</set>
+	</class>
+</hibernate-mapping>

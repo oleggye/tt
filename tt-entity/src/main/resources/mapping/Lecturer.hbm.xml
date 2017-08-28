@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 15, 2017 12:08:06 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="by.bsac.timetable.hibernateFiles.entity.Lecturer" table="lecturer" catalog="timetable" optimistic-lock="version">
+        <id name="idLecturer" type="java.lang.Short">
+            <column name="id_lecturer" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="chair" class="by.bsac.timetable.hibernateFiles.entity.Chair" fetch="join">
+            <column name="id_chair" not-null="true" />
+        </many-to-one>
+        <property name="nameLecturer" type="string">
+            <column name="name_lecturer" length="45" not-null="true" />
+        </property>
+        <set name="records" table="record" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_lecturer" not-null="true" />
+            </key>
+            <one-to-many class="by.bsac.timetable.hibernateFiles.entity.Record" />
+        </set>
+    </class>
+</hibernate-mapping>

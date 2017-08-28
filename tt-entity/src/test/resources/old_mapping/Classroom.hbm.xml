@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Aug 26, 2017 12:43:22 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="true">
+	<class dynamic-insert="false" dynamic-update="false" mutable="true"
+		name="by.bsac.timetable.hibernateFiles.entity.Classroom"
+		optimistic-lock="version" polymorphism="implicit"
+		select-before-update="false" table="classroom">
+		<id name="idClassroom" type="java.lang.Short">
+			<column name="id_classroom" />
+			<generator class="identity" />
+		</id>
+		<property generated="never" lazy="false" name="number"
+			optimistic-lock="true" type="short" unique="false">
+			<column name="number" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="building"
+			optimistic-lock="true" type="byte" unique="false">
+			<column name="building" not-null="true" />
+		</property>
+		<set embed-xml="true" fetch="select" inverse="true" lazy="true"
+			mutable="true" name="records" optimistic-lock="true" sort="unsorted"
+			table="record">
+			<key on-delete="noaction">
+				<column name="id_classroom" not-null="true" />
+			</key>
+			<one-to-many class="by.bsac.timetable.hibernateFiles.entity.Record"
+				embed-xml="true" not-found="exception" />
+		</set>
+	</class>
+</hibernate-mapping>

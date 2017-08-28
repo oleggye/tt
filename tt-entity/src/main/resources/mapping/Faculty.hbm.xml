@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 15, 2017 12:08:06 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+	<class name="by.bsac.timetable.hibernateFiles.entity.Faculty"
+		table="faculty" catalog="timetable" optimistic-lock="version">
+		<id name="idFaculty" type="short">
+			<column name="id_faculty" />
+			<generator class="identity" />
+		</id>
+		<property name="nameFaculty" type="string">
+			<column name="name_faculty" length="60" not-null="true"
+				unique="true" />
+		</property>
+		<set name="groups" table="group" inverse="true" lazy="true" fetch="select">
+			<key>
+				<column name="id_faculty" not-null="true" />
+			</key>
+			<one-to-many class="by.bsac.timetable.hibernateFiles.entity.Group" />
+		</set>
+	</class>
+</hibernate-mapping>

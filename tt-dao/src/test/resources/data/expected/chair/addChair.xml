@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<chair id_chair="1" name_chair="Кафедра математики" />
+	<chair id_chair="2" name_chair="Кафедра программного обеспечения" />
+	<chair id_chair="3" name_chair="Кафедра заочного образования" />
+</dataset>

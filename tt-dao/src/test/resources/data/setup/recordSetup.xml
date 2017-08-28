@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<chair id_chair="1" name_chair="Кафедра математики" />
+	<chair id_chair="2" name_chair="Кафедра программного обеспечения" />
+
+	<lecturer id_lecturer="1" name_lecturer="Иванов Иван Иваныч"
+		id_chair="1" />
+	<lecturer id_lecturer="2" name_lecturer="Викторова Виктория Викторовна"
+		id_chair="1" />
+	<lecturer id_lecturer="3" name_lecturer="Петров Петр Петрович"
+		id_chair="2" />
+
+	<subject id_subject="1" name_subject="Высшая математика"
+		id_chair="1" edu_level="1" abname_subject="ВМ" />
+	<subject id_subject="2" name_subject="Физика" id_chair="1"
+		edu_level="1" abname_subject="Физика" />
+	<subject id_subject="3" name_subject="Основы алгоритмизации и программирования"
+		id_chair="2" edu_level="1" abname_subject="ОАиП" />
+
+	<classroom id_classroom="1" number="123" building="1" />
+	<classroom id_classroom="2" number="124" building="1" />
+	<classroom id_classroom="3" number="333" building="1" />
+	<classroom id_classroom="4" number="222" building="2" />
+	<classroom id_classroom="5" number="223" building="2" />
+
+	<faculty id_faculty="1" name_faculty="Факультет электросвязи" />
+	<faculty id_faculty="2" name_faculty="Факультет инжиниринга и технологий связи" />
+
+	<flow id_flow="1" name="СП_flow" />
+
+	<group id_group="1" name_group="СП441" id_flow="1" id_faculty="1"
+		edu_level="1" />
+	<group id_group="2" name_group="СП442" id_flow="1" id_faculty="1"
+		edu_level="1" />
+
+	<record id_record="1" week_number="1" subj_ordinal_number="1"
+		id_group="1" id_subject="2" id_lecturer="3" id_subject_type="1"
+		id_subject_for="4" id_classroom="1" />
+
+
+
+</dataset>

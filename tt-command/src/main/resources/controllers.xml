@@ -1,0 +1,70 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+ 		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- Record -->
+	<bean id="addRecord" class="by.bsac.timetable.command.impl.add.AddRecord" />
+	<bean id="updateRecord" class="by.bsac.timetable.command.impl.update.UpdateRecord" />
+	<bean id="cancelRecord" class="by.bsac.timetable.command.impl.CancelRecord" />
+	<bean id="GetRecordListByGroupAndReferenceDate"
+		class="by.bsac.timetable.command.impl.get.GetRecordListByGroupAndReferenceDate" />
+
+	<!-- Faculty -->
+	<bean id="addFaculty" class="by.bsac.timetable.command.impl.add.AddFaculty" />
+	<bean id="updateFaculty" class="by.bsac.timetable.command.impl.update.UpdateFaculty" />
+	<bean id="deleteFaculty" class="by.bsac.timetable.command.impl.delete.DeleteFaculty" />
+	<bean id="getFacultyList" class="by.bsac.timetable.command.impl.get.GetFacultyList" />
+
+	<!-- Chair -->
+	<bean id="addChair" class="by.bsac.timetable.command.impl.add.AddChair" />
+	<bean id="updateChair" class="by.bsac.timetable.command.impl.update.UpdateChair" />
+	<bean id="deleteChair" class="by.bsac.timetable.command.impl.delete.DeleteChair" />
+	<bean id="getChairList" class="by.bsac.timetable.command.impl.get.GetChairList" />
+
+	<!-- Classroom -->
+	<bean id="addClassroom" class="by.bsac.timetable.command.impl.add.AddClassroom" />
+	<bean id="updateClassroom" class="by.bsac.timetable.command.impl.update.UpdateClassroom" />
+	<bean id="deleteClassroom" class="by.bsac.timetable.command.impl.delete.DeleteClassroom" />
+	<bean id="changeClassroom" class="by.bsac.timetable.command.impl.ChangeClassroom" />
+	<bean id="getClassroomList" class="by.bsac.timetable.command.impl.get.GetClassroomList" />
+
+	<!--Flow -->
+	<bean id="addFlow" class="by.bsac.timetable.command.impl.add.AddFlow" />
+	<bean id="updateFlow" class="by.bsac.timetable.command.impl.update.UpdateFlow" />
+	<bean id="deleteFlow" class="by.bsac.timetable.command.impl.delete.DeleteFlow" />
+	<bean id="getFlowList" class="by.bsac.timetable.command.impl.get.GetFlowList" />
+	<bean id="getFlowListByName" class="by.bsac.timetable.command.impl.get.GetFlowListByName" />
+
+	<!-- Group -->
+	<bean id="addGroup" class="by.bsac.timetable.command.impl.add.AddGroup" />
+	<bean id="updateGroup" class="by.bsac.timetable.command.impl.update.UpdateGroup" />
+	<bean id="deleteGroup" class="by.bsac.timetable.command.impl.delete.DeleteGroup" />
+	<bean id="getGroupListByFlow" class="by.bsac.timetable.command.impl.get.GetGroupListByFlow" />
+	<bean id="getGroupListByFacultyAndEduLevel"
+		class="by.bsac.timetable.command.impl.get.GetGroupListByFacultyAndEduLevel" />
+	<bean id="getGroupListByName" class="by.bsac.timetable.command.impl.get.GetGroupListByName" />
+
+	<!-- Lecturer -->
+	<bean id="addLecturer" class="by.bsac.timetable.command.impl.add.AddLecturer" />
+	<bean id="updateLecturer" class="by.bsac.timetable.command.impl.update.UpdateLecturer" />
+	<bean id="deleteLecturer" class="by.bsac.timetable.command.impl.delete.DeleteLecturer" />
+	<bean id="changeLecturer" class="by.bsac.timetable.command.impl.ChangeLecturer" />
+	<bean id="getLecturerList" class="by.bsac.timetable.command.impl.get.GetLecturerList" />
+	<bean id="getLecturerListByChair"
+		class="by.bsac.timetable.command.impl.get.GetLecturerListByChair" />
+	<bean id="getLecturerListByName"
+		class="by.bsac.timetable.command.impl.get.GetLecturerListByName" />
+
+	<!-- Subject -->
+	<bean id="addSubject" class="by.bsac.timetable.command.impl.add.AddSubject" />
+	<bean id="updateSubject" class="by.bsac.timetable.command.impl.update.UpdateSubject" />
+	<bean id="deleteSubject" class="by.bsac.timetable.command.impl.delete.DeleteSubject" />
+	<bean id="getSubjectListByChairAndEduLevel"
+		class="by.bsac.timetable.command.impl.get.GetSubjectListByChairAndEduLevel" />
+	<bean id="GetSubjectListByName" class="by.bsac.timetable.command.impl.get.GetSubjectListByName" />
+</beans>

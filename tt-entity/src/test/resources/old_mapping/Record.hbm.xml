@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Aug 26, 2017 12:43:22 PM by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property"
+	default-cascade="none" default-lazy="true">
+	<class dynamic-insert="false" dynamic-update="false" mutable="true"
+		name="by.bsac.timetable.hibernateFiles.entity.Record" optimistic-lock="version"
+		polymorphism="implicit" select-before-update="false" table="record">
+		<id name="idRecord" type="java.lang.Integer">
+			<column name="id_record" />
+			<generator class="identity" />
+		</id>
+		<many-to-one class="by.bsac.timetable.hibernateFiles.entity.Classroom"
+			embed-xml="true" fetch="join" insert="true" name="classroom"
+			not-found="exception" optimistic-lock="true" unique="false" update="true">
+			<column name="id_classroom" not-null="true" />
+		</many-to-one>
+		<many-to-one class="by.bsac.timetable.hibernateFiles.entity.Group"
+			embed-xml="true" fetch="join" insert="true" name="group" not-found="exception"
+			optimistic-lock="true" unique="false" update="true">
+			<column name="id_group" not-null="true" />
+		</many-to-one>
+		<many-to-one class="by.bsac.timetable.hibernateFiles.entity.Lecturer"
+			embed-xml="true" fetch="join" insert="true" name="lecturer"
+			not-found="exception" optimistic-lock="true" unique="false" update="true">
+			<column name="id_lecturer" not-null="true" />
+		</many-to-one>
+		<many-to-one class="by.bsac.timetable.hibernateFiles.entity.Subject"
+			embed-xml="true" fetch="join" insert="true" name="subject" not-found="exception"
+			optimistic-lock="true" unique="false" update="true">
+			<column name="id_subject" not-null="true" />
+		</many-to-one>
+		<many-to-one class="by.bsac.timetable.hibernateFiles.entity.SubjectFor"
+			embed-xml="true" fetch="join" insert="true" name="subjectFor"
+			not-found="exception" optimistic-lock="true" unique="false" update="true">
+			<column name="id_subject_for" not-null="true" />
+		</many-to-one>
+		<many-to-one class="by.bsac.timetable.hibernateFiles.entity.SubjectType"
+			embed-xml="true" fetch="join" insert="true" name="subjectType"
+			not-found="exception" optimistic-lock="true" unique="false" update="true">
+			<column name="id_subject_type" not-null="true" />
+		</many-to-one>
+		<property generated="never" lazy="false" name="weekNumber"
+			optimistic-lock="true" type="byte" unique="false">
+			<column name="week_number" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="weekDay"
+			optimistic-lock="true" type="byte" unique="false">
+			<column name="week_day" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="subjOrdinalNumber"
+			optimistic-lock="true" type="byte" unique="false">
+			<column name="subj_ordinal_number" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="dateFrom"
+			optimistic-lock="true" type="date" unique="false">
+			<column length="10" name="date_from" not-null="true" />
+		</property>
+		<property generated="never" lazy="false" name="dateTo"
+			optimistic-lock="true" type="date" unique="false">
+			<column length="10" name="date_to" not-null="true" />
+		</property>
+		<set embed-xml="true" fetch="select" inverse="true" lazy="true"
+			mutable="true" name="cancellations" optimistic-lock="true" sort="unsorted"
+			table="cancellation">
+			<key on-delete="noaction">
+				<column name="id_record" not-null="true" />
+			</key>
+			<one-to-many class="by.bsac.timetable.hibernateFiles.entity.Cancellation"
+				embed-xml="true" not-found="exception" />
+		</set>
+	</class>
+</hibernate-mapping>

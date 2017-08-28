@@ -1,0 +1,75 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+ 		http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+ 		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+
+	<import resource="classpath:controllers.xml" />
+
+	<util:map id="commandStore" key-type="by.bsac.timetable.util.ActionMode">
+		<!-- Record -->
+		<entry key="Add_Record" value-ref="addRecord" />
+		<entry key="Update_Record" value-ref="updateRecord" />
+		<entry key="Cancel_Record" value-ref="cancelRecord" />
+		<entry key="Get_Timetable_For_Group" value-ref="GetRecordListByGroupAndReferenceDate" />
+
+		<!-- Faculty -->
+		<entry key="Add_Faculty" value-ref="addFaculty" />
+		<entry key="Update_Faculty" value-ref="updateFaculty" />
+		<entry key="Delete_Faculty" value-ref="deleteFaculty" />
+		<entry key="Get_Faculty_List" value-ref="getFacultyList" />
+
+		<!-- Chair -->
+		<entry key="Add_Chair" value-ref="addChair" />
+		<entry key="Update_Chair" value-ref="updateChair" />
+		<entry key="Delete_Chair" value-ref="deleteChair" />
+		<entry key="Get_Chair_List" value-ref="getChairList" />
+
+		<!-- Classroom -->
+		<entry key="Add_Classroom" value-ref="addClassroom" />
+		<entry key="Update_Classroom" value-ref="updateClassroom" />
+		<entry key="Delete_Classroom" value-ref="deleteClassroom" />
+		<entry key="Change_Classroom" value-ref="changeClassroom" />
+		<entry key="Get_Classroom_List" value-ref="getClassroomList" />
+
+		<!-- Flow -->
+		<entry key="Add_Flow" value-ref="addFlow" />
+		<entry key="Update_Flow" value-ref="updateFlow" />
+		<entry key="Delete_Flow" value-ref="deleteFlow" />
+		<entry key="Get_Flow_List" value-ref="getFlowList" />
+		<entry key="Get_Flow_List_By_Name" value-ref="getFlowListByName" />
+
+		<!-- Group -->
+		<entry key="Add_Group" value-ref="addGroup" />
+		<entry key="Update_Group" value-ref="updateGroup" />
+		<entry key="Delete_Group" value-ref="deleteGroup" />
+		<entry key="Get_Group_List_By_Flow" value-ref="getGroupListByFlow" />
+		<entry key="Get_Group_List_By_Faculty_And_EduLevel"
+			value-ref="getGroupListByFacultyAndEduLevel" />
+		<entry key="Get_Group_List_By_Name" value-ref="getGroupListByName" />
+
+		<!-- Lecturer -->
+		<entry key="Add_Lecturer" value-ref="addLecturer" />
+		<entry key="Update_Lecturer" value-ref="updateLecturer" />
+		<entry key="Delete_Lecturer" value-ref="deleteLecturer" />
+		<entry key="Change_Lecturer" value-ref="changeLecturer" />
+		<entry key="Get_Lecturer_List" value-ref="getLecturerList" />
+		<entry key="Get_Lecturer_List_By_Chair" value-ref="getLecturerListByChair" />
+		<entry key="Get_Lecturer_List_By_Name" value-ref="getLecturerListByName" />
+
+		<!-- Subject -->
+		<entry key="Add_Subject" value-ref="addSubject" />
+		<entry key="Update_Subject" value-ref="updateSubject" />
+		<entry key="Delete_Subject" value-ref="deleteSubject" />
+		<entry key="Get_Subject_List_By_Chair_And_EduLevel"
+			value-ref="getSubjectListByChairAndEduLevel" />
+		<entry key="Get_Subject_List_By_Name" value-ref="GetSubjectListByName" />
+
+	</util:map>
+
+</beans>
