@@ -1,4 +1,4 @@
-package by.bsac.timetable.dao.Impl;
+package by.bsac.timetable.dao.impl;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

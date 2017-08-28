@@ -1,4 +1,4 @@
-package by.bsac.timetable.dao.Impl;
+package by.bsac.timetable.dao.impl;
 
 import java.io.Serializable;
 import java.util.Iterator;
@@ -119,6 +119,7 @@ public abstract class AbstractHibernateDAO<E, PK extends Serializable>
     LOGGER.debug("delete: " + object);
     try {
       manager.remove(manager.contains(object) ? object : manager.merge(object));
+      manager.flush();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);

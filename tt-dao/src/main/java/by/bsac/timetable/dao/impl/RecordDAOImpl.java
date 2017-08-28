@@ -1,4 +1,4 @@
-package by.bsac.timetable.dao.Impl;
+package by.bsac.timetable.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
