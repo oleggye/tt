@@ -39,10 +39,10 @@ public class GroupDAOImplTest {
   }
 
   @Test
-  @DatabaseSetup(value= {"/data/setup/facultySetup.xml",
+  /*@DatabaseSetup(value= {"/data/setup/facultySetup.xml",
       "/data/setup/flowSetup.xml","/data/setup/groupSetup.xml"})
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
-      type = DatabaseOperation.CLEAN_INSERT)
+      type = DatabaseOperation.CLEAN_INSERT)*/
   public void testGetGroupList() throws DAOException {
     final int expectedSize = 3;
 

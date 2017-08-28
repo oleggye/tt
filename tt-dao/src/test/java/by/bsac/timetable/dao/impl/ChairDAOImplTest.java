@@ -22,8 +22,8 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import by.bsac.timetable.dao.IChairDAO;
-import by.bsac.timetable.dao.Impl.ChairDAOImpl;
 import by.bsac.timetable.dao.exception.DAOException;
+import by.bsac.timetable.dao.impl.ChairDAOImpl;
 import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.entity.builder.ChairBuilder;
 
