@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-		<!-- <faculty id_faculty="1" name_faculty="Факультет электросвязи" />
-		<faculty id_faculty="2" name_faculty="Факультет инжиниринга и технологий связи" />
-	
-		<flow id_flow="1" name="СТ_СП_44" />
-		<flow id_flow="2" name="Марк_44" />
-		<flow id_flow="3" name="Тест_22" /> -->
-
-	<group id_group="1" name_group="СП441" id_flow="1" id_faculty="1"
+	<groupp id_group="1" name_group="СП441" id_flow="1" id_faculty="1"
 		edu_level="1" />
-	<group id_group="2" name_group="СП442" id_flow="1" id_faculty="1"
+	<groupp id_group="2" name_group="СП442" id_flow="1" id_faculty="1"
 		edu_level="1" />
-	<!-- <Group idGroup="3" name_group="СO222" id_faculty="2" edu_level="2" /> -->
-
+	<groupp id_group="3" name_group="СO222" id_faculty="2" edu_level="2" />
 </dataset>

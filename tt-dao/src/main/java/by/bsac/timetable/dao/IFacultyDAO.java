@@ -15,7 +15,7 @@ public interface IFacultyDAO {
 
 	public void updateAll(List<Faculty> listFaculty) throws DAOException;
 
-	public Faculty getById(Short faculty_id) throws DAOException;
+	public Faculty getById(Byte idFaculty) throws DAOException;
 
 	public List<Faculty> getAll() throws DAOException;
 

@@ -15,7 +15,7 @@ public interface IChairDAO {
 
   public void updateAll(List<Chair> listChair) throws DAOException;
 
-  public Chair getById(Byte chair_id) throws DAOException;
+  public Chair getById(Byte idChair) throws DAOException;
 
   public List<Chair> getAll() throws DAOException;
 

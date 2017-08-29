@@ -29,27 +29,15 @@ public class GroupDAOImpl extends AbstractHibernateDAO<Group, Short> implements 
   public List<Group> getGroupListByFaculty(Faculty faculty) throws DAOException {
     LOGGER.debug("getGroupListByFaculty: faculty= " + faculty);
     try {
-
-      short faculty_id = faculty.getIdFaculty();
-      return manager.createQuery(
-          "select gr from Group as gr inner join gr.Faculty as faculty where faculty.idFaculty = :faculty_id",
-          Group.class).setParameter("faculty_id", faculty_id).getResultList();
-
-      /*
-       * Session session = HibernateUtil.getSession(); short faculty_id = faculty.getIdFaculty();
-       * HibernateUtil.beginTransaction(); Query query =
-       * session.createQuery("select gr from Group as gr" + " inner join gr.Faculty as faculty " +
-       * "where faculty.idFaculty = :faculty_id").setShort("faculty_id", faculty_id); groupsRecords
-       * = query.list(); HibernateUtil.commitTransaction();
-       */
-
+      return manager
+          .createQuery("select gr from Group as gr where gr.faculty = :faculty", Group.class)
+          .setParameter("faculty", faculty).getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);
     }
   }
 
-  // FIXME: change this stub
   @Transactional
   @Override
   public List<Group> getGroupListByFacultyAndEduLevel(Faculty faculty, byte eduLevel)
@@ -57,20 +45,12 @@ public class GroupDAOImpl extends AbstractHibernateDAO<Group, Short> implements 
     LOGGER.debug(
         "getGroupListByFacultyAndEduLevel: faculty= " + faculty + ", eduLevel= " + eduLevel + "]");
     try {
-      /*
-       * Session session = HibernateUtil.getSession(); HibernateUtil.beginTransaction(); Criteria
-       * criteria = session.createCriteria(Group.class, "group");
-       * criteria.add(Restrictions.eq("group.faculty", faculty));
-       * criteria.add(Restrictions.eq("eduLevel", eduLevel)); groupsRecords = criteria.list();
-       */
-
-      // CriteriaBuilder builder = manager.getCriteriaBuilder();
-      // CriteriaQuery<Group> query = builder.createQuery(Group.class);
-      // Root<Group> group = query.from(Group.class);
-
       return manager
-          .createQuery("select gr from Group as gr where gr.faculty = :faculty and gr.eduLevel = :eduLevel", Group.class)
-          .setParameter("faculty", faculty).setParameter("eduLevel", (Byte)eduLevel).getResultList();
+          .createQuery(
+              "select gr from Group as gr where gr.faculty = :faculty and gr.eduLevel = :eduLevel",
+              Group.class)
+          .setParameter("faculty", faculty).setParameter("eduLevel", (Byte) eduLevel)
+          .getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);
@@ -81,12 +61,8 @@ public class GroupDAOImpl extends AbstractHibernateDAO<Group, Short> implements 
   public List<Group> getGroupListByFlow(Flow flow) throws DAOException {
     LOGGER.debug("getGroupListByFlow");
     try {
-      /*
-       * Criteria criteria = session.createCriteria(Group.class, "group");
-       * criteria.add(Restrictions.eq("group.flow", flow)); groupList = criteria.list();
-       */
-      return manager.createQuery("SELECT gr from Group gr where gr.flow =?1 ", Group.class)
-          .setParameter(1, flow).getResultList();
+      return manager.createQuery("select gr from Group gr where gr.flow = :flow ", Group.class)
+          .setParameter("flow", flow).getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);
@@ -125,16 +101,9 @@ public class GroupDAOImpl extends AbstractHibernateDAO<Group, Short> implements 
   @Override
   public List<Group> getAllWithSimilarName(String nameGroup) throws DAOException {
     try {
-      /*
-       * Session session = HibernateUtil.getSession(); HibernateUtil.beginTransaction(); Criteria
-       * criteria = session.createCriteria(Group.class, "group");
-       * criteria.add(Restrictions.ilike("group.nameGroup", nameLecturer, MatchMode.START));
-       * groupList = criteria.list(); HibernateUtil.commitTransaction();
-       */
-
-      return manager.createQuery("from Group as gr where gr.nameGroup like ?1 ", Group.class)
-          .setParameter(1, nameGroup).getResultList();
-
+      final String likeConst = "%";
+      return manager.createQuery("from Group as gr where gr.nameGroup like :nameGroup", Group.class)
+          .setParameter("nameGroup", nameGroup + likeConst).getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);

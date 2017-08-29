@@ -17,7 +17,7 @@ public interface IGroupDAO {
 
   public void updateAll(List<Group> listGroup) throws DAOException;
 
-  public Group getById(Short group_id) throws DAOException;
+  public Group getById(Short idGroup) throws DAOException;
 
   public List<Group> getAll() throws DAOException;
 

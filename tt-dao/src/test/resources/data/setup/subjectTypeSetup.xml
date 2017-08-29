@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<subject_type id="1" name="Лекция" />
+	<subject_type id="2" name="Лабораторная работа" />
+	<subject_type id="3" name="Практическая работа" />
+	<subject_type id="4" name="Консультация" />
+	<subject_type id="5" name="Зачёт" />
+	<subject_type id="6" name="Экзамен" />
+	<subject_type id="7" name="Учебное занятие" />
+	<subject_type id="8" name="Переезд" />
+</dataset>

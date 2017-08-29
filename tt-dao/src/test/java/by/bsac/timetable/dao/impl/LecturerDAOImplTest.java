@@ -34,7 +34,7 @@ public class LecturerDAOImplTest {
   private ILecturerDAO dao;
 
   @Test
-  @DatabaseSetup("/data/setup/lecturerSetup.xml")
+  @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/lecturerSetup.xml"})
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
   public void testGetLecturerList() throws DAOException {

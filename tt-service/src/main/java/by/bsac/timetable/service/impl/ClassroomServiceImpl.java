@@ -86,7 +86,7 @@ public class ClassroomServiceImpl implements IClassroomService {
 		try {
 			dao.changeClassroom(oldClassroom, newClassroom);
 		} catch (DAOException e) {
-			throw new ServiceException("Ошибка при обновлении преподавателя", e);
+			throw new ServiceException("Ошибка при обновлении аудитории", e);
 		}
 	}
 }

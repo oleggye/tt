@@ -29,13 +29,7 @@
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="by.bsac.timetable.entity" />
-		<!-- <property name="mappingResources"> <list> <value>mapping/Chair.hbm.xml</value> 
-			<value>mapping/SubjectType.hbm.xml</value> <value>mapping/Faculty.hbm.xml</value> 
-			<value>mapping/Lecturer.hbm.xml</value> <value>mapping/Classroom.hbm.xml</value> 
-			<value>mapping/SubjectFor.hbm.xml</value> <value>mapping/Subject.hbm.xml</value> 
-			<value>mapping/Flow.hbm.xml</value> <value>mapping/Group.hbm.xml</value> 
-			<value>mapping/Record.hbm.xml</value> <value>mapping/Cancellation.hbm.xml</value> 
-			</list> </property> -->
+		
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="generateDdl" value="true" />
@@ -45,8 +39,8 @@
 		</property>
 		<property name="jpaProperties">
 			<props>
-				<prop key="hibernate.default_schema">timetable_test</prop>
-				<!-- <prop key="hibernate.hbm2ddl.auto">create-drop</prop> -->
+				<!-- <prop key="hibernate.default_schema">timetable_test</prop> -->
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
 				<prop key="connection.useUnicode">true</prop>
 				<prop key="connection.characterEncoding">UTF-8</prop>
 				<prop key="hibernate.hbm2ddl.import_files_sql_extractor">

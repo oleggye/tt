@@ -3,9 +3,9 @@
 	<record id_record="1" week_number="1" week_day="1"
 		subj_ordinal_number="1" id_group="1" id_subject="2" id_lecturer="3"
 		id_subject_type="1" id_subject_for="4" date_from="2017-08-28" date_to="2017-09-24"
-		id_classroom="1" />
+		id_classroom="2" />
 	<record id_record="2" week_number="2" week_day="1"
 		subj_ordinal_number="1" id_group="1" id_subject="2" id_lecturer="3"
 		id_subject_type="1" id_subject_for="4" date_from="2017-08-28" date_to="2017-09-24"
-		id_classroom="1" />
+		id_classroom="2" />
 </dataset>

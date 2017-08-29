@@ -16,7 +16,7 @@ public interface ISubjectDAO {
 
   public void updateAll(List<Subject> listSubject) throws DAOException;
 
-  public Subject getById(Short subject_id) throws DAOException;
+  public Subject getById(Short idSubject) throws DAOException;
 
   public List<Subject> getAll() throws DAOException;
 

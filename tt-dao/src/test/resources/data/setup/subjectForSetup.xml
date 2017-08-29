@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<subject_for id="1" name="Для всего потока"/>
+	<subject_for id="2" name="Для всей группы"/>
+	<subject_for id="3" name="Для первой подгруппы"/>
+	<subject_for id="4" name="Для второй подгруппы"/>
+</dataset>

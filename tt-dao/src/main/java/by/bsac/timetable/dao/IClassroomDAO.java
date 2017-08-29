@@ -15,7 +15,7 @@ public interface IClassroomDAO {
 
 	public void updateAll(List<Classroom> listClassroom) throws DAOException;
 
-	public Classroom getById(Short chair_id) throws DAOException;
+	public Classroom getById(Short idChair) throws DAOException;
 
 	public List<Classroom> getAll() throws DAOException;
 

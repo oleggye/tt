@@ -19,8 +19,12 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
+import by.bsac.timetable.dao.IFacultyDAO;
+import by.bsac.timetable.dao.IFlowDAO;
 import by.bsac.timetable.dao.IGroupDAO;
 import by.bsac.timetable.dao.exception.DAOException;
+import by.bsac.timetable.entity.Faculty;
+import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.entity.Group;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,17 +37,20 @@ public class GroupDAOImplTest {
   @Autowired
   private IGroupDAO dao;
 
-  @Test
-  public void test() {
-    // FIXME: stub!
-  }
+  @Autowired
+  private IFacultyDAO facultyDao;
+
+  @Autowired
+  private IFlowDAO flowDao;
+
 
   @Test
-  /*@DatabaseSetup(value= {"/data/setup/facultySetup.xml",
-      "/data/setup/flowSetup.xml","/data/setup/groupSetup.xml"})
+  @DatabaseSetup(value = {"/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml",
+      "/data/setup/groupSetup.xml"}, type = DatabaseOperation.CLEAN_INSERT)
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
-      type = DatabaseOperation.CLEAN_INSERT)*/
+      type = DatabaseOperation.CLEAN_INSERT)
   public void testGetGroupList() throws DAOException {
+
     final int expectedSize = 3;
 
     List<Group> groupList = dao.getAll();
@@ -51,11 +58,91 @@ public class GroupDAOImplTest {
     assertThat(groupList).isNotNull();
     assertThat(groupList.size()).isEqualTo(expectedSize);
   }
-  
-  /*
-   * @Test
-   * 
-   * @DatabaseSetup("/data/setup/groupSetup.xml") public void
-   * testGetGroupListByFirstFacultyAndOneEduLevel() { Fac }
-   */
+
+  @Test
+  @DatabaseSetup(value = {"/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml",
+      "/data/setup/groupSetup.xml"}, type = DatabaseOperation.CLEAN_INSERT)
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetGroupListByFacultyIdOne() throws DAOException {
+
+    final int expectedSize = 2;
+
+    final Byte idFaculty = 1;
+    Faculty faculty = facultyDao.getById(idFaculty);
+
+    List<Group> groupList = dao.getGroupListByFaculty(faculty);
+
+    assertThat(groupList).isNotNull();
+    assertThat(groupList.size()).isEqualTo(expectedSize);
+  }
+
+  @Test
+  @DatabaseSetup(value = {"/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml",
+      "/data/setup/groupSetup.xml"}, type = DatabaseOperation.CLEAN_INSERT)
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetGroupListByFacultyIdOneAndEduLevelOne() throws DAOException {
+
+    final int expectedSize = 2;
+
+    final byte eduLevel = 1;
+    final Byte idFaculty = 1;
+    Faculty faculty = facultyDao.getById(idFaculty);
+
+    List<Group> groupList = dao.getGroupListByFacultyAndEduLevel(faculty, eduLevel);
+
+    assertThat(groupList).isNotNull();
+    assertThat(groupList.size()).isEqualTo(expectedSize);
+  }
+
+  @Test
+  @DatabaseSetup(value = {"/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml",
+      "/data/setup/groupSetup.xml"}, type = DatabaseOperation.CLEAN_INSERT)
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetGroupListByFlowOne() throws DAOException {
+
+    final int expectedSize = 2;
+
+    final Short idFlow = 1;
+    Flow flow = flowDao.getById(idFlow);
+
+    List<Group> groupList = dao.getGroupListByFlow(flow);
+
+    assertThat(groupList).isNotNull();
+    assertThat(groupList.size()).isEqualTo(expectedSize);
+  }
+
+  @Test
+  @DatabaseSetup(value = {"/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml",
+      "/data/setup/groupSetup.xml"}, type = DatabaseOperation.CLEAN_INSERT)
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetGroupListWithSimilarNameByTwoLetters() throws DAOException {
+
+    final int expectedSize = 2;
+
+    final String groupName = "СП";
+    List<Group> groupList = dao.getAllWithSimilarName(groupName);
+
+    assertThat(groupList).isNotNull();
+    assertThat(groupList.size()).isEqualTo(expectedSize);
+  }
+
+  @Test
+  @DatabaseSetup(value = {"/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml",
+      "/data/setup/groupSetup.xml"}, type = DatabaseOperation.CLEAN_INSERT)
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetGroupListWithSimilarNameByOneLetters() throws DAOException {
+
+    final int expectedSize = 3;
+
+    final String groupName = "С";
+    List<Group> groupList = dao.getAllWithSimilarName(groupName);
+
+    assertThat(groupList).isNotNull();
+    assertThat(groupList.size()).isEqualTo(expectedSize);
+  }
 }

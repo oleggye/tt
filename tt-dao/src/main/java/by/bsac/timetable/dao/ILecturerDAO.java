@@ -16,7 +16,7 @@ public interface ILecturerDAO {
 
   public void updateAll(List<Lecturer> listLecturer) throws DAOException;
 
-  public Lecturer getById(Short lecturer_id) throws DAOException;
+  public Lecturer getById(Short idLecturer) throws DAOException;
 
   public List<Lecturer> getAll() throws DAOException;
 

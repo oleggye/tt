@@ -34,7 +34,7 @@ public class SubjectDAOImplTest {
   private ISubjectDAO dao;
 
   @Test
-  @DatabaseSetup("/data/setup/subjectSetup.xml")
+  @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/subjectSetup.xml"})
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
   public void testGetSubjectList() throws DAOException {

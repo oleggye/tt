@@ -43,9 +43,9 @@ public class FacultyServiceImpl implements IFacultyService {
 	}
 
 	@Override
-	public Faculty getFacultyById(short faculty_id) throws ServiceException {
+	public Faculty getFacultyById(byte idFaculty) throws ServiceException {
 		try {
-			return dao.getById(faculty_id);
+			return dao.getById(idFaculty);
 		} catch (DAOException e) {
 			throw new ServiceException("Ошибка при получении факультета", e);
 		}

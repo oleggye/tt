@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<chair id_chair="1" name_chair="Кафедра математики" />
-	<chair id_chair="2" name_chair="Кафедра программного обеспечения" />
-
 	<lecturer id_lecturer="1" name_lecturer="Иванов Иван Иваныч"
 		id_chair="1" />
 	<lecturer id_lecturer="2" name_lecturer="Викторова Виктория Викторовна"

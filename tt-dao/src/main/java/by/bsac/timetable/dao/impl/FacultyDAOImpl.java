@@ -6,7 +6,7 @@ import by.bsac.timetable.dao.IFacultyDAO;
 import by.bsac.timetable.entity.Faculty;
 
 @Repository
-public class FacultyDAOImpl extends AbstractHibernateDAO<Faculty, Short> implements IFacultyDAO {
+public class FacultyDAOImpl extends AbstractHibernateDAO<Faculty, Byte> implements IFacultyDAO {
 
   public FacultyDAOImpl() {
     super(Faculty.class);

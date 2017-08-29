@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Criteria;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import by.bsac.timetable.dao.IRecordDAO;
 import by.bsac.timetable.dao.exception.DAOException;
+import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.SubjectFor;
@@ -78,7 +81,7 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
     }
   }
 
-  // FIXME: STUB!
+  // FIXME: it is very strange method! Don't exactly know for what...
   @Override
   public Record getRecordForGroupLikeThis(Group group, Record record) throws DAOException {
     LOGGER.debug("getRecordForGroupLikeThis");
@@ -94,6 +97,18 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
        * criteria.add(Restrictions.eq("record.dateTo", record.getDateTo())); likeThisRecord =
        * (Record) criteria.uniqueResult();
        */
+
+      manager
+          .createQuery("select rec from Record as rec where rec.group =:group and "
+              + "rec.weekNumber =:weekNumber and rec.weekDay =:weekDay and "
+              + "rec.subjOrdinalNumber =:subjOrdinalNumber and rec.dateFrom =:dateFrom and "
+              + "rec.dateTo =:dateTo ",Record.class)
+          .setParameter("group", group).setParameter("weekNumber", record.getWeekNumber())
+          .setParameter("weekDay", record.getWeekDay())
+          .setParameter("subjOrdinalNumber", record.getSubjOrdinalNumber())
+          .setParameter("dateFrom", record.getDateFrom())
+          .setParameter("dateTo", record.getDateTo()).getSingleResult();
+
 
       return null;
     } catch (RuntimeException e) {
@@ -121,6 +136,22 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public void replaceClassroomForAllRecords(Classroom oldClassroom, Classroom newClassroom)
+      throws DAOException {
+    LOGGER.debug("replaceClassroom: [oldClassroom= " + oldClassroom + ", newClassroom= "
+        + newClassroom + "]");
+    try {
+      manager
+          .createNativeQuery(
+              "UPDATE record as rec SET rec.id_classroom =:newId WHERE rec.id_classroom =:oldId")
+          .setParameter("newId", newClassroom.getIdClassroom())
+          .setParameter("oldId", oldClassroom.getIdClassroom()).executeUpdate();
+    } catch (RuntimeException e) {
+      LOGGER.error(e.getMessage(), e);
     }
   }
 }

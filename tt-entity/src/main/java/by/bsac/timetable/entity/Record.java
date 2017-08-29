@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -74,7 +75,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   }
 
   @Id
-  /*@GeneratedValue(strategy = IDENTITY)*/
+  /* @GeneratedValue(strategy = IDENTITY) */
   @Column(name = "id_record", unique = true, nullable = false)
   public Integer getIdRecord() {
     return this.idRecord;
@@ -85,7 +86,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   }
 
   @ManyToOne(fetch = FetchType.LAZY)
-  /*@JoinColumn(name = "id_classroom", nullable = false)*/
+  @JoinColumn(name = "id_classroom", nullable = false)
   public Classroom getClassroom() {
     return this.classroom;
   }
@@ -95,7 +96,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   }
 
   @ManyToOne(fetch = FetchType.LAZY)
- /* @JoinColumn(name = "id_group", nullable = false)*/
+  @JoinColumn(name = "id_group", nullable = false)
   public Group getGroup() {
     return this.group;
   }
@@ -105,7 +106,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   }
 
   @ManyToOne(fetch = FetchType.LAZY)
-  /*@JoinColumn(name = "id_lecturer", nullable = false)*/
+  @JoinColumn(name = "id_lecturer", nullable = false)
   public Lecturer getLecturer() {
     return this.lecturer;
   }
@@ -114,8 +115,8 @@ public class Record implements java.io.Serializable, Cloneable, IName {
     this.lecturer = lecturer;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
- /* @JoinColumn(name = "id_subject", nullable = false)*/
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "id_subject", nullable = false)
   public Subject getSubject() {
     return this.subject;
   }
@@ -125,7 +126,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   }
 
   @ManyToOne(fetch = FetchType.LAZY)
-  /*@JoinColumn(name = "id_subject_for", nullable = false)*/
+  @JoinColumn(name = "id_subject_for", nullable = false)
   public SubjectFor getSubjectFor() {
     return this.subjectFor;
   }
@@ -134,8 +135,8 @@ public class Record implements java.io.Serializable, Cloneable, IName {
     this.subjectFor = subjectFor;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
- /* @JoinColumn(name = "id_subject_type", nullable = false)*/
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "id_subject_type", nullable = false)
   public SubjectType getSubjectType() {
     return this.subjectType;
   }
