@@ -86,30 +86,16 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
   public Record getRecordForGroupLikeThis(Group group, Record record) throws DAOException {
     LOGGER.debug("getRecordForGroupLikeThis");
     try {
-
-      /*
-       * Criteria criteria = session.createCriteria(Record.class, "record");
-       * criteria.add(Restrictions.eq("record.group", group));
-       * criteria.add(Restrictions.eq("record.weekNumber", record.getWeekNumber()));
-       * criteria.add(Restrictions.eq("record.weekDay", record.getWeekDay()));
-       * criteria.add(Restrictions.eq("record.subjOrdinalNumber", record.getSubjOrdinalNumber()));
-       * criteria.add(Restrictions.eq("record.dateFrom", record.getDateFrom()));
-       * criteria.add(Restrictions.eq("record.dateTo", record.getDateTo())); likeThisRecord =
-       * (Record) criteria.uniqueResult();
-       */
-
       manager
           .createQuery("select rec from Record as rec where rec.group =:group and "
               + "rec.weekNumber =:weekNumber and rec.weekDay =:weekDay and "
               + "rec.subjOrdinalNumber =:subjOrdinalNumber and rec.dateFrom =:dateFrom and "
-              + "rec.dateTo =:dateTo ",Record.class)
+              + "rec.dateTo =:dateTo ", Record.class)
           .setParameter("group", group).setParameter("weekNumber", record.getWeekNumber())
           .setParameter("weekDay", record.getWeekDay())
           .setParameter("subjOrdinalNumber", record.getSubjOrdinalNumber())
-          .setParameter("dateFrom", record.getDateFrom())
-          .setParameter("dateTo", record.getDateTo()).getSingleResult();
-
-
+          .setParameter("dateFrom", record.getDateFrom()).setParameter("dateTo", record.getDateTo())
+          .getSingleResult();
       return null;
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
@@ -130,9 +116,11 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
        * criteria.add(Restrictions.eq("record.subjectFor", subjectFor)); recordList =
        * criteria.list();
        */
-
-      return Collections.EMPTY_LIST;
-
+      return manager
+          .createQuery(
+              "select rec from Record rec where rec.group =:group and rec.subjectFor =:subjectFor",
+              Record.class)
+          .setParameter("group", group).setParameter("subjectFor", subjectFor).getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);

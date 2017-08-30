@@ -52,3 +52,28 @@
 2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
 2017-08-28T20:33:18,335 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
 2017-08-28T20:33:18,483 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
+2017-08-30T20:35:24,316 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-08-30T20:35:25,298 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-08-30T22:09:39,930 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-08-30T22:09:41,138 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-08-30T22:11:51,957 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-08-30T22:11:52,991 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-08-30T23:02:24,517 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-08-30T23:02:27,608 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-08-30T23:02:38,039 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
+2017-08-30T23:02:40,779 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
+2017-08-30T23:03:16,383 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:1
+2017-08-30T23:03:16,384 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:1
+2017-08-30T23:03:16,384 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
+2017-08-30T23:03:16,385 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 2, rowIndex: 0
+2017-08-30T23:03:16,385 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
+2017-08-30T23:03:16,747 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-08-30T23:03:17,767 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-08-30T23:03:46,424 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
+2017-08-30T23:09:46,054 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-08-30T23:09:46,919 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-08-30T23:09:51,704 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-08-30T23:09:52,384 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
+2017-08-30T23:09:59,716 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-08-30T23:10:00,896 [AWT-EventQueue-0] DEBUG view.extra.ChairEditForm - selected char:Chair [idChair=3, nameChair=Кафедра здорового образа жизни]
+2017-08-30T23:10:04,357 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]

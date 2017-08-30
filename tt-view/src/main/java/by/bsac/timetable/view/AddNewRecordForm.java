@@ -47,11 +47,16 @@ import by.bsac.timetable.view.util.FormInitializer;
 import components.ClassroomRenderer;
 import components.MyComboBox;
 
+import static by.bsac.timetable.view.util.LocalizationBundle.*;
+
 public class AddNewRecordForm extends JDialog {
 
   private static final long serialVersionUID = 1L;
 
   private static final Logger LOGGER = LogManager.getLogger(AddNewRecordForm.class.getName());
+  private static final String DATE_FORMAT = "dd-MM-yyyy";
+  private static final String FONT_CONSTANT = "Tahoma";
+
 
   private final AddNewRecordInitializer initializer = new AddNewRecordInitializer(this);
 
@@ -66,7 +71,7 @@ public class AddNewRecordForm extends JDialog {
   private byte educationLevel = 1;
 
   /**
-   * предварительная инициализация переменных
+   * Previous variables initialization
    */
   private LessonFor lessonFor = LessonFor.FULL_FLOW;
   private LessonPeriod lessonPeriod = LessonPeriod.FOR_ONE_DATE;
@@ -92,7 +97,7 @@ public class AddNewRecordForm extends JDialog {
     setLocationRelativeTo(parent);
     setBounds(100, 100, 741, 576);
 
-    String date = new SimpleDateFormat("dd-MM-yyyy").format(lessonDate);
+    String date = new SimpleDateFormat(DATE_FORMAT).format(lessonDate);
 
     getContentPane().setLayout(null);
 
@@ -102,7 +107,7 @@ public class AddNewRecordForm extends JDialog {
     getContentPane().add(buttonPane);
     {
       JButton okButton = new JButton("OK");
-      okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+      okButton.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
       okButton.setActionCommand("OK");
       buttonPane.add(okButton);
       getRootPane().setDefaultButton(okButton);
@@ -116,7 +121,7 @@ public class AddNewRecordForm extends JDialog {
 
         try {
           command.execute(request);
-          JOptionPane.showMessageDialog(getContentPane(), "Операция выполнена успешно!");
+          JOptionPane.showMessageDialog(getContentPane(), getMessage("addNewRecordForm.success"));
           this.dispose();
         } catch (CommandException ex) {
           LOGGER.error(ex.getCause().getMessage(), ex);
@@ -129,7 +134,7 @@ public class AddNewRecordForm extends JDialog {
 
     {
       JButton cancelButton = new JButton("Cancel");
-      cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+      cancelButton.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
       cancelButton.setActionCommand("Cancel");
       buttonPane.add(cancelButton);
       cancelButton.addActionListener((ActionEvent e) -> {
@@ -143,7 +148,7 @@ public class AddNewRecordForm extends JDialog {
     getContentPane().add(tabbedPane);
 
     JPanel addTab = new JPanel();
-    tabbedPane.addTab("Добавить запись", null, addTab, null);
+    tabbedPane.addTab(getMessage("addNewRecordForm.addRecord"), null, addTab, null);
     addTab.setLayout(null);
     constractAddTab(addTab, date);
   }
@@ -159,7 +164,7 @@ public class AddNewRecordForm extends JDialog {
       addRecord.setDateFrom(date);
       addRecord.setDateTo(date);
       if (lessonPeriod.equals(LessonPeriod.FOR_ONE_DATE)) {
-        String formatedDate = new SimpleDateFormat("dd-MM-yyyy").format(date);
+        String formatedDate = new SimpleDateFormat(DATE_FORMAT).format(date);
         selectedDateLabel.setText(formatedDate);
       }
 
@@ -176,28 +181,28 @@ public class AddNewRecordForm extends JDialog {
       addRecord.setDateTo(date);
     });
 
-    JLabel label = new JLabel("Дата:");
-    label.setFont(new Font("Tahoma", Font.BOLD, 16));
+    JLabel label = new JLabel(getMessage("addNewRecordForm.date"));
+    label.setFont(new Font(FONT_CONSTANT, Font.BOLD, 16));
     label.setBounds(30, 20, 77, 20);
     addTab.add(label);
 
-    JLabel lblNewLabel = new JLabel("Выбраная дата:");
-    lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JLabel lblNewLabel = new JLabel(getMessage("addNewRecordForm.selectedDate"));
+    lblNewLabel.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     lblNewLabel.setBounds(206, 11, 125, 19);
     addTab.add(lblNewLabel);
 
     selectedDateLabel.setForeground(Color.RED);
-    selectedDateLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+    selectedDateLabel.setFont(new Font(FONT_CONSTANT, Font.BOLD, 16));
     selectedDateLabel.setBounds(344, 13, 178, 14);
     addTab.add(selectedDateLabel);
 
-    JLabel label_1 = new JLabel("Пара назначается:");
-    label_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+    JLabel label_1 = new JLabel(getMessage("addNewRecordForm.lessonFor"));
+    label_1.setFont(new Font(FONT_CONSTANT, Font.BOLD, 16));
     label_1.setBounds(30, 118, 166, 20);
     addTab.add(label_1);
 
-    JLabel label_2 = new JLabel("Тип пары:");
-    label_2.setFont(new Font("Tahoma", Font.BOLD, 16));
+    JLabel label_2 = new JLabel(getMessage("addNewRecordForm.lessonType"));
+    label_2.setFont(new Font(FONT_CONSTANT, Font.BOLD, 16));
     label_2.setBounds(30, 210, 166, 20);
     addTab.add(label_2);
 
@@ -209,8 +214,8 @@ public class AddNewRecordForm extends JDialog {
 
     ButtonGroup periodBtnGroup = new ButtonGroup();
 
-    JRadioButton radioButton = new JRadioButton("Пара на выбранную дату");
-    radioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton = new JRadioButton(getMessage("addNewRecordForm.oneDateLesson"));
+    radioButton.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton.setBounds(6, 7, 227, 23);
     radioButton.setSelected(true);
 
@@ -219,7 +224,7 @@ public class AddNewRecordForm extends JDialog {
       Date date = (Date) oneDatePickerForAdding.getModel().getValue();
       addRecord.setDateFrom(date);
       addRecord.setDateTo(date);
-      String formatedDate = new SimpleDateFormat("dd-MM-yyyy").format(date);
+      String formatedDate = new SimpleDateFormat(DATE_FORMAT).format(date);
       selectedDateLabel.setText(formatedDate);
 
       duplicateOnWeeksPanel.setVisible(false);
@@ -232,22 +237,22 @@ public class AddNewRecordForm extends JDialog {
     periodBtnGroup.add(radioButton);
     panel_3.add(radioButton);
 
-    JRadioButton radioButton_1 = new JRadioButton("Пара на промежуток");
-    radioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_1 = new JRadioButton(getMessage("addNewRecordForm.lessonForPeriod"));
+    radioButton_1.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_1.setBounds(6, 44, 190, 23);
     radioButton_1.addActionListener((ActionEvent e) -> {
       lessonPeriod = LessonPeriod.FOR_THE_PERIOD;
       addRecord.setDateFrom((Date) fromDatePickerForAdd.getModel().getValue());
       addRecord.setDateTo((Date) toDatePickerForAdd.getModel().getValue());
-      selectedDateLabel.setText("выбран интервал");
+      selectedDateLabel.setText(getMessage("addNewRecordForm.selectedPeriod"));
 
       duplicateOnWeeksPanel.setVisible(true);
     });
     panel_3.add(radioButton_1);
     periodBtnGroup.add(radioButton_1);
 
-    JLabel label_3 = new JLabel("выбрать другую дату:");
-    label_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+    JLabel label_3 = new JLabel(getMessage("addNewRecordForm.selectAnotherDate"));
+    label_3.setFont(new Font(FONT_CONSTANT, Font.BOLD, 14));
     label_3.setBounds(273, 10, 180, 17);
     panel_3.add(label_3);
 
@@ -266,13 +271,13 @@ public class AddNewRecordForm extends JDialog {
     panel_2.add(toDatePickerForAdd);
     panel_3.add(panel_2);
 
-    JLabel label_4 = new JLabel("с");
-    label_4.setFont(new Font("Tahoma", Font.BOLD, 14));
+    JLabel label_4 = new JLabel(getMessage("addNewRecordForm.from"));
+    label_4.setFont(new Font(FONT_CONSTANT, Font.BOLD, 14));
     label_4.setBounds(200, 48, 18, 14);
     panel_3.add(label_4);
 
-    JLabel label_5 = new JLabel("по");
-    label_5.setFont(new Font("Tahoma", Font.BOLD, 14));
+    JLabel label_5 = new JLabel(getMessage("addNewRecordForm.to"));
+    label_5.setFont(new Font(FONT_CONSTANT, Font.BOLD, 14));
     label_5.setBounds(435, 48, 18, 14);
     panel_3.add(label_5);
 
@@ -284,8 +289,8 @@ public class AddNewRecordForm extends JDialog {
 
     ButtonGroup classForBtnGroup = new ButtonGroup();
 
-    JRadioButton rdbtnNewRadioButton = new JRadioButton("для всего потока");
-    rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton rdbtnNewRadioButton = new JRadioButton(getMessage("addNewRecordForm.to"));
+    rdbtnNewRadioButton.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     rdbtnNewRadioButton.setBounds(6, 7, 166, 23);
 
     if (lessonFor.equals(LessonFor.FULL_FLOW)) {
@@ -300,8 +305,8 @@ public class AddNewRecordForm extends JDialog {
     classForBtnGroup.add(rdbtnNewRadioButton);
     panel_4.add(rdbtnNewRadioButton);
 
-    JRadioButton radioButton_2 = new JRadioButton("для всей группы");
-    radioButton_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_2 = new JRadioButton(getMessage("addNewRecordForm.forFullFlow"));
+    radioButton_2.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_2.setBounds(226, 7, 152, 23);
 
     if (lessonFor.equals(LessonFor.FULL_GROUP)) {
@@ -314,8 +319,8 @@ public class AddNewRecordForm extends JDialog {
     classForBtnGroup.add(radioButton_2);
     panel_4.add(radioButton_2);
 
-    JRadioButton radioButton_3 = new JRadioButton("для первой подгруппы");
-    radioButton_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_3 = new JRadioButton(getMessage("addNewRecordForm.forFirstSubgroup"));
+    radioButton_3.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_3.setBounds(442, 7, 193, 23);
     radioButton_3.addActionListener((ActionEvent e) -> {
       lessonFor = LessonFor.FIRST_SUBGROUP;
@@ -324,8 +329,8 @@ public class AddNewRecordForm extends JDialog {
     classForBtnGroup.add(radioButton_3);
     panel_4.add(radioButton_3);
 
-    JRadioButton radioButton_4 = new JRadioButton("для второй подгруппы");
-    radioButton_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_4 = new JRadioButton(getMessage("addNewRecordForm.forSecondSubgroup"));
+    radioButton_4.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_4.setBounds(442, 38, 193, 23);
     radioButton_4.addActionListener((ActionEvent e) -> {
       lessonFor = LessonFor.SECOND_SUBGROUP;
@@ -334,8 +339,8 @@ public class AddNewRecordForm extends JDialog {
     classForBtnGroup.add(radioButton_4);
     panel_4.add(radioButton_4);
 
-    JLabel label_11 = new JLabel("(поточная пара)");
-    label_11.setFont(new Font("Tahoma", Font.ITALIC, 14));
+    JLabel label_11 = new JLabel(getMessage("addNewRecordForm.flowLesson"));
+    label_11.setFont(new Font(FONT_CONSTANT, Font.ITALIC, 14));
     label_11.setBounds(27, 28, 135, 14);
     panel_4.add(label_11);
 
@@ -347,8 +352,8 @@ public class AddNewRecordForm extends JDialog {
 
     ButtonGroup classTypeBtnGroup = new ButtonGroup();
 
-    JRadioButton radioButton_5 = new JRadioButton("Лекция");
-    radioButton_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_5 = new JRadioButton(getMessage("addNewRecordForm.lection"));
+    radioButton_5.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_5.setBounds(6, 3, 94, 23);
     radioButton_5.setSelected(true);
 
@@ -359,8 +364,8 @@ public class AddNewRecordForm extends JDialog {
     classTypeBtnGroup.add(radioButton_5);
     panel_5.add(radioButton_5);
 
-    JRadioButton radioButton_6 = new JRadioButton("Практическая");
-    radioButton_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_6 = new JRadioButton(getMessage("addNewRecordForm.practiceWork"));
+    radioButton_6.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_6.setBounds(124, 3, 131, 23);
 
     radioButton_6.addActionListener((ActionEvent e) -> {
@@ -370,8 +375,8 @@ public class AddNewRecordForm extends JDialog {
     classTypeBtnGroup.add(radioButton_6);
     panel_5.add(radioButton_6);
 
-    JRadioButton radioButton_7 = new JRadioButton("Консультация");
-    radioButton_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_7 = new JRadioButton(getMessage("addNewRecordForm.consultation"));
+    radioButton_7.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_7.setBounds(257, 3, 140, 23);
 
     radioButton_7.addActionListener((ActionEvent e) -> {
@@ -381,8 +386,8 @@ public class AddNewRecordForm extends JDialog {
     classTypeBtnGroup.add(radioButton_7);
     panel_5.add(radioButton_7);
 
-    JRadioButton radioButton_8 = new JRadioButton("Зачет");
-    radioButton_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_8 = new JRadioButton(getMessage("addNewRecordForm.credit"));
+    radioButton_8.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_8.setBounds(422, 3, 74, 23);
 
     radioButton_8.addActionListener((ActionEvent e) -> {
@@ -392,8 +397,8 @@ public class AddNewRecordForm extends JDialog {
     classTypeBtnGroup.add(radioButton_8);
     panel_5.add(radioButton_8);
 
-    JRadioButton radioButton_9 = new JRadioButton("Экзамен");
-    radioButton_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_9 = new JRadioButton(getMessage("addNewRecordForm.exam"));
+    radioButton_9.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_9.setBounds(361, 25, 94, 23);
 
     radioButton_9.addActionListener((ActionEvent e) -> {
@@ -403,8 +408,8 @@ public class AddNewRecordForm extends JDialog {
     classTypeBtnGroup.add(radioButton_9);
     panel_5.add(radioButton_9);
 
-    JRadioButton radioButton_10 = new JRadioButton("Лабораторная");
-    radioButton_10.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_10 = new JRadioButton(getMessage("addNewRecordForm.laboratoryWork"));
+    radioButton_10.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_10.setBounds(52, 25, 131, 23);
 
     radioButton_10.addActionListener((ActionEvent e) -> {
@@ -414,8 +419,8 @@ public class AddNewRecordForm extends JDialog {
     classTypeBtnGroup.add(radioButton_10);
     panel_5.add(radioButton_10);
 
-    JRadioButton radioButton_11 = new JRadioButton("Учебное занятие");
-    radioButton_11.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_11 = new JRadioButton(getMessage("addNewRecordForm.studyLesson"));
+    radioButton_11.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_11.setBounds(521, 5, 149, 23);
 
     radioButton_11.addActionListener((ActionEvent e) -> {
@@ -425,8 +430,8 @@ public class AddNewRecordForm extends JDialog {
     classTypeBtnGroup.add(radioButton_11);
     panel_5.add(radioButton_11);
 
-    JRadioButton radioButton_12 = new JRadioButton("Переезд");
-    radioButton_12.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton radioButton_12 = new JRadioButton(getMessage("addNewRecordForm.relocation"));
+    radioButton_12.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_12.setBounds(521, 27, 149, 23);
 
     radioButton_12.addActionListener((ActionEvent e) -> {
@@ -446,8 +451,8 @@ public class AddNewRecordForm extends JDialog {
     chairComboBox.setBounds(20, 36, 206, 27);
     panel_6.add(chairComboBox);
 
-    JLabel lblNewLabel_2 = new JLabel("Кафедра");
-    lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JLabel lblNewLabel_2 = new JLabel(getMessage("addNewRecordForm.chair"));
+    lblNewLabel_2.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     lblNewLabel_2.setBounds(20, 11, 112, 20);
     panel_6.add(lblNewLabel_2);
 
@@ -462,13 +467,13 @@ public class AddNewRecordForm extends JDialog {
     });
     panel_6.add(lecturerComboBox);
 
-    JLabel label_7 = new JLabel("Преподаватель");
-    label_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JLabel label_7 = new JLabel(getMessage("addNewRecordForm.lecturer"));
+    label_7.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     label_7.setBounds(246, 11, 112, 20);
     panel_6.add(label_7);
 
-    JLabel label_8 = new JLabel("Предмет");
-    label_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JLabel label_8 = new JLabel(getMessage("addNewRecordForm.subject"));
+    label_8.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     label_8.setBounds(450, 11, 112, 20);
     panel_6.add(label_8);
 
@@ -502,8 +507,8 @@ public class AddNewRecordForm extends JDialog {
       }
     });
 
-    JLabel label_6 = new JLabel("Дисциплина:");
-    label_6.setFont(new Font("Tahoma", Font.BOLD, 16));
+    JLabel label_6 = new JLabel(getMessage("addNewRecordForm.discipline"));
+    label_6.setFont(new Font(FONT_CONSTANT, Font.BOLD, 16));
     label_6.setBounds(30, 289, 166, 20);
     addTab.add(label_6);
 
@@ -517,7 +522,7 @@ public class AddNewRecordForm extends JDialog {
     addTab.add(duplicateOnWeeksPanel);
 
     JCheckBox firstWeekForAdd = new JCheckBox("1");
-    firstWeekForAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    firstWeekForAdd.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     firstWeekForAdd.setBounds(10, 10, 42, 23);
     if (currentWeekNumber.equals(WeekNumber.FIRST)) {
       firstWeekForAdd.setSelected(true);
@@ -533,7 +538,7 @@ public class AddNewRecordForm extends JDialog {
     duplicateOnWeeksPanel.add(firstWeekForAdd);
 
     JCheckBox secondWeekForAdd = new JCheckBox("2");
-    secondWeekForAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    secondWeekForAdd.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     secondWeekForAdd.setBounds(65, 10, 42, 23);
     if (currentWeekNumber.equals(WeekNumber.SECOND)) {
       secondWeekForAdd.setSelected(true);
@@ -548,7 +553,7 @@ public class AddNewRecordForm extends JDialog {
     duplicateOnWeeksPanel.add(secondWeekForAdd);
 
     JCheckBox thirdWeekForAdd = new JCheckBox("3");
-    thirdWeekForAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    thirdWeekForAdd.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     thirdWeekForAdd.setBounds(128, 10, 42, 23);
     if (currentWeekNumber.equals(WeekNumber.THIRD)) {
       thirdWeekForAdd.setSelected(true);
@@ -563,7 +568,7 @@ public class AddNewRecordForm extends JDialog {
     duplicateOnWeeksPanel.add(thirdWeekForAdd);
 
     JCheckBox fourthWeekForAdd = new JCheckBox("4");
-    fourthWeekForAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    fourthWeekForAdd.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     fourthWeekForAdd.setBounds(195, 10, 42, 23);
     if (currentWeekNumber.equals(WeekNumber.FOURTH)) {
       fourthWeekForAdd.setSelected(true);
@@ -583,8 +588,8 @@ public class AddNewRecordForm extends JDialog {
     panel_10.setBounds(480, 420, 197, 46);
     addTab.add(panel_10);
 
-    JLabel label_9 = new JLabel("Дублировать (неделя):");
-    label_9.setFont(new Font("Tahoma", Font.BOLD, 16));
+    JLabel label_9 = new JLabel(getMessage("addNewRecordForm.duplicateWeek"));
+    label_9.setFont(new Font(FONT_CONSTANT, Font.BOLD, 16));
     label_9.setBounds(55, 394, 215, 20);
     addTab.add(label_9);
 
@@ -600,8 +605,8 @@ public class AddNewRecordForm extends JDialog {
     });
     panel_10.add(classroomComboBox);
 
-    JLabel label_10 = new JLabel("Аудитория:");
-    label_10.setFont(new Font("Tahoma", Font.BOLD, 16));
+    JLabel label_10 = new JLabel(getMessage("addNewRecordForm.classroom"));
+    label_10.setFont(new Font(FONT_CONSTANT, Font.BOLD, 16));
     label_10.setBounds(480, 403, 166, 20);
     addTab.add(label_10);
 

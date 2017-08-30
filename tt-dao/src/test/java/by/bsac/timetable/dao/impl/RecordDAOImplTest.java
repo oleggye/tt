@@ -89,23 +89,42 @@ public class RecordDAOImplTest {
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
       "/data/setup/recordSetup.xml",})
-  /*
-   * @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED, value =
-   * "/data/expected/record/replaceClassroom.xml")
-   */
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
-  public void testGetRecordWithIdOneForGroupLikeThis() throws DAOException {
+  public void testGetRecordForGroupLikeThisWithRecordIdOne() throws DAOException {
     final Integer usingRecordId = 1;
     final Integer expectedLikeUsingRecordId = 2;
 
     Record usingRecord = dao.getById(usingRecordId);
     Group usingRecordGroup = groupDao.getById(usingRecord.getGroup().getIdGroup());
-    
+
     Record expectedLikeUsingRecord = dao.getById(expectedLikeUsingRecordId);
 
     Record takenRecord = dao.getRecordForGroupLikeThis(usingRecordGroup, usingRecord);
-    
+
+    assertThat(takenRecord).isNotNull();
+    assertThat(takenRecord).isEqualTo(expectedLikeUsingRecord);
+  }
+  
+  @Test
+  @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/lecturerSetup.xml",
+      "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
+      "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
+      "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
+      "/data/setup/recordSetup.xml",})
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetRecordWithGroupIdOneAndSubjectFor() throws DAOException {
+    final Integer usingRecordId = 1;
+    final Integer expectedLikeUsingRecordId = 2;
+
+    Record usingRecord = dao.getById(usingRecordId);
+    Group usingRecordGroup = groupDao.getById(usingRecord.getGroup().getIdGroup());
+
+    Record expectedLikeUsingRecord = dao.getById(expectedLikeUsingRecordId);
+
+    Record takenRecord = dao.getRecordForGroupLikeThis(usingRecordGroup, usingRecord);
+
     assertThat(takenRecord).isNotNull();
     assertThat(takenRecord).isEqualTo(expectedLikeUsingRecord);
   }

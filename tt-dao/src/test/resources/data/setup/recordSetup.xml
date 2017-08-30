@@ -8,4 +8,9 @@
 		subj_ordinal_number="1" id_group="1" id_subject="2" id_lecturer="3"
 		id_subject_type="1" id_subject_for="4" date_from="2017-08-28" date_to="2017-09-24"
 		id_classroom="1" />
+		
+	<record id_record="3" week_number="2" week_day="2"
+		subj_ordinal_number="1" id_group="1" id_subject="2" id_lecturer="3"
+		id_subject_type="1" id_subject_for="4" date_from="2017-08-28" date_to="2017-09-24"
+		id_classroom="1" />
 </dataset>

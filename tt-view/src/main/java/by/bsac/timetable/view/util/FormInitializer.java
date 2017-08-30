@@ -45,27 +45,27 @@ public final class FormInitializer {
       JComboBox<Group> groupComboBox, JLabel progressBarLbl, JProgressBar progressBar,
       byte educationLevel) throws CommandException {
 
-    progressBarLbl.setText("Инициализация факультетов");
+    progressBarLbl.setText("РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„Р°РєСѓР»СЊС‚РµС‚РѕРІ");
     progressBar.setValue(30);
     try {
       initFacultyComboBox(facultyComboBox);
 
       progressBar.setValue(60);
 
-      progressBarLbl.setText("Инициализация групп");
+      progressBarLbl.setText("РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РіСЂСѓРїРї");
       initGroupComboBox(facultyComboBox, groupComboBox, educationLevel);
       progressBar.setValue(100);
-      progressBarLbl.setText("Завершено");
+      progressBarLbl.setText("Р—Р°РІРµСЂС€РµРЅРѕ");
 
       progressBar.setVisible(false);
       progressBarLbl.setVisible(false);
 
     } catch (CommandException e) {
       progressBar.setValue(0);
-      progressBarLbl.setText("Ошибка при инициализации");
+      progressBarLbl.setText("РћС€РёР±РєР° РїСЂРё РёРЅРёС†РёР°Р»РёР·Р°С†РёРё");
       StringBuilder builder = new StringBuilder();
-      builder.append("Ошибка при инициализации: ");
-      builder.append("Приложение завершилось с ошибкой");
+      builder.append("РћС€РёР±РєР° РїСЂРё РёРЅРёС†РёР°Р»РёР·Р°С†РёРё: ");
+      builder.append("РџСЂРёР»РѕР¶РµРЅРёРµ Р·Р°РІРµСЂС€РёР»РѕСЃСЊ СЃ РѕС€РёР±РєРѕР№");
       builder.append(e.getMessage());
       throw new CommandException(builder.toString(), e);
     }
@@ -73,9 +73,9 @@ public final class FormInitializer {
   }
 
   /**
-   * Инициализация ComboBox строками с названиями факультетов
+   * РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ ComboBox СЃС‚СЂРѕРєР°РјРё СЃ РЅР°Р·РІР°РЅРёСЏРјРё С„Р°РєСѓР»СЊС‚РµС‚РѕРІ
    *
-   * @exception при ошибке SQL-запроса
+   * @exception РїСЂРё РѕС€РёР±РєРµ SQL-Р·Р°РїСЂРѕСЃР°
    * @throws ServiceException
    */
   public static void initFacultyComboBox(JComboBox<Faculty> facultyComboBox)
@@ -95,9 +95,9 @@ public final class FormInitializer {
   }
 
   /**
-   * Инициализация ComboBox строками с названиями кафедр
+   * РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ ComboBox СЃС‚СЂРѕРєР°РјРё СЃ РЅР°Р·РІР°РЅРёСЏРјРё РєР°С„РµРґСЂ
    *
-   * @exception при ошибке SQL-запроса
+   * @exception РїСЂРё РѕС€РёР±РєРµ SQL-Р·Р°РїСЂРѕСЃР°
    * @throws ServiceException
    */
   public static void initChairComboBox(JComboBox<Chair> chairComboBox) throws CommandException {
@@ -220,9 +220,9 @@ public final class FormInitializer {
   }
 
   /**
-   * Инициализация ComboBox строками с названиями потоков
+   * РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ ComboBox СЃС‚СЂРѕРєР°РјРё СЃ РЅР°Р·РІР°РЅРёСЏРјРё РїРѕС‚РѕРєРѕРІ
    *
-   * @exception при ошибке SQL-запроса
+   * @exception РїСЂРё РѕС€РёР±РєРµ SQL-Р·Р°РїСЂРѕСЃР°
    * @throws ServiceException
    */
   public static void initFlowComboBox(JComboBox<Flow> flowComboBox) throws CommandException {
@@ -241,9 +241,9 @@ public final class FormInitializer {
   }
 
   /**
-   * Инициализация ComboBox строками с названиями групп, в зависимости от выбранного факультета
+   * РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ ComboBox СЃС‚СЂРѕРєР°РјРё СЃ РЅР°Р·РІР°РЅРёСЏРјРё РіСЂСѓРїРї, РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±СЂР°РЅРЅРѕРіРѕ С„Р°РєСѓР»СЊС‚РµС‚Р°
    *
-   * @exception при ошибке SQL-запроса
+   * @exception РїСЂРё РѕС€РёР±РєРµ SQL-Р·Р°РїСЂРѕСЃР°
    * @throws ServiceException
    * @see ServiceException
    */
@@ -268,11 +268,11 @@ public final class FormInitializer {
   }
 
   /**
-   * Получаем коллекцию с расписанием для выбранной группы и заполняем записями таблицу
+   * РџРѕР»СѓС‡Р°РµРј РєРѕР»Р»РµРєС†РёСЋ СЃ СЂР°СЃРїРёСЃР°РЅРёРµРј РґР»СЏ РІС‹Р±СЂР°РЅРЅРѕР№ РіСЂСѓРїРїС‹ Рё Р·Р°РїРѕР»РЅСЏРµРј Р·Р°РїРёСЃСЏРјРё С‚Р°Р±Р»РёС†Сѓ
    * 
    * @throws ServiceValidationException
    *
-   * @exception при ошибке SQL-запроса
+   * @exception РїСЂРё РѕС€РёР±РєРµ SQL-Р·Р°РїСЂРѕСЃР°
    * @see ServiceException
    */
   public static void getGroupTimeTable(JComboBox<Group> groupComboBox, TablesArray tableArray,
@@ -291,7 +291,7 @@ public final class FormInitializer {
 
         // } else if (!someFlag) {
       } else
-        JOptionPane.showMessageDialog(null, "Пожалуйста, выберите группу");
+        JOptionPane.showMessageDialog(null, "РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РіСЂСѓРїРїСѓ");
     } finally {
       // HibernateUtil.closeSession();
     }
@@ -303,26 +303,26 @@ public final class FormInitializer {
   }
 
   public static void initLeftPanel(JScrollPane scrollPane) {
-    // задаем дни недели в метках
+    // Р·Р°РґР°РµРј РґРЅРё РЅРµРґРµР»Рё РІ РјРµС‚РєР°С…
     // leftPanel.add(addDayOfWeekTitlesToPanel()
     JPanel leftPanel = new JPanel();
     leftPanel.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
     leftPanel.setLayout(new GridLayout(7, 1, 0, 0));
-    JLabel[] jLbls = new JLabel[] {new JLabel("Понедельник"), new JLabel("Вторник"),
-        new JLabel("Среда"), new JLabel("Четверг"), new JLabel("Пятница"), new JLabel("Суббота"),
-        new JLabel("Воскресенье")};
+    JLabel[] jLbls = new JLabel[] {new JLabel("РџРѕРЅРµРґРµР»СЊРЅРёРє"), new JLabel("Р’С‚РѕСЂРЅРёРє"),
+        new JLabel("РЎСЂРµРґР°"), new JLabel("Р§РµС‚РІРµСЂРі"), new JLabel("РџСЏС‚РЅРёС†Р°"), new JLabel("РЎСѓР±Р±РѕС‚Р°"),
+        new JLabel("Р’РѕСЃРєСЂРµСЃРµРЅСЊРµ")};
     for (JLabel lbl : jLbls) {
-      lbl.setUI(new VerticalLabelUI(false));// задаем вертикальное
-      // отображение для текста в метках
-      lbl.setHorizontalAlignment(SwingConstants.CENTER);// задаем
-      // горизонтальное выравнивание по центру
+      lbl.setUI(new VerticalLabelUI(false));// Р·Р°РґР°РµРј РІРµСЂС‚РёРєР°Р»СЊРЅРѕРµ
+      // РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РґР»СЏ С‚РµРєСЃС‚Р° РІ РјРµС‚РєР°С…
+      lbl.setHorizontalAlignment(SwingConstants.CENTER);// Р·Р°РґР°РµРј
+      // РіРѕСЂРёР·РѕРЅС‚Р°Р»СЊРЅРѕРµ РІС‹СЂР°РІРЅРёРІР°РЅРёРµ РїРѕ С†РµРЅС‚СЂСѓ
       leftPanel.add(lbl);
     }
     scrollPane.setRowHeaderView(leftPanel);
   }
 
   /**
-   * Получаем коллецию всех факультетов, добавляем в модель и задаем её переданной таблице
+   * РџРѕР»СѓС‡Р°РµРј РєРѕР»Р»РµС†РёСЋ РІСЃРµС… С„Р°РєСѓР»СЊС‚РµС‚РѕРІ, РґРѕР±Р°РІР»СЏРµРј РІ РјРѕРґРµР»СЊ Рё Р·Р°РґР°РµРј РµС‘ РїРµСЂРµРґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ
    * 
    * @param table
    * @throws ServiceException
@@ -332,14 +332,14 @@ public final class FormInitializer {
     try {
       List<Faculty> facultyList = CommandFacade.getFacultyList();
 
-      initTable(table, facultyList, Faculty.class, "Список факультетов");
+      initTable(table, facultyList, Faculty.class, "РЎРїРёСЃРѕРє С„Р°РєСѓР»СЊС‚РµС‚РѕРІ");
     } finally {
       // HibernateUtil.closeSession();
     }
   }
 
   /**
-   * Получаем коллецию всех кафедр, добавляем в модель и задаем её переданной таблице
+   * РџРѕР»СѓС‡Р°РµРј РєРѕР»Р»РµС†РёСЋ РІСЃРµС… РєР°С„РµРґСЂ, РґРѕР±Р°РІР»СЏРµРј РІ РјРѕРґРµР»СЊ Рё Р·Р°РґР°РµРј РµС‘ РїРµСЂРµРґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ
    * 
    * @param table
    * @throws ServiceException
@@ -349,14 +349,14 @@ public final class FormInitializer {
     try {
       List<Chair> chairList = CommandFacade.getChairList();
 
-      initTable(table, chairList, Chair.class, "Список кафедр");
+      initTable(table, chairList, Chair.class, "РЎРїРёСЃРѕРє РєР°С„РµРґСЂ");
     } finally {
       // HibernateUtil.closeSession();
     }
   }
 
   /**
-   * Получаем аудиторий всех кафедр, добавляем в модель и задаем её переданной таблице
+   * РџРѕР»СѓС‡Р°РµРј Р°СѓРґРёС‚РѕСЂРёР№ РІСЃРµС… РєР°С„РµРґСЂ, РґРѕР±Р°РІР»СЏРµРј РІ РјРѕРґРµР»СЊ Рё Р·Р°РґР°РµРј РµС‘ РїРµСЂРµРґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ
    * 
    * @param table
    * @throws ServiceException
@@ -366,14 +366,14 @@ public final class FormInitializer {
     try {
       List<Classroom> classroomList = CommandFacade.getClassroomList();
 
-      initTable(table, classroomList, Classroom.class, "Список аудиторий");
+      initTable(table, classroomList, Classroom.class, "РЎРїРёСЃРѕРє Р°СѓРґРёС‚РѕСЂРёР№");
     } finally {
       // HibernateUtil.closeSession();
     }
   }
 
   /**
-   * Получаем коллецию всех потоков, добавляем в модель и задаем её переданной таблице
+   * РџРѕР»СѓС‡Р°РµРј РєРѕР»Р»РµС†РёСЋ РІСЃРµС… РїРѕС‚РѕРєРѕРІ, РґРѕР±Р°РІР»СЏРµРј РІ РјРѕРґРµР»СЊ Рё Р·Р°РґР°РµРј РµС‘ РїРµСЂРµРґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ
    * 
    * @param table
    * @throws ServiceException
@@ -383,14 +383,14 @@ public final class FormInitializer {
     try {
       List<Flow> flowList = CommandFacade.getFlowList();
 
-      initTable(table, flowList, Flow.class, "Список потоков");
+      initTable(table, flowList, Flow.class, "РЎРїРёСЃРѕРє РїРѕС‚РѕРєРѕРІ");
     } finally {
       // HibernateUtil.closeSession();
     }
   }
 
   /**
-   * Получаем коллецию всех групп факультета, добавляем в модель и задаем её переданной таблице
+   * РџРѕР»СѓС‡Р°РµРј РєРѕР»Р»РµС†РёСЋ РІСЃРµС… РіСЂСѓРїРї С„Р°РєСѓР»СЊС‚РµС‚Р°, РґРѕР±Р°РІР»СЏРµРј РІ РјРѕРґРµР»СЊ Рё Р·Р°РґР°РµРј РµС‘ РїРµСЂРµРґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ
    * 
    * @param table
    * @throws ServiceException
@@ -403,7 +403,7 @@ public final class FormInitializer {
           CommandFacade.getGroupListByFacultyAndEduLevel(faculty, educationLevel);
 
       DefaultTableModel tModel =
-          new OneColumnTableModel<Group>(Group.class, groupList, "Список групп");
+          new OneColumnTableModel<Group>(Group.class, groupList, "РЎРїРёСЃРѕРє РіСЂСѓРїРї");
       table.setModel(tModel);
       SupportClass.setHorizontalAlignmentToTable(table);
 
@@ -413,8 +413,8 @@ public final class FormInitializer {
   }
 
   /**
-   * Получаем коллецию всех преподавателей кафедры, добавляем в модель и задаем её переданной
-   * таблице
+   * РџРѕР»СѓС‡Р°РµРј РєРѕР»Р»РµС†РёСЋ РІСЃРµС… РїСЂРµРїРѕРґР°РІР°С‚РµР»РµР№ РєР°С„РµРґСЂС‹, РґРѕР±Р°РІР»СЏРµРј РІ РјРѕРґРµР»СЊ Рё Р·Р°РґР°РµРј РµС‘ РїРµСЂРµРґР°РЅРЅРѕР№
+   * С‚Р°Р±Р»РёС†Рµ
    * 
    * @param table
    * @throws ServiceException
@@ -426,7 +426,7 @@ public final class FormInitializer {
       List<Lecturer> lecturerList = CommandFacade.getLecturerListByChair(chair);
 
       DefaultTableModel tModel =
-          new OneColumnTableModel<Lecturer>(Lecturer.class, lecturerList, "Список преподавателей");
+          new OneColumnTableModel<Lecturer>(Lecturer.class, lecturerList, "РЎРїРёСЃРѕРє РїСЂРµРїРѕРґР°РІР°С‚РµР»РµР№");
       table.setModel(tModel);
       SupportClass.setHorizontalAlignmentToTable(table);
     } finally {
@@ -435,8 +435,8 @@ public final class FormInitializer {
   }
 
   /**
-   * Получаем коллецию всех преподавателей кафедры, добавляем в модель и задаем её переданной
-   * таблице
+   * РџРѕР»СѓС‡Р°РµРј РєРѕР»Р»РµС†РёСЋ РІСЃРµС… РїСЂРµРїРѕРґР°РІР°С‚РµР»РµР№ РєР°С„РµРґСЂС‹, РґРѕР±Р°РІР»СЏРµРј РІ РјРѕРґРµР»СЊ Рё Р·Р°РґР°РµРј РµС‘ РїРµСЂРµРґР°РЅРЅРѕР№
+   * С‚Р°Р±Р»РёС†Рµ
    * 
    * @param table
    * @throws ServiceException
@@ -450,7 +450,7 @@ public final class FormInitializer {
           CommandFacade.getSubjectListByChairAndEduLevel(chair, educationLevel);
 
       DefaultTableModel tModel =
-          new OneColumnTableModel<Subject>(Subject.class, subjectList, "Список дисциплин");
+          new OneColumnTableModel<Subject>(Subject.class, subjectList, "РЎРїРёСЃРѕРє РґРёСЃС†РёРїР»РёРЅ");
       table.setModel(tModel);
       SupportClass.setHorizontalAlignmentToTable(table);
     } finally {
@@ -459,7 +459,7 @@ public final class FormInitializer {
   }
 
   /**
-   * Generic-метод который задает модель составленной из списка переданной таблице
+   * Generic-РјРµС‚РѕРґ РєРѕС‚РѕСЂС‹Р№ Р·Р°РґР°РµС‚ РјРѕРґРµР»СЊ СЃРѕСЃС‚Р°РІР»РµРЅРЅРѕР№ РёР· СЃРїРёСЃРєР° РїРµСЂРµРґР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ
    * 
    * @param table
    * @throws ServiceException
@@ -476,7 +476,7 @@ public final class FormInitializer {
   }
 
   /**
-   * Инициализирует преденный компонент списком групп переданного потока
+   * РРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ РїСЂРµРґРµРЅРЅС‹Р№ РєРѕРјРїРѕРЅРµРЅС‚ СЃРїРёСЃРєРѕРј РіСЂСѓРїРї РїРµСЂРµРґР°РЅРЅРѕРіРѕ РїРѕС‚РѕРєР°
    * 
    * @param groupInFlowTextArea
    * @param flow

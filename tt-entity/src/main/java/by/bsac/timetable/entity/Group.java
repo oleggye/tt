@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "groupp",
+@Table(name = "group",
     uniqueConstraints = @UniqueConstraint(columnNames = "name_group"))
 public class Group implements java.io.Serializable, Cloneable, IName {
 
