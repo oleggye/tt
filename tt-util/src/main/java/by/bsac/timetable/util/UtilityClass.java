@@ -11,12 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
-import by.bsac.timetable.entity.Chair;
-import by.bsac.timetable.entity.Group;
-import by.bsac.timetable.entity.Lecturer;
-import by.bsac.timetable.entity.Subject;
-import by.bsac.timetable.util.VerticalLabelUI;
-
 public class UtilityClass {
 
 	private JPanel addDayOfWeekTitlesToPanel() {

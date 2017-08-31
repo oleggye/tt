@@ -29,360 +29,360 @@ import tableClasses.MyMultiSpanCellTable;
 import tableClasses.TablesArray;
 
 public class SupportClass {
-  
-  private SupportClass(){}
 
-	private static final Logger LOGGER = LogManager.getLogger(SupportClass.class.getName());
+  private SupportClass() {}
 
-	private static final int LENGTHFORWORD = 10;
-	private static final int LENGTHOFI = 1;
-	private static final Color DEFAULT_GRID_COLOR = new Color(122, 138, 153);
+  private static final Logger LOGGER = LogManager.getLogger(SupportClass.class.getName());
 
-	public final static void setColumnsWidth(JTable table) {
+  private static final String RECORD_CONFLICT_MESSAGE = "Данная запись конфликтует с существующей";
+  private static final String RECORD_TIP_CONSTANT = "%s(%s), %s [%s]";
 
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		int prefWidth;
+  private static final int LENGTHFORWORD = 10;
+  private static final int LENGTHOFI = 1;
+  private static final Color DEFAULT_GRID_COLOR = new Color(122, 138, 153);
 
-		JTableHeader th = table.getTableHeader();
-		for (int i = 0; i < table.getColumnCount(); i++) {
-			TableColumn column = table.getColumnModel().getColumn(i);
-			int prefWidthMax = 0;
-			for (int j = 0; j < table.getRowCount(); j++) {
-				try {
-					String s = table.getModel().getValueAt(j, i).toString();
-					prefWidth = Math.round(
-							(float) th.getFontMetrics(th.getFont()).getStringBounds(s, th.getGraphics()).getWidth());
-					if (prefWidth > prefWidthMax) {
-						prefWidthMax = prefWidth;
-					}
-				} catch (NullPointerException e) {
-					continue;
-				}
+  public static final void setColumnsWidth(JTable table) {
 
-			}
-			column.setPreferredWidth(prefWidthMax + 10);
-		}
-	}
+    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    int prefWidth;
 
-	public final static ArrayPosition findArrayPositionOfTable(JTable table, JTable[][] tablesArray) {
+    JTableHeader th = table.getTableHeader();
+    for (int i = 0; i < table.getColumnCount(); i++) {
+      TableColumn column = table.getColumnModel().getColumn(i);
+      int prefWidthMax = 0;
+      for (int j = 0; j < table.getRowCount(); j++) {
+        try {
+          String s = table.getModel().getValueAt(j, i).toString();
+          prefWidth = Math.round((float) th.getFontMetrics(th.getFont())
+              .getStringBounds(s, th.getGraphics()).getWidth());
+          if (prefWidth > prefWidthMax) {
+            prefWidthMax = prefWidth;
+          }
+        } catch (NullPointerException e) {
+          LOGGER.warn("setColumnsWidth error", e);
+          continue;
+        }
 
-		ArrayPosition result = null;
-		for (int i = 0; i < tablesArray.length; i++) {
-			for (int j = 0; j < tablesArray[i].length; j++) {
-				if (tablesArray[i][j].equals(table)) {
-					result = new ArrayPosition(i, j);
-					i = tablesArray.length;
-					break;
-				}
-			}
-		}
-		return result;
-	}
+      }
+      column.setPreferredWidth(prefWidthMax + 10);
+    }
+  }
 
-	public final static ArrayPosition findArrayPositionOfTable(JTable table, TablesArray tablesArray) {
+  public static final ArrayPosition findArrayPositionOfTable(JTable table, JTable[][] tablesArray) {
 
-		ArrayPosition result = null;
-		for (int i = 0; i < tablesArray.getWidth(); i++) {
-			for (int j = 0; j < tablesArray.getHeight(); j++) {
-				if (tablesArray.getElementAt(i, j).equals(table)) {
-					result = new ArrayPosition(i, j);
-					i = tablesArray.getWidth();
-					break;
-				}
-			}
-		}
-		return result;
-	}
+    ArrayPosition result = null;
+    for (int i = 0; i < tablesArray.length; i++) {
+      for (int j = 0; j < tablesArray[i].length; j++) {
+        if (tablesArray[i][j].equals(table)) {
+          result = new ArrayPosition(i, j);
+          i = tablesArray.length;
+          break;
+        }
+      }
+    }
+    return result;
+  }
 
-	public static void formCentering(Window frame) {
-		java.awt.Dimension dim = frame.getToolkit().getScreenSize();// получаем
-																	// разрешение
-																	// текущего
-																	// экрана
-		frame.setLocation(dim.width / 2 - frame.getWidth() / 2, dim.height / 2 - frame.getHeight() / 2);
-	}
+  public static final ArrayPosition findArrayPositionOfTable(JTable table,
+      TablesArray tablesArray) {
 
-	public static void relativeFormCentering(Window parent, Window frame) {
-		frame.setLocationRelativeTo(parent);
-	}
+    ArrayPosition result = null;
+    for (int i = 0; i < tablesArray.getWidth(); i++) {
+      for (int j = 0; j < tablesArray.getHeight(); j++) {
+        if (tablesArray.getElementAt(i, j).equals(table)) {
+          result = new ArrayPosition(i, j);
+          i = tablesArray.getWidth();
+          break;
+        }
+      }
+    }
+    return result;
+  }
 
-	public static List<Record> findMainRecordsByCriterias(List<Record> mainRecordsCollection, byte currentWeekDay,
-			byte currentWeekNumber, byte currentSubjOrdinalNumber) {
-		List<Record> tempArray = new LinkedList<>();
+  public static void formCentering(Window frame) {
+    /* получаем разрешение текущего экрана */
+    java.awt.Dimension dim = frame.getToolkit().getScreenSize();
+    frame.setLocation(dim.width / 2 - frame.getWidth() / 2, dim.height / 2 - frame.getHeight() / 2);
+  }
 
-		for (Record f : mainRecordsCollection) {
-			if ((f.getWeekDay() == currentWeekDay) && (f.getWeekNumber() == currentWeekNumber)
-					&& (f.getSubjOrdinalNumber() == currentSubjOrdinalNumber)) {
-				tempArray.add(f);
-			}
-		}
-		return tempArray;
-	}
+  public static void relativeFormCentering(Window parent, Window frame) {
+    frame.setLocationRelativeTo(parent);
+  }
 
-	public static void setModelsForTables(List<Record> mainRecordsCollection, TablesArray tablesArray) {
-		for (int i = 0; i < tablesArray.getWidth(); i++) {
-			for (int j = 0; j < tablesArray.getHeight(); j++) {
+  public static List<Record> findMainRecordsByCriterias(List<Record> mainRecordsCollection,
+      byte currentWeekDay, byte currentWeekNumber, byte currentSubjOrdinalNumber) {
+    List<Record> tempArray = new LinkedList<>();
 
-				ArrayPosition arrPos = new ArrayPosition(i, j);// позиция
-																// таблицы в
-																// двумерном
-																// массиве
-				MyMultiSpanCellTable table = tablesArray.getElementAt(i, j);
-				table.setModelForTable(mainRecordsCollection, arrPos);
-				// устанавливаем цвет рамки
-				table.setGridColor(DEFAULT_GRID_COLOR);
+    for (Record f : mainRecordsCollection) {
+      if ((f.getWeekDay() == currentWeekDay) && (f.getWeekNumber() == currentWeekNumber)
+          && (f.getSubjOrdinalNumber() == currentSubjOrdinalNumber)) {
+        tempArray.add(f);
+      }
+    }
+    return tempArray;
+  }
 
-			}
-		}
-	}
+  public static void setModelsForTables(List<Record> mainRecordsCollection,
+      TablesArray tablesArray) {
+    for (int i = 0; i < tablesArray.getWidth(); i++) {
+      for (int j = 0; j < tablesArray.getHeight(); j++) {
 
-	/**
-	 * <table border="1">
-	 * <caption>{@link SubjectFor} mapping</caption>
-	 * <tr>
-	 * <th>{@link SubjectFor.getId()}</th>
-	 * <th>description</th>
-	 * </tr>
-	 * <tr>
-	 * <td>1</td>
-	 * <td>FIRST_SUBGROUP</td>
-	 * </tr>
-	 * <tr>
-	 * <td>2</td>
-	 * <td>SECOND_SUBGROUP</td>
-	 * </tr>
-	 * <tr>
-	 * <td>3</td>
-	 * <td>FULL_GROUP</td>
-	 * </tr>
-	 * <tr>
-	 * <td>4</td>
-	 * <td>FULL_FLOW</td>
-	 * </tr>
-	 * </table>
-	 * 
-	 * @param subgroup
-	 * @return
-	 */
-	public static int[] getColsFromSubgroup(byte subgroup) {
-		// т.к. в таблице индексы с 0
+        ArrayPosition arrPos = new ArrayPosition(i, j);
+        MyMultiSpanCellTable table = tablesArray.getElementAt(i, j);
+        table.setModelForTable(mainRecordsCollection, arrPos);
+        // устанавливаем цвет рамки
+        table.setGridColor(DEFAULT_GRID_COLOR);
 
-		/*
-		 * начало костыля!!!! т.к. в БД subGroup 1 - 1-ая подгруппа, 2 - 2-ая
-		 * подгруппа, 3 - Вся группа, а в ComboBox item 0 - Вся группа, 1 - 1-ая
-		 * подгруппа, 3 - 2-ая подгруппа, то делаем проверку и замену.
-		 */
-		/*
-		 * было до правки 18.10.2016 switch (subgroup) { case 1: return new
-		 * int[]{1, 2}; case 2: return new int[]{1}; case 3: return new
-		 * int[]{2}; default: return new int[]{1}; }
-		 */
-		switch (subgroup) {
-		case 1:
-			return new int[] { 1 };
-		case 2:
-			return new int[] { 2 };
-		case 3:
-			return new int[] { 1, 2 };
-		case 4:
-			return new int[] { 1, 2 };
-		default:
-			return new int[] { 1 };
-		}
-		/* конец костыля!!!! */
+      }
+    }
+  }
 
-	}
+  /**
+   * <table border="1">
+   * <caption>{@link SubjectFor} mapping</caption>
+   * <tr>
+   * <th>{@link SubjectFor.getId()}</th>
+   * <th>description</th>
+   * </tr>
+   * <tr>
+   * <td>1</td>
+   * <td>FIRST_SUBGROUP</td>
+   * </tr>
+   * <tr>
+   * <td>2</td>
+   * <td>SECOND_SUBGROUP</td>
+   * </tr>
+   * <tr>
+   * <td>3</td>
+   * <td>FULL_GROUP</td>
+   * </tr>
+   * <tr>
+   * <td>4</td>
+   * <td>FULL_FLOW</td>
+   * </tr>
+   * </table>
+   * 
+   * @param subgroup
+   * @return
+   */
+  public static int[] getColsFromSubgroup(byte subgroup) {
+    // т.к. в таблице индексы с 0
 
-	public static JCheckBox getCheckBoxByWeekDay(byte currentWeekNumber, JCheckBox[] checkBoxes) {
-		switch (currentWeekNumber) {
-		case 1:
-			return checkBoxes[0];
-		case 2:
-			return checkBoxes[1];
-		case 3:
-			return checkBoxes[2];
-		case 4:
-			return checkBoxes[3];
-		default:
-			return null;
+    /*
+     * начало костыля!!!! т.к. в БД subGroup 1 - 1-ая подгруппа, 2 - 2-ая подгруппа, 3 - Вся группа,
+     * а в ComboBox item 0 - Вся группа, 1 - 1-ая подгруппа, 3 - 2-ая подгруппа, то делаем проверку
+     * и замену.
+     */
+    /*
+     * было до правки 18.10.2016 switch (subgroup) { case 1: return new int[]{1, 2}; case 2: return
+     * new int[]{1}; case 3: return new int[]{2}; default: return new int[]{1}; }
+     */
+    switch (subgroup) {
+      case 1:
+        return new int[] {1};
+      case 2:
+        return new int[] {2};
+      case 3:
+        return new int[] {1, 2};
+      case 4:
+        return new int[] {1, 2};
+      default:
+        return new int[] {1};
+    }
+    /* конец костыля!!!! */
 
-		}
-	}
+  }
 
-	public static boolean checkMainRecordBeforeAdd(List<Record> mainRecordsCollection, Record mainRecord) {
+  public static JCheckBox getCheckBoxByWeekDay(byte currentWeekNumber, JCheckBox[] checkBoxes) {
+    switch (currentWeekNumber) {
+      case 1:
+        return checkBoxes[0];
+      case 2:
+        return checkBoxes[1];
+      case 3:
+        return checkBoxes[2];
+      case 4:
+        return checkBoxes[3];
+      default:
+        return null;
 
-		byte mainRecSubGroupValue = mainRecord.getSubjectFor().getId();
-		byte elRecSubGroupValue;
+    }
+  }
 
-		for (Record element : mainRecordsCollection) {
-			if ((element.getWeekDay() == mainRecord.getWeekDay())
-					&& (element.getWeekNumber() == element.getWeekNumber())
-					&& (element.getSubjOrdinalNumber() == mainRecord.getSubjOrdinalNumber())) {
+  public static boolean checkMainRecordBeforeAdd(List<Record> mainRecordsCollection,
+      Record mainRecord) {
 
-				elRecSubGroupValue = element.getSubjectFor().getId();
+    byte mainRecSubGroupValue = mainRecord.getSubjectFor().getId();
+    byte elRecSubGroupValue;
 
-				if ((elRecSubGroupValue == mainRecSubGroupValue)) {
-					JOptionPane.showMessageDialog(null, "Данная запись конфликтует с существующей");
-					return false;
-				} // т.к. имеет место костыль, то 1 изменяеться на 3 (Вся
-					// группа)
-				else if (mainRecSubGroupValue == 3 || elRecSubGroupValue == 3) {
-					JOptionPane.showMessageDialog(null, "Данная запись конфликтует с существующей");
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+    for (Record element : mainRecordsCollection) {
+      if ((element.getWeekDay() == mainRecord.getWeekDay())
+          && (element.getWeekNumber() == mainRecord.getWeekNumber())
+          && (element.getSubjOrdinalNumber() == mainRecord.getSubjOrdinalNumber())) {
 
-	/* данный метод заменён обобщением */
-	public static boolean checkSubjectsRecBeforeAdd(List<Subject> subjectsCollection, Subject subj) {
-		for (Subject e : subjectsCollection) {
-			if (e.getNameSubject().equals(subj.getNameSubject())) {
-				JOptionPane.showMessageDialog(null, "Данная запись конфликтует с существующей");
-				return false;
-			}
-		}
+        elRecSubGroupValue = element.getSubjectFor().getId();
 
-		return true;
-	}
+        if (elRecSubGroupValue == mainRecSubGroupValue) {
+          JOptionPane.showMessageDialog(null, RECORD_CONFLICT_MESSAGE);
+          return false;
+        } // т.к. имеет место костыль, то 1 изменяеться на 3 (Вся
+          // группа)
+        else if (mainRecSubGroupValue == 3 || elRecSubGroupValue == 3) {
+          JOptionPane.showMessageDialog(null, RECORD_CONFLICT_MESSAGE);
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
-	/* данный метод заменён обобщением */
-	public static boolean checkGroupsRecBeforeAdd(List<Group> groupsCollection, Group group) {
-		for (Group e : groupsCollection) {
-			if (e.getNameGroup().equals(group.getNameGroup())) {
-				JOptionPane.showMessageDialog(null, "Данная запись конфликтует с существующей");
-				return false;
-			}
-		}
-		return true;
-	}
+  /* данный метод заменён обобщением */
+  public static boolean checkSubjectsRecBeforeAdd(List<Subject> subjectsCollection, Subject subj) {
+    for (Subject e : subjectsCollection) {
+      if (e.getNameSubject().equals(subj.getNameSubject())) {
+        JOptionPane.showMessageDialog(null, RECORD_CONFLICT_MESSAGE);
+        return false;
+      }
+    }
 
-	/* данный метод заменён обобщением */
-	public static boolean checkLecturersRecBeforeAdd(List<Lecturer> lecturersCollection, Lecturer lect) {
-		for (Lecturer e : lecturersCollection) {
-			if (e.getNameLecturer().equals(lect.getNameLecturer())) {
-				JOptionPane.showMessageDialog(null, "Данная запись конфликтует с существующей");
-				return false;
-			}
-		}
-		return true;
-	}
+    return true;
+  }
 
-	// полиморфизм
-	/*
-	 * public static boolean checkRecordBeforeAdd(ArrayList<MyInt> collection,
-	 * MyInt element) { for (MyInt e : collection) { if
-	 * (e.getName().equals(element.getName())) {
-	 * JOptionPane.showMessageDialog(null,
-	 * "Данная запись конфликтует с существующей"); return false; } } return
-	 * true; }
-	 */
-	public static void setHorizontalAlignmentToTable(JTable table) {
-		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-		rightRenderer.setHorizontalAlignment(JLabel.CENTER);
-		table.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
-	}
+  /* данный метод заменён обобщением */
+  public static boolean checkGroupsRecBeforeAdd(List<Group> groupsCollection, Group group) {
+    for (Group e : groupsCollection) {
+      if (e.getNameGroup().equals(group.getNameGroup())) {
+        JOptionPane.showMessageDialog(null, RECORD_CONFLICT_MESSAGE);
+        return false;
+      }
+    }
+    return true;
+  }
 
-	public static JLabel getJLabelWithPicture(JFrame frame) throws IOException {
-		return new JLabel(new ImageIcon(frame.getClass().getClassLoader().getResource("images/1.png")));
-	}
+  /* данный метод заменён обобщением */
+  public static boolean checkLecturersRecBeforeAdd(List<Lecturer> lecturersCollection,
+      Lecturer lect) {
+    for (Lecturer e : lecturersCollection) {
+      if (e.getNameLecturer().equals(lect.getNameLecturer())) {
+        JOptionPane.showMessageDialog(null, RECORD_CONFLICT_MESSAGE);
+        return false;
+      }
+    }
+    return true;
+  }
 
-	public static String makeAnAbbreviation(String name) {
-		String[] wordsArr;// array for separated words from name
-		String result = ""; // variable for result
+  // полиморфизм
+  /*
+   * public static boolean checkRecordBeforeAdd(ArrayList<MyInt> collection, MyInt element) { for
+   * (MyInt e : collection) { if (e.getName().equals(element.getName())) {
+   * JOptionPane.showMessageDialog(null, RECORD_CONFLICT_MESSAGE); return false; } } return true; }
+   */
+  public static void setHorizontalAlignmentToTable(JTable table) {
+    DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+    rightRenderer.setHorizontalAlignment(JLabel.CENTER);
+    table.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
+  }
 
-		if (name != null) {
-			if (name.length() <= LENGTHFORWORD) {//
-				return name;
-			} else {
-				wordsArr = name.split(" ");
-				for (String e : wordsArr) {
-					if (!e.equals("")) {
-						if (e.length() == LENGTHOFI) {// если это слово из 1
-														// буквы, то добавляем
-														// его в нижнем регистре
-														// к аббривиатуре
-							result = result.concat(String.valueOf(e.charAt(0)).toLowerCase());
-						} else /*
-								 * если это не 2 слова, написанные через знак
-								 * "-"
-								 */ if (!e.contains("-")) {
-							result = result.concat(String.valueOf(e.charAt(0)).toUpperCase());
-						} else {
-							/*
-							 * если это 2 слова разделенных через "-", то
-							 * необходимо взять по первой букве из каждого
-							 */
-							String[] temp = e.split("-");
-							for (String ee : temp) {
-								result = result.concat(String.valueOf(ee.charAt(0)).toUpperCase());
-							}
-						}
-					}
-				}
-				return result;
-			}
-		} else {
-			return result;// when name is null
-		}
+  public static JLabel getJLabelWithPicture(JFrame frame) throws IOException {
+    return new JLabel(new ImageIcon(frame.getClass().getClassLoader().getResource("images/1.png")));
+  }
 
-	}
+  public static String makeAnAbbreviation(String name) {
+    String[] wordsArr;// array for separated words from name
+    String result = ""; // variable for result
 
-	/*// добавление аббривиатуры к названию дисциплины
-	public static List<Subject> addAbrToCollection(List<Subject> subjCol) throws SQLException {
+    if (name != null) {
+      if (name.length() <= LENGTHFORWORD) {//
+        return name;
+      } else {
+        wordsArr = name.split(" ");
+        for (String e : wordsArr) {
+          if (!e.equals("")) {
+            if (e.length() == LENGTHOFI) {// если это слово из 1
+                                          // буквы, то добавляем
+                                          // его в нижнем регистре
+                                          // к аббривиатуре
+              result = result.concat(String.valueOf(e.charAt(0)).toLowerCase());
+            } else /*
+                    * если это не 2 слова, написанные через знак "-"
+                    */ if (!e.contains("-")) {
+              result = result.concat(String.valueOf(e.charAt(0)).toUpperCase());
+            } else {
+              /*
+               * если это 2 слова разделенных через "-", то необходимо взять по первой букве из
+               * каждого
+               */
+              String[] temp = e.split("-");
+              for (String ee : temp) {
+                result = result.concat(String.valueOf(ee.charAt(0)).toUpperCase());
+              }
+            }
+          }
+        }
+        return result;
+      }
+    } else {
+      return result;// when name is null
+    }
 
-		final String defValue = "Unknown";
-		for (int i = 0; i < subjCol.size(); i++) {
-			if (subjCol.get(i).getAbnameSubject().equals(defValue)) {
-				subjCol.get(i).setAbnameSubject(SupportClass.makeAnAbbreviation(subjCol.get(i).getNameSubject()));
-			}
-			try {
-				Subject subject = subjCol.get(i);
+  }
 
-				Request request = new Request();
-				ICommand command = CommandProvider.getInstance().getCommand(ActionMode.Update_Subject);
+  /*
+   * // добавление аббривиатуры к названию дисциплины public static List<Subject>
+   * addAbrToCollection(List<Subject> subjCol) throws SQLException {
+   * 
+   * final String defValue = "Unknown"; for (int i = 0; i < subjCol.size(); i++) { if
+   * (subjCol.get(i).getAbnameSubject().equals(defValue)) {
+   * subjCol.get(i).setAbnameSubject(SupportClass.makeAnAbbreviation(subjCol.get(i).getNameSubject()
+   * )); } try { Subject subject = subjCol.get(i);
+   * 
+   * Request request = new Request(); ICommand command =
+   * CommandProvider.getInstance().getCommand(ActionMode.Update_Subject);
+   * 
+   * request.putParam("subject", subject);
+   * 
+   * command.execute(request); } catch (CommandException e) {
+   * LOGGER.error(e.getCause().getMessage(), e); } } return subjCol; }
+   */
 
-				request.putParam("subject", subject);
+  public static String makeTipForRecord(Record record) {
+    // формат: Название предмета (тип), Преподаватель, [аудитория]
+    // 28.10.16 задал, чтобы отображались аббревиатуры, вместо целых
+    // названий
 
-				command.execute(request);
-			} catch (CommandException e) {
-				LOGGER.error(e.getCause().getMessage(), e);
-			}
-		}
-		return subjCol;
-	}*/
+    byte subjType = record.getSubjectType().getId();
 
-	public static String makeTipForRecord(Record record) {
-		// формат: Название предмета (тип), Преподаватель, [аудитория]
-		// 28.10.16 задал, чтобы отображались аббревиатуры, вместо целых
-		// названий
+    String subjectName = record.getSubject().getName();
 
-		byte subjType = record.getSubjectType().getId();
+    String lectName = record.getLecturer().getName();
 
-		String subjectName = record.getSubject().getName();
+    String classRoom = record.getClassroom().getName();
 
-		String lectName = record.getLecturer().getName();
-
-		String classRoom = record.getClassroom().getName();
-
-		switch (subjType) {
-		case 1:
-			return String.format("%s(%s), %s [%s]", subjectName, "Лекция", lectName, classRoom);
-		case 2:
-			return String.format("%s(%s), %s [%s]", subjectName, "ЛР", lectName, classRoom);
-		case 3:
-			return String.format("%s(%s), %s [%s]", subjectName, "ПЗ", lectName, classRoom);
-		case 4:
-			return String.format("%s(%s), %s [%s]", subjectName, "Консультация", lectName, classRoom);
-		case 5:
-			return String.format("%s(%s), %s [%s]", subjectName, "Экзамен", lectName, classRoom);
-		case 6:
-			return String.format("%s(%s), %s [%s]", subjectName, "Учебное занятие", lectName, classRoom);
-		case 7:
-			return String.format("%s(%s), %s [%s]", subjectName, "Переезд", lectName, classRoom);
-		default:
-			return String.format("%s(%s), %s [%s]", subjectName, "Лекция", lectName, classRoom);
-		}
-	}
+    switch (subjType) {
+      case 1:
+        return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.LECTURE.getValue(), lectName,
+            classRoom);
+      case 2:
+        return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.LABORATORY_WORK.getValue(),
+            lectName, classRoom);
+      case 3:
+        return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.PRACTICE_WORK.getValue(),
+            lectName, classRoom);
+      case 4:
+        return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.CONSULTATION.getValue(),
+            lectName, classRoom);
+      case 5:
+        return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.EXAM.getValue(), lectName,
+            classRoom);
+      case 6:
+        return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.TRAINING_SESSION.getValue(),
+            lectName, classRoom);
+      case 7:
+        return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.MOVE.getValue(), lectName,
+            classRoom);
+      default:
+        return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.LECTURE.getValue(), lectName,
+            classRoom);
+    }
+  }
 }
