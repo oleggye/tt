@@ -54,7 +54,7 @@ public class FlowChooseDialog extends JDialog {
           }
         } catch (CommandException ex) {
           LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage(), "Îøèáêà",
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage(), "ÐžÑˆÐ¸Ð±ÐºÐ°",
               JOptionPane.ERROR_MESSAGE);
         }
       }
@@ -75,7 +75,7 @@ public class FlowChooseDialog extends JDialog {
     flowComboBox.setBounds(10, 25, 185, 34);
     contentPanel.add(flowComboBox);
 
-    JLabel label = new JLabel("Íàçâàíèå ïîòîêà");
+    JLabel label = new JLabel("ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð¾Ñ‚Ð¾ÐºÐ°");
     label.setFont(new Font("Tahoma", Font.BOLD, 14));
     label.setBounds(10, 0, 156, 24);
     contentPanel.add(label);
@@ -99,7 +99,7 @@ public class FlowChooseDialog extends JDialog {
 
       if (this.flow != null) {
 
-        JButton button = new JButton("Óäàëèòü");
+        JButton button = new JButton("Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ");
         button.addActionListener(ItemEvent -> {
           frame.setFlow(null);
           frame.setNeedUpdate(true);

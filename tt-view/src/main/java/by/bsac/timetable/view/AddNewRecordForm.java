@@ -289,7 +289,7 @@ public class AddNewRecordForm extends JDialog {
 
     ButtonGroup classForBtnGroup = new ButtonGroup();
 
-    JRadioButton rdbtnNewRadioButton = new JRadioButton(getMessage("addNewRecordForm.to"));
+    JRadioButton rdbtnNewRadioButton = new JRadioButton(getMessage("addNewRecordForm.forFullFlow"));
     rdbtnNewRadioButton.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     rdbtnNewRadioButton.setBounds(6, 7, 166, 23);
 
@@ -305,7 +305,7 @@ public class AddNewRecordForm extends JDialog {
     classForBtnGroup.add(rdbtnNewRadioButton);
     panel_4.add(rdbtnNewRadioButton);
 
-    JRadioButton radioButton_2 = new JRadioButton(getMessage("addNewRecordForm.forFullFlow"));
+    JRadioButton radioButton_2 = new JRadioButton(getMessage("addNewRecordForm.forFullGroup"));
     radioButton_2.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_2.setBounds(226, 7, 152, 23);
 

@@ -56,19 +56,19 @@ public class SubjectEditForm extends JDialog {
     JComboBox<Chair> chairComboBox = new MyComboBox<>();
     chairComboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-    JButton addButton = new JButton("Добавить");
+    JButton addButton = new JButton("Р”РѕР±Р°РІРёС‚СЊ");
     addButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-    JButton editButton = new JButton("Изменить");
+    JButton editButton = new JButton("РР·РјРµРЅРёС‚СЊ");
     editButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-    JButton deleteButton = new JButton("Удалить");
+    JButton deleteButton = new JButton("РЈРґР°Р»РёС‚СЊ");
     deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
     JTextField subjectNameTextField = new JTextField();
     subjectNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-    JLabel coincidenceLabel = new JLabel("Совпадения");
+    JLabel coincidenceLabel = new JLabel("РЎРѕРІРїР°РґРµРЅРёСЏ");
     coincidenceLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
     JTextArea coincidenceTextArea = new JTextArea();
@@ -94,13 +94,13 @@ public class SubjectEditForm extends JDialog {
       }
     });
 
-    JLabel lblNewLabel = new JLabel("Кафедра");
+    JLabel lblNewLabel = new JLabel("РљР°С„РµРґСЂР°");
     lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 
     lblNewLabel.setBounds(334, 11, 78, 18);
     contentPanel.add(lblNewLabel);
 
-    JLabel label = new JLabel("Редактирование/Добавление");
+    JLabel label = new JLabel("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ/Р”РѕР±Р°РІР»РµРЅРёРµ");
     label.setFont(new Font("Tahoma", Font.BOLD, 14));
     label.setBounds(334, 74, 234, 18);
     contentPanel.add(label);
@@ -232,8 +232,8 @@ public class SubjectEditForm extends JDialog {
       public void actionPerformed(ActionEvent e) {
 
         int result = JOptionPane.showConfirmDialog(getContentPane(),
-            "Убедитесь, что удаляемая дисциплина не связана с записями текущего расписания",
-            "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            "РЈР±РµРґРёС‚РµСЃСЊ, С‡С‚Рѕ СѓРґР°Р»СЏРµРјР°СЏ РґРёСЃС†РёРїР»РёРЅР° РЅРµ СЃРІСЏР·Р°РЅР° СЃ Р·Р°РїРёСЃСЏРјРё С‚РµРєСѓС‰РµРіРѕ СЂР°СЃРїРёСЃР°РЅРёСЏ",
+            "Р’РЅРёРјР°РЅРёРµ!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
           deleteButton.setEnabled(false);
           try {

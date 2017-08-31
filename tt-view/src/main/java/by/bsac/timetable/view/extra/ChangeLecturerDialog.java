@@ -52,14 +52,14 @@ public class ChangeLecturerDialog extends JDialog {
 
           if (lecturerComboBox.getItemCount() == 0) {
             JOptionPane.showMessageDialog(getContentPane(),
-                "На данной кафедре нет других преподавателей!", "Ошибка",
+                "РќР° РґР°РЅРЅРѕР№ РєР°С„РµРґСЂРµ РЅРµС‚ РґСЂСѓРіРёС… РїСЂРµРїРѕРґР°РІР°С‚РµР»РµР№!", "РћС€РёР±РєР°",
                 JOptionPane.ERROR_MESSAGE);
             dispose();
           }
 
         } catch (CommandException ex) {
           LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage(), "Ошибка",
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage(), "РћС€РёР±РєР°",
               JOptionPane.ERROR_MESSAGE);
         }
       }
@@ -74,7 +74,7 @@ public class ChangeLecturerDialog extends JDialog {
     lecturerComboBox.setBounds(10, 25, 185, 34);
     contentPanel.add(lecturerComboBox);
 
-    JLabel label = new JLabel("Преподаватели");
+    JLabel label = new JLabel("РџСЂРµРїРѕРґР°РІР°С‚РµР»Рё");
     label.setFont(new Font("Tahoma", Font.BOLD, 14));
     label.setBounds(10, 0, 156, 24);
     contentPanel.add(label);
@@ -100,8 +100,8 @@ public class ChangeLecturerDialog extends JDialog {
             JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
           } finally {
             /*
-             * FIXME: а если не поменяли (ошибка) то как второй форме узнать об этом (т.е. значит ей
-             * нельзя удалять или я удаляю здесь
+             * FIXME: Р° РµСЃР»Рё РЅРµ РїРѕРјРµРЅСЏР»Рё (РѕС€РёР±РєР°) С‚Рѕ РєР°Рє РІС‚РѕСЂРѕР№ С„РѕСЂРјРµ СѓР·РЅР°С‚СЊ РѕР± СЌС‚РѕРј (С‚.Рµ. Р·РЅР°С‡РёС‚ РµР№
+             * РЅРµР»СЊР·СЏ СѓРґР°Р»СЏС‚СЊ РёР»Рё СЏ СѓРґР°Р»СЏСЋ Р·РґРµСЃСЊ
              */
             dispose();
           }

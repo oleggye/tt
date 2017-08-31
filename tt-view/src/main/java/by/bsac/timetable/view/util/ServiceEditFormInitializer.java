@@ -20,9 +20,9 @@ public class ServiceEditFormInitializer {
   }
 
   /**
-   * Инициализация ComboBox строками с названиями факультетов
+   * РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ ComboBox СЃС‚СЂРѕРєР°РјРё СЃ РЅР°Р·РІР°РЅРёСЏРјРё С„Р°РєСѓР»СЊС‚РµС‚РѕРІ
    *
-   * @exception при ошибке SQL-запроса
+   * @exception РїСЂРё РѕС€РёР±РєРµ SQL-Р·Р°РїСЂРѕСЃР°
    * @throws ServiceException
    */
   public void initFacultyComboBox(JComboBox<Faculty> facultyComboBox) throws CommandException {

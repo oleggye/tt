@@ -60,15 +60,15 @@ public class ClassroomEditForm extends JDialog {
       }
     });
 
-    JLabel label = new JLabel("Редактирование/Добавление");
+    JLabel label = new JLabel("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ/Р”РѕР±Р°РІР»РµРЅРёРµ");
     label.setFont(new Font("Tahoma", Font.BOLD, 14));
     label.setBounds(319, 39, 220, 18);
     contentPanel.add(label);
 
-    JButton editButton = new JButton("Изменить");
+    JButton editButton = new JButton("РР·РјРµРЅРёС‚СЊ");
     editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-    JButton deleteButton = new JButton("Удалить");
+    JButton deleteButton = new JButton("РЈРґР°Р»РёС‚СЊ");
     deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
     JTextField numberField = new JTextField();
@@ -76,7 +76,7 @@ public class ClassroomEditForm extends JDialog {
     numberField.setFont(new Font("Tahoma", Font.PLAIN, 14));
     numberField.setBounds(339, 117, 94, 26);
 
-    JLabel buildingLabel = new JLabel("<html>Номер<br>корпуса</html>");
+    JLabel buildingLabel = new JLabel("<html>РќРѕРјРµСЂ<br>РєРѕСЂРїСѓСЃР°</html>");
     buildingLabel.setForeground(Color.BLUE);
     buildingLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
     buildingLabel.setBounds(470, 68, 79, 38);
@@ -88,7 +88,7 @@ public class ClassroomEditForm extends JDialog {
     buildingField.setBounds(470, 117, 65, 26);
     contentPanel.add(buildingField);
 
-    JLabel label_1 = new JLabel("<html>Номер<br>аудитории</html>");
+    JLabel label_1 = new JLabel("<html>РќРѕРјРµСЂ<br>Р°СѓРґРёС‚РѕСЂРёРё</html>");
     label_1.setForeground(new Color(0, 128, 0));
     label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
     label_1.setBounds(341, 68, 79, 38);
@@ -120,7 +120,7 @@ public class ClassroomEditForm extends JDialog {
           JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
         } catch (NumberFormatException ex) {
           LOGGER.warn(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
+          JOptionPane.showMessageDialog(getContentPane(), "Р’РІРµРґРµРЅС‹ РЅРµ РІРµСЂРЅС‹Рµ С‡РёСЃР»Р°");
         } finally {
           editButton.setEnabled(true);
           resetComponents(editButton, deleteButton, numberField, buildingField);
@@ -138,8 +138,8 @@ public class ClassroomEditForm extends JDialog {
       public void actionPerformed(ActionEvent e) {
 
         int result = JOptionPane.showConfirmDialog(getContentPane(),
-            "Перед удалением, вам необходимо переназначить аудиторию для занятий в текущем расписании",
-            "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            "РџРµСЂРµРґ СѓРґР°Р»РµРЅРёРµРј, РІР°Рј РЅРµРѕР±С…РѕРґРёРјРѕ РїРµСЂРµРЅР°Р·РЅР°С‡РёС‚СЊ Р°СѓРґРёС‚РѕСЂРёСЋ РґР»СЏ Р·Р°РЅСЏС‚РёР№ РІ С‚РµРєСѓС‰РµРј СЂР°СЃРїРёСЃР°РЅРёРё",
+            "Р’РЅРёРјР°РЅРёРµ!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
           deleteButton.setEnabled(false);
 
@@ -168,7 +168,7 @@ public class ClassroomEditForm extends JDialog {
       }
     });
 
-    JButton addButton = new JButton("Добавить");
+    JButton addButton = new JButton("Р”РѕР±Р°РІРёС‚СЊ");
     addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
     addButton.setBounds(444, 169, 105, 26);
@@ -192,7 +192,7 @@ public class ClassroomEditForm extends JDialog {
           JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
         } catch (NumberFormatException ex) {
           LOGGER.warn(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
+          JOptionPane.showMessageDialog(getContentPane(), "Р’РІРµРґРµРЅС‹ РЅРµ РІРµСЂРЅС‹Рµ С‡РёСЃР»Р°");
         } finally {
           addButton.setEnabled(true);
           resetComponents(editButton, deleteButton, numberField, buildingField);

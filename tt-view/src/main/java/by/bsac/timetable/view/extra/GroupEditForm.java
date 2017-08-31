@@ -62,22 +62,22 @@ public class GroupEditForm extends JDialog {
     JComboBox<Faculty> facultyComboBox = new MyComboBox<>();
     facultyComboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-    JButton addButton = new JButton("Добавить");
+    JButton addButton = new JButton("Р”РѕР±Р°РІРёС‚СЊ");
     addButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-    JButton editButton = new JButton("Изменить");
+    JButton editButton = new JButton("РР·РјРµРЅРёС‚СЊ");
     editButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
-    JButton deleteButton = new JButton("Удалить");
+    JButton deleteButton = new JButton("РЈРґР°Р»РёС‚СЊ");
     deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
     JTextField groupNameTextField = new JTextField();
     groupNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-    JLabel flowLabel = new JLabel("Не задан");
+    JLabel flowLabel = new JLabel("РќРµ Р·Р°РґР°РЅ");
     flowLabel.setBounds(130, 36, 90, 23);
 
-    JLabel coincidenceLabel = new JLabel("Совпадения");
+    JLabel coincidenceLabel = new JLabel("РЎРѕРІРїР°РґРµРЅРёСЏ");
     coincidenceLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
     JTextArea coincidenceTextArea = new JTextArea();
@@ -103,13 +103,13 @@ public class GroupEditForm extends JDialog {
       }
     });
 
-    JLabel lblNewLabel = new JLabel("Факультет");
+    JLabel lblNewLabel = new JLabel("Р¤Р°РєСѓР»СЊС‚РµС‚");
     lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 
     lblNewLabel.setBounds(334, 11, 78, 18);
     contentPanel.add(lblNewLabel);
 
-    JLabel label = new JLabel("Редактирование/Добавление");
+    JLabel label = new JLabel("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ/Р”РѕР±Р°РІР»РµРЅРёРµ");
     label.setFont(new Font("Tahoma", Font.BOLD, 14));
     label.setBounds(334, 74, 234, 18);
     contentPanel.add(label);
@@ -158,7 +158,7 @@ public class GroupEditForm extends JDialog {
     contentPanel.add(panel);
     panel.setLayout(null);
 
-    JLabel label_1 = new JLabel("Поток");
+    JLabel label_1 = new JLabel("РџРѕС‚РѕРє");
     label_1.setForeground(Color.BLUE);
     label_1.setBounds(149, 11, 46, 14);
     panel.add(label_1);
@@ -169,7 +169,7 @@ public class GroupEditForm extends JDialog {
 
     groupNameTextField.setColumns(10);
 
-    JLabel label_2 = new JLabel("Название");
+    JLabel label_2 = new JLabel("РќР°Р·РІР°РЅРёРµ");
     label_2.setForeground(new Color(0, 128, 0));
     label_2.setFont(new Font("Tahoma", Font.BOLD, 14));
     label_2.setBounds(20, 11, 79, 14);
@@ -246,7 +246,7 @@ public class GroupEditForm extends JDialog {
       @Override
       public void actionPerformed(ActionEvent e) {
         int result = JOptionPane.showConfirmDialog(getContentPane(),
-            "Удаление группы повлечет за собой удаление всех связанных с ней занятий", "Внимание!",
+            "РЈРґР°Р»РµРЅРёРµ РіСЂСѓРїРїС‹ РїРѕРІР»РµС‡РµС‚ Р·Р° СЃРѕР±РѕР№ СѓРґР°Р»РµРЅРёРµ РІСЃРµС… СЃРІСЏР·Р°РЅРЅС‹С… СЃ РЅРµР№ Р·Р°РЅСЏС‚РёР№", "Р’РЅРёРјР°РЅРёРµ!",
             JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
           deleteButton.setEnabled(false);
@@ -285,7 +285,7 @@ public class GroupEditForm extends JDialog {
           if (flow != null) {
             flowLabel.setText(flow.getName());
           } else {
-            flowLabel.setText("Не задан");
+            flowLabel.setText("РќРµ Р·Р°РґР°РЅ");
           }
 
           editButton.setVisible(true);
@@ -357,6 +357,6 @@ public class GroupEditForm extends JDialog {
     editButton.setVisible(false);
     deleteButton.setVisible(false);
     groupNameTextField.setText("");
-    flowLabel.setText("Не задан");
+    flowLabel.setText("РќРµ Р·Р°РґР°РЅ");
   }
 }

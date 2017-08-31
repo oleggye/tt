@@ -76,7 +76,7 @@ public class UpdateOrCancelInitializer {
     byte educationLevel = record.getGroup().getEduLevel();
     form.setEducationLevel(educationLevel);
 
-    /* разбираемся с датой переданной записи */
+    /* СЂР°Р·Р±РёСЂР°РµРјСЃСЏ СЃ РґР°С‚РѕР№ РїРµСЂРµРґР°РЅРЅРѕР№ Р·Р°РїРёСЃРё */
     if (Checker.isRecordForOneDate(record)) {
       form.setUpdateLessonPeriod(LessonPeriod.FOR_ONE_DATE);
       form.setCancelLessonPeriod(LessonPeriod.FOR_ONE_DATE);
@@ -108,13 +108,13 @@ public class UpdateOrCancelInitializer {
    * @return
    */
   public JDatePickerImpl initDatePicker(Date date) {
-    /* задаем дату для календаря в качестве опорной */
+    /* Р·Р°РґР°РµРј РґР°С‚Сѓ РґР»СЏ РєР°Р»РµРЅРґР°СЂСЏ РІ РєР°С‡РµСЃС‚РІРµ РѕРїРѕСЂРЅРѕР№ */
 
     UtilDateModel model = new UtilDateModel();
     model.setValue(date);
 
     Properties p = new Properties();
-    p.put("text.today", "Сегодня");
+    p.put("text.today", "РЎРµРіРѕРґРЅСЏ");
     JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
     return new JDatePickerImpl(datePanel, new DateLabelFormatter());
   }

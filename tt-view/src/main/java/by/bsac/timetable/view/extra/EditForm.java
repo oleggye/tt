@@ -46,23 +46,23 @@ public class EditForm extends JDialog {
   private static final Logger LOGGER = LogManager.getLogger(EditForm.class.getName());
 
   private final JPanel contentPanel = new JPanel();
-  private JTextField textField;// текстовое поле
-  private JTextField textFieldForAbbr;// специально для аббревиатур
+  private JTextField textField;// С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ
+  private JTextField textFieldForAbbr;// СЃРїРµС†РёР°Р»СЊРЅРѕ РґР»СЏ Р°Р±Р±СЂРµРІРёР°С‚СѓСЂ
   private JTable table;
   private JComboBox comboBox;
-  private JLabel lblNewLabel;// для текстовое поле
-  private JLabel abrLabel;// специально для аббревиатур
+  private JLabel lblNewLabel;// РґР»СЏ С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ
+  private JLabel abrLabel;// СЃРїРµС†РёР°Р»СЊРЅРѕ РґР»СЏ Р°Р±Р±СЂРµРІРёР°С‚СѓСЂ
   private JButton editButton;
 
-  private List<Faculty> facultiesCollection;// массив-кол-ция всех факультетов
-  private List<Chair> chairsCollection;// массив всех кафедр
-  private List<Group> groupsCollection; // массив-кол-ция групп, в зависимости
-                                        // от выбранного факультета
-  private List<Subject> subjectsCollection; // массив предметов, в зависимости
-                                            // от выбранной кафедры
-  private List<Lecturer> lecturersCollection; // массив преподавателей, в
-                                              // зависимости от выбранной
-                                              // кафедры
+  private List<Faculty> facultiesCollection;// РјР°СЃСЃРёРІ-РєРѕР»-С†РёСЏ РІСЃРµС… С„Р°РєСѓР»СЊС‚РµС‚РѕРІ
+  private List<Chair> chairsCollection;// РјР°СЃСЃРёРІ РІСЃРµС… РєР°С„РµРґСЂ
+  private List<Group> groupsCollection; // РјР°СЃСЃРёРІ-РєРѕР»-С†РёСЏ РіСЂСѓРїРї, РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё
+                                        // РѕС‚ РІС‹Р±СЂР°РЅРЅРѕРіРѕ С„Р°РєСѓР»СЊС‚РµС‚Р°
+  private List<Subject> subjectsCollection; // РјР°СЃСЃРёРІ РїСЂРµРґРјРµС‚РѕРІ, РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё
+                                            // РѕС‚ РІС‹Р±СЂР°РЅРЅРѕР№ РєР°С„РµРґСЂС‹
+  private List<Lecturer> lecturersCollection; // РјР°СЃСЃРёРІ РїСЂРµРїРѕРґР°РІР°С‚РµР»РµР№, РІ
+                                              // Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІС‹Р±СЂР°РЅРЅРѕР№
+                                              // РєР°С„РµРґСЂС‹
   private byte edu_level = 1;
 
   private int selItemIndex = -1;
@@ -78,7 +78,7 @@ public class EditForm extends JDialog {
       dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
       dialog.setVisible(true);
     } catch (Exception e) {
-      LOGGER.error("Ошибка при загрузке класса EditForm", e);
+      LOGGER.error("РћС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РєР»Р°СЃСЃР° EditForm", e);
     }
   }
 
@@ -122,7 +122,7 @@ public class EditForm extends JDialog {
     lblNewLabel.setBounds(400, 20, 70, 14);
     contentPanel.add(lblNewLabel);
 
-    JLabel label = new JLabel("Редактирование/Добавление");
+    JLabel label = new JLabel("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ/Р”РѕР±Р°РІР»РµРЅРёРµ");
     label.setBounds(345, 100, 190, 14);
     contentPanel.add(label);
 
@@ -151,7 +151,7 @@ public class EditForm extends JDialog {
 
     textField.setColumns(10);
 
-    abrLabel = new JLabel("Аббревиатура");
+    abrLabel = new JLabel("РђР±Р±СЂРµРІРёР°С‚СѓСЂР°");
     abrLabel.setBounds(395, 200, 190, 14);
     contentPanel.add(abrLabel);
     abrLabel.setVisible(false);
@@ -163,7 +163,7 @@ public class EditForm extends JDialog {
     textFieldForAbbr.setColumns(10);
     textFieldForAbbr.setVisible(false);
 
-    editButton = new JButton("Изменить");
+    editButton = new JButton("РР·РјРµРЅРёС‚СЊ");
     editButton.setVisible(false);
     editButton.setBounds(335, 169, 100, 23);
     contentPanel.add(editButton);
@@ -186,7 +186,7 @@ public class EditForm extends JDialog {
       }
     });
 
-    JButton addButton = new JButton("Добавить");
+    JButton addButton = new JButton("Р”РѕР±Р°РІРёС‚СЊ");
 
     addButton.setBounds(440, 169, 95, 23);
     contentPanel.add(addButton);
@@ -309,11 +309,11 @@ public class EditForm extends JDialog {
     switch (this.cBoxMode) {
       case 1:
         initFacultyComboBox();
-        lblNewLabel.setText("Факультет");
+        lblNewLabel.setText("Р¤Р°РєСѓР»СЊС‚РµС‚");
         break;
       case 2:
         initChairComboBox();
-        lblNewLabel.setText("Кафедра");
+        lblNewLabel.setText("РљР°С„РµРґСЂР°");
         break;
       default:
         this.dispose();
@@ -324,7 +324,7 @@ public class EditForm extends JDialog {
 
     DefaultTableModel tModel = (DefaultTableModel) this.table.getModel();
     Vector title = new Vector();
-    title.add("Предмет");
+    title.add("РџСЂРµРґРјРµС‚");
     tModel.setDataVector(arrayListSubjectsToNamesVector(collection), title);
     SupportClass.setHorizontalAlignmentToTable(this.table);
   }
@@ -333,7 +333,7 @@ public class EditForm extends JDialog {
 
     DefaultTableModel tModel = (DefaultTableModel) this.table.getModel();
     Vector title = new Vector();
-    title.add("Группа");
+    title.add("Р“СЂСѓРїРїР°");
     tModel.setDataVector(arrayListGroupsToNamesVector(collection), title);
     SupportClass.setHorizontalAlignmentToTable(this.table);
   }
@@ -342,7 +342,7 @@ public class EditForm extends JDialog {
 
     DefaultTableModel tModel = (DefaultTableModel) this.table.getModel();
     Vector title = new Vector();
-    title.add("Преподаватель");
+    title.add("РџСЂРµРїРѕРґР°РІР°С‚РµР»СЊ");
     tModel.setDataVector(arrayListLecturersToNamesVector(collection), title);
     SupportClass.setHorizontalAlignmentToTable(this.table);
   }
@@ -403,11 +403,11 @@ public class EditForm extends JDialog {
   }
 
   private void getSubjectsCollection() throws CommandException {
-    // т.к. есть разделение по уровню образования, то изменен запрос
+    // С‚.Рє. РµСЃС‚СЊ СЂР°Р·РґРµР»РµРЅРёРµ РїРѕ СѓСЂРѕРІРЅСЋ РѕР±СЂР°Р·РѕРІР°РЅРёСЏ, С‚Рѕ РёР·РјРµРЅРµРЅ Р·Р°РїСЂРѕСЃ
     //
-    int CB_index = this.comboBox.getSelectedIndex(); // передаем index
-                                                     // выбранного
-                                                     // элемента в
+    int CB_index = this.comboBox.getSelectedIndex(); // РїРµСЂРµРґР°РµРј index
+                                                     // РІС‹Р±СЂР°РЅРЅРѕРіРѕ
+                                                     // СЌР»РµРјРµРЅС‚Р° РІ
                                                      // ComboBox
     // subjectsCollection = (ArrayList)
     // Factory.getInstance().getSubjectsDAO().getSubjectsRecordsByChairId(chairsCollection.get(CB_index));
@@ -416,7 +416,7 @@ public class EditForm extends JDialog {
     subjectsCollection = CommandFacade.getSubjectListByChairAndEduLevel(chair, this.edu_level);
 
     /*
-     * использовалась для автоматического генерирования аббревиатур предметов subjectsCollection =
+     * РёСЃРїРѕР»СЊР·РѕРІР°Р»Р°СЃСЊ РґР»СЏ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РіРµРЅРµСЂРёСЂРѕРІР°РЅРёСЏ Р°Р±Р±СЂРµРІРёР°С‚СѓСЂ РїСЂРµРґРјРµС‚РѕРІ subjectsCollection =
      * SupportClass.addAbrToCollection(subjectsCollection);
      */
     initTableBySubjects(subjectsCollection);
@@ -424,9 +424,9 @@ public class EditForm extends JDialog {
 
   private void getGroupsCollection() throws CommandException {
     //
-    int CB_index = this.comboBox.getSelectedIndex(); // передаем index
-                                                     // выбранного
-                                                     // элемента в
+    int CB_index = this.comboBox.getSelectedIndex(); // РїРµСЂРµРґР°РµРј index
+                                                     // РІС‹Р±СЂР°РЅРЅРѕРіРѕ
+                                                     // СЌР»РµРјРµРЅС‚Р° РІ
                                                      // ComboBox
     Faculty faculty = facultiesCollection.get(CB_index);
     groupsCollection = CommandFacade.getGroupListByFacultyAndEduLevel(faculty, this.edu_level);
@@ -434,9 +434,9 @@ public class EditForm extends JDialog {
 
   private void getLecturersCollection() throws CommandException {
     //
-    int CB_index = this.comboBox.getSelectedIndex(); // передаем index
-                                                     // выбранного
-                                                     // элемента в
+    int CB_index = this.comboBox.getSelectedIndex(); // РїРµСЂРµРґР°РµРј index
+                                                     // РІС‹Р±СЂР°РЅРЅРѕРіРѕ
+                                                     // СЌР»РµРјРµРЅС‚Р° РІ
                                                      // ComboBox
     Chair chair = chairsCollection.get(CB_index);
     lecturersCollection = CommandFacade.getLecturerListByChair(chair);
@@ -446,7 +446,7 @@ public class EditForm extends JDialog {
   private Vector<String> arrayListGroupsToNamesVector(List<Group> collection) {
 
     Vector vec = new Vector<String>();
-    String[] str = new String[1];// 1 - кол-во столбцов
+    String[] str = new String[1];// 1 - РєРѕР»-РІРѕ СЃС‚РѕР»Р±С†РѕРІ
 
     for (Group e : collection) {
       Vector element = new Vector();
@@ -462,7 +462,7 @@ public class EditForm extends JDialog {
   private Vector<String> arrayListLecturersToNamesVector(List<Lecturer> collection) {
 
     Vector vec = new Vector<String>();
-    String[] str = new String[1];// 1 - кол-во столбцов
+    String[] str = new String[1];// 1 - РєРѕР»-РІРѕ СЃС‚РѕР»Р±С†РѕРІ
 
     for (Lecturer e : collection) {
       Vector element = new Vector();
@@ -478,7 +478,7 @@ public class EditForm extends JDialog {
   private Vector<String> arrayListSubjectsToNamesVector(List<Subject> collection) {
 
     Vector vec = new Vector<String>();
-    String[] str = new String[1];// 1 - кол-во столбцов
+    String[] str = new String[1];// 1 - РєРѕР»-РІРѕ СЃС‚РѕР»Р±С†РѕРІ
 
     for (Subject e : collection) {
       Vector element = new Vector();
@@ -497,9 +497,9 @@ public class EditForm extends JDialog {
         Chair chair = chairsCollection.get(comboBox.getSelectedIndex());
         String subjName = textField.getText();
         Subject newSubj;
-        if (textFieldForAbbr.getText().equals("")) {// если поле пустое, то
-                                                    // генерируем
-                                                    // автоматически
+        if (textFieldForAbbr.getText().equals("")) {// РµСЃР»Рё РїРѕР»Рµ РїСѓСЃС‚РѕРµ, С‚Рѕ
+                                                    // РіРµРЅРµСЂРёСЂСѓРµРј
+                                                    // Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё
           newSubj = new Subject(chair, subjName, this.edu_level);
         } else {
           String abrName = textFieldForAbbr.getText();
@@ -508,7 +508,7 @@ public class EditForm extends JDialog {
 
         // if (SupportClass.checkSubjectsRecBeforeAdd(subjectsCollection,
         // newSubj)) {
-        /* !!!!!временна мера, чтобы попробывать обобщения!!!!! */
+        /* !!!!!РІСЂРµРјРµРЅРЅР° РјРµСЂР°, С‡С‚РѕР±С‹ РїРѕРїСЂРѕР±С‹РІР°С‚СЊ РѕР±РѕР±С‰РµРЅРёСЏ!!!!! */
         CheckGeneralization<Subject> obj = new CheckGeneralization<Subject>();
         if (obj.checkRecordBeforeAdd(subjectsCollection, newSubj)) {
           CommandFacade.addSubject(newSubj);
@@ -542,7 +542,7 @@ public class EditForm extends JDialog {
 
         // if (SupportClass.checkGroupsRecBeforeAdd((ArrayList<Group>)
         // groupsCollection, newGroup)) {
-        /* !!!!!временна мера, чтобы попробывать обобщения!!!!! */
+        /* !!!!!РІСЂРµРјРµРЅРЅР° РјРµСЂР°, С‡С‚РѕР±С‹ РїРѕРїСЂРѕР±С‹РІР°С‚СЊ РѕР±РѕР±С‰РµРЅРёСЏ!!!!! */
         CheckGeneralization<Group> obj = new CheckGeneralization<Group>();
         if (obj.checkRecordBeforeAdd((ArrayList<Group>) groupsCollection, newGroup)) {
           CommandFacade.addGroup(newGroup);
@@ -569,7 +569,7 @@ public class EditForm extends JDialog {
 
         // if (SupportClass.checkLecturersRecBeforeAdd(lecturersCollection,
         // newLect)) {
-        /* !!!!!временна мера, чтобы попробывать обобщения!!!!! */
+        /* !!!!!РІСЂРµРјРµРЅРЅР° РјРµСЂР°, С‡С‚РѕР±С‹ РїРѕРїСЂРѕР±С‹РІР°С‚СЊ РѕР±РѕР±С‰РµРЅРёСЏ!!!!! */
         CheckGeneralization<Lecturer> obj = new CheckGeneralization<Lecturer>();
         if (obj.checkRecordBeforeAdd(lecturersCollection, newLect)) {
           CommandFacade.addLecturer(newLect);

@@ -60,15 +60,15 @@ public class FlowEditForm extends JDialog {
       }
     });
 
-    JLabel label = new JLabel("Редактирование/Добавление");
+    JLabel label = new JLabel("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ/Р”РѕР±Р°РІР»РµРЅРёРµ");
     label.setFont(new Font("Tahoma", Font.BOLD, 14));
     label.setBounds(323, 56, 220, 18);
     contentPanel.add(label);
 
-    JButton editButton = new JButton("Изменить");
+    JButton editButton = new JButton("РР·РјРµРЅРёС‚СЊ");
     editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-    JButton deleteButton = new JButton("Удалить");
+    JButton deleteButton = new JButton("РЈРґР°Р»РёС‚СЊ");
     deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
     editButton.setVisible(false);
@@ -111,8 +111,8 @@ public class FlowEditForm extends JDialog {
       @Override
       public void actionPerformed(ActionEvent e) {
         int result = JOptionPane.showConfirmDialog(getContentPane(),
-            "Перед удалением потока, убедитесь, что он не используется в текущем расписании",
-            "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            "РџРµСЂРµРґ СѓРґР°Р»РµРЅРёРµРј РїРѕС‚РѕРєР°, СѓР±РµРґРёС‚РµСЃСЊ, С‡С‚Рѕ РѕРЅ РЅРµ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РІ С‚РµРєСѓС‰РµРј СЂР°СЃРїРёСЃР°РЅРёРё",
+            "Р’РЅРёРјР°РЅРёРµ!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
           try {
             deleteButton.setEnabled(false);
@@ -132,7 +132,7 @@ public class FlowEditForm extends JDialog {
       }
     });
 
-    JButton addButton = new JButton("Добавить");
+    JButton addButton = new JButton("Р”РѕР±Р°РІРёС‚СЊ");
     addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
     addButton.setBounds(438, 126, 105, 26);
@@ -191,7 +191,7 @@ public class FlowEditForm extends JDialog {
     contentPanel.add(textField);
     textField.setColumns(10);
 
-    JLabel label_1 = new JLabel("Список групп данного потока");
+    JLabel label_1 = new JLabel("РЎРїРёСЃРѕРє РіСЂСѓРїРї РґР°РЅРЅРѕРіРѕ РїРѕС‚РѕРєР°");
     label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
     label_1.setBounds(323, 197, 229, 17);
     contentPanel.add(label_1);
@@ -260,7 +260,7 @@ public class FlowEditForm extends JDialog {
         Flow value = (Flow) table.getValueAt(row, column);
         if (value.getName().equals(nameFlow)) {
           LOGGER.warn("try to dublicete nameFlow:" + nameFlow);
-          JOptionPane.showMessageDialog(getContentPane(), "Поток с таким именем уже есть");
+          JOptionPane.showMessageDialog(getContentPane(), "РџРѕС‚РѕРє СЃ С‚Р°РєРёРј РёРјРµРЅРµРј СѓР¶Рµ РµСЃС‚СЊ");
           return false;
         }
       }

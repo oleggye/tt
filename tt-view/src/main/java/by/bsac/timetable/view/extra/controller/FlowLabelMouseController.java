@@ -25,10 +25,10 @@ public class FlowLabelMouseController extends MouseAdapter {
     flowLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     if (frame.getFlow() == null) {
       flowLabel.setForeground(new Color(0, 110, 0));
-      flowLabel.setText("<html><u>задать поток</u></html>");
+      flowLabel.setText("<html><u>Р·Р°РґР°С‚СЊ РїРѕС‚РѕРє</u></html>");
     } else {
       flowLabel.setForeground(new Color(110, 0, 0));
-      flowLabel.setText("<html><u>изменить поток</u></html>");
+      flowLabel.setText("<html><u>РёР·РјРµРЅРёС‚СЊ РїРѕС‚РѕРє</u></html>");
     }
   }
 
@@ -37,7 +37,7 @@ public class FlowLabelMouseController extends MouseAdapter {
     flowLabel.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     if (frame.getFlow() == null) {
       flowLabel.setForeground(new Color(0, 0, 255));
-      flowLabel.setText("Не задан");
+      flowLabel.setText("РќРµ Р·Р°РґР°РЅ");
     } else {
       flowLabel.setForeground(new Color(0, 0, 0));
       flowLabel.setText(frame.getFlow().getName());
@@ -53,7 +53,7 @@ public class FlowLabelMouseController extends MouseAdapter {
     if (frame.isNeedUpdate()) {
 
       if (frame.getFlow() == null) {
-        flowLabel.setText("Не задан");
+        flowLabel.setText("РќРµ Р·Р°РґР°РЅ");
       } else {
         flowLabel.setText(frame.getFlow().getName());
       }

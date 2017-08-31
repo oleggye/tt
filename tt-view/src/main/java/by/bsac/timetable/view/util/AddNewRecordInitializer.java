@@ -81,16 +81,14 @@ public final class AddNewRecordInitializer {
    * @return
    */
   public JDatePickerImpl initDatePicker(Date date) {
-    /* задаем дату для календаря в качестве опорной */
+    /* Р·Р°РґР°РµРј РґР°С‚Сѓ РґР»СЏ РєР°Р»РµРЅРґР°СЂСЏ РІ РєР°С‡РµСЃС‚РІРµ РѕРїРѕСЂРЅРѕР№ */
 
     UtilDateModel model = new UtilDateModel();
     model.setValue(date);
 
     Properties p = new Properties();
-    p.put("text.today", "Сегодня");
+    p.put("text.today", "РЎРµРіРѕРґРЅСЏ");
     JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
     return new JDatePickerImpl(datePanel, new DateLabelFormatter());
   }
-
-
 }

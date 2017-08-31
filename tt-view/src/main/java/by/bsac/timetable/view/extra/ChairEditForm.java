@@ -58,15 +58,15 @@ public class ChairEditForm extends JDialog {
       }
     });
 
-    JLabel label = new JLabel("Редактирование/Добавление");
+    JLabel label = new JLabel("Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ/Р”РѕР±Р°РІР»РµРЅРёРµ");
     label.setFont(new Font("Tahoma", Font.BOLD, 14));
     label.setBounds(323, 56, 220, 18);
     contentPanel.add(label);
 
-    JButton editButton = new JButton("Изменить");
+    JButton editButton = new JButton("РР·РјРµРЅРёС‚СЊ");
     editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-    JButton deleteButton = new JButton("Удалить");
+    JButton deleteButton = new JButton("РЈРґР°Р»РёС‚СЊ");
     deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
     JTextArea textField = new JTextArea(1, 1);
@@ -116,8 +116,8 @@ public class ChairEditForm extends JDialog {
       @Override
       public void actionPerformed(ActionEvent e) {
         int result = JOptionPane.showConfirmDialog(getContentPane(),
-            "Удаление кафедры повлечен за собой удаление всех связанных с ней преподавателей и предметов, которые, в свою очередь, приведут к удалению связанных с ними занятий",
-            "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            "РЈРґР°Р»РµРЅРёРµ РєР°С„РµРґСЂС‹ РїРѕРІР»РµС‡РµРЅ Р·Р° СЃРѕР±РѕР№ СѓРґР°Р»РµРЅРёРµ РІСЃРµС… СЃРІСЏР·Р°РЅРЅС‹С… СЃ РЅРµР№ РїСЂРµРїРѕРґР°РІР°С‚РµР»РµР№ Рё РїСЂРµРґРјРµС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ, РІ СЃРІРѕСЋ РѕС‡РµСЂРµРґСЊ, РїСЂРёРІРµРґСѓС‚ Рє СѓРґР°Р»РµРЅРёСЋ СЃРІСЏР·Р°РЅРЅС‹С… СЃ РЅРёРјРё Р·Р°РЅСЏС‚РёР№",
+            "Р’РЅРёРјР°РЅРёРµ!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
           try {
             deleteButton.setEnabled(false);
@@ -137,7 +137,7 @@ public class ChairEditForm extends JDialog {
       }
     });
 
-    JButton addButton = new JButton("Добавить");
+    JButton addButton = new JButton("Р”РѕР±Р°РІРёС‚СЊ");
     addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
     addButton.setBounds(438, 142, 105, 26);
@@ -232,7 +232,7 @@ public class ChairEditForm extends JDialog {
         Chair value = (Chair) table.getValueAt(row, column);
         if (value.getNameChair().equals(nameChair)) {
           LOGGER.warn("try to dublicete nameChair:" + nameChair);
-          JOptionPane.showMessageDialog(getContentPane(), "Кафедра с таким именем уже есть");
+          JOptionPane.showMessageDialog(getContentPane(), "РљР°С„РµРґСЂР° СЃ С‚Р°РєРёРј РёРјРµРЅРµРј СѓР¶Рµ РµСЃС‚СЊ");
           return false;
         }
       }
