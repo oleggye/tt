@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<faculty id_faculty="1" name_faculty="Факультет электросвязи" />
+	<faculty id_faculty="2" name_faculty="Факультет инжиниринга и технологий связи" />
+	<faculty id_faculty="3" name_faculty="Факультет довузовской подготовки" />
+</dataset>

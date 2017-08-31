@@ -18,6 +18,7 @@ public class ClassroomDAOImpl extends AbstractHibernateDAO<Classroom, Short>
     super(Classroom.class);
   }
 
+  //FIXME: strange method, don't know why it is here
   @Override
   public void changeClassroom(Classroom oldClassroom, Classroom newClassroom) throws DAOException {
     LOGGER.debug("changeClassroom: [oldClassroom= " + oldClassroom + ", newClassroom= "

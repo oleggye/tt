@@ -18,10 +18,13 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 import by.bsac.timetable.dao.IFacultyDAO;
 import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Faculty;
+import by.bsac.timetable.entity.builder.FacultyBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:springDBUnitContext.xml")
@@ -50,4 +53,87 @@ public class FacultyDAOImplTest {
     assertThat(facultyList.size()).isEqualTo(expectedSize);
   }
 
+  @Test
+  @DatabaseSetup("/data/setup/facultySetup.xml")
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetFacultyByIdZero() throws DAOException {
+    final Byte idFaculty = 0;
+
+    Faculty faculty = dao.getById(idFaculty);
+    assertThat(faculty).isNull();
+  }
+
+  @Test
+  @DatabaseSetup("/data/setup/facultySetup.xml")
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetFacultyByIdOne() throws DAOException {
+    final Byte idFaculty = 1;
+
+    String nameFaculty = "Факультет электросвязи";
+    Faculty expectedFaculty =
+        new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
+
+    Faculty takenFaculty = dao.getById(idFaculty);
+    assertThat(takenFaculty).isNotNull();
+    assertThat(takenFaculty).isEqualTo(expectedFaculty);
+  }
+
+  @Test
+  @DatabaseSetup("/data/setup/facultySetup.xml")
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetFacultyByIdTwo() throws DAOException {
+    final Byte idFaculty = 2;
+
+    String nameFaculty = "Факультет инжиниринга и технологий связи";
+    Faculty expectedFaculty =
+        new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
+
+    Faculty takenFaculty = dao.getById(idFaculty);
+    assertThat(takenFaculty).isNotNull();
+    assertThat(takenFaculty).isEqualTo(expectedFaculty);
+  }
+
+  @Test
+  @DatabaseSetup("/data/setup/facultySetup.xml")
+  @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
+      value = "/data/expected/faculty/addFaculty.xml")
+  public void testAddFacultyWithIdThree() throws DAOException {
+    final Byte idFaculty = 3;
+
+    String nameFaculty = "Факультет довузовской подготовки";
+    Faculty expectedFaculty =
+        new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
+
+    dao.add(expectedFaculty);
+  }
+
+  @Test
+  @DatabaseSetup("/data/setup/facultySetup.xml")
+  @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
+      value = "/data/expected/faculty/updateFaculty.xml")
+  public void testUpdateFacultyWithIdThree() throws DAOException {
+    final Byte idFaculty = 3;
+
+    String nameFaculty = "Факультет подготовки";
+    Faculty expectedFaculty =
+        new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
+
+    dao.update(expectedFaculty);
+  }
+
+  @Test
+  @DatabaseSetup("/data/setup/facultySetup.xml")
+  @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
+      value = "/data/expected/faculty/deleteFaculty.xml")
+  public void testDeleteFacultyWithIdOne() throws DAOException {
+    final Byte idFaculty = 1;
+
+    Faculty faculty = dao.getById(idFaculty);
+    assertThat(faculty).isNotNull();
+
+    dao.delete(faculty);
+  }
 }
