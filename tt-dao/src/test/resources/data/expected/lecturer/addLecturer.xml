@@ -6,4 +6,6 @@
 		id_chair="1" />
 	<lecturer id_lecturer="3" name_lecturer="Петров Петр Петрович"
 		id_chair="2" />
+	<lecturer id_lecturer="4" name_lecturer="Бухарова Светлана Сергеевна"
+		id_chair="2" />
 </dataset>

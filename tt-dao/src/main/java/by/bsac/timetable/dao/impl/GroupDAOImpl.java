@@ -13,8 +13,6 @@ import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Faculty;
 import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.entity.Group;
-import by.bsac.timetable.entity.SubjectFor;
-import by.bsac.timetable.util.LessonFor;
 
 @Repository
 public class GroupDAOImpl extends AbstractHibernateDAO<Group, Short> implements IGroupDAO {
@@ -63,35 +61,6 @@ public class GroupDAOImpl extends AbstractHibernateDAO<Group, Short> implements 
     try {
       return manager.createQuery("select gr from Group gr where gr.flow = :flow ", Group.class)
           .setParameter("flow", flow).getResultList();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
-  }
-
-  // FIXME: this is just stub
-  @Override
-  public void changeGroupFlow(Group group, Flow newFlow) throws DAOException {
-    LOGGER.debug("changeGroupFlow");
-
-    SubjectFor subjectFor = (LessonFor.FULL_FLOW).lessonForToSubjectFor();
-    try {
-      /*
-       * IRecordDAO dao = DAOFactory.getInstance().getRecordDAO(); List<Record> recordList =
-       * dao.getRecordListByGroupAndSubjectFor(group, subjectFor);
-       * 
-       * Session session = HibernateUtil.getSession(); HibernateUtil.beginTransaction();
-       * 
-       * SQLQuery deleteRecordSqlQuery = session
-       * .createSQLQuery("delete from timetable.record where record.id_record = ?;");
-       * 
-       * Iterator<Record> iter = recordList.listIterator(); while (iter.hasNext()) { Integer
-       * idRecord = iter.next().getIdRecord(); deleteRecordSqlQuery.setInteger(0, idRecord);
-       * deleteRecordSqlQuery.executeUpdate(); } group.setFlow(newFlow); session.update(group);
-       * 
-       * HibernateUtil.commitTransaction();
-       */
-
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);

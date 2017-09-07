@@ -5,21 +5,15 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import by.bsac.timetable.dao.IRecordDAO;
 import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
+import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.SubjectFor;
 
@@ -140,6 +134,23 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
           .setParameter("oldId", oldClassroom.getIdClassroom()).executeUpdate();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public void replaceLecturerForAllRecords(Lecturer oldLecturer, Lecturer newLecturer)
+      throws DAOException {
+    LOGGER.debug(
+        "replaceLecturer: [oldLecturer= " + oldLecturer + ", newLecturer= " + newLecturer + "]");
+    try {
+      manager
+          .createQuery(
+              "UPDATE timetable.record as rec SET rec.id_lecturer=?1 WHERE rec.id_lecturer=?2;")
+          .setParameter(1, oldLecturer.getIdLecturer()).setParameter(2, newLecturer.getIdLecturer())
+          .executeUpdate();
+    } catch (RuntimeException e) {
+      LOGGER.error(e.getMessage(), e);
+      throw new DAOException(e.getMessage(), e);
     }
   }
 }

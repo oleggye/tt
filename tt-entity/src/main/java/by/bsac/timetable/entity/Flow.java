@@ -12,8 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "flow",
-    uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@Table(name = "flow", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Flow implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = 2602140866098102543L;
@@ -35,7 +34,7 @@ public class Flow implements java.io.Serializable, Cloneable, IName {
   }
 
   @Id
-  /*@GeneratedValue(strategy = IDENTITY)*/
+  /* @GeneratedValue(strategy = IDENTITY) */
   @Column(name = "id_flow", unique = true, nullable = false)
   public Short getIdFlow() {
     return this.idFlow;
@@ -92,6 +91,18 @@ public class Flow implements java.io.Serializable, Cloneable, IName {
     if (getClass() != obj.getClass())
       return false;
     Flow other = (Flow) obj;
-    return idFlow != other.idFlow;
+    if (idFlow != other.idFlow) {
+      return false;
+    }
+    if (name == null) {
+      if (other != null) {
+        return false;
+      }
+    } else {
+      if (!name.equals(other.name)) {
+        return false;
+      }
+    }
+    return true;
   }
 }

@@ -4,10 +4,10 @@ import by.bsac.timetable.entity.Chair;
 
 public class ChairBuilder {
 
-	private short idChair;
+	private byte idChair;
 	private String nameChair;
 
-	public ChairBuilder buildId(short idChair) {
+	public ChairBuilder buildId(byte idChair) {
 		this.idChair = idChair;
 		return this;
 	}

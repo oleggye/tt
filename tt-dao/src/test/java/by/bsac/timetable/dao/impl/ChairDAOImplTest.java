@@ -70,12 +70,12 @@ public class ChairDAOImplTest extends ChairDAOImpl {
     Chair expectedChair =
         new ChairBuilder().buildId(id).buildNameChair("Кафедра математики").build();
 
-    Chair takedChair = dao.getById(id);
+    Chair takenChair = dao.getById(id);
 
-    assertThat(takedChair).isNotNull();
-    assertThat(takedChair).isEqualTo(expectedChair);
-    assertThat(takedChair.getIdChair()).isEqualTo(expectedChair.getIdChair());
-    assertThat(takedChair.getNameChair()).isEqualTo(expectedChair.getNameChair());
+    assertThat(takenChair).isNotNull();
+    assertThat(takenChair).isEqualTo(expectedChair);
+    assertThat(takenChair.getIdChair()).isEqualTo(expectedChair.getIdChair());
+    assertThat(takenChair.getNameChair()).isEqualTo(expectedChair.getNameChair());
   }
 
   @Test
@@ -87,12 +87,12 @@ public class ChairDAOImplTest extends ChairDAOImpl {
     Chair expectedChair =
         new ChairBuilder().buildId(id).buildNameChair("Кафедра программного обеспечения").build();
 
-    Chair takedChair = dao.getById(id);
+    Chair takenChair = dao.getById(id);
 
-    assertThat(takedChair).isNotNull();
-    assertThat(takedChair).isEqualTo(expectedChair);
-    assertThat(takedChair.getIdChair()).isEqualTo(expectedChair.getIdChair());
-    assertThat(takedChair.getNameChair()).isEqualTo(expectedChair.getNameChair());
+    assertThat(takenChair).isNotNull();
+    assertThat(takenChair).isEqualTo(expectedChair);
+    assertThat(takenChair.getIdChair()).isEqualTo(expectedChair.getIdChair());
+    assertThat(takenChair.getNameChair()).isEqualTo(expectedChair.getNameChair());
   }
 
 
@@ -102,7 +102,7 @@ public class ChairDAOImplTest extends ChairDAOImpl {
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/chair/addChair.xml")
   public void testAddChairWithIdThree() throws DAOException {
-    Short chairId = 3;
+    byte chairId = 3;
     String chairName = "Кафедра заочного образования";
 
     Chair expectedChair = new ChairBuilder().buildId(chairId).buildNameChair(chairName).build();
@@ -115,7 +115,7 @@ public class ChairDAOImplTest extends ChairDAOImpl {
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/chair/updateChair.xml")
   public void testUpdateChairWithIdOne() throws DAOException {
-    Short chairId = 1;
+    byte chairId = 1;
     String chairName = "Кафедра заочного образования";
 
     Chair chair = new ChairBuilder().buildId(chairId).buildNameChair(chairName).build();
@@ -127,12 +127,10 @@ public class ChairDAOImplTest extends ChairDAOImpl {
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/chair/deleteChair.xml")
   public void testDeleteChairWithIdOne() throws DAOException {
-    Short chairId = 1;
+    byte chairId = 1;
     String chairName = "Кафедра заочного образования";
 
     Chair chair = new ChairBuilder().buildId(chairId).buildNameChair(chairName).build();
     dao.delete(chair);
   }
-
-
 }

@@ -135,6 +135,7 @@ public abstract class AbstractHibernateDAO<E, PK extends Serializable>
         E object = iter.next();
         manager.remove(manager.contains(object) ? object : manager.merge(object));
       }
+      manager.flush();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);

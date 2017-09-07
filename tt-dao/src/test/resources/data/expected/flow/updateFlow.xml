@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<flow id_flow="1" name="СТ_СП_44" />
+	<flow id_flow="1" name="ТЕСТ" />
 	<flow id_flow="2" name="Сарк_44" />
 	<flow id_flow="3" name="СТест_22" />
 </dataset>

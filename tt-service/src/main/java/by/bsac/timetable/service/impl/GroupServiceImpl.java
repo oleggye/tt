@@ -2,18 +2,24 @@ package by.bsac.timetable.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import by.bsac.timetable.dao.IGroupDAO;
+import by.bsac.timetable.dao.IRecordDAO;
 import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Faculty;
 import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.entity.Group;
+import by.bsac.timetable.entity.Record;
+import by.bsac.timetable.entity.SubjectFor;
 import by.bsac.timetable.service.IGroupService;
 import by.bsac.timetable.service.IValidationService;
 import by.bsac.timetable.service.exception.ServiceException;
 import by.bsac.timetable.service.exception.ServiceValidationException;
+import by.bsac.timetable.util.LessonFor;
 
 @Service
 public class GroupServiceImpl implements IGroupService {
@@ -23,6 +29,9 @@ public class GroupServiceImpl implements IGroupService {
 
 	@Autowired
 	private IGroupDAO dao;
+	
+	@Autowired
+	private IRecordDAO recordDao;
 
 	@Override
 	public void addGroup(Group group) throws ServiceException, ServiceValidationException {
@@ -103,13 +112,20 @@ public class GroupServiceImpl implements IGroupService {
 		}
 	}
 
+	@Transactional
 	@Override
 	public void changeGroupFlow(Group group, Flow newFlow) throws ServiceException, ServiceValidationException {
 		service.validateGroup(group, true);
 		Flow flow = group.getFlow();
 		service.validateFlow(flow, true);
 		try {
-			dao.changeGroupFlow(group, newFlow);
+		  SubjectFor subjectFor = (LessonFor.FULL_FLOW).lessonForToSubjectFor();
+		  
+		  List<Record> recordList = recordDao.getRecordListByGroupAndSubjectFor(group, subjectFor);
+		  recordDao.deleteAll(recordList);
+		  
+		  group.setFlow(newFlow);
+		  dao.update(group);
 		} catch (DAOException e) {
 			throw new ServiceException("Ошибка при обновлении потока группы", e);
 		}

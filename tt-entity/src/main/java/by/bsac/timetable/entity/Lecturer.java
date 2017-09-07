@@ -50,7 +50,7 @@ public class Lecturer implements java.io.Serializable, Cloneable, IName {
     this.idLecturer = idLecturer;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "id_chair", nullable = false)
   public Chair getChair() {
     return this.chair;

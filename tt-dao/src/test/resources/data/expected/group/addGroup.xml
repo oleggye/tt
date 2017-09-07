@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<groupp id_group="1" name_group="СП441" id_flow="1" id_faculty="1"
+		edu_level="1" />
+	<groupp id_group="2" name_group="СП442" id_flow="1" id_faculty="1"
+		edu_level="1" />
+	<groupp id_group="3" name_group="СO222" id_faculty="2" edu_level="2" />
+	<groupp id_group="4" name_group="СO333" id_faculty="2" edu_level="2" />
+</dataset>

@@ -22,17 +22,7 @@ public class LecturerDAOImpl extends AbstractHibernateDAO<Lecturer, Short> imple
 
   @Override
   public List<Lecturer> getLecturerListByChair(Chair chair) throws DAOException {
-
     try {
-      /*
-       * Session session = HibernateUtil.getSession(); HibernateUtil.beginTransaction();
-       * 
-       * Criteria criteria = session.createCriteria(Lecturer.class, "lecturer");
-       * criteria.add(Restrictions.eq("lecturer.chair", chair)); lecturerList = criteria.list();
-       * 
-       * HibernateUtil.commitTransaction();
-       */
-
       return manager.createQuery("from Lecturer as lec where lec.chair =?1 ", Lecturer.class)
           .setParameter(1, chair).getResultList();
     } catch (RuntimeException e) {
@@ -43,41 +33,10 @@ public class LecturerDAOImpl extends AbstractHibernateDAO<Lecturer, Short> imple
 
   public List<Lecturer> getAllWithSimilarName(String nameLecturer) throws DAOException {
     try {
-      /*
-       * Session session = HibernateUtil.getSession(); HibernateUtil.beginTransaction(); Criteria
-       * criteria = session.createCriteria(Lecturer.class, "lecturer");
-       * criteria.add(Restrictions.ilike("lecturer.nameLecturer", nameLecturer, MatchMode.START));
-       * lecturerList = criteria.list(); HibernateUtil.commitTransaction();
-       */
-
+      final String likeConst = "%";
       return manager
-          .createQuery("from Lecturer as lec where lec.nameLecturer like ?1 ", Lecturer.class)
-          .setParameter(1, nameLecturer).getResultList();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
-  }
-
-  /**
-   * Method updates all references of oldLecturer to newLecturer
-   */
-  @Override
-  public void changeLecturer(Lecturer oldLecturer, Lecturer newLecturer) throws DAOException {
-    try {
-      // SQLQuery sqlQuery = session
-      // .createSQLQuery("UPDATE timetable.record as rec SET rec.id_lecturer=? WHERE
-      // rec.id_lecturer=?;");
-      // sqlQuery.setShort(0, oldLecturer.getIdLecturer());
-      // sqlQuery.setShort(1, newLecturer.getIdLecturer());
-      // sqlQuery.executeUpdate();
-
-      manager
-          .createQuery(
-              "UPDATE timetable.record as rec SET rec.id_lecturer=?1 WHERE rec.id_lecturer=?2;")
-          .setParameter(1, oldLecturer.getIdLecturer()).setParameter(2, newLecturer.getIdLecturer())
-          .executeUpdate();
-
+          .createQuery("from Lecturer as lec where lec.nameLecturer like :name ", Lecturer.class)
+          .setParameter("name", nameLecturer + likeConst).getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);

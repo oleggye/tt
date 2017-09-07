@@ -30,7 +30,5 @@ public interface IGroupDAO {
 
   public List<Group> getGroupListByFlow(Flow flow) throws DAOException;
 
-  public void changeGroupFlow(Group group, Flow newFlow) throws DAOException;
-
   public List<Group> getAllWithSimilarName(String nameLecturer) throws DAOException;
 }

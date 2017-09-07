@@ -25,9 +25,4 @@ public interface ILecturerDAO {
   public List<Lecturer> getLecturerListByChair(Chair chair) throws DAOException;
 
   public List<Lecturer> getAllWithSimilarName(String nameLecturer) throws DAOException;
-
-  /**
-   * Method updates all references of oldLecturer to newLecturer
-   */
-  public void changeLecturer(Lecturer oldLecturer, Lecturer newLecturer) throws DAOException;
 }

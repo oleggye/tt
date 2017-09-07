@@ -72,13 +72,13 @@ public class ClassroomDAOImplTest {
     Classroom expectedClassroom =
         new ClassroomBuilder().buildId(id).buildNumber(number).buildBuilding(building).build();
 
-    Classroom takedClassroom = dao.getById(id);
+    Classroom takenClassroom = dao.getById(id);
 
-    assertThat(takedClassroom).isNotNull();
-    assertThat(takedClassroom).isEqualTo(expectedClassroom);
-    assertThat(takedClassroom.getIdClassroom()).isEqualTo(expectedClassroom.getIdClassroom());
-    assertThat(takedClassroom.getName()).isEqualTo(expectedClassroom.getName());
-    assertThat(takedClassroom.getBuilding()).isEqualTo(expectedClassroom.getBuilding());
+    assertThat(takenClassroom).isNotNull();
+    assertThat(takenClassroom).isEqualTo(expectedClassroom);
+    assertThat(takenClassroom.getIdClassroom()).isEqualTo(expectedClassroom.getIdClassroom());
+    assertThat(takenClassroom.getName()).isEqualTo(expectedClassroom.getName());
+    assertThat(takenClassroom.getBuilding()).isEqualTo(expectedClassroom.getBuilding());
   }
 
   @Test
@@ -93,13 +93,13 @@ public class ClassroomDAOImplTest {
     Classroom expectedClassroom =
         new ClassroomBuilder().buildId(id).buildNumber(number).buildBuilding(building).build();
 
-    Classroom takedClassroom = dao.getById(id);
+    Classroom takenClassroom = dao.getById(id);
 
-    assertThat(takedClassroom).isNotNull();
-    assertThat(takedClassroom).isEqualTo(expectedClassroom);
-    assertThat(takedClassroom.getIdClassroom()).isEqualTo(expectedClassroom.getIdClassroom());
-    assertThat(takedClassroom.getName()).isEqualTo(expectedClassroom.getName());
-    assertThat(takedClassroom.getBuilding()).isEqualTo(expectedClassroom.getBuilding());
+    assertThat(takenClassroom).isNotNull();
+    assertThat(takenClassroom).isEqualTo(expectedClassroom);
+    assertThat(takenClassroom.getIdClassroom()).isEqualTo(expectedClassroom.getIdClassroom());
+    assertThat(takenClassroom.getName()).isEqualTo(expectedClassroom.getName());
+    assertThat(takenClassroom.getBuilding()).isEqualTo(expectedClassroom.getBuilding());
   }
 
 

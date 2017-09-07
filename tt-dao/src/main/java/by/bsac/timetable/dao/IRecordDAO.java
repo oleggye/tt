@@ -6,6 +6,7 @@ import java.util.List;
 import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
+import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.SubjectFor;
 
@@ -24,6 +25,8 @@ public interface IRecordDAO {
   public List<Record> getAll() throws DAOException;
 
   public void delete(Record mainRecord) throws DAOException;
+  
+  public void deleteAll(List<Record> recordList) throws DAOException;
 
   public List<Record> getRecordListByGroupAndDate(Group group, Date dateFrom, Date dateTo)
       throws DAOException;
@@ -34,4 +37,6 @@ public interface IRecordDAO {
       throws DAOException;
 
   public void replaceClassroomForAllRecords(Classroom oldClassroom, Classroom newClassroom) throws DAOException;
+  
+  public void replaceLecturerForAllRecords(Lecturer oldLecturer, Lecturer newLecturer) throws DAOException;
 }

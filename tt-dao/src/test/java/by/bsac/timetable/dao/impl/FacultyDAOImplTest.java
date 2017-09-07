@@ -100,34 +100,38 @@ public class FacultyDAOImplTest {
   @DatabaseSetup("/data/setup/facultySetup.xml")
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/faculty/addFaculty.xml")
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
   public void testAddFacultyWithIdThree() throws DAOException {
     final Byte idFaculty = 3;
 
     String nameFaculty = "Факультет довузовской подготовки";
-    Faculty expectedFaculty =
-        new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
+    Faculty faculty = new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
 
-    dao.add(expectedFaculty);
+    dao.add(faculty);
   }
 
   @Test
   @DatabaseSetup("/data/setup/facultySetup.xml")
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/faculty/updateFaculty.xml")
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
   public void testUpdateFacultyWithIdThree() throws DAOException {
     final Byte idFaculty = 3;
 
     String nameFaculty = "Факультет подготовки";
-    Faculty expectedFaculty =
-        new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
+    Faculty faculty = new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
 
-    dao.update(expectedFaculty);
+    dao.update(faculty);
   }
 
   @Test
   @DatabaseSetup("/data/setup/facultySetup.xml")
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/faculty/deleteFaculty.xml")
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
   public void testDeleteFacultyWithIdOne() throws DAOException {
     final Byte idFaculty = 1;
 
