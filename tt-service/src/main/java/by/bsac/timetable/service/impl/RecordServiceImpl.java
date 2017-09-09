@@ -113,7 +113,7 @@ public class RecordServiceImpl implements IRecordService {
       throws ServiceException, ServiceValidationException {
     service.validateGroup(group, true);
     try {
-      return recordDAO.getRecordListByGroupAndDate(group, dateFrom, dateTo);
+      return recordDAO.getRecordListByGroupAndDates(group, dateFrom, dateTo);
     } catch (DAOException e) {
       throw new ServiceException("Ошибка при получении занятий", e);
     }

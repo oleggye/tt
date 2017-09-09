@@ -28,7 +28,7 @@ public interface IRecordDAO {
   
   public void deleteAll(List<Record> recordList) throws DAOException;
 
-  public List<Record> getRecordListByGroupAndDate(Group group, Date dateFrom, Date dateTo)
+  public List<Record> getRecordListByGroupAndDates(Group group, Date dateFrom, Date dateTo)
       throws DAOException;
 
   public Record getRecordForGroupLikeThis(Group group, Record record) throws DAOException;

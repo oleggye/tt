@@ -7,7 +7,7 @@ import by.bsac.timetable.command.ICommand;
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.Request;
 import by.bsac.timetable.entity.Lecturer;
-import by.bsac.timetable.service.ILecturerService;
+import by.bsac.timetable.service.IRecordService;
 import by.bsac.timetable.service.exception.ServiceException;
 import by.bsac.timetable.service.exception.ServiceValidationException;
 
@@ -15,7 +15,7 @@ import by.bsac.timetable.service.exception.ServiceValidationException;
 public class ChangeLecturer implements ICommand {
 
 	@Autowired
-	private ILecturerService service;
+	private IRecordService service;
 
 	@Override
 	public void execute(Request request) throws CommandException {
@@ -23,7 +23,7 @@ public class ChangeLecturer implements ICommand {
 		Lecturer newLecturer = (Lecturer) request.getValue("newLecturer");
 
 		try {
-			service.changeLecturer(oldLecturer, newLecturer);
+			service.changeLecturerForAllRecords(oldLecturer, newLecturer);
 		} catch (ServiceException | ServiceValidationException e) {
 			throw new CommandException(e);
 		}

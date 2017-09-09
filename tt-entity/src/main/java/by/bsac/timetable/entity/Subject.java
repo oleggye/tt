@@ -63,7 +63,7 @@ public class Subject implements java.io.Serializable, Cloneable, IName {
     this.idSubject = idSubject;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY/*, cascade = {CascadeType.MERGE, CascadeType.REMOVE}*/)
+  @ManyToOne(fetch = FetchType.EAGER/*, cascade = {CascadeType.MERGE, CascadeType.REMOVE}*/)
   @JoinColumn(name = "id_chair", nullable = false)
   public Chair getChair() {
     return this.chair;
@@ -150,7 +150,11 @@ public class Subject implements java.io.Serializable, Cloneable, IName {
     if (getClass() != obj.getClass())
       return false;
     Subject other = (Subject) obj;
-
-    return (idSubject != other.idSubject);
+    if (idSubject == null) {
+      if (other.idSubject != null)
+        return false;
+    } else if (!idSubject.equals(other.idSubject))
+      return false;
+    return true;
   }
 }

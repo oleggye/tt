@@ -23,12 +23,6 @@ public class SubjectDAOImpl extends AbstractHibernateDAO<Subject, Short> impleme
   @Override
   public List<Subject> getSubjectListByChair(Chair chair) throws DAOException {
     try {
-
-      /*
-       * Criteria criteria = session.createCriteria(Subject.class, "subject");
-       * criteria.add(Restrictions.eq("subject.chair", chair)); subjectList = criteria.list();
-       */
-
       return manager.createQuery("from Subject as sbj where sbj.chair =:chair ", Subject.class)
           .setParameter("chair", chair).getResultList();
     } catch (RuntimeException e) {
@@ -41,13 +35,6 @@ public class SubjectDAOImpl extends AbstractHibernateDAO<Subject, Short> impleme
   public List<Subject> getSubjectListByChairAndEduLevel(Chair chair, byte eduLevel)
       throws DAOException {
     try {
-
-      /*
-       * Criteria criteria = session.createCriteria(Subject.class, "subject");
-       * criteria.add(Restrictions.eq("subject.chair", chair));
-       * criteria.add(Restrictions.eq("eduLevel", eduLevel)); subjectList = criteria.list();
-       */
-
       return manager
           .createQuery("from Subject as sbj where sbj.chair =:chair and sbj.eduLevel =:eduLevel",
               Subject.class)
@@ -61,15 +48,10 @@ public class SubjectDAOImpl extends AbstractHibernateDAO<Subject, Short> impleme
   @Override
   public List<Subject> getAllWithSimilarName(String nameSubject) throws DAOException {
     try {
-
-      /*
-       * Criteria criteria = session.createCriteria(Subject.class, "subject");
-       * criteria.add(Restrictions.ilike("subject.nameSubject", nameSubject, MatchMode.START));
-       * subjectList = criteria.list();
-       */
-
-      return manager.createQuery("from Subject as sbj where sbj.nameSubject like :nameSubject ",
-          Subject.class).setParameter("nameSubject", nameSubject).getResultList();
+      final String likeConst = "%";
+      return manager
+          .createQuery("from Subject as sbj where sbj.nameSubject like :name ", Subject.class)
+          .setParameter("name", nameSubject + likeConst).getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);

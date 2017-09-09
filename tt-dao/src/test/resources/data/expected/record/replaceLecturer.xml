@@ -4,31 +4,31 @@
 	<record id_record="1" week_number="1" week_day="1"
 		subj_ordinal_number="1" id_group="1" id_subject="2" id_lecturer="3"
 		id_subject_type="1" id_subject_for="4" date_from="2017-08-28" date_to="2017-09-24"
-		id_classroom="2" />
+		id_classroom="1" />
 	<record id_record="2" week_number="1" week_day="1"
 		subj_ordinal_number="1" id_group="2" id_subject="2" id_lecturer="3"
 		id_subject_type="1" id_subject_for="4" date_from="2017-08-28" date_to="2017-09-24"
-		id_classroom="2" />
+		id_classroom="1" />
 
 	<!--Records for flow - 1; Second week; Monday; First pair -->
 	<record id_record="3" week_number="2" week_day="1"
 		subj_ordinal_number="1" id_group="1" id_subject="2" id_lecturer="3"
 		id_subject_type="1" id_subject_for="4" date_from="2017-08-28" date_to="2017-09-24"
-		id_classroom="2" />
+		id_classroom="1" />
 	<record id_record="4" week_number="2" week_day="1"
 		subj_ordinal_number="1" id_group="2" id_subject="2" id_lecturer="3"
 		id_subject_type="1" id_subject_for="4" date_from="2017-08-28" date_to="2017-09-24"
-		id_classroom="2" />
+		id_classroom="1" />
 
 	<!--Records for flow - 1; Second week; Tuesday; First pair -->
 	<record id_record="5" week_number="2" week_day="2"
 		subj_ordinal_number="1" id_group="1" id_subject="2" id_lecturer="3"
 		id_subject_type="1" id_subject_for="4" date_from="2017-08-28" date_to="2017-09-24"
-		id_classroom="2" />
+		id_classroom="1" />
 	<record id_record="6" week_number="2" week_day="2"
 		subj_ordinal_number="1" id_group="2" id_subject="2" id_lecturer="3"
 		id_subject_type="1" id_subject_for="4" date_from="2017-08-28" date_to="2017-09-24"
-		id_classroom="2" />
+		id_classroom="1" />
 
 	<!-- Records for first group; First week; Monday; Second pair; laboratory 
 		work for two subgroups -->
@@ -44,20 +44,20 @@
 	<!-- Record for the first group; first subgroup; First week; Monday; Fourth 
 		pair; Practice work -->
 	<record id_record="9" week_number="1" week_day="1"
-		subj_ordinal_number="4" id_group="1" id_subject="1" id_lecturer="1"
+		subj_ordinal_number="4" id_group="1" id_subject="1" id_lecturer="3"
 		id_subject_type="3" id_subject_for="1" date_from="2017-08-28" date_to="2017-09-24"
 		id_classroom="2" />
 	<!-- Record for the first group; second subgroup; First week; Tuesday week; 
 		Second pair; Practice work -->
 	<record id_record="10" week_number="1" week_day="2"
-		subj_ordinal_number="2" id_group="1" id_subject="2" id_lecturer="1"
+		subj_ordinal_number="2" id_group="1" id_subject="2" id_lecturer="3"
 		id_subject_type="3" id_subject_for="2" date_from="2017-08-28" date_to="2017-09-24"
 		id_classroom="2" />
 
 	<!-- Record for the first group; full group; First week; Tuesday; First 
 		pair; Consultation -->
 	<record id_record="11" week_number="1" week_day="1"
-		subj_ordinal_number="1" id_group="1" id_subject="1" id_lecturer="1"
+		subj_ordinal_number="1" id_group="1" id_subject="1" id_lecturer="3"
 		id_subject_type="4" id_subject_for="3" date_from="2017-08-28" date_to="2017-09-24"
-		id_classroom="2" />
+		id_classroom="1" />
 </dataset>

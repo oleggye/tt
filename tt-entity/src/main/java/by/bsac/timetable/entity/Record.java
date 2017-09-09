@@ -85,7 +85,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
     this.idRecord = idRecord;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "id_classroom", nullable = false)
   public Classroom getClassroom() {
     return this.classroom;
@@ -95,7 +95,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
     this.classroom = classroom;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "id_group", nullable = false)
   public Group getGroup() {
     return this.group;
@@ -105,7 +105,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
     this.group = group;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "id_lecturer", nullable = false)
   public Lecturer getLecturer() {
     return this.lecturer;
@@ -125,7 +125,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
     this.subject = subject;
   }
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "id_subject_for", nullable = false)
   public SubjectFor getSubjectFor() {
     return this.subjectFor;
@@ -384,7 +384,10 @@ public class Record implements java.io.Serializable, Cloneable, IName {
     if (weekDay != other.weekDay) {
       return false;
     }
-    return weekNumber != other.weekNumber;
+    if (weekNumber != other.weekNumber) {
+      return false;
+    }
+    return true;
   }
 }
 

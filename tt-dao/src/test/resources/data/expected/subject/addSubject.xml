@@ -12,4 +12,7 @@
 		edu_level="2" abname_subject="Физика" />
 	<subject id_subject="5" name_subject="Элементарная физика"
 		id_chair="1" edu_level="2" abname_subject="Физика" />
+		
+	<subject id_subject="6" name_subject="Конструирование программ и языки программирования"
+		id_chair="2" edu_level="1" abname_subject="КПиЯП" />
 </dataset>

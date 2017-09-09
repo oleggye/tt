@@ -4,10 +4,6 @@
 		id_chair="1" edu_level="1" abname_subject="ВМ" />
 	<subject id_subject="2" name_subject="Физика" id_chair="1"
 		edu_level="1" abname_subject="Физика" />
-
-	<subject id_subject="3" name_subject="Основы алгоритмизации и программирования"
-		id_chair="2" edu_level="1" abname_subject="ОАиП" />
-
 	<subject id_subject="4" name_subject="Физика" id_chair="1"
 		edu_level="2" abname_subject="Физика" />
 	<subject id_subject="5" name_subject="Элементарная физика"

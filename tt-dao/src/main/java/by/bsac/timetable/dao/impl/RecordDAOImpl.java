@@ -49,11 +49,10 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
 
   // FIXME: stub!!!
   @Override
-  public List<Record> getRecordListByGroupAndDate(Group group, Date dateFrom, Date dateTo)
+  public List<Record> getRecordListByGroupAndDates(Group group, Date dateFrom, Date dateTo)
       throws DAOException {
 
     LOGGER.debug("getRecordListByGroupAndDate");
-    List<Record> recordList = new ArrayList<>();
     try {
       /*
        * Session session = HibernateUtil.getSession(); HibernateUtil.beginTransaction(); SQLQuery
@@ -80,36 +79,31 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
   public Record getRecordForGroupLikeThis(Group group, Record record) throws DAOException {
     LOGGER.debug("getRecordForGroupLikeThis");
     try {
-      manager
+      return 
+          manager
           .createQuery("select rec from Record as rec where rec.group =:group and "
               + "rec.weekNumber =:weekNumber and rec.weekDay =:weekDay and "
               + "rec.subjOrdinalNumber =:subjOrdinalNumber and rec.dateFrom =:dateFrom and "
-              + "rec.dateTo =:dateTo ", Record.class)
-          .setParameter("group", group).setParameter("weekNumber", record.getWeekNumber())
+              + "rec.dateTo =:dateTo and rec.idRecord <>:id", Record.class)
+          .setParameter("group", group)
+          .setParameter("weekNumber", record.getWeekNumber())
           .setParameter("weekDay", record.getWeekDay())
           .setParameter("subjOrdinalNumber", record.getSubjOrdinalNumber())
-          .setParameter("dateFrom", record.getDateFrom()).setParameter("dateTo", record.getDateTo())
+          .setParameter("dateFrom", record.getDateFrom())
+          .setParameter("dateTo", record.getDateTo())
+          .setParameter("id", record.getIdRecord())
           .getSingleResult();
-      return null;
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);
     }
   }
 
-  // FIXME: STUB!
   @Override
   public List<Record> getRecordListByGroupAndSubjectFor(Group group, SubjectFor subjectFor)
       throws DAOException {
     LOGGER.debug("getRecordListByGroupAndSubjectFor");
     try {
-
-      /*
-       * Criteria criteria = session.createCriteria(Record.class, "record");
-       * criteria.add(Restrictions.eq("record.group", group));
-       * criteria.add(Restrictions.eq("record.subjectFor", subjectFor)); recordList =
-       * criteria.list();
-       */
       return manager
           .createQuery(
               "select rec from Record rec where rec.group =:group and rec.subjectFor =:subjectFor",
@@ -131,7 +125,8 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
           .createNativeQuery(
               "UPDATE record as rec SET rec.id_classroom =:newId WHERE rec.id_classroom =:oldId")
           .setParameter("newId", newClassroom.getIdClassroom())
-          .setParameter("oldId", oldClassroom.getIdClassroom()).executeUpdate();
+          .setParameter("oldId", oldClassroom.getIdClassroom()).
+          executeUpdate();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
     }
@@ -144,9 +139,10 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
         "replaceLecturer: [oldLecturer= " + oldLecturer + ", newLecturer= " + newLecturer + "]");
     try {
       manager
-          .createQuery(
-              "UPDATE timetable.record as rec SET rec.id_lecturer=?1 WHERE rec.id_lecturer=?2;")
-          .setParameter(1, oldLecturer.getIdLecturer()).setParameter(2, newLecturer.getIdLecturer())
+          .createNativeQuery(
+              "UPDATE record as rec SET rec.id_lecturer =:newId WHERE rec.id_lecturer =:oldId")
+          .setParameter("newId", newLecturer.getIdLecturer())
+          .setParameter("oldId", oldLecturer.getIdLecturer())
           .executeUpdate();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);

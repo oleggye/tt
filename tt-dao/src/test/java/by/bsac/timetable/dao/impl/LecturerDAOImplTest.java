@@ -82,7 +82,6 @@ public class LecturerDAOImplTest {
     assertThat(takenLecturer.getIdLecturer()).isEqualTo(expectedLecturer.getIdLecturer());
     assertThat(takenLecturer.getChair()).isEqualTo(expectedLecturer.getChair());
     assertThat(takenLecturer.getNameLecturer()).isEqualTo(expectedLecturer.getNameLecturer());
-
   }
 
   @Test
@@ -124,7 +123,7 @@ public class LecturerDAOImplTest {
       value = "/data/expected/lecturer/updateLecturer.xml")
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
-  public void testAddUpdateWithIdTwo() throws DAOException {
+  public void testUpdateLecturerWithIdTwo() throws DAOException {
     final short idLecturer = 2;
     final String nameLecturer = "Сидоренко Евгения Петровна";
     final byte idChair = 2;
@@ -143,7 +142,7 @@ public class LecturerDAOImplTest {
       value = "/data/expected/lecturer/deleteLecturer.xml")
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
-  public void testDeleteUpdateWithIdOne() throws DAOException {
+  public void testDeleteLecturerUpdateWithIdOne() throws DAOException {
     final short idLecturer = 1;
 
     Lecturer lecturer = dao.getById(idLecturer);

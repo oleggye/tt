@@ -102,7 +102,6 @@ public class Chair implements java.io.Serializable, Cloneable, IName {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((idChair == null) ? 0 : idChair.hashCode());
-    result = prime * result + ((lecturers == null) ? 0 : lecturers.hashCode());
     result = prime * result + ((nameChair == null) ? 0 : nameChair.hashCode());
     return result;
   }
