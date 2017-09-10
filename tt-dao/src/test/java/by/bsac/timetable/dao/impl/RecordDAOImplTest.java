@@ -274,4 +274,26 @@ public class RecordDAOImplTest {
     Record record = dao.getById(idRecord);
     dao.delete(record);    
   }
+  
+  @Test
+  @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/lecturerSetup.xml",
+      "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
+      "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
+      "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
+      "/data/setup/recordSetup.xml"})
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetRecordListByGroupWithIdOneAndDates() throws DAOException, ParseException {
+    final int expectedSize = 2;
+    final Short idGroup = 1;
+    
+    Group group = groupDao.getById(idGroup);
+    final Date dateFrom = FORMAT.parse("2018-08-28");
+    final Date dateTo = FORMAT.parse("2018-09-24");
+
+    List<Record> recordList = dao.getRecordListByGroupAndDates(group, dateFrom, dateTo);
+
+    assertThat(recordList).isNotNull();
+    assertThat(recordList.size()).isEqualTo(expectedSize);
+  }
 }

@@ -1,239 +1,370 @@
-2017-08-28T19:49:19,363 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T19:49:20,217 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=����], eduLevel= 1]
-2017-08-28T20:06:09,354 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:06:10,475 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=����], eduLevel= 1]
-2017-08-28T20:06:13,912 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:06:15,520 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=��������� ������������], eduLevel= 1]
-2017-08-28T20:26:44,699 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:26:46,936 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=����], eduLevel= 1]
-2017-08-28T20:26:49,597 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:26:51,484 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=��������� ������������], eduLevel= 1]
-2017-08-28T20:26:53,075 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:26:55,472 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=����], eduLevel= 1]
-2017-08-28T20:26:57,384 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:26:58,507 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=��������� ������������], eduLevel= 1]
-2017-08-28T20:27:00,573 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:27:00,635 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=����], eduLevel= 1]
-2017-08-28T20:27:01,443 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=����], eduLevel= 1]
-2017-08-28T20:27:03,067 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:27:06,586 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=��������� ������������], eduLevel= 1]
-2017-08-28T20:27:10,029 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:27:11,043 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=����], eduLevel= 1]
-2017-08-28T20:27:12,391 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:27:14,024 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=��������� ������������], eduLevel= 1]
-2017-08-28T20:27:15,573 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:27:16,444 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=����], eduLevel= 1]
-2017-08-28T20:27:18,413 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=��������� ������������], eduLevel= 1]
-2017-08-28T20:27:19,610 [AWT-EventQueue-0] DEBUG dao.Impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-28T20:27:24,867 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:0
-2017-08-28T20:27:24,868 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:1
-2017-08-28T20:27:24,868 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
-2017-08-28T20:27:24,868 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 0, rowIndex: 0
-2017-08-28T20:27:24,869 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
-2017-08-28T20:27:25,177 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:27:25,342 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:27:32,322 [AWT-EventQueue-0] DEBUG dao.Impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-28T20:32:57,197 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:32:58,098 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=����], eduLevel= 1]
-2017-08-28T20:33:02,301 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:33:03,209 [AWT-EventQueue-0] DEBUG view.extra.FacultyEditForm - selected faculty:Faculty [idFaculty=3, nameFaculty=��������� �������� � �������������� �����������]
-2017-08-28T20:33:06,365 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=��������� ������������], eduLevel= 1]
-2017-08-28T20:33:07,967 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:33:09,093 [AWT-EventQueue-0] DEBUG view.extra.ClassroomEditForm - selected classroom:Classroom [idClassroom=10, number=118, building=2, isReserved=false]
-2017-08-28T20:33:09,932 [AWT-EventQueue-0] DEBUG view.extra.ClassroomEditForm - selected classroom:Classroom [idClassroom=4, number=212, building=1, isReserved=false]
-2017-08-28T20:33:10,604 [AWT-EventQueue-0] DEBUG view.extra.ClassroomEditForm - selected classroom:Classroom [idClassroom=9, number=155, building=2, isReserved=false]
-2017-08-28T20:33:11,536 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=����], eduLevel= 1]
-2017-08-28T20:33:15,786 [AWT-EventQueue-0] DEBUG dao.Impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=��������� ������������], eduLevel= 1]
-2017-08-28T20:33:17,073 [AWT-EventQueue-0] DEBUG dao.Impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:4
-2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:2
-2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
-2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 0, rowIndex: 0
-2017-08-28T20:33:18,022 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
-2017-08-28T20:33:18,335 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-28T20:33:18,483 [AWT-EventQueue-0] DEBUG dao.Impl.AbstractHibernateDAO - getAll
-2017-08-30T20:35:24,316 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T20:35:25,298 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-30T22:09:39,930 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T22:09:41,138 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-30T22:11:51,957 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T22:11:52,991 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-30T23:02:24,517 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:02:27,608 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-30T23:02:38,039 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
-2017-08-30T23:02:40,779 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-30T23:03:16,383 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:1
-2017-08-30T23:03:16,384 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:1
-2017-08-30T23:03:16,384 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
-2017-08-30T23:03:16,385 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 2, rowIndex: 0
-2017-08-30T23:03:16,385 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
-2017-08-30T23:03:16,747 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:03:17,767 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:03:46,424 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-30T23:09:46,054 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:09:46,919 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-30T23:09:51,704 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:09:52,384 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
-2017-08-30T23:09:59,716 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:10:00,896 [AWT-EventQueue-0] DEBUG view.extra.ChairEditForm - selected char:Chair [idChair=3, nameChair=Кафедра здорового образа жизни]
-2017-08-30T23:10:04,357 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-30T23:17:20,178 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:17:21,179 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-30T23:17:26,089 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:17:27,535 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
-2017-08-30T23:17:31,167 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-30T23:17:32,551 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:2
-2017-08-30T23:17:32,551 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:1
-2017-08-30T23:17:32,551 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
-2017-08-30T23:17:32,552 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 2, rowIndex: 1
-2017-08-30T23:17:32,552 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
-2017-08-30T23:17:32,916 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:17:33,237 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:17:57,097 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-30T23:18:05,047 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:5
-2017-08-30T23:18:05,047 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:1
-2017-08-30T23:18:05,048 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
-2017-08-30T23:18:05,048 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 1, rowIndex: 1
-2017-08-30T23:18:05,048 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
-2017-08-30T23:18:05,240 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:18:05,545 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:18:58,746 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-30T23:19:00,423 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:4
-2017-08-30T23:19:00,423 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:2
-2017-08-30T23:19:00,424 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
-2017-08-30T23:19:00,424 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 1, rowIndex: 1
-2017-08-30T23:19:00,424 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
-2017-08-30T23:19:01,057 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:19:01,592 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:19:07,759 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-30T23:19:27,527 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:19:28,226 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-30T23:19:35,048 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
-2017-08-30T23:19:36,252 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-30T23:19:37,448 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:3
-2017-08-30T23:19:37,449 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:1
-2017-08-30T23:19:37,450 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
-2017-08-30T23:19:37,451 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 1, rowIndex: 1
-2017-08-30T23:19:37,452 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
-2017-08-30T23:19:37,742 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:19:38,094 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:19:54,360 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-30T23:19:54,904 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:2
-2017-08-30T23:19:54,904 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:2
-2017-08-30T23:19:54,905 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
-2017-08-30T23:19:54,905 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 0, rowIndex: 0
-2017-08-30T23:19:54,905 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
-2017-08-30T23:19:55,041 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:19:55,246 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:19:57,225 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-30T23:20:02,340 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-30T23:20:04,632 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-31T20:58:11,944 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-31T20:58:13,226 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-31T20:58:17,191 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-31T20:58:18,197 [AWT-EventQueue-0] DEBUG view.extra.FacultyEditForm - selected faculty:Faculty [idFaculty=3, nameFaculty=Факультет заочного и дистанционного образования]
-2017-08-31T20:58:24,318 [AWT-EventQueue-0] DEBUG view.extra.FacultyEditForm - selected faculty:Faculty [idFaculty=6, nameFaculty=ТЕСТ]
-2017-08-31T20:58:26,453 [AWT-EventQueue-0] DEBUG view.extra.FacultyEditForm - selected faculty:Faculty [idFaculty=3, nameFaculty=Факультет заочного и дистанционного образования]
-2017-08-31T20:58:27,910 [AWT-EventQueue-0] DEBUG view.extra.FacultyEditForm - selected faculty:Faculty [idFaculty=6, nameFaculty=ТЕСТ]
-2017-08-31T20:58:34,074 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
-2017-08-31T20:58:38,234 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-31T20:58:39,814 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected row:0
-2017-08-31T20:58:39,815 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - column:1
-2017-08-31T20:58:39,815 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - selected value:null
-2017-08-31T20:58:39,815 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - aPosition: colIndex: 3, rowIndex: 0
-2017-08-31T20:58:39,816 [AWT-EventQueue-0] DEBUG view.contoller.CellTableMouseClickedEvent - It isn't a record:
-2017-08-31T20:58:40,208 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-31T20:58:41,299 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-31T20:59:08,635 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-31T20:59:15,142 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-31T20:59:16,190 [AWT-EventQueue-0] DEBUG view.extra.ClassroomEditForm - selected classroom:Classroom [idClassroom=1, number=210, building=1, isReserved=false]
-2017-08-31T20:59:17,521 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - update: Classroom [idClassroom=1, number=210, building=1, isReserved=false]
-2017-08-31T20:59:17,650 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-31T20:59:19,070 [AWT-EventQueue-0] DEBUG view.extra.ClassroomEditForm - selected classroom:Classroom [idClassroom=5, number=218, building=1, isReserved=false]
-2017-08-31T20:59:23,232 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
-2017-08-31T20:59:25,568 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
-2017-08-31T20:59:26,548 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
-2017-08-31T21:07:45,229 [AWT-EventQueue-0] INFO timetable.listener.AppListener - 
+2017-09-10T11:52:37,633 [AWT-EventQueue-0] INFO timetable.listener.AppListener - 
 Managed bean list:
-2017-08-31T21:07:45,286 [AWT-EventQueue-0] INFO timetable.listener.AppListener - ----------------------------------------------------------
-2017-08-31T21:07:45,286 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addRecord
-2017-08-31T21:07:45,287 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateRecord
-2017-08-31T21:07:45,287 [AWT-EventQueue-0] INFO timetable.listener.AppListener - cancelRecord
-2017-08-31T21:07:45,288 [AWT-EventQueue-0] INFO timetable.listener.AppListener - GetRecordListByGroupAndReferenceDate
-2017-08-31T21:07:45,288 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addFaculty
-2017-08-31T21:07:45,289 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateFaculty
-2017-08-31T21:07:45,289 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteFaculty
-2017-08-31T21:07:45,289 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getFacultyList
-2017-08-31T21:07:45,289 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addChair
-2017-08-31T21:07:45,290 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateChair
-2017-08-31T21:07:45,290 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteChair
-2017-08-31T21:07:45,291 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getChairList
-2017-08-31T21:07:45,291 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addClassroom
-2017-08-31T21:07:45,291 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateClassroom
-2017-08-31T21:07:45,291 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteClassroom
-2017-08-31T21:07:45,291 [AWT-EventQueue-0] INFO timetable.listener.AppListener - changeClassroom
-2017-08-31T21:07:45,292 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getClassroomList
-2017-08-31T21:07:45,292 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addFlow
-2017-08-31T21:07:45,292 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateFlow
-2017-08-31T21:07:45,293 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteFlow
-2017-08-31T21:07:45,293 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getFlowList
-2017-08-31T21:07:45,293 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getFlowListByName
-2017-08-31T21:07:45,294 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addGroup
-2017-08-31T21:07:45,294 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateGroup
-2017-08-31T21:07:45,294 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteGroup
-2017-08-31T21:07:45,294 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getGroupListByFlow
-2017-08-31T21:07:45,295 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getGroupListByFacultyAndEduLevel
-2017-08-31T21:07:45,295 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getGroupListByName
-2017-08-31T21:07:45,295 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addLecturer
-2017-08-31T21:07:45,296 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateLecturer
-2017-08-31T21:07:45,296 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteLecturer
-2017-08-31T21:07:45,296 [AWT-EventQueue-0] INFO timetable.listener.AppListener - changeLecturer
-2017-08-31T21:07:45,297 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getLecturerList
-2017-08-31T21:07:45,297 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getLecturerListByChair
-2017-08-31T21:07:45,297 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getLecturerListByName
-2017-08-31T21:07:45,298 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addSubject
-2017-08-31T21:07:45,298 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateSubject
-2017-08-31T21:07:45,298 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteSubject
-2017-08-31T21:07:45,298 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getSubjectListByChairAndEduLevel
-2017-08-31T21:07:45,299 [AWT-EventQueue-0] INFO timetable.listener.AppListener - GetSubjectListByName
-2017-08-31T21:07:45,299 [AWT-EventQueue-0] INFO timetable.listener.AppListener - commandStore
-2017-08-31T21:07:45,300 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.beans.factory.config.PropertyPlaceholderConfigurer#0
-2017-08-31T21:07:45,300 [AWT-EventQueue-0] INFO timetable.listener.AppListener - dataSource
-2017-08-31T21:07:45,300 [AWT-EventQueue-0] INFO timetable.listener.AppListener - myEmf
-2017-08-31T21:07:45,301 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.config.internalTransactionalEventListenerFactory
-2017-08-31T21:07:45,302 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.aop.config.internalAutoProxyCreator
-2017-08-31T21:07:45,302 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0
-2017-08-31T21:07:45,302 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.interceptor.TransactionInterceptor#0
-2017-08-31T21:07:45,303 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.config.internalTransactionAdvisor
-2017-08-31T21:07:45,304 [AWT-EventQueue-0] INFO timetable.listener.AppListener - transactionManager
-2017-08-31T21:07:45,304 [AWT-EventQueue-0] INFO timetable.listener.AppListener - persistenceExceptionTranslationPostProcessor
-2017-08-31T21:07:45,305 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalConfigurationAnnotationProcessor
-2017-08-31T21:07:45,305 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalAutowiredAnnotationProcessor
-2017-08-31T21:07:45,305 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalRequiredAnnotationProcessor
-2017-08-31T21:07:45,306 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalCommonAnnotationProcessor
-2017-08-31T21:07:45,306 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalPersistenceAnnotationProcessor
-2017-08-31T21:07:45,306 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.event.internalEventListenerProcessor
-2017-08-31T21:07:45,307 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.event.internalEventListenerFactory
-2017-08-31T21:07:45,307 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getRecordListByGroupAndReferenceDate
-2017-08-31T21:07:45,308 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getSubjectListByName
-2017-08-31T21:07:45,308 [AWT-EventQueue-0] INFO timetable.listener.AppListener - chairServiceImpl
-2017-08-31T21:07:45,309 [AWT-EventQueue-0] INFO timetable.listener.AppListener - classroomServiceImpl
-2017-08-31T21:07:45,310 [AWT-EventQueue-0] INFO timetable.listener.AppListener - facultyServiceImpl
-2017-08-31T21:07:45,311 [AWT-EventQueue-0] INFO timetable.listener.AppListener - flowServiceImpl
-2017-08-31T21:07:45,311 [AWT-EventQueue-0] INFO timetable.listener.AppListener - groupServiceImpl
-2017-08-31T21:07:45,311 [AWT-EventQueue-0] INFO timetable.listener.AppListener - lecturerServiceImpl
-2017-08-31T21:07:45,311 [AWT-EventQueue-0] INFO timetable.listener.AppListener - recordServiceImpl
-2017-08-31T21:07:45,312 [AWT-EventQueue-0] INFO timetable.listener.AppListener - subjectServiceImpl
-2017-08-31T21:07:45,312 [AWT-EventQueue-0] INFO timetable.listener.AppListener - validationServiceImpl
-2017-08-31T21:07:45,312 [AWT-EventQueue-0] INFO timetable.listener.AppListener - cancellationDAOImpl
-2017-08-31T21:07:45,313 [AWT-EventQueue-0] INFO timetable.listener.AppListener - chairDAOImpl
-2017-08-31T21:07:45,313 [AWT-EventQueue-0] INFO timetable.listener.AppListener - classroomDAOImpl
-2017-08-31T21:07:45,313 [AWT-EventQueue-0] INFO timetable.listener.AppListener - facultyDAOImpl
-2017-08-31T21:07:45,313 [AWT-EventQueue-0] INFO timetable.listener.AppListener - flowDAOImpl
-2017-08-31T21:07:45,314 [AWT-EventQueue-0] INFO timetable.listener.AppListener - groupDAOImpl
-2017-08-31T21:07:45,314 [AWT-EventQueue-0] INFO timetable.listener.AppListener - lecturerDAOImpl
-2017-08-31T21:07:45,314 [AWT-EventQueue-0] INFO timetable.listener.AppListener - recordDAOImpl
-2017-08-31T21:07:45,314 [AWT-EventQueue-0] INFO timetable.listener.AppListener - subjectDAOImpl
-2017-08-31T21:07:45,315 [AWT-EventQueue-0] INFO timetable.listener.AppListener - ----------------------------------------------------------
-2017-08-31T22:21:15,150 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
-2017-08-31T22:21:15,948 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-09-10T11:52:37,813 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addRecord
+2017-09-10T11:52:37,813 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateRecord
+2017-09-10T11:52:37,814 [AWT-EventQueue-0] INFO timetable.listener.AppListener - cancelRecord
+2017-09-10T11:52:37,814 [AWT-EventQueue-0] INFO timetable.listener.AppListener - GetRecordListByGroupAndReferenceDate
+2017-09-10T11:52:37,814 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addFaculty
+2017-09-10T11:52:37,815 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateFaculty
+2017-09-10T11:52:37,815 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteFaculty
+2017-09-10T11:52:37,815 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getFacultyList
+2017-09-10T11:52:37,816 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addChair
+2017-09-10T11:52:37,816 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateChair
+2017-09-10T11:52:37,817 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteChair
+2017-09-10T11:52:37,817 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getChairList
+2017-09-10T11:52:37,817 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addClassroom
+2017-09-10T11:52:37,818 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateClassroom
+2017-09-10T11:52:37,818 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteClassroom
+2017-09-10T11:52:37,818 [AWT-EventQueue-0] INFO timetable.listener.AppListener - changeClassroom
+2017-09-10T11:52:37,819 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getClassroomList
+2017-09-10T11:52:37,819 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addFlow
+2017-09-10T11:52:37,819 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateFlow
+2017-09-10T11:52:37,820 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteFlow
+2017-09-10T11:52:37,820 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getFlowList
+2017-09-10T11:52:37,820 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getFlowListByName
+2017-09-10T11:52:37,821 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addGroup
+2017-09-10T11:52:37,821 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateGroup
+2017-09-10T11:52:37,821 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteGroup
+2017-09-10T11:52:37,822 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getGroupListByFlow
+2017-09-10T11:52:37,822 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getGroupListByFacultyAndEduLevel
+2017-09-10T11:52:37,822 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getGroupListByName
+2017-09-10T11:52:37,823 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addLecturer
+2017-09-10T11:52:37,823 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateLecturer
+2017-09-10T11:52:37,823 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteLecturer
+2017-09-10T11:52:37,824 [AWT-EventQueue-0] INFO timetable.listener.AppListener - changeLecturer
+2017-09-10T11:52:37,824 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getLecturerList
+2017-09-10T11:52:37,824 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getLecturerListByChair
+2017-09-10T11:52:37,825 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getLecturerListByName
+2017-09-10T11:52:37,825 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addSubject
+2017-09-10T11:52:37,826 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateSubject
+2017-09-10T11:52:37,826 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteSubject
+2017-09-10T11:52:37,826 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getSubjectListByChairAndEduLevel
+2017-09-10T11:52:37,827 [AWT-EventQueue-0] INFO timetable.listener.AppListener - GetSubjectListByName
+2017-09-10T11:52:37,827 [AWT-EventQueue-0] INFO timetable.listener.AppListener - commandStore
+2017-09-10T11:52:37,827 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.beans.factory.config.PropertyPlaceholderConfigurer#0
+2017-09-10T11:52:37,828 [AWT-EventQueue-0] INFO timetable.listener.AppListener - dataSource
+2017-09-10T11:52:37,828 [AWT-EventQueue-0] INFO timetable.listener.AppListener - myEmf
+2017-09-10T11:52:37,829 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.config.internalTransactionalEventListenerFactory
+2017-09-10T11:52:37,829 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.aop.config.internalAutoProxyCreator
+2017-09-10T11:52:37,829 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0
+2017-09-10T11:52:37,830 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.interceptor.TransactionInterceptor#0
+2017-09-10T11:52:37,830 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.config.internalTransactionAdvisor
+2017-09-10T11:52:37,830 [AWT-EventQueue-0] INFO timetable.listener.AppListener - transactionManager
+2017-09-10T11:52:37,830 [AWT-EventQueue-0] INFO timetable.listener.AppListener - persistenceExceptionTranslationPostProcessor
+2017-09-10T11:52:37,831 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+2017-09-10T11:52:37,831 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+2017-09-10T11:52:37,831 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalRequiredAnnotationProcessor
+2017-09-10T11:52:37,832 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalCommonAnnotationProcessor
+2017-09-10T11:52:37,832 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalPersistenceAnnotationProcessor
+2017-09-10T11:52:37,833 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.event.internalEventListenerProcessor
+2017-09-10T11:52:37,833 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.event.internalEventListenerFactory
+2017-09-10T11:52:37,833 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getRecordListByGroupAndReferenceDate
+2017-09-10T11:52:37,833 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getSubjectListByName
+2017-09-10T11:52:37,834 [AWT-EventQueue-0] INFO timetable.listener.AppListener - chairServiceImpl
+2017-09-10T11:52:37,834 [AWT-EventQueue-0] INFO timetable.listener.AppListener - classroomServiceImpl
+2017-09-10T11:52:37,835 [AWT-EventQueue-0] INFO timetable.listener.AppListener - facultyServiceImpl
+2017-09-10T11:52:37,835 [AWT-EventQueue-0] INFO timetable.listener.AppListener - flowServiceImpl
+2017-09-10T11:52:37,835 [AWT-EventQueue-0] INFO timetable.listener.AppListener - groupServiceImpl
+2017-09-10T11:52:37,836 [AWT-EventQueue-0] INFO timetable.listener.AppListener - lecturerServiceImpl
+2017-09-10T11:52:37,836 [AWT-EventQueue-0] INFO timetable.listener.AppListener - recordServiceImpl
+2017-09-10T11:52:37,836 [AWT-EventQueue-0] INFO timetable.listener.AppListener - subjectServiceImpl
+2017-09-10T11:52:37,836 [AWT-EventQueue-0] INFO timetable.listener.AppListener - validationServiceImpl
+2017-09-10T11:52:37,837 [AWT-EventQueue-0] INFO timetable.listener.AppListener - cancellationDAOImpl
+2017-09-10T11:52:37,837 [AWT-EventQueue-0] INFO timetable.listener.AppListener - chairDAOImpl
+2017-09-10T11:52:37,837 [AWT-EventQueue-0] INFO timetable.listener.AppListener - classroomDAOImpl
+2017-09-10T11:52:37,837 [AWT-EventQueue-0] INFO timetable.listener.AppListener - facultyDAOImpl
+2017-09-10T11:52:37,838 [AWT-EventQueue-0] INFO timetable.listener.AppListener - flowDAOImpl
+2017-09-10T11:52:37,838 [AWT-EventQueue-0] INFO timetable.listener.AppListener - groupDAOImpl
+2017-09-10T11:52:37,838 [AWT-EventQueue-0] INFO timetable.listener.AppListener - lecturerDAOImpl
+2017-09-10T11:52:37,839 [AWT-EventQueue-0] INFO timetable.listener.AppListener - recordDAOImpl
+2017-09-10T11:52:37,839 [AWT-EventQueue-0] INFO timetable.listener.AppListener - subjectDAOImpl
+2017-09-10T11:52:46,927 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-09-10T11:52:47,639 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-09-10T11:52:47,718 [AWT-EventQueue-0] ERROR dao.impl.GroupDAOImpl - org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+javax.persistence.PersistenceException: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1763) ~[hibernate-entitymanager-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.jpa.spi.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1677) ~[hibernate-entitymanager-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.jpa.internal.QueryImpl.getResultList(QueryImpl.java:458) ~[hibernate-entitymanager-4.3.10.Final.jar:4.3.10.Final]
+	at by.bsac.timetable.dao.impl.GroupDAOImpl.getGroupListByFacultyAndEduLevel(GroupDAOImpl.java:51) [classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_131]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:333) [spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190) [spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157) [spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:136) [spring-tx-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99) [spring-tx-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:282) [spring-tx-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96) [spring-tx-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) [spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:213) [spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at com.sun.proxy.$Proxy47.getGroupListByFacultyAndEduLevel(Unknown Source) [?:?]
+	at by.bsac.timetable.service.impl.GroupServiceImpl.getGroupListByFacultyAndEduLevel(GroupServiceImpl.java:100) [classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_131]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:333) [spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207) [spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at com.sun.proxy.$Proxy53.getGroupListByFacultyAndEduLevel(Unknown Source) [?:?]
+	at by.bsac.timetable.command.impl.get.GetGroupListByFacultyAndEduLevel.execute(GetGroupListByFacultyAndEduLevel.java:29) [classes/:?]
+	at by.bsac.timetable.command.util.CommandFacade.executeCommand(CommandFacade.java:31) [classes/:?]
+	at by.bsac.timetable.command.util.CommandFacade.getGenericList(CommandFacade.java:48) [classes/:?]
+	at by.bsac.timetable.command.util.CommandFacade.getGroupListByFacultyAndEduLevel(CommandFacade.java:109) [classes/:?]
+	at by.bsac.timetable.view.util.FormInitializer.initGroupComboBox(FormInitializer.java:258) [classes/:?]
+	at by.bsac.timetable.view.util.FormInitializer.initMainForm(FormInitializer.java:56) [classes/:?]
+	at by.bsac.timetable.view.MainForm.showWindow(MainForm.java:350) [classes/:?]
+	at by.bsac.timetable.view.MainForm.access$200(MainForm.java:70) [classes/:?]
+	at by.bsac.timetable.view.MainForm$MainFormWindowListener.windowOpened(MainForm.java:416) [classes/:?]
+	at java.awt.Window.processWindowEvent(Unknown Source) [?:1.8.0_131]
+	at javax.swing.JFrame.processWindowEvent(Unknown Source) [?:1.8.0_131]
+	at java.awt.Window.processEvent(Unknown Source) [?:1.8.0_131]
+	at java.awt.Component.dispatchEventImpl(Unknown Source) [?:1.8.0_131]
+	at java.awt.Container.dispatchEventImpl(Unknown Source) [?:1.8.0_131]
+	at java.awt.Window.dispatchEventImpl(Unknown Source) [?:1.8.0_131]
+	at java.awt.Component.dispatchEvent(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue.access$500(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue$3.run(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue$3.run(Unknown Source) [?:1.8.0_131]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_131]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source) [?:1.8.0_131]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue$4.run(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue$4.run(Unknown Source) [?:1.8.0_131]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_131]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue.dispatchEvent(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.run(Unknown Source) [?:1.8.0_131]
+Caused by: org.hibernate.exception.SQLGrammarException: could not extract ResultSet
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:80) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:49) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:126) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:112) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:91) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.getResultSet(Loader.java:2066) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:1863) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:1839) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.doQuery(Loader.java:910) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:355) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.doList(Loader.java:2554) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.doList(Loader.java:2540) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2370) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.list(Loader.java:2365) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.hql.QueryLoader.list(QueryLoader.java:497) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.list(QueryTranslatorImpl.java:387) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.engine.query.spi.HQLQueryPlan.performList(HQLQueryPlan.java:236) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1300) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.internal.QueryImpl.list(QueryImpl.java:103) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.jpa.internal.QueryImpl.list(QueryImpl.java:573) ~[hibernate-entitymanager-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.jpa.internal.QueryImpl.getResultList(QueryImpl.java:449) ~[hibernate-entitymanager-4.3.10.Final.jar:4.3.10.Final]
+	... 58 more
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'timetable.groupp' doesn't exist
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[?:1.8.0_131]
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source) ~[?:1.8.0_131]
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source) ~[?:1.8.0_131]
+	at java.lang.reflect.Constructor.newInstance(Unknown Source) ~[?:1.8.0_131]
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411) ~[mysql-connector-java-5.1.23.jar:?]
+	at com.mysql.jdbc.Util.getInstance(Util.java:386) ~[mysql-connector-java-5.1.23.jar:?]
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1053) ~[mysql-connector-java-5.1.23.jar:?]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4120) ~[mysql-connector-java-5.1.23.jar:?]
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:4052) ~[mysql-connector-java-5.1.23.jar:?]
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2503) ~[mysql-connector-java-5.1.23.jar:?]
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2664) ~[mysql-connector-java-5.1.23.jar:?]
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2794) ~[mysql-connector-java-5.1.23.jar:?]
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:2155) ~[mysql-connector-java-5.1.23.jar:?]
+	at com.mysql.jdbc.PreparedStatement.executeQuery(PreparedStatement.java:2322) ~[mysql-connector-java-5.1.23.jar:?]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:82) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.getResultSet(Loader.java:2066) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:1863) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:1839) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.doQuery(Loader.java:910) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:355) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.doList(Loader.java:2554) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.doList(Loader.java:2540) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2370) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.Loader.list(Loader.java:2365) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.loader.hql.QueryLoader.list(QueryLoader.java:497) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.list(QueryTranslatorImpl.java:387) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.engine.query.spi.HQLQueryPlan.performList(HQLQueryPlan.java:236) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1300) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.internal.QueryImpl.list(QueryImpl.java:103) ~[hibernate-core-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.jpa.internal.QueryImpl.list(QueryImpl.java:573) ~[hibernate-entitymanager-4.3.10.Final.jar:4.3.10.Final]
+	at org.hibernate.jpa.internal.QueryImpl.getResultList(QueryImpl.java:449) ~[hibernate-entitymanager-4.3.10.Final.jar:4.3.10.Final]
+	... 58 more
+2017-09-10T11:52:47,757 [AWT-EventQueue-0] ERROR timetable.view.MainForm - Transaction marked as rollbackOnly
+org.springframework.transaction.TransactionSystemException: Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Transaction marked as rollbackOnly
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:526) ~[spring-orm-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:761) ~[spring-tx-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:730) ~[spring-tx-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.completeTransactionAfterThrowing(TransactionAspectSupport.java:542) ~[spring-tx-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:286) ~[spring-tx-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96) ~[spring-tx-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179) ~[spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:213) ~[spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at com.sun.proxy.$Proxy47.getGroupListByFacultyAndEduLevel(Unknown Source) ~[?:?]
+	at by.bsac.timetable.service.impl.GroupServiceImpl.getGroupListByFacultyAndEduLevel(GroupServiceImpl.java:100) ~[classes/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_131]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_131]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[?:1.8.0_131]
+	at java.lang.reflect.Method.invoke(Unknown Source) ~[?:1.8.0_131]
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:333) ~[spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:207) ~[spring-aop-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	at com.sun.proxy.$Proxy53.getGroupListByFacultyAndEduLevel(Unknown Source) ~[?:?]
+	at by.bsac.timetable.command.impl.get.GetGroupListByFacultyAndEduLevel.execute(GetGroupListByFacultyAndEduLevel.java:29) ~[classes/:?]
+	at by.bsac.timetable.command.util.CommandFacade.executeCommand(CommandFacade.java:31) ~[classes/:?]
+	at by.bsac.timetable.command.util.CommandFacade.getGenericList(CommandFacade.java:48) ~[classes/:?]
+	at by.bsac.timetable.command.util.CommandFacade.getGroupListByFacultyAndEduLevel(CommandFacade.java:109) ~[classes/:?]
+	at by.bsac.timetable.view.util.FormInitializer.initGroupComboBox(FormInitializer.java:258) ~[classes/:?]
+	at by.bsac.timetable.view.util.FormInitializer.initMainForm(FormInitializer.java:56) ~[classes/:?]
+	at by.bsac.timetable.view.MainForm.showWindow(MainForm.java:350) [classes/:?]
+	at by.bsac.timetable.view.MainForm.access$200(MainForm.java:70) [classes/:?]
+	at by.bsac.timetable.view.MainForm$MainFormWindowListener.windowOpened(MainForm.java:416) [classes/:?]
+	at java.awt.Window.processWindowEvent(Unknown Source) [?:1.8.0_131]
+	at javax.swing.JFrame.processWindowEvent(Unknown Source) [?:1.8.0_131]
+	at java.awt.Window.processEvent(Unknown Source) [?:1.8.0_131]
+	at java.awt.Component.dispatchEventImpl(Unknown Source) [?:1.8.0_131]
+	at java.awt.Container.dispatchEventImpl(Unknown Source) [?:1.8.0_131]
+	at java.awt.Window.dispatchEventImpl(Unknown Source) [?:1.8.0_131]
+	at java.awt.Component.dispatchEvent(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue.dispatchEventImpl(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue.access$500(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue$3.run(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue$3.run(Unknown Source) [?:1.8.0_131]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_131]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source) [?:1.8.0_131]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue$4.run(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue$4.run(Unknown Source) [?:1.8.0_131]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_131]
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventQueue.dispatchEvent(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.pumpEvents(Unknown Source) [?:1.8.0_131]
+	at java.awt.EventDispatchThread.run(Unknown Source) [?:1.8.0_131]
+Caused by: javax.persistence.RollbackException: Transaction marked as rollbackOnly
+	at org.hibernate.jpa.internal.TransactionImpl.commit(TransactionImpl.java:74) ~[hibernate-entitymanager-4.3.10.Final.jar:4.3.10.Final]
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:517) ~[spring-orm-4.3.10.RELEASE.jar:4.3.10.RELEASE]
+	... 50 more
+2017-09-10T11:56:43,004 [AWT-EventQueue-0] INFO timetable.listener.AppListener - 
+Managed bean list:
+2017-09-10T11:56:43,056 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addRecord
+2017-09-10T11:56:43,056 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateRecord
+2017-09-10T11:56:43,057 [AWT-EventQueue-0] INFO timetable.listener.AppListener - cancelRecord
+2017-09-10T11:56:43,057 [AWT-EventQueue-0] INFO timetable.listener.AppListener - GetRecordListByGroupAndReferenceDate
+2017-09-10T11:56:43,057 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addFaculty
+2017-09-10T11:56:43,057 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateFaculty
+2017-09-10T11:56:43,058 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteFaculty
+2017-09-10T11:56:43,058 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getFacultyList
+2017-09-10T11:56:43,058 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addChair
+2017-09-10T11:56:43,058 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateChair
+2017-09-10T11:56:43,058 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteChair
+2017-09-10T11:56:43,059 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getChairList
+2017-09-10T11:56:43,059 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addClassroom
+2017-09-10T11:56:43,060 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateClassroom
+2017-09-10T11:56:43,060 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteClassroom
+2017-09-10T11:56:43,060 [AWT-EventQueue-0] INFO timetable.listener.AppListener - changeClassroom
+2017-09-10T11:56:43,061 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getClassroomList
+2017-09-10T11:56:43,061 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addFlow
+2017-09-10T11:56:43,061 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateFlow
+2017-09-10T11:56:43,062 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteFlow
+2017-09-10T11:56:43,062 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getFlowList
+2017-09-10T11:56:43,062 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getFlowListByName
+2017-09-10T11:56:43,063 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addGroup
+2017-09-10T11:56:43,063 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateGroup
+2017-09-10T11:56:43,064 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteGroup
+2017-09-10T11:56:43,064 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getGroupListByFlow
+2017-09-10T11:56:43,064 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getGroupListByFacultyAndEduLevel
+2017-09-10T11:56:43,065 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getGroupListByName
+2017-09-10T11:56:43,065 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addLecturer
+2017-09-10T11:56:43,065 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateLecturer
+2017-09-10T11:56:43,066 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteLecturer
+2017-09-10T11:56:43,066 [AWT-EventQueue-0] INFO timetable.listener.AppListener - changeLecturer
+2017-09-10T11:56:43,066 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getLecturerList
+2017-09-10T11:56:43,067 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getLecturerListByChair
+2017-09-10T11:56:43,067 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getLecturerListByName
+2017-09-10T11:56:43,067 [AWT-EventQueue-0] INFO timetable.listener.AppListener - addSubject
+2017-09-10T11:56:43,067 [AWT-EventQueue-0] INFO timetable.listener.AppListener - updateSubject
+2017-09-10T11:56:43,068 [AWT-EventQueue-0] INFO timetable.listener.AppListener - deleteSubject
+2017-09-10T11:56:43,068 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getSubjectListByChairAndEduLevel
+2017-09-10T11:56:43,068 [AWT-EventQueue-0] INFO timetable.listener.AppListener - GetSubjectListByName
+2017-09-10T11:56:43,069 [AWT-EventQueue-0] INFO timetable.listener.AppListener - commandStore
+2017-09-10T11:56:43,069 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.beans.factory.config.PropertyPlaceholderConfigurer#0
+2017-09-10T11:56:43,069 [AWT-EventQueue-0] INFO timetable.listener.AppListener - dataSource
+2017-09-10T11:56:43,070 [AWT-EventQueue-0] INFO timetable.listener.AppListener - myEmf
+2017-09-10T11:56:43,070 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.config.internalTransactionalEventListenerFactory
+2017-09-10T11:56:43,070 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.aop.config.internalAutoProxyCreator
+2017-09-10T11:56:43,070 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.annotation.AnnotationTransactionAttributeSource#0
+2017-09-10T11:56:43,071 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.interceptor.TransactionInterceptor#0
+2017-09-10T11:56:43,071 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.transaction.config.internalTransactionAdvisor
+2017-09-10T11:56:43,072 [AWT-EventQueue-0] INFO timetable.listener.AppListener - transactionManager
+2017-09-10T11:56:43,072 [AWT-EventQueue-0] INFO timetable.listener.AppListener - persistenceExceptionTranslationPostProcessor
+2017-09-10T11:56:43,073 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+2017-09-10T11:56:43,073 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalAutowiredAnnotationProcessor
+2017-09-10T11:56:43,073 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalRequiredAnnotationProcessor
+2017-09-10T11:56:43,074 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalCommonAnnotationProcessor
+2017-09-10T11:56:43,074 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.annotation.internalPersistenceAnnotationProcessor
+2017-09-10T11:56:43,075 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.event.internalEventListenerProcessor
+2017-09-10T11:56:43,076 [AWT-EventQueue-0] INFO timetable.listener.AppListener - org.springframework.context.event.internalEventListenerFactory
+2017-09-10T11:56:43,076 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getRecordListByGroupAndReferenceDate
+2017-09-10T11:56:43,077 [AWT-EventQueue-0] INFO timetable.listener.AppListener - getSubjectListByName
+2017-09-10T11:56:43,077 [AWT-EventQueue-0] INFO timetable.listener.AppListener - chairServiceImpl
+2017-09-10T11:56:43,078 [AWT-EventQueue-0] INFO timetable.listener.AppListener - classroomServiceImpl
+2017-09-10T11:56:43,078 [AWT-EventQueue-0] INFO timetable.listener.AppListener - facultyServiceImpl
+2017-09-10T11:56:43,079 [AWT-EventQueue-0] INFO timetable.listener.AppListener - flowServiceImpl
+2017-09-10T11:56:43,079 [AWT-EventQueue-0] INFO timetable.listener.AppListener - groupServiceImpl
+2017-09-10T11:56:43,079 [AWT-EventQueue-0] INFO timetable.listener.AppListener - lecturerServiceImpl
+2017-09-10T11:56:43,080 [AWT-EventQueue-0] INFO timetable.listener.AppListener - recordServiceImpl
+2017-09-10T11:56:43,080 [AWT-EventQueue-0] INFO timetable.listener.AppListener - subjectServiceImpl
+2017-09-10T11:56:43,080 [AWT-EventQueue-0] INFO timetable.listener.AppListener - validationServiceImpl
+2017-09-10T11:56:43,081 [AWT-EventQueue-0] INFO timetable.listener.AppListener - cancellationDAOImpl
+2017-09-10T11:56:43,081 [AWT-EventQueue-0] INFO timetable.listener.AppListener - chairDAOImpl
+2017-09-10T11:56:43,082 [AWT-EventQueue-0] INFO timetable.listener.AppListener - classroomDAOImpl
+2017-09-10T11:56:43,082 [AWT-EventQueue-0] INFO timetable.listener.AppListener - facultyDAOImpl
+2017-09-10T11:56:43,083 [AWT-EventQueue-0] INFO timetable.listener.AppListener - flowDAOImpl
+2017-09-10T11:56:43,084 [AWT-EventQueue-0] INFO timetable.listener.AppListener - groupDAOImpl
+2017-09-10T11:56:43,085 [AWT-EventQueue-0] INFO timetable.listener.AppListener - lecturerDAOImpl
+2017-09-10T11:56:43,085 [AWT-EventQueue-0] INFO timetable.listener.AppListener - recordDAOImpl
+2017-09-10T11:56:43,085 [AWT-EventQueue-0] INFO timetable.listener.AppListener - subjectDAOImpl
+2017-09-10T11:56:45,577 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-09-10T11:56:46,239 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-09-10T11:56:48,836 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
+2017-09-10T11:56:50,006 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
+2017-09-10T11:57:00,393 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
+2017-09-10T11:57:07,731 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
+2017-09-10T11:57:15,499 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
+2017-09-10T11:57:17,913 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
+2017-09-10T11:57:20,496 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndDate
+2017-09-10T11:57:48,976 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-09-10T11:57:50,260 [AWT-EventQueue-0] DEBUG view.extra.FlowEditForm - selected flow:Flow [idFlow=1, name=СТиСП441-442]
+2017-09-10T11:57:50,282 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFlow
+2017-09-10T11:57:52,201 [AWT-EventQueue-0] DEBUG view.extra.FlowEditForm - selected flow:Flow [idFlow=3, name=123]
+2017-09-10T11:57:52,245 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFlow
+2017-09-10T11:57:52,545 [AWT-EventQueue-0] DEBUG view.extra.FlowEditForm - selected flow:Flow [idFlow=3, name=123]
+2017-09-10T11:57:52,612 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFlow
+2017-09-10T11:57:53,169 [AWT-EventQueue-0] DEBUG view.extra.FlowEditForm - selected flow:Flow [idFlow=1, name=СТиСП441-442]
+2017-09-10T11:57:53,200 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFlow
+2017-09-10T11:57:55,327 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-09-10T11:57:57,141 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-09-10T11:57:57,175 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=6, nameFaculty=ТЕСТ], eduLevel= 1]
+2017-09-10T11:57:58,560 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=5, nameFaculty=Факультет довузовской подготовки], eduLevel= 1]
+2017-09-10T11:58:00,378 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=3, nameFaculty=Факультет заочного и дистанционного образования], eduLevel= 1]
+2017-09-10T11:58:01,412 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-09-10T11:58:03,604 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
+2017-09-10T11:58:04,233 [AWT-EventQueue-0] DEBUG view.extra.GroupEditForm - selected group:СП441
+2017-09-10T11:58:06,466 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - getAll
+2017-09-10T11:58:09,516 [AWT-EventQueue-0] DEBUG dao.impl.RecordDAOImpl - getRecordListByGroupAndSubjectFor
+2017-09-10T11:58:09,786 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - deleteAll
+2017-09-10T11:58:09,998 [AWT-EventQueue-0] DEBUG dao.impl.AbstractHibernateDAO - update: Group [idGroup=3, faculty=Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], flow=null, nameGroup=СП441, eduLevel=1]
+2017-09-10T11:58:10,186 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]
+2017-09-10T11:58:11,735 [AWT-EventQueue-0] DEBUG dao.impl.GroupDAOImpl - getGroupListByFacultyAndEduLevel: faculty= Faculty [idFaculty=1, nameFaculty=Факультет электросвязи], eduLevel= 1]

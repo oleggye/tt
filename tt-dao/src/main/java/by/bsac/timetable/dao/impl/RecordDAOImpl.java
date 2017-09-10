@@ -1,6 +1,5 @@
 package by.bsac.timetable.dao.impl;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
    * DAOException(e.getMessage(), e); } return recordList; }
    */
 
-  // FIXME: stub!!!
+  // FIXME: rename the method for more concrete name
   @Override
   public List<Record> getRecordListByGroupAndDates(Group group, Date dateFrom, Date dateTo)
       throws DAOException {
@@ -64,9 +63,21 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
        * 
        * recordList = sqlQuery.list(); HibernateUtil.commitTransaction();
        */
-
-      return Collections.EMPTY_LIST;
-
+      
+      //FIXME: doesn't take into using bounds to Record
+     return 
+         manager.createQuery("SELECT distinct rec FROM Record as rec "
+          + "LEFT JOIN rec.cancellations can "
+          + "WHERE rec.idRecord not in "
+          + "(SELECT cans.record.idRecord FROM Cancellation cans "
+          + "WHERE (:dateFrom BETWEEN cans.dateFrom AND cans.dateTo) "
+          + "OR (:dateTo BETWEEN cans.dateFrom AND cans.dateTo) "
+          + "OR (:dateFrom <= cans.dateFrom AND :dateTo >= cans.dateTo)) "
+          + "AND rec.group =:group", Record.class)
+      .setParameter("dateFrom", dateFrom)
+      .setParameter("dateTo", dateTo)
+      .setParameter("group", group)
+      .getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
       throw new DAOException(e.getMessage(), e);
