@@ -61,7 +61,7 @@ public class Lecturer implements java.io.Serializable, Cloneable, IName {
   }
 
 
-  @Column(name = "name_lecturer", nullable = false, length = 45)
+  @Column(name = "name_lecturer", nullable = false, length = 60)
   public String getNameLecturer() {
     return this.nameLecturer;
   }

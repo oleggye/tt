@@ -41,8 +41,9 @@
 			<props>
 				<!-- <prop key="hibernate.default_schema">timetable_test</prop> -->
 				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
-				<prop key="connection.useUnicode">true</prop>
+				<prop key="hibernate.connection.CharSet">utf8</prop>
 				<prop key="connection.characterEncoding">UTF-8</prop>
+				<prop key="connection.useUnicode">true</prop>
 				<prop key="hibernate.hbm2ddl.import_files_sql_extractor">
 					org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
 				</prop>

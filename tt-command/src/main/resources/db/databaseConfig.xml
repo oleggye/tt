@@ -46,8 +46,9 @@
 				<prop key="hibernate.default_schema">timetable</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="connection.useUnicode">true</prop>
+				<prop key="hibernate.connection.CharSet">utf8</prop>
 				<prop key="connection.characterEncoding">UTF-8</prop>
+				<prop key="connection.useUnicode">true</prop>
 				<prop key="hibernate.hbm2ddl.import_files_sql_extractor">
 					org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
 				</prop>
