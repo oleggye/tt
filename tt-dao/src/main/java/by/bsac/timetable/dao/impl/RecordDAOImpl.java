@@ -24,47 +24,11 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
     super(Record.class);
   }
 
-  /*
-   * // TODO: изменить метод!
-   * 
-   * @Override public List<Record> getRecordListByGroupAndDate(Group group, Date dateFrom, Date
-   * dateTo) throws DAOException {
-   * 
-   * List<Record> recordList = new ArrayList<>(); try { Session session =
-   * HibernateUtil.getSession(); HibernateUtil.beginTransaction();
-   * 
-   * Criteria criteria = session.createCriteria(Record.class, "record");
-   * criteria.add(Restrictions.eq("record.group", group)); // riteria.add(Restrictions.("eduLevel",
-   * eduLevel)); recordList = criteria.list();
-   * 
-   * // short group_id = group.getIdGroup(); // Query query = session // .createQuery("from Record
-   * as rec inner join rec.group as gr where // gr.idGroup = :group_id") // .setShort("group_id",
-   * group_id); // mainRecords = query.list(); HibernateUtil.commitTransaction();
-   * 
-   * } catch (Exception e) { HibernateUtil.rollbackTransaction(); throw new
-   * DAOException(e.getMessage(), e); } return recordList; }
-   */
-
-  // FIXME: rename the method for more concrete name
   @Override
-  public List<Record> getRecordListByGroupAndDates(Group group, Date dateFrom, Date dateTo)
+  public List<Record> getRecordListByGroupAndDatesWhichNotCancelled(Group group, Date dateFrom, Date dateTo)
       throws DAOException {
-
     LOGGER.debug("getRecordListByGroupAndDate");
     try {
-      /*
-       * Session session = HibernateUtil.getSession(); HibernateUtil.beginTransaction(); SQLQuery
-       * sqlQuery = session .createSQLQuery("SELECT *" +
-       * " FROM timetable.cancellation as cancel right join timetable.record as rec using(id_record)"
-       * + " where rec.id_group = ? " + " and	not((rec.date_to < ?) or (rec.date_from > ?))" +
-       * " and (cancel.id_record is null or ((cancel.date_to <rec.date_from) or (cancel.date_from > rec.date_to)))"
-       * ) .addEntity(Record.class); sqlQuery.setShort(0, group.getIdGroup()); sqlQuery.setDate(1,
-       * dateFrom); sqlQuery.setDate(2, dateTo);
-       * 
-       * recordList = sqlQuery.list(); HibernateUtil.commitTransaction();
-       */
-      
-      //FIXME: doesn't take into using bounds to Record
      return 
          manager.createQuery("SELECT distinct rec FROM Record as rec "
           + "LEFT JOIN rec.cancellations can "
@@ -73,7 +37,10 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
           + "WHERE (:dateFrom BETWEEN cans.dateFrom AND cans.dateTo) "
           + "OR (:dateTo BETWEEN cans.dateFrom AND cans.dateTo) "
           + "OR (:dateFrom <= cans.dateFrom AND :dateTo >= cans.dateTo)) "
-          + "AND rec.group =:group", Record.class)
+          + "AND rec.group =:group "
+          + "AND ((:dateFrom BETWEEN rec.dateFrom AND rec.dateTo) " + 
+          "OR (:dateTo BETWEEN rec.dateFrom AND rec.dateTo) " + 
+          "OR (:dateFrom <= rec.dateFrom AND :dateTo >= rec.dateTo))", Record.class)
       .setParameter("dateFrom", dateFrom)
       .setParameter("dateTo", dateTo)
       .setParameter("group", group)

@@ -51,13 +51,13 @@
 		Second pair; Practice work -->
 	<record id_record="10" week_number="1" week_day="2"
 		subj_ordinal_number="2" id_group="1" id_subject="2" id_lecturer="1"
-		id_subject_type="3" id_subject_for="2" date_from="2017-08-28" date_to="2017-09-24"
+		id_subject_type="3" id_subject_for="2" date_from="2017-08-29" date_to="2017-09-24"
 		id_classroom="2" />
 
 	<!-- Record for the first group; full group; First week; Tuesday; First 
 		pair; Consultation -->
 	<record id_record="11" week_number="1" week_day="1"
 		subj_ordinal_number="1" id_group="1" id_subject="1" id_lecturer="1"
-		id_subject_type="4" id_subject_for="3" date_from="2017-08-28" date_to="2017-09-24"
+		id_subject_type="4" id_subject_for="3" date_from="2017-08-29" date_to="2017-09-24"
 		id_classroom="2" />
 </dataset>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<cancellation id_cancellation="1" id_record="5" date_to="2017-08-28"
-		date_from="2017-08-28" />
-	<cancellation id_cancellation="2" id_record="6" date_to="2017-08-28"
-		date_from="2017-08-28" />
+	<cancellation id_cancellation="1" id_record="5" date_from="2017-08-28"
+		date_to="2017-08-28" />
+	<cancellation id_cancellation="2" id_record="6" date_from="2017-08-28"
+		date_to="2017-08-28" />
 </dataset>

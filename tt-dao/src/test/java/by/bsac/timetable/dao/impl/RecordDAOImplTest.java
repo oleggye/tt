@@ -280,18 +280,18 @@ public class RecordDAOImplTest {
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
-      "/data/setup/recordSetup.xml"})
+      "/data/setup/recordSetup.xml", "/data/setup/cancellationSetup.xml"})
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
   public void testGetRecordListByGroupWithIdOneAndDates() throws DAOException, ParseException {
-    final int expectedSize = 2;
+    final int expectedSize = 5;
     final Short idGroup = 1;
-    
-    Group group = groupDao.getById(idGroup);
-    final Date dateFrom = FORMAT.parse("2018-08-28");
-    final Date dateTo = FORMAT.parse("2018-09-24");
 
-    List<Record> recordList = dao.getRecordListByGroupAndDates(group, dateFrom, dateTo);
+    Group group = groupDao.getById(idGroup);
+    final Date dateFrom = FORMAT.parse("2017-08-28");
+    final Date dateTo = FORMAT.parse("2017-08-28");
+
+    List<Record> recordList = dao.getRecordListByGroupAndDatesWhichNotCancelled(group, dateFrom, dateTo);
 
     assertThat(recordList).isNotNull();
     assertThat(recordList.size()).isEqualTo(expectedSize);
