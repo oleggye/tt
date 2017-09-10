@@ -1,6 +1,5 @@
 package by.bsac.timetable.dao.impl;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;

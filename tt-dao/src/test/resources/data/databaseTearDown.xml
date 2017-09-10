@@ -7,6 +7,9 @@
 	<flow />
 	<lecturer />
 	<subject />
-	<groupp/>
+	<groupp />
+	<subject_type />
+	<subject_for />
 	<record />
+	<cancellation />
 </dataset>

@@ -70,7 +70,7 @@ public class RecordDAOImplTest {
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
-      "/data/setup/recordSetup.xml",})
+      "/data/setup/recordSetup.xml"})
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
   public void testGetRecordList() throws DAOException {
@@ -87,7 +87,7 @@ public class RecordDAOImplTest {
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
-      "/data/setup/recordSetup.xml",})
+      "/data/setup/recordSetup.xml"})
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/record/replaceClassroom.xml")
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
@@ -107,7 +107,7 @@ public class RecordDAOImplTest {
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
-      "/data/setup/recordSetup.xml",})
+      "/data/setup/recordSetup.xml"})
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/record/replaceLecturer.xml")
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
@@ -127,7 +127,7 @@ public class RecordDAOImplTest {
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
-      "/data/setup/recordSetup.xml",})
+      "/data/setup/recordSetup.xml"})
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
   public void testGetRecordForGroupLikeThisWithRecordIdOne() throws DAOException {
@@ -151,7 +151,7 @@ public class RecordDAOImplTest {
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
-      "/data/setup/recordSetup.xml",})
+      "/data/setup/recordSetup.xml"})
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
   public void testGetRecordWithGroupIdOneAndSubjectForFullFlow() throws DAOException {
@@ -174,17 +174,12 @@ public class RecordDAOImplTest {
     assertThat(takenRecord).isEqualTo(expectedRecord);
   }
 
-  /*
-   * <record id_record="12" week_number="1" week_day="1" subj_ordinal_number="1" id_group="2"
-   * id_subject="1" id_lecturer="1" id_subject_type="4" id_subject_for="3" date_from="2017-08-28"
-   * date_to="2017-09-24" id_classroom="1" />
-   */
   @Test
   @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/lecturerSetup.xml",
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
-      "/data/setup/recordSetup.xml",})
+      "/data/setup/recordSetup.xml"})
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/record/addRecord.xml")
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
@@ -226,7 +221,7 @@ public class RecordDAOImplTest {
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
-      "/data/setup/recordSetup.xml",})
+      "/data/setup/recordSetup.xml"})
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/record/updateRecord.xml")
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
@@ -268,7 +263,7 @@ public class RecordDAOImplTest {
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
-      "/data/setup/recordSetup.xml",})
+      "/data/setup/recordSetup.xml"})
   @ExpectedDatabase(assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED,
       value = "/data/expected/record/deleteRecord.xml")
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
