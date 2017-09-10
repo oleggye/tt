@@ -158,7 +158,7 @@ public class GroupDAOImplTest {
       type = DatabaseOperation.CLEAN_INSERT)
   public void testAddGroupWithIdFour() throws DAOException {
     final short idGroup = 4;
-    final String nameGroup = "СO333";
+    final String nameGroup = "СО333";
     final byte idFaculty = 2;
     final byte eduLevel = 2;
 
@@ -208,5 +208,4 @@ public class GroupDAOImplTest {
     Group group = dao.getById(idGroup);
     dao.delete(group);
   }
-
 }
