@@ -29,20 +29,20 @@ public class ChoseEducationLevelForm extends JDialog {
     panel.setLayout(null);
 
     JLabel label = new JLabel(
-        "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u0443\u0440\u043E\u0432\u0435\u043D\u044C \u043E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043D\u0438\u044F");
+        "Выберите уровень образования");
     label.setForeground(Color.RED);
     label.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     label.setBounds(21, 11, 225, 40);
     panel.add(label);
 
     JButton btnNewButton = new JButton(
-        "\u0412\u044B\u0441\u0448\u0435\u0435 \u043E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u043D\u0438\u0435");
+        "Высшее");
     btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     btnNewButton.setBounds(31, 62, 187, 32);
     btnNewButton.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        setEduLevel((byte) 1); // ������ ��
+        setEduLevel((byte) 1); // ������ ��
         dispose();
       }
     });
@@ -50,13 +50,13 @@ public class ChoseEducationLevelForm extends JDialog {
     panel.add(btnNewButton);
 
     JButton btnNewButton_1 = new JButton(
-        "\u0421\u0440\u0435\u0434\u043D\u0435\u0435 \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0435");
+        "Среднее специальное");
     btnNewButton_1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
     btnNewButton_1.setBounds(31, 118, 187, 32);
     btnNewButton_1.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        setEduLevel((byte) 2); // ������ ���
+        setEduLevel((byte) 2); // ������ ���
         dispose();
       }
     });

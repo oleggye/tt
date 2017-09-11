@@ -1,5 +1,7 @@
 package by.bsac.timetable.view;
 
+import static by.bsac.timetable.view.util.LocalizationBundle.getMessage;
+
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -57,8 +59,6 @@ import by.bsac.timetable.view.extra.LecturerEditForm;
 import by.bsac.timetable.view.util.FormInitializer;
 import components.MyComboBox;
 import tableClasses.TablesArray;
-
-import static by.bsac.timetable.view.util.LocalizationBundle.*;
 
 /**
  * The app's main class
@@ -170,6 +170,17 @@ public class MainForm extends JFrame {
       FacultyEditForm dialog = new FacultyEditForm();
       dialog.setLocationRelativeTo(mainFrame);
       dialog.setVisible(true);
+      try {
+        FormInitializer.initFacultyComboBox(facultyComboBox);
+      } catch (CommandException | ApplicationException ex) {
+        LOGGER.error(ex.getCause().getMessage(), ex);
+        JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
+      } finally {
+        if (groupComboBox.getItemCount() > 0) {
+          groupComboBox.setSelectedIndex(0);
+        }
+        actOrDeactivateButton();
+      }
       resetTimetable();
     });
     mnNewMenu.add(changeFacultyMenuItem);
@@ -204,6 +215,7 @@ public class MainForm extends JFrame {
     JMenuItem changeSubjectMenuItem = new JMenuItem(getMessage("mainForm.editSubject"));
     changeSubjectMenuItem.addActionListener((ActionEvent e) -> {
       EditForm edf = new EditForm(mainFrame, 2, 1, educationLevel);
+      /* SubjectEditForm edf = new SubjectEditForm(educationLevel); */
       edf.setLocationRelativeTo(mainFrame);
       edf.setVisible(true);
       resetTimetable();
@@ -359,8 +371,10 @@ public class MainForm extends JFrame {
     } catch (Throwable ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
       JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
-      JOptionPane.showMessageDialog(mainFrame.getContentPane(), getMessage("mainForm.error.sendToAdmin"));
-      JOptionPane.showMessageDialog(mainFrame.getContentPane(), getMessage("mainForm.error.appWillBeClosed"));
+      JOptionPane.showMessageDialog(mainFrame.getContentPane(),
+          getMessage("mainForm.error.sendToAdmin"));
+      JOptionPane.showMessageDialog(mainFrame.getContentPane(),
+          getMessage("mainForm.error.appWillBeClosed"));
       mainFrame.dispose();
 
     } finally {
@@ -377,8 +391,8 @@ public class MainForm extends JFrame {
   }
 
   /**
-   * Resets selected element in {@link #facultyComboBox}. 
-   * Clears a data in all tables and resets the flag
+   * Resets selected element in {@link #facultyComboBox}. Clears a data in all tables and resets the
+   * flag
    */
   private void resetTimetable() {
     facultyComboBox

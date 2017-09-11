@@ -25,7 +25,7 @@ public class FlowDAOImpl extends AbstractHibernateDAO<Flow, Short> implements IF
     try {
 
       final String likeConst = "%";
-      return manager.createQuery("from Flow as f where f.name like :name", Flow.class)
+      return manager.createQuery("select distinct f from Flow as f where f.name like :name", Flow.class)
           .setParameter("name", nameFlow + likeConst).getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);

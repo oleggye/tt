@@ -1,5 +1,6 @@
 package tableClasses;
 
+import java.awt.Color;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -116,6 +117,8 @@ public class TablesArray {
 		for (MyMultiSpanCellTable[] e : this.tablesArray) {
 			for (MyMultiSpanCellTable ee : e) {
 				ee.setDefaultAttributiveCellTableModel();
+				ee.clearSelection();
+				ee.setGridColor(new Color(122,138,153));
 			}
 		}
 	}

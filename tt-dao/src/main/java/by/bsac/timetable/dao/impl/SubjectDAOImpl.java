@@ -50,7 +50,7 @@ public class SubjectDAOImpl extends AbstractHibernateDAO<Subject, Short> impleme
     try {
       final String likeConst = "%";
       return manager
-          .createQuery("from Subject as sbj where sbj.nameSubject like :name ", Subject.class)
+          .createQuery("select distinct sbj from Subject as sbj where sbj.nameSubject like :name ", Subject.class)
           .setParameter("name", nameSubject + likeConst).getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);

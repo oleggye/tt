@@ -111,9 +111,7 @@ public class LecturerEditForm extends JDialog {
     contentPanel.add(chairComboBox);
     chairComboBox.setToolTipText("");
 
-    chairComboBox.addItemListener(new java.awt.event.ItemListener() {
-      @Override
-      public void itemStateChanged(java.awt.event.ItemEvent evt) {
+    chairComboBox.addItemListener((ItemEvent evt)-> {
         if (evt.getStateChange() == ItemEvent.SELECTED) {
           try {
             Chair chair = (Chair) chairComboBox.getSelectedItem();
@@ -127,7 +125,6 @@ public class LecturerEditForm extends JDialog {
             refreshFormField(editButton, deleteButton, lecturerNameTextField);
           }
         }
-      }
     });
 
     ImageIcon icon = new ImageIcon("C:\\Users\\hello\\Desktop\\add-icon.png");

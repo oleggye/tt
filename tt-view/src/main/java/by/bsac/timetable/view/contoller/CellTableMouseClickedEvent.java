@@ -53,7 +53,6 @@ public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
 
       MyMultiSpanCellTable table = (MyMultiSpanCellTable) event.getSource();
 
-      // получаем положение (координаты) выделенной строки таблицы
       int row = table.rowAtPoint(event.getPoint());
       LOGGER.debug("selected row:" + row);
       int column = table.columnAtPoint(event.getPoint());
@@ -65,7 +64,6 @@ public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
       Object value = table.getValueAt(row, column);
       LOGGER.debug("selected value:" + value);
 
-      // ѕолучаем положение таблицы в массиве
       ArrayPosition aPosition = tableArray.getElementPosition(table);
       LOGGER.debug("aPosition: " + aPosition);
 
@@ -90,7 +88,7 @@ public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
             selectedWeekDay, selectedLessonOrdinalNumber);
         mainForm.getMainFrame().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
       }
-      table.clearSelection(); // убираем выделение
+      table.clearSelection();
 
       mainForm.getMainFrame().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
       try {

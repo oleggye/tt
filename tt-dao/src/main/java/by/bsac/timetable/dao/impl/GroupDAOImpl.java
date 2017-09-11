@@ -71,7 +71,7 @@ public class GroupDAOImpl extends AbstractHibernateDAO<Group, Short> implements 
   public List<Group> getAllWithSimilarName(String nameGroup) throws DAOException {
     try {
       final String likeConst = "%";
-      return manager.createQuery("from Group as gr where gr.nameGroup like :nameGroup", Group.class)
+      return manager.createQuery("select distinct gr from Group as gr where gr.nameGroup like :nameGroup", Group.class)
           .setParameter("nameGroup", nameGroup + likeConst).getResultList();
     } catch (RuntimeException e) {
       LOGGER.error(e.getMessage(), e);
