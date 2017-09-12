@@ -17,14 +17,10 @@ import javax.swing.border.EmptyBorder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.bsac.timetable.command.CommandProvider;
-import by.bsac.timetable.command.ICommand;
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
-import by.bsac.timetable.command.util.Request;
 import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.entity.Lecturer;
-import by.bsac.timetable.util.ActionMode;
 import by.bsac.timetable.view.util.FormInitializer;
 import components.MyComboBox;
 
@@ -90,9 +86,8 @@ public class ChangeLecturerDialog extends JDialog {
           Lecturer newLecturer = (Lecturer) lecturerComboBox.getSelectedItem();
           LOGGER.debug("newLecturer:" + newLecturer);
 
-          Request request = new Request();
           try {
-            changeLecturer(oldLecturer, newLecturer, request);
+            CommandFacade.changeLecturerForAllRecords(oldLecturer, newLecturer);
             CommandFacade.deleteLecturer(oldLecturer);
 
           } catch (CommandException ex) {
@@ -111,13 +106,5 @@ public class ChangeLecturerDialog extends JDialog {
         getRootPane().setDefaultButton(okButton);
       }
     }
-  }
-
-  private void changeLecturer(Lecturer oldLecturer, Lecturer newLecturer, Request request)
-      throws CommandException {
-    ICommand command = CommandProvider.getInstance().getCommand(ActionMode.Change_Lecturer);
-    request.putParam("oldLecturer", oldLecturer);
-    request.putParam("newLecturer", newLecturer);
-    command.execute(request);
   }
 }

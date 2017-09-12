@@ -4,13 +4,15 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import by.bsac.timetable.dao.ICancellationDAO;
 import by.bsac.timetable.dao.IGroupDAO;
 import by.bsac.timetable.dao.IRecordDAO;
-import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Cancellation;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
@@ -38,6 +40,8 @@ public class RecordServiceImpl implements IRecordService {
   @Autowired
   private IGroupDAO groupDao;
 
+  @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
+      dontRollbackOn = ServiceValidationException.class)
   @Override
   public void addRecord(Record record) throws ServiceException, ServiceValidationException {
     service.validateRecord(record, false);
@@ -51,11 +55,13 @@ public class RecordServiceImpl implements IRecordService {
         checkRecordForConflict(record);
         recordDAO.add(record);
       }
-    } catch (DAOException e) {
+    } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при вставке", e);
     }
   }
 
+  @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
+      dontRollbackOn = ServiceValidationException.class)
   @Override
   public void updateRecord(Record initialRecord, Record updateRecord)
       throws ServiceException, ServiceValidationException {
@@ -84,41 +90,49 @@ public class RecordServiceImpl implements IRecordService {
       } else {
         recordDAO.update(updateRecord);
       }
-    } catch (DAOException e) {
+    } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при обновлении", e);
     }
   }
 
+  @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
+      dontRollbackOn = ServiceValidationException.class)
   @Override
   public Record getRecord(int idRecord) throws ServiceException {
     try {
       return recordDAO.getById(idRecord);
-    } catch (DAOException e) {
+    } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при получении занятия", e);
     }
   }
 
+  @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
+      dontRollbackOn = ServiceValidationException.class)
   @Override
   public void deleteRecord(Record record) throws ServiceException, ServiceValidationException {
     service.validateRecord(record, true);
     try {
       recordDAO.delete(record);
-    } catch (DAOException e) {
+    } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при получении занятия", e);
     }
   }
 
+  @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
+      dontRollbackOn = ServiceValidationException.class)
   @Override
   public List<Record> getAllRecordListForGroup(Group group, Date dateFrom, Date dateTo)
       throws ServiceException, ServiceValidationException {
     service.validateGroup(group, true);
     try {
       return recordDAO.getRecordListByGroupAndDatesWhichNotCancelled(group, dateFrom, dateTo);
-    } catch (DAOException e) {
+    } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при получении занятий", e);
     }
   }
 
+  @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
+      dontRollbackOn = ServiceValidationException.class)
   @Override
   public void cancelRecord(Record initialRecord, Record cancelRecord,
       LessonPeriod cancelLessonPeriod) throws ServiceException, ServiceValidationException {
@@ -152,13 +166,13 @@ public class RecordServiceImpl implements IRecordService {
           cancellationDao.add(cancellation);
         }
       }
-    } catch (DAOException e) {
+    } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при отмене занятия", e);
     }
   }
 
-  private void addFlowRecord(Record addRecord)
-      throws DAOException, ServiceException, ServiceValidationException {
+  @Transactional(value = TxType.MANDATORY)
+  private void addFlowRecord(Record addRecord) throws ServiceException, ServiceValidationException {
 
     List<Record> recordList = new LinkedList<>();
 
@@ -176,8 +190,9 @@ public class RecordServiceImpl implements IRecordService {
     recordDAO.addAll(recordList);
   }
 
+  @Transactional(value = TxType.MANDATORY)
   private void updateFlowRecord(Record initialRecord, Record updateRecord)
-      throws DAOException, ServiceException, ServiceValidationException {
+      throws ServiceException, ServiceValidationException {
 
     List<Group> groupList = groupDao.getGroupListByFlow(initialRecord.getGroup().getFlow());
     for (Group group : groupList) {
@@ -209,7 +224,8 @@ public class RecordServiceImpl implements IRecordService {
     // factory.getRecordDAO().updateAll(recordList);
   }
 
-  private void cancelFlowRecord(Record initalRecord, Record cancelRecord) throws DAOException {
+  @Transactional(value = TxType.MANDATORY)
+  private void cancelFlowRecord(Record initalRecord, Record cancelRecord) {
 
     Cancellation cancellation = new Cancellation();
     cancellation.setDateFrom(cancelRecord.getDateFrom());
@@ -225,7 +241,8 @@ public class RecordServiceImpl implements IRecordService {
     }
   }
 
-  private void deleteFlowRecord(Record initalRecord) throws DAOException {
+  @Transactional(value = TxType.MANDATORY)
+  private void deleteFlowRecord(Record initalRecord) {
 
     List<Group> groupList = groupDao.getGroupListByFlow(initalRecord.getGroup().getFlow());
     for (Group group : groupList) {
@@ -243,6 +260,7 @@ public class RecordServiceImpl implements IRecordService {
    * @throws ServiceException
    * @throws ServiceValidationException
    */
+  @Transactional(value = TxType.MANDATORY)
   private void checkRecordForConflict(Record record)
       throws ServiceException, ServiceValidationException {
     List<Record> recordList =
@@ -261,6 +279,8 @@ public class RecordServiceImpl implements IRecordService {
 
   }
 
+  @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
+      dontRollbackOn = ServiceValidationException.class)
   @Override
   public void changeClassroomForAllRecords(Classroom oldClassroom, Classroom newClassroom)
       throws ServiceException, ServiceValidationException {
@@ -268,11 +288,13 @@ public class RecordServiceImpl implements IRecordService {
     service.validateClassroom(newClassroom, true);
     try {
       recordDAO.replaceClassroomForAllRecords(oldClassroom, newClassroom);
-    } catch (DAOException e) {
+    } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при обновлении аудитории", e);
     }
   }
 
+  @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
+      dontRollbackOn = ServiceValidationException.class)
   @Override
   public void changeLecturerForAllRecords(Lecturer oldLecturer, Lecturer newLecturer)
       throws ServiceException, ServiceValidationException {
@@ -280,7 +302,7 @@ public class RecordServiceImpl implements IRecordService {
     service.validateLecturer(newLecturer, true);
     try {
       recordDAO.replaceLecturerForAllRecords(oldLecturer, newLecturer);
-    } catch (DAOException e) {
+    } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при обновлении преподавателя", e);
     }
   }

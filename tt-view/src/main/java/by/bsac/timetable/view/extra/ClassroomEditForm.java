@@ -5,9 +5,12 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -71,8 +74,13 @@ public class ClassroomEditForm extends JDialog {
     JButton deleteButton = new JButton("Удалить");
     deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-    JTextField numberField = new JTextField();
+    NumberFormat numberFormat = NumberFormat.getNumberInstance();
+    DecimalFormat decimalFormat = (DecimalFormat) numberFormat;
+    decimalFormat.setGroupingUsed(false);
+
+    JFormattedTextField numberField = new JFormattedTextField(decimalFormat);
     contentPanel.add(numberField);
+    numberField.setColumns(3);
     numberField.setFont(new Font("Tahoma", Font.PLAIN, 14));
     numberField.setBounds(339, 117, 94, 26);
 
@@ -82,7 +90,7 @@ public class ClassroomEditForm extends JDialog {
     buildingLabel.setBounds(470, 68, 79, 38);
     contentPanel.add(buildingLabel);
 
-    JTextField buildingField = new JTextField();
+    JFormattedTextField buildingField = new JFormattedTextField(decimalFormat);
     buildingField.setFont(new Font("Tahoma", Font.PLAIN, 14));
     buildingField.setColumns(1);
     buildingField.setBounds(470, 117, 65, 26);
@@ -103,29 +111,32 @@ public class ClassroomEditForm extends JDialog {
     editButton.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+        byte building = Byte.parseByte(buildingField.getText());
+        short number = Short.parseShort(numberField.getText());
 
-        try {
-          editButton.setEnabled(false);
-          byte building = Byte.valueOf(buildingField.getText());
-          short number = Short.valueOf(numberField.getText());
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, building, number);
 
-          classroom.setBuilding(building);
-          classroom.setNumber(number);
+        if (isTableHasNot) {
+          try {
+            editButton.setEnabled(false);
 
-          CommandFacade.updateClassroom(classroom);
-          FormInitializer.initClassroomTable(table);
+            classroom.setBuilding(building);
+            classroom.setNumber(number);
 
-        } catch (CommandException ex) {
-          LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-        } catch (NumberFormatException ex) {
-          LOGGER.warn(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
-        } finally {
-          editButton.setEnabled(true);
-          resetComponents(editButton, deleteButton, numberField, buildingField);
+            CommandFacade.updateClassroom(classroom);
+            FormInitializer.initClassroomTable(table);
+
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } catch (NumberFormatException ex) {
+            LOGGER.warn(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
+          } finally {
+            editButton.setEnabled(true);
+            resetComponents(editButton, deleteButton, numberField, buildingField);
+          }
         }
-
       }
     });
 
@@ -177,25 +188,30 @@ public class ClassroomEditForm extends JDialog {
     addButton.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        try {
-          addButton.setEnabled(false);
-          byte building = Byte.valueOf(buildingField.getText());
-          short number = Short.valueOf(numberField.getText());
+        byte building = Byte.parseByte(buildingField.getText());
+        short number = Short.parseShort(numberField.getText());
 
-          classroom = new ClassroomBuilder().buildBuilding(building).buildNumber(number).build();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, building, number);
 
-          CommandFacade.addClassroom(classroom);
-          FormInitializer.initClassroomTable(table);
+        if (isTableHasNot) {
+          try {
+            addButton.setEnabled(false);
 
-        } catch (CommandException ex) {
-          LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-        } catch (NumberFormatException ex) {
-          LOGGER.warn(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
-        } finally {
-          addButton.setEnabled(true);
-          resetComponents(editButton, deleteButton, numberField, buildingField);
+            classroom = new ClassroomBuilder().buildBuilding(building).buildNumber(number).build();
+
+            CommandFacade.addClassroom(classroom);
+            FormInitializer.initClassroomTable(table);
+
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } catch (NumberFormatException ex) {
+            LOGGER.warn(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
+          } finally {
+            addButton.setEnabled(true);
+            resetComponents(editButton, deleteButton, numberField, buildingField);
+          }
         }
       }
     });
@@ -257,5 +273,20 @@ public class ClassroomEditForm extends JDialog {
     deleteButton.setVisible(false);
     numberTextFiled.setText("");
     buildingTextFiled.setText("");
+  }
+
+  private boolean isTableHasNotAlikeValue(JTable table, byte building, short number) {
+    int colCount = table.getColumnCount();
+    int rowCount = table.getRowCount();
+    for (int column = 0; column < colCount; column++)
+      for (int row = 0; row < rowCount; row++) {
+        Classroom value = (Classroom) table.getValueAt(row, column);
+        if (value.getNumber() == number && value.getBuilding() == building) {
+          LOGGER.warn("try to dublicete classroom:" + value);
+          JOptionPane.showMessageDialog(getContentPane(), "Такая аудитория уже есть");
+          return false;
+        }
+      }
+    return true;
   }
 }

@@ -7,7 +7,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import by.bsac.timetable.dao.IFlowDAO;
-import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Flow;
 
 @Repository
@@ -15,21 +14,17 @@ public class FlowDAOImpl extends AbstractHibernateDAO<Flow, Short> implements IF
 
   private static final Logger LOGGER = LogManager.getLogger(FlowDAOImpl.class.getName());
 
+  private static final String LIKE_CONST = "%";
+
   public FlowDAOImpl() {
     super(Flow.class);
   }
 
   @Override
-  public List<Flow> getAllWithSimilarName(String nameFlow) throws DAOException {
+  public List<Flow> getAllWithSimilarName(String nameFlow) {
     LOGGER.debug("getAllWithSimilarName: nameFlow= " + nameFlow);
-    try {
-
-      final String likeConst = "%";
-      return manager.createQuery("select distinct f from Flow as f where f.name like :name", Flow.class)
-          .setParameter("name", nameFlow + likeConst).getResultList();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
+    return manager
+        .createQuery("select distinct f from Flow as f where f.name like :name", Flow.class)
+        .setParameter("name", nameFlow + LIKE_CONST).getResultList();
   }
 }

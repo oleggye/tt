@@ -17,13 +17,9 @@ import javax.swing.border.EmptyBorder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import by.bsac.timetable.command.CommandProvider;
-import by.bsac.timetable.command.ICommand;
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
-import by.bsac.timetable.command.util.Request;
 import by.bsac.timetable.entity.Classroom;
-import by.bsac.timetable.util.ActionMode;
 import by.bsac.timetable.view.util.FormInitializer;
 import components.MyComboBox;
 
@@ -84,13 +80,12 @@ public class ChangeClassroomDialog extends JDialog {
         JButton okButton = new JButton("OK");
         okButton.setActionCommand("OK");
 
-        okButton.addActionListener(ItemEvent -> {
+        okButton.addActionListener(e -> {
           Classroom newClassroom = (Classroom) classroomComboBox.getSelectedItem();
           LOGGER.debug("newClassroom:" + newClassroom);
 
-          Request request = new Request();
           try {
-            changeClassroom(oldClassroom, newClassroom, request);
+            CommandFacade.changeClassroomForAllRecords(oldClassroom, newClassroom);
             CommandFacade.deleteClassroom(oldClassroom);
 
           } catch (CommandException ex) {
@@ -109,14 +104,5 @@ public class ChangeClassroomDialog extends JDialog {
         getRootPane().setDefaultButton(okButton);
       }
     }
-  }
-
-  // FIXME: use CommandFacade method to change classroom
-  private void changeClassroom(Classroom oldClassroom, Classroom newClassroom, Request request)
-      throws CommandException {
-    ICommand command = CommandProvider.getInstance().getCommand(ActionMode.Change_Classroom);
-    request.putParam("oldClassroom", oldClassroom);
-    request.putParam("newClassroom", newClassroom);
-    command.execute(request);
   }
 }

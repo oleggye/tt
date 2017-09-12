@@ -32,18 +32,13 @@
 			<ref bean="dataSource" />
 		</property>
 		<property name="packagesToScan" value="by.bsac.timetable.entity" />
-		<!-- <property name="mappingResources"> <list> <value>classpath:mapping/Chair.hbm.xml</value> 
-			<value>classpath:mapping/SubjectType.hbm.xml</value> <value>classpath:mapping/Faculty.hbm.xml</value> 
-			<value>classpath:mapping/Lecturer.hbm.xml</value> <value>classpath:mapping/Classroom.hbm.xml</value> 
-			<value>classpath:mapping/SubjectFor.hbm.xml</value> <value>classpath:mapping/Subject.hbm.xml</value> 
-			<value>classpath:mapping/Group.hbm.xml</value> <value>classpath:mapping/Cancellation.hbm.xml</value> 
-			<value>classpath:mapping/Record.hbm.xml</value> </list> </property> -->
+
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
 		<property name="jpaProperties">
 			<props>
-				<prop key="hibernate.default_schema">timetable</prop>
+				<prop key="hibernate.default_schema">bsac_timetable</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.connection.CharSet">utf8</prop>

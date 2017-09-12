@@ -193,24 +193,27 @@ public class GroupEditForm extends JDialog {
     addButton.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        addButton.setEnabled(false);
+        String groupName = groupNameTextField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, groupName);
 
-        try {
-          String groupName = groupNameTextField.getText();
-          Faculty faculty = (Faculty) facultyComboBox.getSelectedItem();
-          Group newGroup = new GroupBuilder().buildEduLevel(educationLevel).buildFaculty(faculty)
-              .buildFlow(flow).buildName(groupName).build();
+        if (isTableHasNot) {
+          try {
+            addButton.setEnabled(false);
+            Faculty faculty = (Faculty) facultyComboBox.getSelectedItem();
+            Group newGroup = new GroupBuilder().buildEduLevel(educationLevel).buildFaculty(faculty)
+                .buildFlow(flow).buildName(groupName).build();
 
-          CommandFacade.addGroup(newGroup);
-          FormInitializer.initGroupTable(table, faculty, educationLevel);
+            CommandFacade.addGroup(newGroup);
+            FormInitializer.initGroupTable(table, faculty, educationLevel);
 
-        } catch (CommandException ex) {
-          LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex);
-        } finally {
-          addButton.setEnabled(true);
-          refreshFormField(editButton, deleteButton, groupNameTextField, flowLabel);
-          flow = null;
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            addButton.setEnabled(true);
+            refreshFormField(editButton, deleteButton, groupNameTextField, flowLabel);
+            flow = null;
+          }
         }
       }
     });
@@ -219,25 +222,28 @@ public class GroupEditForm extends JDialog {
     editButton.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+        String groupName = groupNameTextField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, groupName);
 
-        editButton.setEnabled(false);
-        try {
+        if (isTableHasNot) {
+          try {
+            editButton.setEnabled(false);
 
-          String groupName = groupNameTextField.getText();
-          Faculty faculty = (Faculty) facultyComboBox.getSelectedItem();
-          group.setFaculty(faculty);
-          group.setNameGroup(groupName);
+            Faculty faculty = (Faculty) facultyComboBox.getSelectedItem();
+            group.setFaculty(faculty);
+            group.setNameGroup(groupName);
 
-          CommandFacade.updateGroup(group);
-          FormInitializer.initGroupTable(table, faculty, educationLevel);
+            CommandFacade.updateGroup(group);
+            FormInitializer.initGroupTable(table, faculty, educationLevel);
 
-        } catch (CommandException ex) {
-          LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex);
-        } finally {
-          editButton.setEnabled(true);
-          refreshFormField(editButton, deleteButton, groupNameTextField, flowLabel);
-          flow = null;
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            editButton.setEnabled(true);
+            refreshFormField(editButton, deleteButton, groupNameTextField, flowLabel);
+            flow = null;
+          }
         }
       }
     });
@@ -257,7 +263,7 @@ public class GroupEditForm extends JDialog {
 
           } catch (CommandException ex) {
             LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
           } finally {
             deleteButton.setEnabled(true);
             refreshFormField(editButton, deleteButton, groupNameTextField, flowLabel);
@@ -358,5 +364,20 @@ public class GroupEditForm extends JDialog {
     deleteButton.setVisible(false);
     groupNameTextField.setText("");
     flowLabel.setText("Не задан");
+  }
+
+  private boolean isTableHasNotAlikeValue(JTable table, String nameGroup) {
+    int colCount = table.getColumnCount();
+    int rowCount = table.getRowCount();
+    for (int column = 0; column < colCount; column++)
+      for (int row = 0; row < rowCount; row++) {
+        Group value = (Group) table.getValueAt(row, column);
+        if (value.getNameGroup().equals(nameGroup)) {
+          LOGGER.warn("try to dublicete nameGroup:" + nameGroup);
+          JOptionPane.showMessageDialog(getContentPane(), "Группа с таким именем уже есть");
+          return false;
+        }
+      }
+    return true;
   }
 }

@@ -10,14 +10,10 @@ import javax.persistence.TypedQuery;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.transaction.annotation.Transactional;
 
 import by.bsac.timetable.dao.IGenericDAO;
-import by.bsac.timetable.dao.exception.DAOException;
 
-@Transactional
-public abstract class AbstractHibernateDAO<E, PK extends Serializable>
-    implements IGenericDAO<E, PK> {
+public abstract class AbstractHibernateDAO<E, P extends Serializable> implements IGenericDAO<E, P> {
   private static final Logger LOGGER = LogManager.getLogger(AbstractHibernateDAO.class.getName());
 
   @PersistenceContext
@@ -31,114 +27,69 @@ public abstract class AbstractHibernateDAO<E, PK extends Serializable>
 
 
   @Override
-  public void add(E object) throws DAOException {
+  public void add(E object) {
     LOGGER.debug("add: " + object);
-    try {
-      if (manager.contains(object)) {
-        manager.merge(object);
-      } else
-        manager.persist(object);
-      manager.flush();
-
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
-  }
-
-  @Override
-  public void addAll(List<E> listObject) throws DAOException {
-    LOGGER.debug("addAll: " + listObject);
-    try {
-      Iterator<E> iter = listObject.listIterator();
-      while (iter.hasNext()) {
-        manager.persist(iter.next());
-      }
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
-  }
-
-  @Override
-  public E getById(PK id) throws DAOException {
-    LOGGER.debug("getById: " + id);
-    try {
-      return manager.find(clazz, id);
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
-  }
-
-  @Override
-  public List<E> getAll() throws DAOException {
-    LOGGER.debug("getAll");
-    try {
-      /*
-       * List<ITable> tableList = manager.createNativeQuery("show tables").getResultList();
-       * for(ITable ob: tableList) System.out.println(ob);
-       */
-      TypedQuery<E> query =
-          manager.createQuery("select E from " + clazz.getSimpleName() + " E", clazz);
-      return query.getResultList();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
-  }
-
-  @Override
-  public void update(E object) throws DAOException {
-    LOGGER.debug("update: " + object);
-    try {
+    if (manager.contains(object)) {
       manager.merge(object);
-      manager.flush();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
+    } else
+      manager.persist(object);
+    manager.flush();
+  }
+
+  @Override
+  public void addAll(List<E> listObject) {
+    LOGGER.debug("addAll: " + listObject);
+    Iterator<E> iter = listObject.listIterator();
+    while (iter.hasNext()) {
+      manager.persist(iter.next());
     }
   }
 
   @Override
-  public void updateAll(List<E> listObject) throws DAOException {
+  public E getById(P id) {
+    LOGGER.debug("getById: " + id);
+    return manager.find(clazz, id);
+  }
+
+  @Override
+  public List<E> getAll() {
+    LOGGER.debug("getAll");
+    TypedQuery<E> query =
+        manager.createQuery("select E from " + clazz.getSimpleName() + " E", clazz);
+    return query.getResultList();
+  }
+
+  @Override
+  public void update(E object) {
+    LOGGER.debug("update: " + object);
+    manager.merge(object);
+    manager.flush();
+  }
+
+  @Override
+  public void updateAll(List<E> listObject) {
     LOGGER.debug("updateAll");
-    try {
-      Iterator<E> iter = listObject.listIterator();
-      while (iter.hasNext()) {
-        manager.merge(iter.next());
-      }
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
+    Iterator<E> iter = listObject.listIterator();
+    while (iter.hasNext()) {
+      manager.merge(iter.next());
     }
   }
 
   @Override
-  public void delete(E object) throws DAOException {
+  public void delete(E object) {
     LOGGER.debug("delete: " + object);
-    try {
-      manager.remove(manager.contains(object) ? object : manager.merge(object));
-      manager.flush();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
+    manager.remove(manager.contains(object) ? object : manager.merge(object));
+    manager.flush();
   }
 
   @Override
-  public void deleteAll(List<E> listObject) throws DAOException {
+  public void deleteAll(List<E> listObject) {
     LOGGER.debug("deleteAll");
-    try {
-      Iterator<E> iter = listObject.listIterator();
-      while (iter.hasNext()) {
-        E object = iter.next();
-        manager.remove(manager.contains(object) ? object : manager.merge(object));
-      }
-      manager.flush();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
+    Iterator<E> iter = listObject.listIterator();
+    while (iter.hasNext()) {
+      E object = iter.next();
+      manager.remove(manager.contains(object) ? object : manager.merge(object));
     }
+    manager.flush();
   }
 }

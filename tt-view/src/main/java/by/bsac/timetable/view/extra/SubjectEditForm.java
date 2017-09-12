@@ -89,7 +89,7 @@ public class SubjectEditForm extends JDialog {
           FormInitializer.initSubjectTable(table, chair, educationLevel);
         } catch (CommandException ex) {
           LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
         }
       }
     });
@@ -120,7 +120,7 @@ public class SubjectEditForm extends JDialog {
 
           } catch (CommandException ex) {
             LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
           } finally {
             refreshFormField(editButton, deleteButton, subjectNameTextField);
           }
@@ -179,23 +179,27 @@ public class SubjectEditForm extends JDialog {
     addButton.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        addButton.setEnabled(false);
+        String subjectName = subjectNameTextField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName);
 
-        try {
-          String lecturerName = subjectNameTextField.getText();
-          Chair chair = (Chair) chairComboBox.getSelectedItem();
-          Subject subject = new SubjectBuilder().buildChair(chair).buildEduLevel(educationLevel)
-              .buildNameSubject(lecturerName).build();
+        if (isTableHasNot) {
+          try {
+            addButton.setEnabled(false);
 
-          CommandFacade.addSubject(subject);
-          FormInitializer.initSubjectTable(table, chair, educationLevel);
+            Chair chair = (Chair) chairComboBox.getSelectedItem();
+            Subject newSubject = new SubjectBuilder().buildChair(chair)
+                .buildEduLevel(educationLevel).buildNameSubject(subjectName).build();
 
-        } catch (CommandException ex) {
-          LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex);
-        } finally {
-          addButton.setEnabled(true);
-          refreshFormField(editButton, deleteButton, subjectNameTextField);
+            CommandFacade.addSubject(newSubject);
+            FormInitializer.initSubjectTable(table, chair, educationLevel);
+
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            addButton.setEnabled(true);
+            refreshFormField(editButton, deleteButton, subjectNameTextField);
+          }
         }
       }
     });
@@ -204,24 +208,27 @@ public class SubjectEditForm extends JDialog {
     editButton.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+        String subjectName = subjectNameTextField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName);
 
-        editButton.setEnabled(false);
-        try {
+        if (isTableHasNot) {
+          try {
+            editButton.setEnabled(false);
 
-          String subjectName = subjectNameTextField.getText();
-          Chair chair = (Chair) chairComboBox.getSelectedItem();
-          subject.setChair(chair);
-          subject.setNameSubject(subjectName);
+            Chair chair = (Chair) chairComboBox.getSelectedItem();
+            subject.setChair(chair);
+            subject.setNameSubject(subjectName);
 
-          CommandFacade.updateSubject(subject);
-          FormInitializer.initSubjectTable(table, chair, educationLevel);
+            CommandFacade.updateSubject(subject);
+            FormInitializer.initSubjectTable(table, chair, educationLevel);
 
-        } catch (CommandException ex) {
-          LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex);
-        } finally {
-          editButton.setEnabled(true);
-          refreshFormField(editButton, deleteButton, subjectNameTextField);
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+          } finally {
+            editButton.setEnabled(true);
+            refreshFormField(editButton, deleteButton, subjectNameTextField);
+          }
         }
       }
     });
@@ -243,7 +250,7 @@ public class SubjectEditForm extends JDialog {
 
           } catch (CommandException ex) {
             LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
           } finally {
             deleteButton.setEnabled(true);
             refreshFormField(editButton, deleteButton, subjectNameTextField);
@@ -306,5 +313,20 @@ public class SubjectEditForm extends JDialog {
     editButton.setVisible(false);
     deleteButton.setVisible(false);
     groupNameTextField.setText("");
+  }
+
+  private boolean isTableHasNotAlikeValue(JTable table, String nameSubject) {
+    int colCount = table.getColumnCount();
+    int rowCount = table.getRowCount();
+    for (int column = 0; column < colCount; column++)
+      for (int row = 0; row < rowCount; row++) {
+        Subject value = (Subject) table.getValueAt(row, column);
+        if (value.getNameSubject().equals(nameSubject)) {
+          LOGGER.warn("try to dublicete nameSubject:" + nameSubject);
+          JOptionPane.showMessageDialog(getContentPane(), "Дисциплина с таким именем уже есть");
+          return false;
+        }
+      }
+    return true;
   }
 }

@@ -372,12 +372,15 @@ public class SupportClass {
         return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.CONSULTATION.getValue(),
             lectName, classRoom);
       case 5:
+        return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.CREDIT.getValue(),
+            lectName, classRoom);
+      case 6:
         return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.EXAM.getValue(), lectName,
             classRoom);
-      case 6:
+      case 7:
         return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.TRAINING_SESSION.getValue(),
             lectName, classRoom);
-      case 7:
+      case 8:
         return String.format(RECORD_TIP_CONSTANT, subjectName, LessonType.MOVE.getValue(), lectName,
             classRoom);
       default:

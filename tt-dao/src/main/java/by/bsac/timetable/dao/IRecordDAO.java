@@ -3,7 +3,6 @@ package by.bsac.timetable.dao;
 import java.util.Date;
 import java.util.List;
 
-import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
@@ -12,31 +11,30 @@ import by.bsac.timetable.entity.SubjectFor;
 
 public interface IRecordDAO {
 
-  public void add(Record mainRecord) throws DAOException;
+  public void add(Record mainRecord);
 
-  public void addAll(List<Record> listRecord) throws DAOException;
+  public void addAll(List<Record> listRecord);
 
-  public void update(Record mainRecord) throws DAOException;
+  public void update(Record mainRecord);
 
-  public void updateAll(List<Record> listRecord) throws DAOException;
+  public void updateAll(List<Record> listRecord);
 
-  public Record getById(Integer idRecord) throws DAOException;
+  public Record getById(Integer idRecord);
 
-  public List<Record> getAll() throws DAOException;
+  public List<Record> getAll();
 
-  public void delete(Record mainRecord) throws DAOException;
-  
-  public void deleteAll(List<Record> recordList) throws DAOException;
+  public void delete(Record mainRecord);
 
-  public List<Record> getRecordListByGroupAndDatesWhichNotCancelled(Group group, Date dateFrom, Date dateTo)
-      throws DAOException;
+  public void deleteAll(List<Record> recordList);
 
-  public Record getRecordForGroupLikeThis(Group group, Record record) throws DAOException;
+  public List<Record> getRecordListByGroupAndDatesWhichNotCancelled(Group group, Date dateFrom,
+      Date dateTo);
 
-  public List<Record> getRecordListByGroupAndSubjectFor(Group group, SubjectFor subjectFor)
-      throws DAOException;
+  public Record getRecordForGroupLikeThis(Group group, Record record);
 
-  public void replaceClassroomForAllRecords(Classroom oldClassroom, Classroom newClassroom) throws DAOException;
-  
-  public void replaceLecturerForAllRecords(Lecturer oldLecturer, Lecturer newLecturer) throws DAOException;
+  public List<Record> getRecordListByGroupAndSubjectFor(Group group, SubjectFor subjectFor);
+
+  public void replaceClassroomForAllRecords(Classroom oldClassroom, Classroom newClassroom);
+
+  public void replaceLecturerForAllRecords(Lecturer oldLecturer, Lecturer newLecturer);
 }

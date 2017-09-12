@@ -111,20 +111,20 @@ public class LecturerEditForm extends JDialog {
     contentPanel.add(chairComboBox);
     chairComboBox.setToolTipText("");
 
-    chairComboBox.addItemListener((ItemEvent evt)-> {
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-          try {
-            Chair chair = (Chair) chairComboBox.getSelectedItem();
+    chairComboBox.addItemListener((ItemEvent evt) -> {
+      if (evt.getStateChange() == ItemEvent.SELECTED) {
+        try {
+          Chair chair = (Chair) chairComboBox.getSelectedItem();
 
-            FormInitializer.initLecturerTable(table, chair);
+          FormInitializer.initLecturerTable(table, chair);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex);
-          } finally {
-            refreshFormField(editButton, deleteButton, lecturerNameTextField);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex);
+        } finally {
+          refreshFormField(editButton, deleteButton, lecturerNameTextField);
         }
+      }
     });
 
     ImageIcon icon = new ImageIcon("C:\\Users\\hello\\Desktop\\add-icon.png");
@@ -178,23 +178,27 @@ public class LecturerEditForm extends JDialog {
     addButton.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        addButton.setEnabled(false);
+        String lecturerName = lecturerNameTextField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, lecturerName);
 
-        try {
-          String lecturerName = lecturerNameTextField.getText();
-          Chair chair = (Chair) chairComboBox.getSelectedItem();
-          Lecturer lecturer =
-              new LecturerBuilder().buildChair(chair).buildNameLecturer(lecturerName).build();
+        if (isTableHasNot) {
+          try {
+            addButton.setEnabled(false);
 
-          CommandFacade.addLecturer(lecturer);
-          FormInitializer.initLecturerTable(table, chair);
+            Chair chair = (Chair) chairComboBox.getSelectedItem();
+            Lecturer newLecturer =
+                new LecturerBuilder().buildChair(chair).buildNameLecturer(lecturerName).build();
 
-        } catch (CommandException ex) {
-          LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex);
-        } finally {
-          addButton.setEnabled(true);
-          refreshFormField(editButton, deleteButton, lecturerNameTextField);
+            CommandFacade.addLecturer(newLecturer);
+            FormInitializer.initLecturerTable(table, chair);
+
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex);
+          } finally {
+            addButton.setEnabled(true);
+            refreshFormField(editButton, deleteButton, lecturerNameTextField);
+          }
         }
       }
     });
@@ -203,24 +207,27 @@ public class LecturerEditForm extends JDialog {
     editButton.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+        String lecturerName = lecturerNameTextField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, lecturerName);
 
-        editButton.setEnabled(false);
-        try {
+        if (isTableHasNot) {
+          try {
+            editButton.setEnabled(false);
 
-          String lecturerName = lecturerNameTextField.getText();
-          Chair chair = (Chair) chairComboBox.getSelectedItem();
-          lecturer.setChair(chair);
-          lecturer.setNameLecturer(lecturerName);
+            Chair chair = (Chair) chairComboBox.getSelectedItem();
+            lecturer.setChair(chair);
+            lecturer.setNameLecturer(lecturerName);
 
-          CommandFacade.updateLecturer(lecturer);
-          FormInitializer.initLecturerTable(table, chair);
+            CommandFacade.updateLecturer(lecturer);
+            FormInitializer.initLecturerTable(table, chair);
 
-        } catch (CommandException ex) {
-          LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex);
-        } finally {
-          editButton.setEnabled(true);
-          refreshFormField(editButton, deleteButton, lecturerNameTextField);
+          } catch (CommandException ex) {
+            LOGGER.error(ex.getCause().getMessage(), ex);
+            JOptionPane.showMessageDialog(getContentPane(), ex);
+          } finally {
+            editButton.setEnabled(true);
+            refreshFormField(editButton, deleteButton, lecturerNameTextField);
+          }
         }
       }
     });
@@ -319,5 +326,20 @@ public class LecturerEditForm extends JDialog {
     editButton.setVisible(false);
     deleteButton.setVisible(false);
     groupNameTextField.setText("");
+  }
+
+  private boolean isTableHasNotAlikeValue(JTable table, String nameLecturer) {
+    int colCount = table.getColumnCount();
+    int rowCount = table.getRowCount();
+    for (int column = 0; column < colCount; column++)
+      for (int row = 0; row < rowCount; row++) {
+        Lecturer value = (Lecturer) table.getValueAt(row, column);
+        if (value.getNameLecturer().equals(nameLecturer)) {
+          LOGGER.warn("try to dublicete nameLecturer:" + nameLecturer);
+          JOptionPane.showMessageDialog(getContentPane(), "Преподаватель с таким именем уже есть");
+          return false;
+        }
+      }
+    return true;
   }
 }

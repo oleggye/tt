@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import by.bsac.timetable.dao.IClassroomDAO;
-import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
 
@@ -20,8 +19,7 @@ public class ClassroomDAOImpl extends AbstractHibernateDAO<Classroom, Short>
 
   // TODO: just stub
   @Override
-  public List<Classroom> getClassroomListForGroupByDates(Group group, Date dateFrom, Date dateTo)
-      throws DAOException {
+  public List<Classroom> getClassroomListForGroupByDates(Group group, Date dateFrom, Date dateTo) {
     // TODO Auto-generated method stub
     return null;
   }

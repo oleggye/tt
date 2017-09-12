@@ -31,3 +31,4 @@ hibernate.cfg.xml
 hibernate.reveng.xml
 logs/**
 *.log
+tt-view/logs/*.log

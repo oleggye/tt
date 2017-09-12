@@ -44,18 +44,17 @@ import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.exception.ApplicationException;
 import by.bsac.timetable.listener.AppListener;
-import by.bsac.timetable.service.exception.ServiceException;
 import by.bsac.timetable.util.DateLabelFormatter;
 import by.bsac.timetable.util.SupportClass;
 import by.bsac.timetable.view.contoller.CellTableMouseClickedEvent;
 import by.bsac.timetable.view.contoller.ShowBtnActionEvent;
 import by.bsac.timetable.view.extra.ChairEditForm;
 import by.bsac.timetable.view.extra.ClassroomEditForm;
-import by.bsac.timetable.view.extra.EditForm;
 import by.bsac.timetable.view.extra.FacultyEditForm;
 import by.bsac.timetable.view.extra.FlowEditForm;
 import by.bsac.timetable.view.extra.GroupEditForm;
 import by.bsac.timetable.view.extra.LecturerEditForm;
+import by.bsac.timetable.view.extra.SubjectEditForm;
 import by.bsac.timetable.view.util.FormInitializer;
 import components.MyComboBox;
 import tableClasses.TablesArray;
@@ -154,7 +153,7 @@ public class MainForm extends JFrame {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         try {
           showWindow(false, progressBarLbl, progressBar);
-        } catch (ServiceException | ApplicationException ex) {
+        } catch (ApplicationException ex) {
           LOGGER.error(ex.getCause().getMessage(), ex);
           JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
         }
@@ -214,8 +213,8 @@ public class MainForm extends JFrame {
 
     JMenuItem changeSubjectMenuItem = new JMenuItem(getMessage("mainForm.editSubject"));
     changeSubjectMenuItem.addActionListener((ActionEvent e) -> {
-      EditForm edf = new EditForm(mainFrame, 2, 1, educationLevel);
-      /* SubjectEditForm edf = new SubjectEditForm(educationLevel); */
+      /* EditForm edf = new EditForm(mainFrame, 2, 1, educationLevel); */
+      SubjectEditForm edf = new SubjectEditForm(educationLevel);
       edf.setLocationRelativeTo(mainFrame);
       edf.setVisible(true);
       resetTimetable();
@@ -351,8 +350,7 @@ public class MainForm extends JFrame {
     }
   }
 
-  private void showWindow(boolean isJustStarted, JLabel progressBarLbl, JProgressBar progressBar)
-      throws ServiceException {
+  private void showWindow(boolean isJustStarted, JLabel progressBarLbl, JProgressBar progressBar) {
     mainFrame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     try {
       // TODO add your handling code here:
@@ -365,12 +363,8 @@ public class MainForm extends JFrame {
       }
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
-      JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
-      progressBarLbl.setText(ex.toString());
-
-    } catch (Throwable ex) {
-      LOGGER.error(ex.getCause().getMessage(), ex);
-      JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
+      JOptionPane.showMessageDialog(mainFrame.getContentPane(),
+          ex.getCause().getCause().getMessage());
       JOptionPane.showMessageDialog(mainFrame.getContentPane(),
           getMessage("mainForm.error.sendToAdmin"));
       JOptionPane.showMessageDialog(mainFrame.getContentPane(),
@@ -428,7 +422,7 @@ public class MainForm extends JFrame {
       try {
         listener.appStarting();
         showWindow(true, progressBarLbl, progressBar);
-      } catch (ServiceException | ApplicationException ex) {
+      } catch (ApplicationException ex) {
         LOGGER.error(ex.getCause().getMessage(), ex);
         JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
         progressBarLbl.setText(getMessage("mainForm.error"));

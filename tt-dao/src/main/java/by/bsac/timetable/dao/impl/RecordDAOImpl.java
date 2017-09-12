@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import by.bsac.timetable.dao.IRecordDAO;
-import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
@@ -25,105 +24,68 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
   }
 
   @Override
-  public List<Record> getRecordListByGroupAndDatesWhichNotCancelled(Group group, Date dateFrom, Date dateTo)
-      throws DAOException {
-    LOGGER.debug("getRecordListByGroupAndDate");
-    try {
-     return 
-         manager.createQuery("SELECT distinct rec FROM Record as rec "
-          + "LEFT JOIN rec.cancellations can "
-          + "WHERE rec.idRecord not in "
-          + "(SELECT cans.record.idRecord FROM Cancellation cans "
-          + "WHERE (:dateFrom BETWEEN cans.dateFrom AND cans.dateTo) "
-          + "OR (:dateTo BETWEEN cans.dateFrom AND cans.dateTo) "
-          + "OR (:dateFrom <= cans.dateFrom AND :dateTo >= cans.dateTo)) "
-          + "AND rec.group =:group "
-          + "AND ((:dateFrom BETWEEN rec.dateFrom AND rec.dateTo) " + 
-          "OR (:dateTo BETWEEN rec.dateFrom AND rec.dateTo) " + 
-          "OR (:dateFrom <= rec.dateFrom AND :dateTo >= rec.dateTo))", Record.class)
-      .setParameter("dateFrom", dateFrom)
-      .setParameter("dateTo", dateTo)
-      .setParameter("group", group)
-      .getResultList();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
+  public List<Record> getRecordListByGroupAndDatesWhichNotCancelled(Group group, Date dateFrom,
+      Date dateTo) {
+    LOGGER.debug("getRecordListByGroupAndDate: group=" + group + ", dateFrom=" + dateFrom
+        + ",dateTo=" + dateTo);
+    return manager
+        .createQuery("SELECT distinct rec FROM Record as rec " + "LEFT JOIN rec.cancellations can "
+            + "WHERE rec.idRecord not in " + "(SELECT cans.record.idRecord FROM Cancellation cans "
+            + "WHERE (:dateFrom BETWEEN cans.dateFrom AND cans.dateTo) "
+            + "OR (:dateTo BETWEEN cans.dateFrom AND cans.dateTo) "
+            + "OR (:dateFrom <= cans.dateFrom AND :dateTo >= cans.dateTo)) "
+            + "AND rec.group =:group " + "AND ((:dateFrom BETWEEN rec.dateFrom AND rec.dateTo) "
+            + "OR (:dateTo BETWEEN rec.dateFrom AND rec.dateTo) "
+            + "OR (:dateFrom <= rec.dateFrom AND :dateTo >= rec.dateTo))", Record.class)
+        .setParameter("dateFrom", dateFrom).setParameter("dateTo", dateTo)
+        .setParameter("group", group).getResultList();
   }
 
   // FIXME: it is very strange method! Don't exactly know for what...
   @Override
-  public Record getRecordForGroupLikeThis(Group group, Record record) throws DAOException {
-    LOGGER.debug("getRecordForGroupLikeThis");
-    try {
-      return 
-          manager
-          .createQuery("select rec from Record as rec where rec.group =:group and "
-              + "rec.weekNumber =:weekNumber and rec.weekDay =:weekDay and "
-              + "rec.subjOrdinalNumber =:subjOrdinalNumber and rec.dateFrom =:dateFrom and "
-              + "rec.dateTo =:dateTo and rec.idRecord <>:id", Record.class)
-          .setParameter("group", group)
-          .setParameter("weekNumber", record.getWeekNumber())
-          .setParameter("weekDay", record.getWeekDay())
-          .setParameter("subjOrdinalNumber", record.getSubjOrdinalNumber())
-          .setParameter("dateFrom", record.getDateFrom())
-          .setParameter("dateTo", record.getDateTo())
-          .setParameter("id", record.getIdRecord())
-          .getSingleResult();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
+  public Record getRecordForGroupLikeThis(Group group, Record record) {
+    LOGGER.debug("getRecordForGroupLikeThis: group=" + group + "record=" + record);
+    return manager
+        .createQuery("select rec from Record as rec where rec.group =:group and "
+            + "rec.weekNumber =:weekNumber and rec.weekDay =:weekDay and "
+            + "rec.subjOrdinalNumber =:subjOrdinalNumber and rec.dateFrom =:dateFrom and "
+            + "rec.dateTo =:dateTo and rec.idRecord <>:id", Record.class)
+        .setParameter("group", group).setParameter("weekNumber", record.getWeekNumber())
+        .setParameter("weekDay", record.getWeekDay())
+        .setParameter("subjOrdinalNumber", record.getSubjOrdinalNumber())
+        .setParameter("dateFrom", record.getDateFrom()).setParameter("dateTo", record.getDateTo())
+        .setParameter("id", record.getIdRecord()).getSingleResult();
   }
 
   @Override
-  public List<Record> getRecordListByGroupAndSubjectFor(Group group, SubjectFor subjectFor)
-      throws DAOException {
-    LOGGER.debug("getRecordListByGroupAndSubjectFor");
-    try {
-      return manager
-          .createQuery(
-              "select rec from Record rec where rec.group =:group and rec.subjectFor =:subjectFor",
-              Record.class)
-          .setParameter("group", group).setParameter("subjectFor", subjectFor).getResultList();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
+  public List<Record> getRecordListByGroupAndSubjectFor(Group group, SubjectFor subjectFor) {
+    LOGGER.debug("getRecordListByGroupAndSubjectFor: group=" + group + "subjectFor=" + subjectFor);
+    return manager
+        .createQuery(
+            "select rec from Record rec where rec.group =:group and rec.subjectFor =:subjectFor",
+            Record.class)
+        .setParameter("group", group).setParameter("subjectFor", subjectFor).getResultList();
   }
 
   @Override
-  public void replaceClassroomForAllRecords(Classroom oldClassroom, Classroom newClassroom)
-      throws DAOException {
+  public void replaceClassroomForAllRecords(Classroom oldClassroom, Classroom newClassroom) {
     LOGGER.debug("replaceClassroom: [oldClassroom= " + oldClassroom + ", newClassroom= "
         + newClassroom + "]");
-    try {
-      manager
-          .createNativeQuery(
-              "UPDATE record as rec SET rec.id_classroom =:newId WHERE rec.id_classroom =:oldId")
-          .setParameter("newId", newClassroom.getIdClassroom())
-          .setParameter("oldId", oldClassroom.getIdClassroom()).
-          executeUpdate();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-    }
+    manager
+        .createNativeQuery(
+            "UPDATE record as rec SET rec.id_classroom =:newId WHERE rec.id_classroom =:oldId")
+        .setParameter("newId", newClassroom.getIdClassroom())
+        .setParameter("oldId", oldClassroom.getIdClassroom()).executeUpdate();
   }
 
   @Override
-  public void replaceLecturerForAllRecords(Lecturer oldLecturer, Lecturer newLecturer)
-      throws DAOException {
+  public void replaceLecturerForAllRecords(Lecturer oldLecturer, Lecturer newLecturer) {
     LOGGER.debug(
         "replaceLecturer: [oldLecturer= " + oldLecturer + ", newLecturer= " + newLecturer + "]");
-    try {
-      manager
-          .createNativeQuery(
-              "UPDATE record as rec SET rec.id_lecturer =:newId WHERE rec.id_lecturer =:oldId")
-          .setParameter("newId", newLecturer.getIdLecturer())
-          .setParameter("oldId", oldLecturer.getIdLecturer())
-          .executeUpdate();
-    } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage(), e);
-      throw new DAOException(e.getMessage(), e);
-    }
+    manager
+        .createNativeQuery(
+            "UPDATE record as rec SET rec.id_lecturer =:newId WHERE rec.id_lecturer =:oldId")
+        .setParameter("newId", newLecturer.getIdLecturer())
+        .setParameter("oldId", oldLecturer.getIdLecturer()).executeUpdate();
   }
 }
