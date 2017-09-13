@@ -23,4 +23,6 @@ public interface IClassroomDAO {
   public void delete(Classroom chair);
 
   public List<Classroom> getClassroomListForGroupByDates(Group group, Date dateFrom, Date dateTo);
+
+  public List<Classroom> getReservedClassroomList(Date dateFrom, Date dateTo);
 }

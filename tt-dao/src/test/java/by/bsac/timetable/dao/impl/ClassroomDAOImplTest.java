@@ -2,6 +2,10 @@ package by.bsac.timetable.dao.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -32,6 +36,7 @@ import by.bsac.timetable.entity.builder.ClassroomBuilder;
     DirtiesContextTestExecutionListener.class, TransactionalTestExecutionListener.class,
     DbUnitTestExecutionListener.class})
 public class ClassroomDAOImplTest {
+  private static final DateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
   @Autowired
   private IClassroomDAO dao;
@@ -145,5 +150,24 @@ public class ClassroomDAOImplTest {
     Classroom classroom =
         new ClassroomBuilder().buildId(id).buildNumber(number).buildBuilding(building).build();
     dao.delete(classroom);
+  }
+  
+  @Test
+  @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/lecturerSetup.xml",
+      "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
+      "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
+      "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
+      "/data/setup/recordSetup.xml", "/data/setup/cancellationSetup.xml"})
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testGetClassroomListByDates() throws DAOException, ParseException {
+    final int expectedSize = 2;    
+    final Date dateFrom = FORMAT.parse("2017-08-28");
+    final Date dateTo = FORMAT.parse("2017-08-28");
+
+    List<Classroom> classroomList = dao.getReservedClassroomList(dateFrom, dateTo);
+    assertThat(classroomList).isNotNull();
+    classroomList.stream().forEach(System.out::println);
+    assertThat(classroomList.size()).isEqualTo(expectedSize);
   }
 }

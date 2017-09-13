@@ -155,11 +155,15 @@ public class AddNewRecordForm extends JDialog {
 
   private void constractAddTab(JPanel addTab, String lessonDate) {
 
+    /* be careful with such attepts! */
+    JComboBox<Classroom> classroomComboBox = new MyComboBox<>(new ClassroomRenderer<>());
+    classroomComboBox.setBounds(10, 11, 159, 27);
+
     JLabel selectedDateLabel = new JLabel(lessonDate);
     JPanel duplicateOnWeeksPanel = new JPanel();
 
     JDatePickerImpl oneDatePickerForAdding = initializer.initDatePicker(addRecord.getDateFrom());
-    oneDatePickerForAdding.addActionListener((ActionEvent e) -> {
+    oneDatePickerForAdding.addActionListener(e -> {
       Date date = (Date) oneDatePickerForAdding.getModel().getValue();
       addRecord.setDateFrom(date);
       addRecord.setDateTo(date);
@@ -167,12 +171,13 @@ public class AddNewRecordForm extends JDialog {
         String formatedDate = new SimpleDateFormat(DATE_FORMAT).format(date);
         selectedDateLabel.setText(formatedDate);
       }
-
+      initClassroomComboBox(classroomComboBox, addRecord.getDateFrom());
     });
     JDatePickerImpl fromDatePickerForAdd = initializer.initDatePicker(addRecord.getDateFrom());
     fromDatePickerForAdd.addActionListener((ActionEvent e) -> {
       Date date = (Date) fromDatePickerForAdd.getModel().getValue();
       addRecord.setDateFrom(date);
+      initClassroomComboBox(classroomComboBox, date);
     });
 
     JDatePickerImpl toDatePickerForAdd = initializer.initDatePicker(addRecord.getDateFrom());
@@ -593,9 +598,6 @@ public class AddNewRecordForm extends JDialog {
     label_9.setBounds(55, 394, 215, 20);
     addTab.add(label_9);
 
-    JComboBox<Classroom> classroomComboBox = new MyComboBox<>(new ClassroomRenderer<>());
-    classroomComboBox.setBounds(10, 11, 159, 27);
-
     classroomComboBox.addItemListener((java.awt.event.ItemEvent evt) -> {
       if (evt.getStateChange() == ItemEvent.SELECTED) {
         if (classroomComboBox.getItemCount() > 0) {
@@ -619,7 +621,7 @@ public class AddNewRecordForm extends JDialog {
         FormInitializer.initLecturerComboBox(lecturerComboBox, chairComboBox);
         addRecord.setLecturer((Lecturer) lecturerComboBox.getSelectedItem());
       }
-      FormInitializer.initClassroomComboBox(classroomComboBox);
+      initClassroomComboBox(classroomComboBox, addRecord.getDateFrom());
       addRecord.setClassroom((Classroom) classroomComboBox.getSelectedItem());
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
@@ -720,5 +722,14 @@ public class AddNewRecordForm extends JDialog {
 
   public Record getAddRecord() {
     return addRecord;
+  }
+
+  private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate) {
+    try {
+      FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate);
+    } catch (CommandException ex) {
+      LOGGER.error(ex.getCause().getMessage(), ex);
+      JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+    }
   }
 }

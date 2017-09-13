@@ -57,6 +57,7 @@ public class UpdateOrCancelForm extends JDialog {
   private static final Logger LOGGER = LogManager.getLogger(UpdateOrCancelForm.class.getName());
 
   private static final long serialVersionUID = 1L;
+  private static final String DATE_FORMAT = "dd-MM-yyyy";
 
   private final UpdateOrCancelInitializer initializer = new UpdateOrCancelInitializer(this);
 
@@ -100,7 +101,7 @@ public class UpdateOrCancelForm extends JDialog {
     setLocationRelativeTo(parent);
     setBounds(100, 100, 741, 576);
 
-    String date = new SimpleDateFormat("dd-MM-yyyy").format(lessonDate);
+    String date = new SimpleDateFormat(DATE_FORMAT).format(lessonDate);
 
     getContentPane().setLayout(null);
 
@@ -177,20 +178,28 @@ public class UpdateOrCancelForm extends JDialog {
 
   private void constactUpdateTab(JPanel updatePanel, String lessonDate) {
 
+    JComboBox<Classroom> classroomComboBox = new MyComboBox<>(new ClassroomRenderer<>());
+    classroomComboBox.setBounds(10, 11, 159, 27);
+
+    JLabel selectedDateLabel = new JLabel(lessonDate);
+
     JDatePickerImpl oneDatePickerForUpdate = initializer.initDatePicker(updateRecord.getDateFrom());
     oneDatePickerForUpdate.addActionListener((ActionEvent e) -> {
-      Date value = (Date) oneDatePickerForUpdate.getModel().getValue();
-      System.out.println("selected date:" + value);
-      updateRecord.setDateFrom(value);
-      updateRecord.setDateTo(value);
+      Date dateValue = (Date) oneDatePickerForUpdate.getModel().getValue();
+      updateRecord.setDateFrom(dateValue);
+      updateRecord.setDateTo(dateValue);
+      if (updateLessonPeriod.equals(LessonPeriod.FOR_ONE_DATE)) {
+        String formatedDate = new SimpleDateFormat(DATE_FORMAT).format(dateValue);
+        selectedDateLabel.setText(formatedDate);
+      }
     });
     JDatePickerImpl fromDatePickerForUpdate =
         initializer.initDatePicker(updateRecord.getDateFrom());
     fromDatePickerForUpdate.addActionListener((ActionEvent e) -> {
       // FIXME: проверка на то, чтобы dateFrom <= dateTo
       Date value = (Date) fromDatePickerForUpdate.getModel().getValue();
-      System.out.println("selected date from:" + value);
       updateRecord.setDateFrom(value);
+      initClassroomComboBox(classroomComboBox, value);
     });
 
     JDatePickerImpl toDatePickerForUpdate = initializer.initDatePicker(updateRecord.getDateTo());
@@ -211,7 +220,6 @@ public class UpdateOrCancelForm extends JDialog {
     lblNewLabel.setBounds(206, 11, 125, 19);
     updatePanel.add(lblNewLabel);
 
-    JLabel selectedDateLabel = new JLabel(lessonDate);
     selectedDateLabel.setForeground(Color.RED);
     selectedDateLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
     selectedDateLabel.setBounds(344, 13, 115, 14);
@@ -660,11 +668,10 @@ public class UpdateOrCancelForm extends JDialog {
     dublicateOnWeekLabel.setBounds(55, 394, 215, 20);
     updatePanel.add(dublicateOnWeekLabel);
 
-    JComboBox<Classroom> classroomComboBox = new MyComboBox<>(new ClassroomRenderer<>());
-    classroomComboBox.setBounds(10, 11, 159, 27);
     classroomComboBox.addItemListener((java.awt.event.ItemEvent evt) -> {
       if (classroomComboBox.getItemCount() > 0) {
         updateRecord.setClassroom((Classroom) classroomComboBox.getSelectedItem());
+        initClassroomComboBox(classroomComboBox, updateRecord.getDateFrom());
       }
     });
 
@@ -698,7 +705,7 @@ public class UpdateOrCancelForm extends JDialog {
         System.out.println("idLecturer:" + lecturer.getIdLecturer());
         UtilityClass.selectCBItemById(updateLecturerComboBox, lecturer);
       }
-      FormInitializer.initClassroomComboBox(classroomComboBox);
+      FormInitializer.initClassroomComboBox(classroomComboBox, updateRecord.getDateFrom());
 
       Classroom classroom = updateRecord.getClassroom();
       System.out.println("classroom:" + classroom.getName());
@@ -1112,5 +1119,14 @@ public class UpdateOrCancelForm extends JDialog {
 
   public void setEducationLevel(byte educationLevel) {
     this.educationLevel = educationLevel;
+  }
+
+  private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate) {
+    try {
+      FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate);
+    } catch (CommandException ex) {
+      LOGGER.error(ex.getCause().getMessage(), ex);
+      JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+    }
   }
 }

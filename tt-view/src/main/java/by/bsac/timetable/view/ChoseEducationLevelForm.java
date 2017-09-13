@@ -10,8 +10,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 public class ChoseEducationLevelForm extends JDialog {
-
   private static final long serialVersionUID = 1L;
+
+  private static final String FONT_CONSTANT = "Times New Roman";
 
   private byte educationLevel = 1;
 
@@ -28,32 +29,26 @@ public class ChoseEducationLevelForm extends JDialog {
     getContentPane().add(panel, BorderLayout.CENTER);
     panel.setLayout(null);
 
-    JLabel label = new JLabel(
-        "Выберите уровень образования");
+    JLabel label = new JLabel("Выберите уровень образования");
     label.setForeground(Color.RED);
-    label.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-    label.setBounds(21, 11, 225, 40);
+    label.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
+    label.setBounds(25, 11, 225, 40);
     panel.add(label);
 
-    JButton btnNewButton = new JButton(
-        "Высшее");
-    btnNewButton.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-    btnNewButton.setBounds(31, 62, 187, 32);
-    btnNewButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        setEduLevel((byte) 1); // ������ ��
-        dispose();
-      }
+    JButton highEducationBtn = new JButton("Высшая ступень");
+    highEducationBtn.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
+    highEducationBtn.setBounds(45, 55, 187, 32);
+    highEducationBtn.addActionListener(e -> {
+      setEduLevel((byte) 1); // ������ ��
+      dispose();
     });
 
-    panel.add(btnNewButton);
+    panel.add(highEducationBtn);
 
-    JButton btnNewButton_1 = new JButton(
-        "Среднее специальное");
-    btnNewButton_1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-    btnNewButton_1.setBounds(31, 118, 187, 32);
-    btnNewButton_1.addActionListener(new java.awt.event.ActionListener() {
+    JButton middleEducationBtn = new JButton("Среднее специальное");
+    middleEducationBtn.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
+    middleEducationBtn.setBounds(45, 100, 187, 32);
+    middleEducationBtn.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         setEduLevel((byte) 2); // ������ ���
@@ -61,15 +56,28 @@ public class ChoseEducationLevelForm extends JDialog {
       }
     });
 
-    panel.add(btnNewButton_1);
-    setBounds(100, 100, 259, 199);
+    panel.add(middleEducationBtn);
+
+    JButton magistrationBtn = new JButton("Магистратура");
+    magistrationBtn.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
+    magistrationBtn.setBounds(45, 145, 187, 32);
+    magistrationBtn.addActionListener(new java.awt.event.ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        setEduLevel((byte) 3); // ������ ��
+        dispose();
+      }
+    });
+    panel.add(magistrationBtn);
+
+    setBounds(100, 100, 278, 224);
   }
 
   public byte getEduLevel() {
     return this.educationLevel;
   }
 
-  private void setEduLevel(byte edu_level) {
-    this.educationLevel = edu_level;
+  private void setEduLevel(byte educationLevel) {
+    this.educationLevel = educationLevel;
   }
 }

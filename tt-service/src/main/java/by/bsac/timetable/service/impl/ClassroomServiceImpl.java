@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import by.bsac.timetable.dao.IClassroomDAO;
 import by.bsac.timetable.entity.Classroom;
-import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.service.IClassroomService;
 import by.bsac.timetable.service.IValidationService;
 import by.bsac.timetable.service.exception.ServiceException;
@@ -78,12 +77,22 @@ public class ClassroomServiceImpl implements IClassroomService {
   @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
       dontRollbackOn = ServiceValidationException.class)
   @Override
-  public List<Classroom> getClassroomListForGroupByDates(Group group, Date dateFrom, Date dateTo)
+  public List<Classroom> getClassroomListByDates(Date dateFrom, Date dateTo)
       throws ServiceException, ServiceValidationException {
-    service.validateGroup(group, true);
     service.validateDates(dateFrom, dateTo);
     try {
-      return dao.getClassroomListForGroupByDates(group, dateFrom, dateTo);
+      List<Classroom> allClassroomList = dao.getAll();
+      List<Classroom> reservedClassroomList = dao.getReservedClassroomList(dateFrom, dateTo);
+      
+      for (Classroom classroom : allClassroomList) {
+        for (Classroom reservedClassroom : reservedClassroomList) {
+          if (classroom.equals(reservedClassroom)) {
+            classroom.setReserved(true);
+            break;
+          }
+        }
+      }
+      return allClassroomList;
     } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при получении аудиторий", e);
     }

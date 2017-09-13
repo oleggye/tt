@@ -36,6 +36,7 @@
 		<entry key="Delete_Classroom" value-ref="deleteClassroom" />
 		<entry key="Change_Classroom" value-ref="changeClassroom" />
 		<entry key="Get_Classroom_List" value-ref="getClassroomList" />
+		<entry key="Get_Classroom_List_By_Date" value-ref="GetClassroomListByReferenceDate" />
 
 		<!-- Flow -->
 		<entry key="Add_Flow" value-ref="addFlow" />
@@ -49,8 +50,7 @@
 		<entry key="Update_Group" value-ref="updateGroup" />
 		<entry key="Delete_Group" value-ref="deleteGroup" />
 		<entry key="Get_Group_List_By_Flow" value-ref="getGroupListByFlow" />
-		<entry key="Get_Group_List_By_Faculty_And_EduLevel"
-			value-ref="getGroupListByFacultyAndEduLevel" />
+		<entry key="Get_Group_List_By_Faculty_And_EduLevel" value-ref="getGroupListByFacultyAndEduLevel" />
 		<entry key="Get_Group_List_By_Name" value-ref="getGroupListByName" />
 
 		<!-- Lecturer -->
@@ -66,8 +66,7 @@
 		<entry key="Add_Subject" value-ref="addSubject" />
 		<entry key="Update_Subject" value-ref="updateSubject" />
 		<entry key="Delete_Subject" value-ref="deleteSubject" />
-		<entry key="Get_Subject_List_By_Chair_And_EduLevel"
-			value-ref="getSubjectListByChairAndEduLevel" />
+		<entry key="Get_Subject_List_By_Chair_And_EduLevel" value-ref="getSubjectListByChairAndEduLevel" />
 		<entry key="Get_Subject_List_By_Name" value-ref="GetSubjectListByName" />
 
 	</util:map>

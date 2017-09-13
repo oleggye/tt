@@ -298,7 +298,7 @@ public class ValidationServiceImpl implements IValidationService {
     private static final short TOP_CLASSROOM_NUMBER_BOUND = 500;
 
     private static final short LOW_EDUCATION_LEVEL_BOUND = 1;
-    private static final short TOP_EDUCATION_LEVEL_BOUND = 2;
+    private static final short TOP_EDUCATION_LEVEL_BOUND = 4;
 
     static boolean isIdInvalid(int id) {
       return id < LOW_ID_BOUND ? true : false;
