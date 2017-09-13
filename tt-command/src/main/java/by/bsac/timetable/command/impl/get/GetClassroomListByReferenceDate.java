@@ -10,6 +10,7 @@ import by.bsac.timetable.command.ICommand;
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.Request;
 import by.bsac.timetable.entity.Classroom;
+import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.service.IClassroomService;
 import by.bsac.timetable.service.exception.ServiceException;
 import by.bsac.timetable.service.exception.ServiceValidationException;
@@ -24,12 +25,14 @@ public class GetClassroomListByReferenceDate implements ICommand {
   @Override
   public void execute(Request request) throws CommandException {
     Date referenceDate = (Date) request.getValue("referenceDate");
+    Record record = (Record) request.getValue("record");
 
     Date[] dateArr = DateUtil.getDateFromAndDateToByReferenceDate(referenceDate);
     Date dateFrom = dateArr[0];
     Date dateTo = dateArr[1];
     try {
-      List<Classroom> classroomList = service.getClassroomListByDates(dateFrom, dateTo);
+      List<Classroom> classroomList =
+          service.getClassroomListByDatesAndRecordParams(dateFrom, dateTo, record);
       request.putParam("classroomList", classroomList);
     } catch (ServiceException | ServiceValidationException e) {
       throw new CommandException(e);

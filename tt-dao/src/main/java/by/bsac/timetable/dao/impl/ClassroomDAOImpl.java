@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import by.bsac.timetable.dao.IClassroomDAO;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
+import by.bsac.timetable.entity.Record;
 
 @Repository
 public class ClassroomDAOImpl extends AbstractHibernateDAO<Classroom, Short>
@@ -28,7 +29,7 @@ public class ClassroomDAOImpl extends AbstractHibernateDAO<Classroom, Short>
   }
 
   @Override
-  public List<Classroom> getReservedClassroomList(Date dateFrom, Date dateTo) {
+  public List<Classroom> getReservedClassroomListByDatesAndRecord(Date dateFrom, Date dateTo, Record record) {
     LOGGER.debug("getReservedClassroomList: dateFrom=" + dateFrom + ",dateTo=" + dateTo);
     return manager
         .createQuery("SELECT distinct rec.classroom FROM Record as rec "
@@ -37,9 +38,20 @@ public class ClassroomDAOImpl extends AbstractHibernateDAO<Classroom, Short>
             + "WHERE (:dateFrom BETWEEN cans.dateFrom AND cans.dateTo) "
             + "OR (:dateTo BETWEEN cans.dateFrom AND cans.dateTo) "
             + "OR (:dateFrom <= cans.dateFrom AND :dateTo >= cans.dateTo)) "
-            + "AND ((:dateFrom BETWEEN rec.dateFrom AND rec.dateTo) "
+            + "AND NOT (:dateTo < rec.dateFrom OR :dateFrom > rec.dateTo) "
+            + "AND rec.weekNumber =:weekNumber "
+            + "AND rec.weekDay =:weekDay "
+            + "AND rec.subjOrdinalNumber =:subjOrdinalNumber "
+           /* + "AND ((:dateFrom BETWEEN rec.dateFrom AND rec.dateTo) "
             + "OR (:dateTo BETWEEN rec.dateFrom AND rec.dateTo) "
-            + "OR (:dateFrom <= rec.dateFrom AND :dateTo >= rec.dateTo))", Classroom.class)
-        .setParameter("dateFrom", dateFrom).setParameter("dateTo", dateTo).getResultList();
+            + "OR (:dateFrom <= rec.dateFrom AND :dateTo >= rec.dateTo))"*/, Classroom.class)
+        .setParameter("dateFrom", dateFrom)
+        .setParameter("dateTo", dateTo)
+        .setParameter("weekNumber", record.getWeekNumber())
+        .setParameter("weekDay", record.getWeekDay())
+        .setParameter("subjOrdinalNumber", record.getWeekDay())
+        .getResultList();
+    
+    
   }
 }

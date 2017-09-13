@@ -28,7 +28,9 @@ import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import by.bsac.timetable.dao.IClassroomDAO;
 import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Classroom;
+import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.builder.ClassroomBuilder;
+import by.bsac.timetable.entity.builder.RecordBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:springDBUnitContext.xml")
@@ -161,11 +163,19 @@ public class ClassroomDAOImplTest {
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
   public void testGetClassroomListByDates() throws DAOException, ParseException {
-    final int expectedSize = 2;    
+    final int expectedSize = 1;    
     final Date dateFrom = FORMAT.parse("2017-08-28");
     final Date dateTo = FORMAT.parse("2017-08-28");
+    byte weekNumber = 1;
+    byte weekDay = 1;
+    byte subjectOrdinalNumber = 1;
+    Record record = new RecordBuilder()
+                      .buildWeekNumber(weekNumber)
+                      .buildWeekDay(weekDay)
+                      .buildSubjOrdinalNumber(subjectOrdinalNumber)
+                      .build();
 
-    List<Classroom> classroomList = dao.getReservedClassroomList(dateFrom, dateTo);
+    List<Classroom> classroomList = dao.getReservedClassroomListByDatesAndRecord(dateFrom, dateTo, record);
     assertThat(classroomList).isNotNull();
     classroomList.stream().forEach(System.out::println);
     assertThat(classroomList.size()).isEqualTo(expectedSize);

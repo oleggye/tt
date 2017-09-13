@@ -32,6 +32,7 @@
 	<bean id="deleteClassroom" class="by.bsac.timetable.command.impl.delete.DeleteClassroom" />
 	<bean id="changeClassroom" class="by.bsac.timetable.command.impl.ChangeClassroom" />
 	<bean id="getClassroomList" class="by.bsac.timetable.command.impl.get.GetClassroomList" />
+	<bean id="GetClassroomListByReferenceDate" class="by.bsac.timetable.command.impl.get.GetClassroomListByReferenceDate" />
 
 	<!--Flow -->
 	<bean id="addFlow" class="by.bsac.timetable.command.impl.add.AddFlow" />

@@ -194,7 +194,7 @@ public final class FormInitializer {
       //// HibernateUtil.closeSession();
     }
   }
-  
+
   /**
    * Method gets the list of {@link Classroom} instances and inits JComboBox param
    * 
@@ -202,7 +202,8 @@ public final class FormInitializer {
    * @param chairComboBox
    * @throws ServiceException
    */
-  public static void initClassroomComboBox(JComboBox<Classroom> classroomComboBox) throws CommandException {
+  public static void initClassroomComboBox(JComboBox<Classroom> classroomComboBox)
+      throws CommandException {
     try {
       List<Classroom> classroomList = CommandFacade.getClassroomList();
 
@@ -223,9 +224,10 @@ public final class FormInitializer {
    * @throws ServiceException
    */
   public static void initClassroomComboBox(JComboBox<Classroom> classroomComboBox,
-      Date referenceDate) throws CommandException {
+      Date referenceDate, Record record) throws CommandException {
     try {
-      List<Classroom> classroomList = CommandFacade.getClassroomListByDates(referenceDate);
+      List<Classroom> classroomList =
+          CommandFacade.getClassroomListByDatesAndRecord(referenceDate, record);
 
       DefaultComboBoxModel<Classroom> model = new MyComboBoxModel<>(classroomList);
       classroomComboBox.setModel(model);

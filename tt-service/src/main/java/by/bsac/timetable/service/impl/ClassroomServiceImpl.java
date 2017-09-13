@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import by.bsac.timetable.dao.IClassroomDAO;
 import by.bsac.timetable.entity.Classroom;
+import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.service.IClassroomService;
 import by.bsac.timetable.service.IValidationService;
 import by.bsac.timetable.service.exception.ServiceException;
@@ -77,12 +78,12 @@ public class ClassroomServiceImpl implements IClassroomService {
   @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
       dontRollbackOn = ServiceValidationException.class)
   @Override
-  public List<Classroom> getClassroomListByDates(Date dateFrom, Date dateTo)
+  public List<Classroom> getClassroomListByDatesAndRecordParams(Date dateFrom, Date dateTo, Record record)
       throws ServiceException, ServiceValidationException {
     service.validateDates(dateFrom, dateTo);
     try {
       List<Classroom> allClassroomList = dao.getAll();
-      List<Classroom> reservedClassroomList = dao.getReservedClassroomList(dateFrom, dateTo);
+      List<Classroom> reservedClassroomList = dao.getReservedClassroomListByDatesAndRecord(dateFrom, dateTo, record);
       
       for (Classroom classroom : allClassroomList) {
         for (Classroom reservedClassroom : reservedClassroomList) {

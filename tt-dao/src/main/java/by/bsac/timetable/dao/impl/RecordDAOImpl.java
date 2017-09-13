@@ -49,12 +49,11 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
         .createQuery("select rec from Record as rec where rec.group =:group and "
             + "rec.weekNumber =:weekNumber and rec.weekDay =:weekDay and "
             + "rec.subjOrdinalNumber =:subjOrdinalNumber and rec.dateFrom =:dateFrom and "
-            + "rec.dateTo =:dateTo and rec.idRecord <>:id", Record.class)
+            + "rec.dateTo =:dateTo", Record.class)
         .setParameter("group", group).setParameter("weekNumber", record.getWeekNumber())
         .setParameter("weekDay", record.getWeekDay())
         .setParameter("subjOrdinalNumber", record.getSubjOrdinalNumber())
-        .setParameter("dateFrom", record.getDateFrom()).setParameter("dateTo", record.getDateTo())
-        .setParameter("id", record.getIdRecord()).getSingleResult();
+        .setParameter("dateFrom", record.getDateFrom()).setParameter("dateTo", record.getDateTo()).getSingleResult();
   }
 
   @Override

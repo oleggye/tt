@@ -37,6 +37,7 @@ import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.Subject;
+import by.bsac.timetable.entity.builder.RecordBuilder;
 import by.bsac.timetable.util.ActionMode;
 import by.bsac.timetable.util.LessonFor;
 import by.bsac.timetable.util.LessonPeriod;
@@ -132,7 +133,8 @@ public class UpdateOrCancelForm extends JDialog {
           JOptionPane.showMessageDialog(getContentPane(), "Операция выполнена успешно!");
           this.dispose();
         } catch (CommandException ex) {
-          JOptionPane.showMessageDialog(getContentPane(), ex);
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
         } finally {
           okButton.setEnabled(true);
         }
@@ -192,14 +194,15 @@ public class UpdateOrCancelForm extends JDialog {
         String formatedDate = new SimpleDateFormat(DATE_FORMAT).format(dateValue);
         selectedDateLabel.setText(formatedDate);
       }
+      initClassroomComboBox(classroomComboBox, dateValue, updateRecord);
     });
     JDatePickerImpl fromDatePickerForUpdate =
         initializer.initDatePicker(updateRecord.getDateFrom());
     fromDatePickerForUpdate.addActionListener((ActionEvent e) -> {
       // FIXME: проверка на то, чтобы dateFrom <= dateTo
-      Date value = (Date) fromDatePickerForUpdate.getModel().getValue();
-      updateRecord.setDateFrom(value);
-      initClassroomComboBox(classroomComboBox, value);
+      Date dateValue = (Date) fromDatePickerForUpdate.getModel().getValue();
+      updateRecord.setDateFrom(dateValue);
+      initClassroomComboBox(classroomComboBox, dateValue, updateRecord);
     });
 
     JDatePickerImpl toDatePickerForUpdate = initializer.initDatePicker(updateRecord.getDateTo());
@@ -606,7 +609,7 @@ public class UpdateOrCancelForm extends JDialog {
       } else {
         updateWeekSet.remove(WeekNumber.FIRST);
       }
-      JOptionPane.showMessageDialog(this.getContentPane(), updateWeekSet);
+      /*JOptionPane.showMessageDialog(this.getContentPane(), updateWeekSet);*/
     });
     weekPanel.add(firstWeekForAdd);
 
@@ -671,7 +674,6 @@ public class UpdateOrCancelForm extends JDialog {
     classroomComboBox.addItemListener((java.awt.event.ItemEvent evt) -> {
       if (classroomComboBox.getItemCount() > 0) {
         updateRecord.setClassroom((Classroom) classroomComboBox.getSelectedItem());
-        initClassroomComboBox(classroomComboBox, updateRecord.getDateFrom());
       }
     });
 
@@ -705,7 +707,8 @@ public class UpdateOrCancelForm extends JDialog {
         System.out.println("idLecturer:" + lecturer.getIdLecturer());
         UtilityClass.selectCBItemById(updateLecturerComboBox, lecturer);
       }
-      FormInitializer.initClassroomComboBox(classroomComboBox, updateRecord.getDateFrom());
+      Date dateValue = parseDate(updateRecord.getDateFrom().getTime());
+      initClassroomComboBox(classroomComboBox, dateValue, updateRecord);
 
       Classroom classroom = updateRecord.getClassroom();
       System.out.println("classroom:" + classroom.getName());
@@ -1121,12 +1124,20 @@ public class UpdateOrCancelForm extends JDialog {
     this.educationLevel = educationLevel;
   }
 
-  private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate) {
+  private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate,
+      Record updateRecord) {
     try {
-      FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate);
+      Record record = new RecordBuilder().buildWeekDay(updateRecord.getWeekDay())
+          .buildWeekNumber(updateRecord.getWeekNumber())
+          .buildSubjOrdinalNumber(updateRecord.getSubjOrdinalNumber()).build();
+      FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate, record);
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
       JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
     }
+  }
+
+  private Date parseDate(long dateValue) {
+    return new Date(dateValue);
   }
 }

@@ -15,17 +15,17 @@ import by.bsac.timetable.service.exception.ServiceException;
 @Controller
 public class GetFacultyList implements ICommand {
 
-	@Autowired
-	private IFacultyService service;
+  @Autowired
+  private IFacultyService service;
 
-	@Override
-	public void execute(Request request) throws CommandException {
+  @Override
+  public void execute(Request request) throws CommandException {
 
-		try {
-			List<Faculty> facultyList = service.getAllFaculties();
-			request.putParam("facultyList", facultyList);
-		} catch (ServiceException e) {
-			throw new CommandException(e);
-		}
-	}
+    try {
+      List<Faculty> facultyList = service.getAllFaculties();
+      request.putParam("facultyList", facultyList);
+    } catch (ServiceException e) {
+      throw new CommandException(e);
+    }
+  }
 }

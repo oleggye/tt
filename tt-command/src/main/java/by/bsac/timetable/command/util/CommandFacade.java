@@ -1,12 +1,9 @@
 package by.bsac.timetable.command.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import by.bsac.timetable.command.CommandProvider;
 import by.bsac.timetable.command.exception.CommandException;
@@ -104,18 +101,19 @@ public class CommandFacade {
     return getGenericList(ActionMode.Get_Classroom_List, CLASSROOM_LIST_VARIABLE);
   }
 
-  public static List<Classroom> getClassroomListByDates(Date referenceDate)
+  public static List<Classroom> getClassroomListByDatesAndRecord(Date referenceDate, Record record)
       throws CommandException {
-    Request request = new Request().putParam("referenceDate", referenceDate);
+    Request request =
+        new Request().putParam(REFERENCE_DATE_VARIABLE, referenceDate).putParam("record", record);
     return getGenericList(ActionMode.Get_Classroom_List_By_Date, request, CLASSROOM_LIST_VARIABLE);
   }
-  
+
   public static void main(String[] args) {
     List<String> list = new ArrayList<>();
     Iterator<String> iterator = list.iterator();
-    
+
     list.add("");
-    
+
     iterator.next();
   }
 

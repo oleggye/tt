@@ -326,7 +326,7 @@ public class ValidationServiceImpl implements IValidationService {
     }
 
     static boolean isNameInvalid(String name) {
-      return (isNull(name) || name.isEmpty());
+      return (isNull(name) /*|| name.isEmpty()*/);
     }
 
     static boolean isBuildingInvalid(byte building) {

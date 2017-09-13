@@ -112,6 +112,7 @@ public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
       byte weekNumber, byte weekDay, byte lessonOrdinalNumber) {
     UpdateOrCancelForm updateOrCancelForm = new UpdateOrCancelForm(parent, lessonDate, group,
         record, weekNumber, weekDay, lessonOrdinalNumber);
+    updateOrCancelForm.setLocationRelativeTo(parent);
     updateOrCancelForm.setModal(true);
     updateOrCancelForm.setVisible(true);
   }
@@ -121,6 +122,7 @@ public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
     AddNewRecordForm addNewRecord =
         new AddNewRecordForm(parent, lessonDate, group, weekNumber, weekDay, lessonOrdinalNumber);
     addNewRecord.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    addNewRecord.setLocationRelativeTo(parent);
     addNewRecord.setModal(true);
     addNewRecord.setVisible(true);
   }

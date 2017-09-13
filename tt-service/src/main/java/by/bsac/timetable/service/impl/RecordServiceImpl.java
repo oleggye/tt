@@ -18,6 +18,7 @@ import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
+import by.bsac.timetable.entity.builder.RecordBuilder;
 import by.bsac.timetable.service.IRecordService;
 import by.bsac.timetable.service.IValidationService;
 import by.bsac.timetable.service.exception.ServiceException;
@@ -171,7 +172,7 @@ public class RecordServiceImpl implements IRecordService {
     }
   }
 
-  @Transactional(value = TxType.MANDATORY)
+  /* @Transactional(value = TxType.MANDATORY) */
   private void addFlowRecord(Record addRecord) throws ServiceException, ServiceValidationException {
 
     List<Record> recordList = new LinkedList<>();
@@ -179,18 +180,13 @@ public class RecordServiceImpl implements IRecordService {
     List<Group> groupList = groupDao.getGroupListByFlow(addRecord.getGroup().getFlow());
     for (Group group : groupList) {
       addRecord.setGroup(group);
-      // factory.getRecordDAO().add(addRecord);
-      try {
-        checkRecordForConflict(addRecord);
-        recordList.add((Record) addRecord.clone());
-      } catch (CloneNotSupportedException e) {
-        throw new ServiceException("Ошибка при обновлении записи для потока", e);
-      }
+      checkRecordForConflict(addRecord);
+      recordList.add(new RecordBuilder().copy(addRecord));
     }
     recordDAO.addAll(recordList);
   }
 
-  @Transactional(value = TxType.MANDATORY)
+  /* @Transactional(value = TxType.MANDATORY) */
   private void updateFlowRecord(Record initialRecord, Record updateRecord)
       throws ServiceException, ServiceValidationException {
 
@@ -224,7 +220,7 @@ public class RecordServiceImpl implements IRecordService {
     // factory.getRecordDAO().updateAll(recordList);
   }
 
-  @Transactional(value = TxType.MANDATORY)
+  /* @Transactional(value = TxType.MANDATORY) */
   private void cancelFlowRecord(Record initalRecord, Record cancelRecord) {
 
     Cancellation cancellation = new Cancellation();
@@ -241,7 +237,7 @@ public class RecordServiceImpl implements IRecordService {
     }
   }
 
-  @Transactional(value = TxType.MANDATORY)
+  /* @Transactional(value = TxType.MANDATORY) */
   private void deleteFlowRecord(Record initalRecord) {
 
     List<Group> groupList = groupDao.getGroupListByFlow(initalRecord.getGroup().getFlow());
@@ -260,7 +256,7 @@ public class RecordServiceImpl implements IRecordService {
    * @throws ServiceException
    * @throws ServiceValidationException
    */
-  @Transactional(value = TxType.MANDATORY)
+  /* @Transactional(value = TxType.MANDATORY) */
   private void checkRecordForConflict(Record record)
       throws ServiceException, ServiceValidationException {
     List<Record> recordList =

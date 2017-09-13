@@ -5,6 +5,7 @@ import java.util.List;
 
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
+import by.bsac.timetable.entity.Record;
 
 public interface IClassroomDAO {
 
@@ -24,5 +25,6 @@ public interface IClassroomDAO {
 
   public List<Classroom> getClassroomListForGroupByDates(Group group, Date dateFrom, Date dateTo);
 
-  public List<Classroom> getReservedClassroomList(Date dateFrom, Date dateTo);
+  public List<Classroom> getReservedClassroomListByDatesAndRecord(Date dateFrom, Date dateTo,
+      Record record);
 }

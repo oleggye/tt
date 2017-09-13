@@ -37,6 +37,7 @@ import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.Subject;
+import by.bsac.timetable.entity.builder.RecordBuilder;
 import by.bsac.timetable.util.ActionMode;
 import by.bsac.timetable.util.LessonFor;
 import by.bsac.timetable.util.LessonPeriod;
@@ -171,13 +172,13 @@ public class AddNewRecordForm extends JDialog {
         String formatedDate = new SimpleDateFormat(DATE_FORMAT).format(date);
         selectedDateLabel.setText(formatedDate);
       }
-      initClassroomComboBox(classroomComboBox, addRecord.getDateFrom());
+      initClassroomComboBox(classroomComboBox, addRecord.getDateFrom(), addRecord);
     });
     JDatePickerImpl fromDatePickerForAdd = initializer.initDatePicker(addRecord.getDateFrom());
     fromDatePickerForAdd.addActionListener((ActionEvent e) -> {
       Date date = (Date) fromDatePickerForAdd.getModel().getValue();
       addRecord.setDateFrom(date);
-      initClassroomComboBox(classroomComboBox, date);
+      initClassroomComboBox(classroomComboBox, date, addRecord);
     });
 
     JDatePickerImpl toDatePickerForAdd = initializer.initDatePicker(addRecord.getDateFrom());
@@ -538,7 +539,7 @@ public class AddNewRecordForm extends JDialog {
       } else {
         weekSet.remove(WeekNumber.FIRST);
       }
-      JOptionPane.showMessageDialog(this.getContentPane(), weekSet);
+      /*JOptionPane.showMessageDialog(this.getContentPane(), weekSet);*/
     });
     duplicateOnWeeksPanel.add(firstWeekForAdd);
 
@@ -621,7 +622,7 @@ public class AddNewRecordForm extends JDialog {
         FormInitializer.initLecturerComboBox(lecturerComboBox, chairComboBox);
         addRecord.setLecturer((Lecturer) lecturerComboBox.getSelectedItem());
       }
-      initClassroomComboBox(classroomComboBox, addRecord.getDateFrom());
+      initClassroomComboBox(classroomComboBox, addRecord.getDateFrom(), addRecord);
       addRecord.setClassroom((Classroom) classroomComboBox.getSelectedItem());
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
@@ -724,9 +725,15 @@ public class AddNewRecordForm extends JDialog {
     return addRecord;
   }
 
-  private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate) {
+  private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate,
+      Record addRecord) {
     try {
-      FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate);
+      Record record = new RecordBuilder()
+          .buildWeekDay(addRecord.getWeekDay())
+          .buildWeekNumber(addRecord.getWeekNumber())
+          .buildSubjOrdinalNumber(addRecord.getSubjOrdinalNumber())
+          .build();
+      FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate, record);
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
       JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
