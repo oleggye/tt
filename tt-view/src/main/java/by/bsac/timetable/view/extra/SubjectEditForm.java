@@ -43,6 +43,7 @@ public class SubjectEditForm extends JDialog {
   private Subject subject;
 
   private boolean isNeedUpdate;
+  private JTextField abbrTextField;
 
   public SubjectEditForm(byte educationLevel) {
     isNeedUpdate = false;
@@ -122,7 +123,7 @@ public class SubjectEditForm extends JDialog {
             LOGGER.error(ex.getCause().getMessage(), ex);
             JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
           } finally {
-            refreshFormField(editButton, deleteButton, subjectNameTextField);
+            refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
           }
         }
       }
@@ -144,21 +145,21 @@ public class SubjectEditForm extends JDialog {
     contentPanel.add(scrollPane);
 
     JPanel panel = new JPanel();
-    panel.setBounds(334, 98, 234, 117);
+    panel.setBounds(334, 98, 234, 124);
     contentPanel.add(panel);
     panel.setLayout(null);
 
-    subjectNameTextField.setBounds(20, 11, 200, 23);
+    subjectNameTextField.setBounds(20, 25, 200, 23);
     panel.add(subjectNameTextField);
     subjectNameTextField.setColumns(10);
 
-    editButton.setBounds(20, 45, 100, 23);
+    editButton.setBounds(20, 101, 100, 23);
     panel.add(editButton);
 
-    addButton.setBounds(130, 45, 95, 23);
+    addButton.setBounds(130, 67, 95, 23);
     panel.add(addButton);
 
-    deleteButton.setBounds(81, 79, 100, 23);
+    deleteButton.setBounds(130, 101, 95, 23);
     deleteButton.setVisible(false);
     panel.add(deleteButton);
 
@@ -171,6 +172,21 @@ public class SubjectEditForm extends JDialog {
     subjectNameTextField.addKeyListener(new CoincidenceTextFieldController(this, Subject.class,
         coincidenceTextArea, subjectNameTextField, coincidenceScrollPane, coincidenceLabel));
 
+    abbrTextField = new JTextField();
+    abbrTextField.setBounds(20, 70, 86, 20);
+    panel.add(abbrTextField);
+    abbrTextField.setColumns(10);
+
+    JLabel label_1 = new JLabel("Аббревиатура");
+    label_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
+    label_1.setBounds(20, 50, 100, 14);
+    panel.add(label_1);
+
+    JLabel label_2 = new JLabel("Название");
+    label_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
+    label_2.setBounds(20, 5, 100, 14);
+    panel.add(label_2);
+
     coincidenceLabel.setForeground(Color.RED);
     coincidenceLabel.setBounds(334, 226, 91, 14);
     coincidenceLabel.setVisible(false);
@@ -180,14 +196,15 @@ public class SubjectEditForm extends JDialog {
       @Override
       public void actionPerformed(ActionEvent e) {
         String subjectName = subjectNameTextField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName);
+        String abbrName = abbrTextField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName, false);
 
         if (isTableHasNot) {
           try {
             addButton.setEnabled(false);
 
             Chair chair = (Chair) chairComboBox.getSelectedItem();
-            Subject newSubject = new SubjectBuilder().buildChair(chair)
+            Subject newSubject = new SubjectBuilder().buildChair(chair).buildAbname(abbrName)
                 .buildEduLevel(educationLevel).buildNameSubject(subjectName).build();
 
             CommandFacade.addSubject(newSubject);
@@ -198,7 +215,7 @@ public class SubjectEditForm extends JDialog {
             JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
           } finally {
             addButton.setEnabled(true);
-            refreshFormField(editButton, deleteButton, subjectNameTextField);
+            refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
           }
         }
       }
@@ -209,7 +226,8 @@ public class SubjectEditForm extends JDialog {
       @Override
       public void actionPerformed(ActionEvent e) {
         String subjectName = subjectNameTextField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName);
+        String abbrName = abbrTextField.getText();
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName, true);
 
         if (isTableHasNot) {
           try {
@@ -217,6 +235,7 @@ public class SubjectEditForm extends JDialog {
 
             Chair chair = (Chair) chairComboBox.getSelectedItem();
             subject.setChair(chair);
+            subject.setAbnameSubject(abbrName);
             subject.setNameSubject(subjectName);
 
             CommandFacade.updateSubject(subject);
@@ -227,7 +246,7 @@ public class SubjectEditForm extends JDialog {
             JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
           } finally {
             editButton.setEnabled(true);
-            refreshFormField(editButton, deleteButton, subjectNameTextField);
+            refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
           }
         }
       }
@@ -253,7 +272,7 @@ public class SubjectEditForm extends JDialog {
             JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
           } finally {
             deleteButton.setEnabled(true);
-            refreshFormField(editButton, deleteButton, subjectNameTextField);
+            refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
           }
         }
       }
@@ -269,9 +288,10 @@ public class SubjectEditForm extends JDialog {
 
           LOGGER.debug("selected subject:" + subject.getName());
 
-          refreshFormField(editButton, deleteButton, subjectNameTextField);
+          refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
 
           subjectNameTextField.setText(subject.getName());
+          abbrTextField.setText(subject.getAbnameSubject());
 
           editButton.setVisible(true);
           deleteButton.setVisible(true);
@@ -309,13 +329,18 @@ public class SubjectEditForm extends JDialog {
   }
 
   private void refreshFormField(JButton editButton, JButton deleteButton,
-      JTextField groupNameTextField) {
+      JTextField groupNameTextField, JTextField abbrTextField) {
     editButton.setVisible(false);
     deleteButton.setVisible(false);
     groupNameTextField.setText("");
+    abbrTextField.setText("");
   }
 
-  private boolean isTableHasNotAlikeValue(JTable table, String nameSubject) {
+  private boolean isTableHasNotAlikeValue(JTable table, String nameSubject, boolean isUpdate) {
+    if (isUpdate) {
+      return true;
+    }
+
     int colCount = table.getColumnCount();
     int rowCount = table.getRowCount();
     for (int column = 0; column < colCount; column++)

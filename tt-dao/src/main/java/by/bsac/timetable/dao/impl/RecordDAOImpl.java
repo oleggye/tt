@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import by.bsac.timetable.dao.IRecordDAO;
 import by.bsac.timetable.entity.Classroom;
+import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
@@ -53,7 +54,8 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
         .setParameter("group", group).setParameter("weekNumber", record.getWeekNumber())
         .setParameter("weekDay", record.getWeekDay())
         .setParameter("subjOrdinalNumber", record.getSubjOrdinalNumber())
-        .setParameter("dateFrom", record.getDateFrom()).setParameter("dateTo", record.getDateTo()).getSingleResult();
+        .setParameter("dateFrom", record.getDateFrom()).setParameter("dateTo", record.getDateTo())
+        .getSingleResult();
   }
 
   @Override
@@ -86,5 +88,12 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
             "UPDATE record as rec SET rec.id_lecturer =:newId WHERE rec.id_lecturer =:oldId")
         .setParameter("newId", newLecturer.getIdLecturer())
         .setParameter("oldId", oldLecturer.getIdLecturer()).executeUpdate();
+  }
+
+  @Override
+  public void deleteAllRecordsByFlow(Flow flow) {
+    LOGGER.debug("deleteAllRecordsByFlow: flow=" + flow);
+    manager.createQuery("delete rec from Record record where rec.group.flow =:flow")
+        .setParameter("flow", flow).executeUpdate();
   }
 }

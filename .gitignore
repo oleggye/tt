@@ -30,5 +30,6 @@ local.properties
 hibernate.cfg.xml
 hibernate.reveng.xml
 logs/**
+*/logs/*.log
 *.log
 tt-view/logs/*.log

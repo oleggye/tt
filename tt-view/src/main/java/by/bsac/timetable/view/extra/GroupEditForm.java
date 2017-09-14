@@ -194,7 +194,7 @@ public class GroupEditForm extends JDialog {
       @Override
       public void actionPerformed(ActionEvent e) {
         String groupName = groupNameTextField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, groupName);
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, groupName, false);
 
         if (isTableHasNot) {
           try {
@@ -223,7 +223,7 @@ public class GroupEditForm extends JDialog {
       @Override
       public void actionPerformed(ActionEvent e) {
         String groupName = groupNameTextField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, groupName);
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, groupName, true);
 
         if (isTableHasNot) {
           try {
@@ -233,7 +233,7 @@ public class GroupEditForm extends JDialog {
             group.setFaculty(faculty);
             group.setNameGroup(groupName);
 
-            CommandFacade.updateGroup(group);
+            CommandFacade.updateGroup(group, flow);
             FormInitializer.initGroupTable(table, faculty, educationLevel);
 
           } catch (CommandException ex) {
@@ -366,7 +366,12 @@ public class GroupEditForm extends JDialog {
     flowLabel.setText("Не задан");
   }
 
-  private boolean isTableHasNotAlikeValue(JTable table, String nameGroup) {
+  // FIXME: bad practice - isUpdate
+  private boolean isTableHasNotAlikeValue(JTable table, String nameGroup, boolean isUpdate) {
+    if (isUpdate) {
+      return true;
+    }
+
     int colCount = table.getColumnCount();
     int rowCount = table.getRowCount();
     for (int column = 0; column < colCount; column++)

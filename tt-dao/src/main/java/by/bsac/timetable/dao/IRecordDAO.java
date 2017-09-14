@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import by.bsac.timetable.entity.Classroom;
+import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
@@ -37,4 +38,6 @@ public interface IRecordDAO {
   public void replaceClassroomForAllRecords(Classroom oldClassroom, Classroom newClassroom);
 
   public void replaceLecturerForAllRecords(Lecturer oldLecturer, Lecturer newLecturer);
+  
+  public void deleteAllRecordsByFlow(Flow flow);
 }

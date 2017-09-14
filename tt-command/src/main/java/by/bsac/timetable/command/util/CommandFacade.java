@@ -222,6 +222,13 @@ public class CommandFacade {
   public static void updateGroup(Group group) throws CommandException {
     executeVoidCommandWithOneRequestVariable(ActionMode.Update_Group, GROUP_VARIABLE, group);
   }
+  
+  public static void updateGroup(Group group, Flow flow) throws CommandException {
+    Request request = new Request()
+                        .putParam(GROUP_VARIABLE, group)
+                         .putParam(FLOW_VARIABLE, flow);
+    executeCommand(ActionMode.Update_Group, request);
+  }
 
   public static void updateLecturer(Lecturer lecturer) throws CommandException {
     executeVoidCommandWithOneRequestVariable(ActionMode.Update_Lecturer, LECTURER_VARIABLE,

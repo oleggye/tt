@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import by.bsac.timetable.dao.IFlowDAO;
+import by.bsac.timetable.dao.IRecordDAO;
 import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.service.IFlowService;
 import by.bsac.timetable.service.IValidationService;
@@ -23,6 +24,9 @@ public class FlowServiceImpl implements IFlowService {
 
   @Autowired
   private IFlowDAO dao;
+  
+  @Autowired
+  private IRecordDAO recordDao;
 
   @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
       dontRollbackOn = ServiceValidationException.class)
@@ -76,6 +80,7 @@ public class FlowServiceImpl implements IFlowService {
   public void deleteFlow(Flow flow) throws ServiceException, ServiceValidationException {
     service.validateFlow(flow, true);
     try {
+      recordDao.deleteAllRecordsByFlow(flow);
       dao.delete(flow);
     } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при удалении потока", e);
