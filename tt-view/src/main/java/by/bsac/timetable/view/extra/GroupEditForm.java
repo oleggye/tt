@@ -230,10 +230,15 @@ public class GroupEditForm extends JDialog {
             editButton.setEnabled(false);
 
             Faculty faculty = (Faculty) facultyComboBox.getSelectedItem();
-            group.setFaculty(faculty);
-            group.setNameGroup(groupName);
+            Group editingGroup = new GroupBuilder()
+                          .buildId(group.getIdGroup())
+                          .buildEduLevel(group.getEduLevel())
+                          .buildFaculty(group.getFaculty())
+                          .buildFlow(group.getFlow())
+                          .buildName(groupName)
+                          .build();
 
-            CommandFacade.updateGroup(group, flow);
+            CommandFacade.updateGroup(editingGroup, flow);
             FormInitializer.initGroupTable(table, faculty, educationLevel);
 
           } catch (CommandException ex) {

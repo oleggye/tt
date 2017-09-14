@@ -91,9 +91,11 @@ public class FacultyEditForm extends JDialog {
           try {
             editButton.setEnabled(false);
 
-            faculty.setNameFaculty(nameFaculty);
-
-            CommandFacade.updateFaculty(faculty);
+            Faculty editingFaculty = new FacultyBuilder()
+                                .buildId(faculty.getIdFaculty())
+                                .buildName(nameFaculty)
+                                .build();
+            CommandFacade.updateFaculty(editingFaculty);
             FormInitializer.initFacultyTable(table);
 
           } catch (CommandException ex) {

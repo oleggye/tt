@@ -86,10 +86,12 @@ public class FlowEditForm extends JDialog {
 
           try {
             editButton.setEnabled(false);
-
-            flow.setName(textField.getText());
-
-            CommandFacade.updateFlow(flow);
+            
+           Flow editingFlow = new FlowBuilder()
+                      .buildId(flow.getIdFlow())
+                      .buildName(nameFlow)
+                      .build();
+            CommandFacade.updateFlow(editingFlow);
             FormInitializer.initFlowTable(table);
 
           } catch (CommandException ex) {

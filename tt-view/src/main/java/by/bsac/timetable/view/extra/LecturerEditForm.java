@@ -215,10 +215,13 @@ public class LecturerEditForm extends JDialog {
             editButton.setEnabled(false);
 
             Chair chair = (Chair) chairComboBox.getSelectedItem();
-            lecturer.setChair(chair);
-            lecturer.setNameLecturer(lecturerName);
+            Lecturer editingLecturer = new LecturerBuilder()
+                                    .buildId(lecturer.getIdLecturer())
+                                    .buildChair(lecturer.getChair())
+                                    .buildNameLecturer(lecturerName)
+                                    .build();
 
-            CommandFacade.updateLecturer(lecturer);
+            CommandFacade.updateLecturer(editingLecturer);
             FormInitializer.initLecturerTable(table, chair);
 
           } catch (CommandException ex) {

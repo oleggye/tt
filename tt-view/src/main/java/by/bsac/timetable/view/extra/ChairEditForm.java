@@ -93,8 +93,11 @@ public class ChairEditForm extends JDialog {
           try {
             editButton.setEnabled(false);
 
-            chair.setNameChair(textField.getText());
-            CommandFacade.updateChair(chair);
+            Chair editingChair = new ChairBuilder()
+                              .buildId(chair.getIdChair())
+                              .buildNameChair(textField.getText())
+                              .build();
+            CommandFacade.updateChair(editingChair);
             FormInitializer.initChairTable(table);
 
           } catch (CommandException ex) {

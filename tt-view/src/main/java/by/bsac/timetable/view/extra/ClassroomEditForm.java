@@ -120,10 +120,10 @@ public class ClassroomEditForm extends JDialog {
           try {
             editButton.setEnabled(false);
 
-            classroom.setBuilding(building);
-            classroom.setNumber(number);
+            Classroom editingClassroom = new ClassroomBuilder().buildId(classroom.getIdClassroom())
+                .buildBuilding(building).buildNumber(number).build();
 
-            CommandFacade.updateClassroom(classroom);
+            CommandFacade.updateClassroom(editingClassroom);
             FormInitializer.initClassroomTable(table);
 
           } catch (CommandException ex) {
@@ -188,13 +188,15 @@ public class ClassroomEditForm extends JDialog {
     addButton.addActionListener(new java.awt.event.ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        byte building = Byte.parseByte(buildingField.getText());
-        short number = Short.parseShort(numberField.getText());
+        try {
 
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, building, number);
+          byte building = Byte.parseByte(buildingField.getText());
+          short number = Short.parseShort(numberField.getText());
 
-        if (isTableHasNot) {
-          try {
+          boolean isTableHasNot = isTableHasNotAlikeValue(table, building, number);
+
+          if (isTableHasNot) {
+
             addButton.setEnabled(false);
 
             classroom = new ClassroomBuilder().buildBuilding(building).buildNumber(number).build();
@@ -202,16 +204,16 @@ public class ClassroomEditForm extends JDialog {
             CommandFacade.addClassroom(classroom);
             FormInitializer.initClassroomTable(table);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } catch (NumberFormatException ex) {
-            LOGGER.warn(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
-          } finally {
-            addButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, numberField, buildingField);
           }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } catch (NumberFormatException ex) {
+          LOGGER.warn(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
+        } finally {
+          addButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, numberField, buildingField);
         }
       }
     });
@@ -228,6 +230,7 @@ public class ClassroomEditForm extends JDialog {
     contentPanel.add(tableScrollPane);
 
     table.addMouseListener(new java.awt.event.MouseAdapter() {
+
       @Override
       public void mouseClicked(java.awt.event.MouseEvent evt) {
         int columnIndex = table.getSelectedColumn();
@@ -247,8 +250,10 @@ public class ClassroomEditForm extends JDialog {
     });
 
     {
+
       JPanel buttonPane = new JPanel();
       buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
       getContentPane().add(buttonPane, BorderLayout.SOUTH);
       {
         JButton okButton = new JButton("OK");
@@ -265,6 +270,7 @@ public class ClassroomEditForm extends JDialog {
         });
       }
     }
+
   }
 
   private void resetComponents(JButton editButton, JButton deleteButton, JTextField numberTextFiled,
