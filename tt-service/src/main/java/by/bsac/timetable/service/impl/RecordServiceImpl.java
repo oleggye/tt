@@ -1,8 +1,10 @@
 package by.bsac.timetable.service.impl;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
@@ -18,6 +20,7 @@ import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
+import by.bsac.timetable.entity.builder.CancellationBuilder;
 import by.bsac.timetable.entity.builder.RecordBuilder;
 import by.bsac.timetable.service.IRecordService;
 import by.bsac.timetable.service.IValidationService;
@@ -26,9 +29,12 @@ import by.bsac.timetable.service.exception.ServiceValidationException;
 import by.bsac.timetable.util.DateUtil;
 import by.bsac.timetable.util.LessonFor;
 import by.bsac.timetable.util.LessonPeriod;
+import by.bsac.timetable.util.WeekNumber;
 
 @Service
 public class RecordServiceImpl implements IRecordService {
+  private static final RecordBuilder RECORD_BUILDER = new RecordBuilder();
+  private static final CancellationBuilder CANCEL_BUILDER = new CancellationBuilder();
   @Autowired
   private IValidationService service;
 
@@ -64,6 +70,39 @@ public class RecordServiceImpl implements IRecordService {
   @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
       dontRollbackOn = ServiceValidationException.class)
   @Override
+  public void addRecordByAtWeekSet(Record record, Set<WeekNumber> weekSet)
+      throws ServiceException, ServiceValidationException {
+    service.validateRecord(record, false);
+
+    List<Record> resultList = new LinkedList<>();
+
+    LessonFor lessonFor = LessonFor.subjectForToLessonFor(record.getSubjectFor());
+    try {
+      Iterator<WeekNumber> it = weekSet.iterator();
+      while (it.hasNext()) {
+        WeekNumber weekNumber = it.next();
+        byte weekNumberValue = weekNumber.getWeekNumber();
+        record.setWeekNumber(weekNumberValue);
+
+        /* если это пара для всего потока, то нужно добавить всем */
+        if (lessonFor.equals(LessonFor.FULL_FLOW)) {
+          List<Record> constructFlowRecordList = constructFlowRecordList(record);
+          resultList.addAll(constructFlowRecordList);
+        } else {
+          checkRecordForConflict(record);
+          resultList.add(RECORD_BUILDER.copy(record));
+        }
+      }
+      recordDAO.addAll(resultList);
+    } catch (RuntimeException e) {
+      throw new ServiceException("Ошибка при вставке", e);
+    }
+  }
+
+
+  @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
+      dontRollbackOn = ServiceValidationException.class)
+  @Override
   public void updateRecord(Record initialRecord, Record updateRecord)
       throws ServiceException, ServiceValidationException {
     service.validateRecord(initialRecord, true);
@@ -76,7 +115,7 @@ public class RecordServiceImpl implements IRecordService {
         && !updateRecord.getDateFrom().equals(initialRecord.getDateFrom())
         && !updateRecord.getDateTo().equals(initialRecord.getDateTo())) {
 
-      System.out.println(updateRecord.getDateFrom().getClass());
+      /*System.out.println(updateRecord.getDateFrom().getClass());*/
       byte weekDay = DateUtil.getWeekDay(updateRecord.getDateFrom());
       byte weekNumber = DateUtil.getWeekNumber(updateRecord.getDateFrom());
       updateRecord.setWeekDay(weekDay);
@@ -186,9 +225,24 @@ public class RecordServiceImpl implements IRecordService {
     recordDAO.addAll(recordList);
   }
 
+  private List<Record> constructFlowRecordList(Record addRecord)
+      throws ServiceException, ServiceValidationException {
+
+    List<Record> recordList = new LinkedList<>();
+
+    List<Group> groupList = groupDao.getGroupListByFlow(addRecord.getGroup().getFlow());
+    for (Group group : groupList) {
+      addRecord.setGroup(group);
+      checkRecordForConflict(addRecord);
+      recordList.add(RECORD_BUILDER.copy(addRecord));
+    }
+    return recordList;
+  }
+
   /* @Transactional(value = TxType.MANDATORY) */
   private void updateFlowRecord(Record initialRecord, Record updateRecord)
       throws ServiceException, ServiceValidationException {
+    List<Record> resultList = new LinkedList<>();
 
     List<Group> groupList = groupDao.getGroupListByFlow(initialRecord.getGroup().getFlow());
     for (Group group : groupList) {
@@ -205,9 +259,10 @@ public class RecordServiceImpl implements IRecordService {
       if (thisGroupRecord != null) {
         updateRecord.setGroup(group);
         updateRecord.setIdRecord(thisGroupRecord.getIdRecord());
-        recordDAO.update(updateRecord);
+        resultList.add(RECORD_BUILDER.copy(updateRecord));
       }
     }
+    recordDAO.updateAll(resultList);
     // try {
     // checkRecordForConflict(updateRecord);
     // recordList.add((Record) updateRecord.clone());
@@ -222,7 +277,8 @@ public class RecordServiceImpl implements IRecordService {
 
   /* @Transactional(value = TxType.MANDATORY) */
   private void cancelFlowRecord(Record initalRecord, Record cancelRecord) {
-
+    List<Cancellation> resultList = new LinkedList<>();
+    
     Cancellation cancellation = new Cancellation();
     cancellation.setDateFrom(cancelRecord.getDateFrom());
     cancellation.setDateTo(cancelRecord.getDateTo());
@@ -232,21 +288,24 @@ public class RecordServiceImpl implements IRecordService {
       Record thisGroupRecord = recordDAO.getRecordForGroupLikeThis(group, initalRecord);
       if (thisGroupRecord != null) {
         cancellation.setRecord(thisGroupRecord);
-        cancellationDao.add(cancellation);
+        resultList.add(CANCEL_BUILDER.copy(cancellation));
       }
     }
+    cancellationDao.addAll(resultList);
   }
 
   /* @Transactional(value = TxType.MANDATORY) */
   private void deleteFlowRecord(Record initalRecord) {
+    List<Record> resultList = new LinkedList<>();
 
     List<Group> groupList = groupDao.getGroupListByFlow(initalRecord.getGroup().getFlow());
     for (Group group : groupList) {
       Record thisGroupRecord = recordDAO.getRecordForGroupLikeThis(group, initalRecord);
       if (thisGroupRecord != null) {
-        recordDAO.delete(thisGroupRecord);
+        resultList.add(thisGroupRecord);
       }
     }
+    recordDAO.deleteAll(resultList);
   }
 
   /**

@@ -2,6 +2,7 @@ package by.bsac.timetable.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
@@ -10,6 +11,7 @@ import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.service.exception.ServiceException;
 import by.bsac.timetable.service.exception.ServiceValidationException;
 import by.bsac.timetable.util.LessonPeriod;
+import by.bsac.timetable.util.WeekNumber;
 
 public interface IRecordService {
 
@@ -32,5 +34,8 @@ public interface IRecordService {
       throws ServiceException, ServiceValidationException;
 
   public void changeLecturerForAllRecords(Lecturer oldLecturer, Lecturer newLecturer)
+      throws ServiceException, ServiceValidationException;
+
+  void addRecordByAtWeekSet(Record record, Set<WeekNumber> weekSet)
       throws ServiceException, ServiceValidationException;
 }

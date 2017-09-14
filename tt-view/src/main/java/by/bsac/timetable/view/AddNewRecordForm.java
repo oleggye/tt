@@ -58,7 +58,6 @@ public class AddNewRecordForm extends JDialog {
   private static final String DATE_FORMAT = "dd-MM-yyyy";
   private static final String FONT_CONSTANT = "Tahoma";
 
-
   private final AddNewRecordInitializer initializer = new AddNewRecordInitializer(this);
 
   private JFrame parent;
@@ -66,7 +65,7 @@ public class AddNewRecordForm extends JDialog {
   private WeekNumber currentWeekNumber = WeekNumber.FIRST;
   private byte lessonOrdinalNumber = 1;
 
-  private Record addRecord = new Record();
+  private Record addRecord;
 
   private ActionMode action = ActionMode.Add_Record;
   private byte educationLevel = 1;
@@ -90,6 +89,7 @@ public class AddNewRecordForm extends JDialog {
    */
   public AddNewRecordForm(JFrame parent, Date lessonDate, Group group, byte weekNumber,
       byte currentWeekDay, byte lessonOrdinalNumber) {
+    addRecord = new Record();
 
     initializer.initFormFieldList(parent, lessonDate, group, weekNumber, currentWeekDay,
         lessonOrdinalNumber);
@@ -117,6 +117,7 @@ public class AddNewRecordForm extends JDialog {
 
         ICommand command = CommandProvider.getInstance().getCommand(action);
         Request request = new Request();
+        addRecord.setIdRecord(null);
         request.putParam("addRecord", addRecord);
         request.putParam("weekSet", weekSet);
 
@@ -539,7 +540,7 @@ public class AddNewRecordForm extends JDialog {
       } else {
         weekSet.remove(WeekNumber.FIRST);
       }
-      /*JOptionPane.showMessageDialog(this.getContentPane(), weekSet);*/
+      /* JOptionPane.showMessageDialog(this.getContentPane(), weekSet); */
     });
     duplicateOnWeeksPanel.add(firstWeekForAdd);
 
@@ -728,11 +729,9 @@ public class AddNewRecordForm extends JDialog {
   private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate,
       Record addRecord) {
     try {
-      Record record = new RecordBuilder()
-          .buildWeekDay(addRecord.getWeekDay())
+      Record record = new RecordBuilder().buildWeekDay(addRecord.getWeekDay())
           .buildWeekNumber(addRecord.getWeekNumber())
-          .buildSubjOrdinalNumber(addRecord.getSubjOrdinalNumber())
-          .build();
+          .buildSubjOrdinalNumber(addRecord.getSubjOrdinalNumber()).build();
       FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate, record);
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);

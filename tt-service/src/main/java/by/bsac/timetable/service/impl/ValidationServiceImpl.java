@@ -29,10 +29,9 @@ public class ValidationServiceImpl implements IValidationService {
       throw new ServiceValidationException("Record is null");
     }
 
-    int idRecord = record.getIdRecord();
-    if (withId && Checker.isIdInvalid(idRecord)) {
+    if (withId && Checker.isIdInvalid(record.getIdRecord())) {
       builder.append("Неверный идентификатор:");
-      builder.append(idRecord);
+      builder.append(record.getIdRecord());
       throw new ServiceValidationException(builder.toString());
     }
     Date dateFrom = record.getDateFrom();

@@ -40,4 +40,13 @@ public class CancellationBuilder {
     cancellation.setDateTo(dateTo);
     return cancellation;
   }
+  
+  public Cancellation copy(Cancellation prototype) {
+    Cancellation cancellation = new Cancellation();/*
+    cancellation.setIdCancellation(prototype.getIdCancellation());*/
+    cancellation.setRecord(prototype.getRecord());
+    cancellation.setDateFrom(prototype.getDateFrom());
+    cancellation.setDateTo(prototype.getDateTo());
+    return cancellation;
+  }
 }

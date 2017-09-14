@@ -15,6 +15,8 @@ public interface ICancellationDAO {
   public void updateAll(List<Cancellation> listCancellation);
 
   public void delete(Cancellation object);
+  
+  public void deleteAll(List<Cancellation> listCancellation);
 
   public Cancellation getById(Integer id);
 

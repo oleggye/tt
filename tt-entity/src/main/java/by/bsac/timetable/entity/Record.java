@@ -80,7 +80,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_record", unique = true, nullable = false)
   public Integer getIdRecord() {
-    return this.idRecord;
+    return idRecord;
   }
 
   public void setIdRecord(Integer idRecord) {
