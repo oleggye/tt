@@ -12,6 +12,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "faculty",
     uniqueConstraints = @UniqueConstraint(columnNames = "name_faculty"))
@@ -19,8 +22,11 @@ public class Faculty implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = -2033949070842765012L;
 
+  @JsonProperty(value="id")
   private Byte idFaculty;
+  @JsonProperty(value="name")
   private String nameFaculty;
+  @JsonIgnore
   private Set<Group> groups = new HashSet<>(0);
 
   public Faculty() {}
@@ -66,8 +72,8 @@ public class Faculty implements java.io.Serializable, Cloneable, IName {
   }
 
   @Override
-
   @Transient
+  @JsonIgnore
   public String getName() {
     return this.getNameFaculty();
   }

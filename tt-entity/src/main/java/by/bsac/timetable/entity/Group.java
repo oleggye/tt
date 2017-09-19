@@ -14,18 +14,26 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
-@Table(name = "group",
-    uniqueConstraints = @UniqueConstraint(columnNames = "name_group"))
+@Table(name = "`group`", uniqueConstraints = @UniqueConstraint(columnNames = "name_group"))
 public class Group implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = -4886595455964348534L;
 
+  @JsonProperty(value="id")
   private Short idGroup;
+  @JsonIgnore
   private Faculty faculty;
+  @JsonIgnore
   private Flow flow;
+  @JsonProperty(value="name")
   private String nameGroup;
+  @JsonProperty(value="educationLevel")
   private byte eduLevel;
+  @JsonIgnore
   private Set<Record> records = new HashSet<>(0);
 
   public Group() {}
@@ -46,7 +54,7 @@ public class Group implements java.io.Serializable, Cloneable, IName {
   }
 
   @Id
-  /*@GeneratedValue(strategy = IDENTITY)*/
+  /* @GeneratedValue(strategy = IDENTITY) */
   @Column(name = "id_group", unique = true, nullable = false)
   public Short getIdGroup() {
     return this.idGroup;
@@ -95,7 +103,7 @@ public class Group implements java.io.Serializable, Cloneable, IName {
   public void setEduLevel(byte eduLevel) {
     this.eduLevel = eduLevel;
   }
-  
+
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
   public Set<Record> getRecords() {
     return this.records;
@@ -107,6 +115,7 @@ public class Group implements java.io.Serializable, Cloneable, IName {
 
   @Override
   @Transient
+  @JsonIgnore
   public String getName() {
     return this.getNameGroup();
   }

@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "flow", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Flow implements java.io.Serializable, Cloneable, IName {
@@ -19,6 +21,7 @@ public class Flow implements java.io.Serializable, Cloneable, IName {
 
   private Short idFlow;
   private String name;
+  @JsonIgnore
   private Set<Group> groups = new HashSet<>(0);
 
   public Flow() {}

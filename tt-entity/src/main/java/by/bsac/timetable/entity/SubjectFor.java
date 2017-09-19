@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "subject_for")
 public class SubjectFor implements java.io.Serializable, Cloneable {
@@ -18,6 +20,7 @@ public class SubjectFor implements java.io.Serializable, Cloneable {
 
   private Byte id;
   private String name;
+  @JsonIgnore
   private Set<Record> records = new HashSet<>(0);
 
   public SubjectFor() {}

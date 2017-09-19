@@ -73,11 +73,11 @@ public class ClassroomDAOImplTest {
       type = DatabaseOperation.CLEAN_INSERT)
   public void testGetByIdOne() throws DAOException {
     final Short id = 1;
-    final short number = 123;
+    final String name = "123";
     final byte building = 1;
 
     Classroom expectedClassroom =
-        new ClassroomBuilder().buildId(id).buildNumber(number).buildBuilding(building).build();
+        new ClassroomBuilder().buildId(id).buildName(name).buildBuilding(building).build();
 
     Classroom takenClassroom = dao.getById(id);
 
@@ -94,11 +94,11 @@ public class ClassroomDAOImplTest {
       type = DatabaseOperation.CLEAN_INSERT)
   public void testGetByIdTwo() throws DAOException {
     final Short id = 2;
-    final short number = 124;
+    final String name = "124";
     final byte building = 1;
 
     Classroom expectedClassroom =
-        new ClassroomBuilder().buildId(id).buildNumber(number).buildBuilding(building).build();
+        new ClassroomBuilder().buildId(id).buildName(name).buildBuilding(building).build();
 
     Classroom takenClassroom = dao.getById(id);
 
@@ -117,11 +117,11 @@ public class ClassroomDAOImplTest {
       value = "/data/expected/Classroom/addClassroom.xml")
   public void testAddClassroomWithIdSix() throws DAOException {
     final Short id = 6;
-    final short number = 777;
+    final String name = "777";
     final byte building = 1;
 
     Classroom classroom =
-        new ClassroomBuilder().buildId(id).buildNumber(number).buildBuilding(building).build();
+        new ClassroomBuilder().buildId(id).buildName(name).buildBuilding(building).build();
 
     dao.add(classroom);
   }
@@ -132,11 +132,11 @@ public class ClassroomDAOImplTest {
       value = "/data/expected/Classroom/updateClassroom.xml")
   public void testUpdateClassroomWithIdOne() throws DAOException {
     final Short id = 1;
-    final short number = 777;
+    final String name = "777";
     final byte building = 2;
 
     Classroom classroom =
-        new ClassroomBuilder().buildId(id).buildNumber(number).buildBuilding(building).build();
+        new ClassroomBuilder().buildId(id).buildName(name).buildBuilding(building).build();
     dao.update(classroom);
   }
 
@@ -146,11 +146,11 @@ public class ClassroomDAOImplTest {
       value = "/data/expected/Classroom/deleteClassroom.xml")
   public void testDeleteClassroomWithIdOne() throws DAOException {
     final Short id = 1;
-    final short number = 123;
+    final String name = "123";
     final byte building = 1;
 
     Classroom classroom =
-        new ClassroomBuilder().buildId(id).buildNumber(number).buildBuilding(building).build();
+        new ClassroomBuilder().buildId(id).buildName(name).buildBuilding(building).build();
     dao.delete(classroom);
   }
   

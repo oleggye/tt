@@ -132,10 +132,10 @@ public class ValidationServiceImpl implements IValidationService {
       builder.append(idClassroom);
       throw new ServiceValidationException(builder.toString());
     }
-    short number = classroom.getNumber();
-    if (Checker.isNumberInvalid(number)) {
-      builder.append("Неверно задан номер аудитории: ");
-      builder.append(number);
+    String name = classroom.getName();
+    if (Checker.isNameInvalid(name)) {
+      builder.append("Неверно задано название аудитории: ");
+      builder.append(name);
       throw new ServiceValidationException(builder.toString());
     }
     byte building = classroom.getBuilding();

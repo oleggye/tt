@@ -13,17 +13,26 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "subject")
 public class Subject implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = -1879039518302025880L;
 
+  @JsonProperty(value="id")
   private Short idSubject;
+  @JsonIgnore
   private Chair chair;
+  @JsonProperty(value="name")
   private String nameSubject;
+  @JsonProperty(value="educationLevel")
   private Byte eduLevel;
+  @JsonProperty(value="abbreviation")
   private String abnameSubject;
+  @JsonIgnore
   private Set<Record> records = new HashSet<>(0);
 
   public Subject() {}
@@ -114,6 +123,7 @@ public class Subject implements java.io.Serializable, Cloneable, IName {
 
   @Override
   @Transient
+  @JsonIgnore
   public String getName() {
     return this.getNameSubject();
   }

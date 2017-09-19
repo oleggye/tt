@@ -78,11 +78,11 @@ public class ClassroomEditForm extends JDialog {
     DecimalFormat decimalFormat = (DecimalFormat) numberFormat;
     decimalFormat.setGroupingUsed(false);
 
-    JFormattedTextField numberField = new JFormattedTextField(decimalFormat);
-    contentPanel.add(numberField);
-    numberField.setColumns(3);
-    numberField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    numberField.setBounds(339, 117, 94, 26);
+    JFormattedTextField classroomNameField = new JFormattedTextField(/*decimalFormat*/);
+    contentPanel.add(classroomNameField);
+    classroomNameField.setColumns(3);
+    classroomNameField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    classroomNameField.setBounds(339, 117, 94, 26);
 
     JLabel buildingLabel = new JLabel("<html>Номер<br>корпуса</html>");
     buildingLabel.setForeground(Color.BLUE);
@@ -96,13 +96,13 @@ public class ClassroomEditForm extends JDialog {
     buildingField.setBounds(470, 117, 65, 26);
     contentPanel.add(buildingField);
 
-    JLabel label_1 = new JLabel("<html>Номер<br>аудитории</html>");
+    JLabel label_1 = new JLabel("<html>Название<br>аудитории</html>");
     label_1.setForeground(new Color(0, 128, 0));
     label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
     label_1.setBounds(341, 68, 79, 38);
     contentPanel.add(label_1);
 
-    numberField.setColumns(1);
+    classroomNameField.setColumns(1);
 
     editButton.setVisible(false);
     editButton.setBounds(333, 169, 100, 26);
@@ -112,16 +112,16 @@ public class ClassroomEditForm extends JDialog {
       @Override
       public void actionPerformed(ActionEvent e) {
         byte building = Byte.parseByte(buildingField.getText());
-        short number = Short.parseShort(numberField.getText());
+        String name = classroomNameField.getText();
 
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, building, number);
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, building, name);
 
         if (isTableHasNot) {
           try {
             editButton.setEnabled(false);
 
             Classroom editingClassroom = new ClassroomBuilder().buildId(classroom.getIdClassroom())
-                .buildBuilding(building).buildNumber(number).build();
+                .buildBuilding(building).buildName(name).build();
 
             CommandFacade.updateClassroom(editingClassroom);
             FormInitializer.initClassroomTable(table);
@@ -134,7 +134,7 @@ public class ClassroomEditForm extends JDialog {
             JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
           } finally {
             editButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, numberField, buildingField);
+            resetComponents(editButton, deleteButton, classroomNameField, buildingField);
           }
         }
       }
@@ -173,7 +173,7 @@ public class ClassroomEditForm extends JDialog {
             JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
           } finally {
             deleteButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, numberField, buildingField);
+            resetComponents(editButton, deleteButton, classroomNameField, buildingField);
           }
         }
       }
@@ -191,15 +191,15 @@ public class ClassroomEditForm extends JDialog {
         try {
 
           byte building = Byte.parseByte(buildingField.getText());
-          short number = Short.parseShort(numberField.getText());
+          String name = classroomNameField.getText();
 
-          boolean isTableHasNot = isTableHasNotAlikeValue(table, building, number);
+          boolean isTableHasNot = isTableHasNotAlikeValue(table, building, name);
 
           if (isTableHasNot) {
 
             addButton.setEnabled(false);
 
-            classroom = new ClassroomBuilder().buildBuilding(building).buildNumber(number).build();
+            classroom = new ClassroomBuilder().buildBuilding(building).buildName(name).build();
 
             CommandFacade.addClassroom(classroom);
             FormInitializer.initClassroomTable(table);
@@ -213,7 +213,7 @@ public class ClassroomEditForm extends JDialog {
           JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
         } finally {
           addButton.setEnabled(true);
-          resetComponents(editButton, deleteButton, numberField, buildingField);
+          resetComponents(editButton, deleteButton, classroomNameField, buildingField);
         }
       }
     });
@@ -239,10 +239,10 @@ public class ClassroomEditForm extends JDialog {
           classroom = (Classroom) table.getModel().getValueAt(rowIndex, columnIndex);
 
           LOGGER.debug("selected classroom:" + classroom);
-          resetComponents(editButton, deleteButton, numberField, buildingField);
+          resetComponents(editButton, deleteButton, classroomNameField, buildingField);
 
           buildingField.setText(String.valueOf(classroom.getBuilding()));
-          numberField.setText(String.valueOf(classroom.getNumber()));
+          classroomNameField.setText(String.valueOf(classroom.getName()));
           editButton.setVisible(true);
           deleteButton.setVisible(true);
         }
@@ -281,13 +281,13 @@ public class ClassroomEditForm extends JDialog {
     buildingTextFiled.setText("");
   }
 
-  private boolean isTableHasNotAlikeValue(JTable table, byte building, short number) {
+  private boolean isTableHasNotAlikeValue(JTable table, byte building, String name) {
     int colCount = table.getColumnCount();
     int rowCount = table.getRowCount();
     for (int column = 0; column < colCount; column++)
       for (int row = 0; row < rowCount; row++) {
         Classroom value = (Classroom) table.getValueAt(row, column);
-        if (value.getNumber() == number && value.getBuilding() == building) {
+        if (value.getName().equals(name) && value.getBuilding() == building) {
           LOGGER.warn("try to dublicete classroom:" + value);
           JOptionPane.showMessageDialog(getContentPane(), "Такая аудитория уже есть");
           return false;

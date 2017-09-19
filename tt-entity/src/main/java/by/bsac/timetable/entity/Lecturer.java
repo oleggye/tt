@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @Table(name = "lecturer")
@@ -20,9 +23,13 @@ public class Lecturer implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = -1097849435762885350L;
 
+  @JsonProperty(value="id")
   private Short idLecturer;
+  @JsonIgnore
   private Chair chair;
+  @JsonProperty(value="name")
   private String nameLecturer;
+  @JsonIgnore
   private Set<Record> records = new HashSet<>(0);
 
   public Lecturer() {}
@@ -80,8 +87,8 @@ public class Lecturer implements java.io.Serializable, Cloneable, IName {
   }
 
   @Override
-
   @Transient
+  @JsonIgnore
   public String getName() {
     return this.getNameLecturer();
   }

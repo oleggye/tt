@@ -63,7 +63,7 @@ public class GetNamesClass {
 		String str = null;
 		final String format = "%s (%s)";
 		for (Classroom f : classroomList) {
-			str = String.format(format, f.getNumber(), f.getBuilding());
+			str = String.format(format, f.getName(), f.getBuilding());
 			vec.add(str);
 		}
 		return vec;

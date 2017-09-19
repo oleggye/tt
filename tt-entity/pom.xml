@@ -9,11 +9,17 @@
 	<artifactId>tt-entity</artifactId>
 	<packaging>jar</packaging>
 
-	<!-- <dependencies>
+	<properties>
+		<jackson.annotations.version>2.9.1</jackson.annotations.version>
+	</properties>
+
+	<!-- <dependencies> <dependency> <groupId>by.bsac.timetable</groupId> <artifactId>tt-util</artifactId> 
+		<version>0.0.2</version> </dependency> </dependencies> -->
+	<dependencies>
 		<dependency>
-			<groupId>by.bsac.timetable</groupId>
-			<artifactId>tt-util</artifactId>
-			<version>0.0.2</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.annotations.version}</version>
 		</dependency>
-	</dependencies> -->
+	</dependencies>
 </project>

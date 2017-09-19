@@ -18,6 +18,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "record")
 public class Record implements java.io.Serializable, Cloneable, IName {
@@ -25,7 +28,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   private static final long serialVersionUID = -6066965208149766799L;
   private static final String FORMAT_CONST = "%s(%s)";
 
-
+  @JsonProperty(value="id")
   private Integer idRecord;
   private Classroom classroom;
   private Group group;
@@ -35,9 +38,13 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   private SubjectType subjectType;
   private byte weekNumber;
   private byte weekDay;
+  @JsonProperty(value="ordinalNumber")
   private byte subjOrdinalNumber;
+  @JsonProperty(value="from")
   private Date dateFrom;
+  @JsonProperty(value="to")
   private Date dateTo;
+  @JsonIgnore
   private Set<Cancellation> cancellations = new HashSet<>(0);
 
   public Record() {}
@@ -260,6 +267,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
 
   @Override
   @Transient
+  @JsonIgnore
   public String getName() {
     return getSubjAndSubjType(false);
   }

@@ -12,31 +12,36 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Entity
 @Table(name = "classroom",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"number", "building"}))
+    uniqueConstraints = @UniqueConstraint(columnNames = {"name", "building"}))
 public class Classroom implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = 7602775957279064254L;
 
+  @JsonProperty(value="id")
   private Short idClassroom;
-  private short number;
+  private String name;
   private byte building;
-  private Set<Record> records = new HashSet<Record>(0);
-
+  @JsonIgnore
+  private Set<Record> records = new HashSet<>(0);
+  
   private boolean isReserved;
 
   public Classroom() {}
 
 
-  public Classroom(short number, byte building) {
-    this.number = number;
+  public Classroom(String name, byte building) {
+    this.name = name;
     this.building = building;
   }
 
-  public Classroom(short number, byte building, Set<Record> records) {
-    this.number = number;
+  public Classroom(String name, byte building, Set<Record> records) {
+    this.name = name;
     this.building = building;
     this.records = records;
   }
@@ -53,13 +58,13 @@ public class Classroom implements java.io.Serializable, Cloneable, IName {
   }
 
 
-  @Column(name = "number", nullable = false)
-  public short getNumber() {
-    return this.number;
+  @Column(name = "name", nullable = false, length = 30)
+  public String getName() {
+    return this.name;
   }
 
-  public void setNumber(short number) {
-    this.number = number;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
@@ -83,18 +88,14 @@ public class Classroom implements java.io.Serializable, Cloneable, IName {
 
 
   @Transient
+  @JsonIgnore
   public String getFullClassroomName() {
     String format = "%s (%s)";
-    return String.format(format, this.getNumber(), this.getBuilding());
-  }
-
-  @Override
-  @Transient
-  public String getName() {
-    return getFullClassroomName();
+    return String.format(format, this.getName(), this.getBuilding());
   }
 
   @Transient
+  @JsonIgnore
   public boolean isReserved() {
     return isReserved;
   }
@@ -105,7 +106,7 @@ public class Classroom implements java.io.Serializable, Cloneable, IName {
 
   @Override
   public String toString() {
-    return "Classroom [idClassroom=" + idClassroom + ", number=" + number + ", building=" + building
+    return "Classroom [idClassroom=" + idClassroom + ", number=" + name + ", building=" + building
         + ", isReserved=" + isReserved + "]";
   }
 
@@ -121,7 +122,7 @@ public class Classroom implements java.io.Serializable, Cloneable, IName {
     result = prime * result + building;
     result = prime * result + ((idClassroom == null) ? 0 : idClassroom.hashCode());
     result = prime * result + (isReserved ? 1231 : 1237);
-    result = prime * result + number;
+    result = prime * result + ((name == null)? 0 : name.hashCode());
     return result;
   }
 

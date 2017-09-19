@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "chair", uniqueConstraints = @UniqueConstraint(columnNames = "name_chair"))
 public class Chair implements java.io.Serializable, Cloneable, IName {
@@ -20,7 +22,9 @@ public class Chair implements java.io.Serializable, Cloneable, IName {
 
   private Byte idChair;
   private String nameChair;
+  @JsonIgnore
   private Set<Lecturer> lecturers = new HashSet<>(0);
+  @JsonIgnore
   private Set<Subject> subjects = new HashSet<>(0);
 
   public Chair() {}
@@ -83,6 +87,7 @@ public class Chair implements java.io.Serializable, Cloneable, IName {
 
   @Override
   @Transient
+  @JsonIgnore
   public String getName() {
     return this.getNameChair();
   }
