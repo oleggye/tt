@@ -20,14 +20,15 @@ public class Faculty implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = -2033949070842765012L;
 
-  @JsonProperty(value="id")
+  @JsonProperty(value = "id")
   private Byte idFaculty;
-  @JsonProperty(value="name")
+  @JsonProperty(value = "name")
   private String nameFaculty;
   @JsonIgnore
   private Set<Group> groups = new HashSet<>(0);
 
-  public Faculty() {}
+  public Faculty() {
+  }
 
 
   public Faculty(String nameFaculty) {
@@ -96,21 +97,20 @@ public class Faculty implements java.io.Serializable, Cloneable, IName {
   }
 
   @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
+  public boolean equals(Object o) {
+    if (this == o) {
       return true;
-    if (obj == null)
+    }
+    if (o == null || getClass() != o.getClass()) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+
+    Faculty faculty = (Faculty) o;
+
+    if (idFaculty != null ? !idFaculty.equals(faculty.idFaculty) : faculty.idFaculty != null) {
       return false;
-    Faculty other = (Faculty) obj;
-    if (idFaculty != other.idFaculty)
-      return false;
-    if (nameFaculty == null) {
-      if (other.nameFaculty != null)
-        return false;
-    } else if (!nameFaculty.equals(other.nameFaculty))
-      return false;
-    return true;
+    }
+    return nameFaculty != null ? nameFaculty.equals(faculty.nameFaculty)
+        : faculty.nameFaculty == null;
   }
 }

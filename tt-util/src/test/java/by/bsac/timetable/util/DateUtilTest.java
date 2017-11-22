@@ -9,13 +9,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class DateUtilTest {
+
   private static final DateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+  private static final String dateString = "2017-09-12";
 
   private Date date;
 
+  @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("STCAL_INVOKE_ON_STATIC_DATE_FORMAT_INSTANCE")
   @Before
   public void setUp() throws Exception {
-    date = FORMAT.parse("2017-09-12");
+    date = FORMAT.parse(dateString);
   }
 
   @After

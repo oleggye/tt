@@ -37,7 +37,7 @@ public final class DateUtil {
 
       /**
        * работаем с первым сентября
-       * 
+       *
        */
 
       /**
@@ -61,14 +61,14 @@ public final class DateUtil {
 
       /**
        * начинаем подсчитывать номер недели
-       * 
+       *
        */
 
       int weekNumb = 0; // номер недели;
       boolean needWeekOffset = false; /**
-                                       * смещение, если 1-ое сентября не пн, то начинаем с // пн
-                                       * 2-ой недели и weekOffset=true;
-                                       */
+       * смещение, если 1-ое сентября не пн, то начинаем с // пн
+       * 2-ой недели и weekOffset=true;
+       */
       int daysDiff = 0; // разница в количестве дней между двумя датами;
 
       /**
@@ -159,49 +159,45 @@ public final class DateUtil {
           mondays[1] = DateUtil.getPrivMonday(mondays[2]);
           mondays[0] = DateUtil.getPrivMonday(mondays[1]);
           break;
+        default:
+          throw new IllegalArgumentException(String.format("Wrong weeknumber value = %s",weekNumb ));
       }
       return mondays;
-    } else
-      throw new IllegalArgumentException("Wrong referenceDate=" + referenceDate);
+    } else {
+      throw new IllegalArgumentException("Wrong referenceDate is null");
+    }
   }
 
   public static LocalDate getNextMonday(LocalDate referenceMonday) {
-    if (referenceMonday != null && isMonday(referenceMonday))
+    if (referenceMonday != null && isMonday(referenceMonday)) {
       return referenceMonday.plusDays(7);
-    else {
+    } else {
       throw new IllegalArgumentException("Wrong referenceMonday=" + referenceMonday);
     }
   }
 
   public static LocalDate getPrivMonday(LocalDate referenceMonday) {
-    if (referenceMonday != null && isMonday(referenceMonday))
+    if (referenceMonday != null && isMonday(referenceMonday)) {
       return referenceMonday.minusDays(7);
-    else {
+    } else {
       throw new IllegalArgumentException("Wrong referenceMonday=" + referenceMonday);
     }
   }
 
   /**
    * Method returns instance {@link LocalDate} of a next Sunday by Monday's date param
-   *
-   * @param mondayDate
-   * @return
-   * @throws Exception
    */
   public static LocalDate getSundayByMonday(LocalDate mondayDate) {
     // нужно проверять дату на null и этоПонедельник?
-    if (mondayDate != null && isMonday(mondayDate))
+    if (mondayDate != null && isMonday(mondayDate)) {
       return mondayDate.plusDays(6);
-    else {
+    } else {
       throw new IllegalArgumentException("Wrong param: mondayDate=" + mondayDate);
     }
   }
 
   /**
    * Checks if param date is a Monday
-   * 
-   * @param date
-   * @return
    */
   private static boolean isMonday(LocalDate date) {
     if (date == null) {
@@ -219,9 +215,8 @@ public final class DateUtil {
   /**
    * Method returns array of two instances of {@link Date}. The first represents a Monday of first
    * study week and the second a Sunday of fourth study week.
-   * 
+   *
    * @param referenceDate date, which represents a point of date on four weeks study window
-   * @return
    */
   public static Date[] getDateFromAndDateToByReferenceDate(Date referenceDate) {
     LocalDate localDate = referenceDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

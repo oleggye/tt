@@ -29,6 +29,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -64,45 +65,40 @@ import tableClasses.TablesArray;
  */
 
 public class MainForm extends JFrame {
+
   private static final long serialVersionUID = -8883696845828234226L;
 
   private static final Logger LOGGER = LogManager.getLogger(MainForm.class.getName());
 
   private JFrame mainFrame;// ���������� �����
-  private TablesArray tableArray = new TablesArray(7, 4);
+  private final TablesArray tableArray = new TablesArray(7, 4);
 
   private JButton showRecordsButton;
   private List<Record> mainRecordList; // ������-���-��� ���
-                                       // ������� ������
+  // ������� ������
   private JComboBox<Faculty> facultyComboBox; // combobox � ����������
-                                              // �����������
+  // �����������
   private JComboBox<Group> groupComboBox; // combobox � ���������� �����
   private byte educationLevel = 1;// ���������� ��� ������ �����������
-
-  private JDatePickerImpl datePicker;
 
   private Boolean isGroupSelected = false;
 
   /**
    * Launch the application.
    *
-   * @param args
-   * 
    * @see Exception
    */
   public static void main(String[] args) {
-    EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        MainForm window = null;
-        try {
-          window = new MainForm();
-          window.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-          window.mainFrame.setVisible(true);
-        } catch (Throwable e) {
-          LOGGER.error(e.getCause().getMessage(), e);
-          JOptionPane.showMessageDialog(window.mainFrame.getContentPane(),
-              e.getCause().getMessage());
-        }
+    EventQueue.invokeLater(() -> {
+      MainForm window = null;
+      try {
+        window = new MainForm();
+        window.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        window.mainFrame.setVisible(true);
+      } catch (Exception e) {
+        LOGGER.error(e.getCause().getMessage(), e);
+        JOptionPane.showMessageDialog(window.mainFrame.getContentPane(),
+            e.getCause().getMessage());
       }
     });
   }
@@ -135,8 +131,8 @@ public class MainForm extends JFrame {
     topPanel.setMaximumSize(new Dimension(100, 78));
 
     JPanel menuPanel = new JPanel();
-    FlowLayout fl_menuPanel = (FlowLayout) menuPanel.getLayout();
-    fl_menuPanel.setAlignment(FlowLayout.LEFT);
+    FlowLayout menuPanelLayout = (FlowLayout) menuPanel.getLayout();
+    menuPanelLayout.setAlignment(FlowLayout.LEFT);
     topPanel.add(menuPanel);
 
     JMenuBar menuBar = new JMenuBar();
@@ -146,14 +142,12 @@ public class MainForm extends JFrame {
     menuBar.add(mnFile);
 
     JMenuItem mntmNewFile = new JMenuItem(getMessage("mainForm.educationLevel"));
-    mntmNewFile.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-          showWindow(false, progressBarLbl, progressBar);
-        } catch (ApplicationException ex) {
-          LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
-        }
+    mntmNewFile.addActionListener(evt -> {
+      try {
+        showWindow(false, progressBarLbl, progressBar);
+      } catch (ApplicationException ex) {
+        LOGGER.error(ex.getCause().getMessage(), ex);
+        JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
       }
     });
     mnFile.add(mntmNewFile);
@@ -237,24 +231,25 @@ public class MainForm extends JFrame {
     });
     mnNewMenu.add(changeClassroomMenuItem);
 
-    JMenu mnNewMenu_1 = new JMenu(getMessage("mainForm.aboutProgramm"));
-    mnNewMenu_1.addMouseListener(new java.awt.event.MouseAdapter() {
+    JMenu aboutProgramMenu = new JMenu(getMessage("mainForm.aboutProgram"));
+    aboutProgramMenu.addMouseListener(new MouseAdapter() {
+      @Override
       public void mouseClicked(java.awt.event.MouseEvent evt) {
         AboutForm edf = new AboutForm();
         edf.setLocationRelativeTo(mainFrame);
         edf.setVisible(true);
       }
     });
-    menuBar.add(mnNewMenu_1);
+    menuBar.add(aboutProgramMenu);
 
-    JPanel FCSubpanel = new JPanel();
-    FlowLayout fl_FCSubpanel = (FlowLayout) FCSubpanel.getLayout();
-    fl_FCSubpanel.setAlignment(FlowLayout.LEFT);
-    topPanel.add(FCSubpanel);
+    JPanel facultySubPanel = new JPanel();
+    FlowLayout facultySubPanelLayout = (FlowLayout) facultySubPanel.getLayout();
+    facultySubPanelLayout.setAlignment(FlowLayout.LEFT);
+    topPanel.add(facultySubPanel);
 
-    FCSubpanel.add(new JLabel(getMessage("mainForm.faculty")));
+    facultySubPanel.add(new JLabel(getMessage("mainForm.faculty")));
     facultyComboBox = new MyComboBox<>();
-    FCSubpanel.add(facultyComboBox);
+    facultySubPanel.add(facultyComboBox);
 
     facultyComboBox.addItemListener((ItemEvent ev) -> {
       if (ev.getStateChange() == ItemEvent.SELECTED) {
@@ -272,9 +267,9 @@ public class MainForm extends JFrame {
         }
       }
     });
-    FCSubpanel.add(new JLabel(getMessage("mainForm.group")));
+    facultySubPanel.add(new JLabel(getMessage("mainForm.group")));
     groupComboBox = new MyComboBox<>();
-    FCSubpanel.add(groupComboBox);
+    facultySubPanel.add(groupComboBox);
     groupComboBox.addItemListener((ItemEvent e) -> {
       if (e.getStateChange() == ItemEvent.SELECTED) {
         tableArray.resetAllTablesInArray();
@@ -282,7 +277,7 @@ public class MainForm extends JFrame {
         showRecordsButton.setEnabled(true);
       }
     });
-    FCSubpanel.add(new JLabel(getMessage("mainForm.reference")));
+    facultySubPanel.add(new JLabel(getMessage("mainForm.reference")));
     // ������ ������� ���� ��� ��������� � �������� �������
     UtilDateModel model = new UtilDateModel();
     Calendar calendar = Calendar.getInstance();
@@ -290,15 +285,15 @@ public class MainForm extends JFrame {
     Properties p = new Properties();
     p.put("text.today", getMessage("mainForm.today"));
     JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-    datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+    final JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
     datePicker.addActionListener((ActionEvent e) -> {
       //
     });
-    FCSubpanel.add(datePicker);
+    facultySubPanel.add(datePicker);
 
     /* 27/10/16 was changed */
     showRecordsButton = new JButton(getMessage("mainForm.showBtn"));
-    FCSubpanel.add(showRecordsButton);
+    facultySubPanel.add(showRecordsButton);
     showRecordsButton
         .setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/toolbar_find.png")));
     showRecordsButton
@@ -336,14 +331,12 @@ public class MainForm extends JFrame {
     ChoseEducationLevelForm edf = new ChoseEducationLevelForm();
     edf.setLocationRelativeTo(mainFrame);
     edf.setVisible(true);
-    byte new_eduLvl = edf.getEduLevel();
-    if (new_eduLvl != this.educationLevel) {
-      this.educationLevel = new_eduLvl;
-      return true;
-    } else if (isJustStarted) {
+    byte newEduLvl = edf.getEduLevel();
+    if (newEduLvl != this.educationLevel) {
+      this.educationLevel = newEduLvl;
       return true;
     } else {
-      return false;
+      return isJustStarted;
     }
   }
 
@@ -396,11 +389,13 @@ public class MainForm extends JFrame {
     return tableArray;
   }
 
+  @Override
   public void addWindowListener(WindowListener wl) {
     mainFrame.addWindowListener(wl);
   }
 
   public class MainFormWindowListener extends WindowAdapter {
+
     private JFrame mainFrame;
     private JLabel progressBarLbl;
     private JProgressBar progressBar;
@@ -431,11 +426,6 @@ public class MainForm extends JFrame {
 
     @Override
     public void windowClosing(WindowEvent e) {
-      // try {
-      // initializer.closeSession();
-      // } finally {
-
-
       listener.appClosing();
 
       super.windowClosing(e);

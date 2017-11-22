@@ -11,9 +11,7 @@ import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.Subject;
 import by.bsac.timetable.util.ActionMode;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 // FIXME: it's not a good practice!!!
@@ -22,7 +20,8 @@ public class CommandFacade {
 
   private static final CommandProvider PROVIDER = CommandProvider.getInstance();
 
-  private CommandFacade() {}
+  private CommandFacade() {
+  }
 
   /*
    * FACADE's methods
@@ -105,15 +104,6 @@ public class CommandFacade {
     Request request =
         new Request().putParam(REFERENCE_DATE_VARIABLE, referenceDate).putParam("record", record);
     return getGenericList(ActionMode.Get_Classroom_List_By_Date, request, CLASSROOM_LIST_VARIABLE);
-  }
-
-  public static void main(String[] args) {
-    List<String> list = new ArrayList<>();
-    Iterator<String> iterator = list.iterator();
-
-    list.add("");
-
-    iterator.next();
   }
 
   public static List<Flow> getFlowList() throws CommandException {
@@ -221,11 +211,11 @@ public class CommandFacade {
   public static void updateGroup(Group group) throws CommandException {
     executeVoidCommandWithOneRequestVariable(ActionMode.Update_Group, GROUP_VARIABLE, group);
   }
-  
+
   public static void updateGroup(Group group, Flow flow) throws CommandException {
     Request request = new Request()
-                        .putParam(GROUP_VARIABLE, group)
-                         .putParam(FLOW_VARIABLE, flow);
+        .putParam(GROUP_VARIABLE, group)
+        .putParam(FLOW_VARIABLE, flow);
     executeCommand(ActionMode.Update_Group, request);
   }
 

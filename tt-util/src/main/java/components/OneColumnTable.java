@@ -34,7 +34,7 @@ public class OneColumnTable extends JTable {
       if (value instanceof IName) {
         tip = ((IName) value).getName();
       } else {
-        value.toString();
+        tip = value.toString();
       }
     }
     return tip;
