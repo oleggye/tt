@@ -10,6 +10,8 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -24,9 +26,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class FlowEditForm extends JDialog {
+
   private static final long serialVersionUID = 1L;
 
   private static final Logger LOGGER = LogManager.getLogger(FlowEditForm.class.getName());
+  private static final String FONT_NAME = "Tahoma";
 
   private JTable table;
   private Flow flow;
@@ -45,9 +49,9 @@ public class FlowEditForm extends JDialog {
     contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
     getContentPane().add(contentPanel, BorderLayout.CENTER);
     contentPanel.setLayout(null);
-    addWindowListener(new java.awt.event.WindowAdapter() {
+    addWindowListener(new WindowAdapter() {
       @Override
-      public void windowOpened(java.awt.event.WindowEvent evt) {
+      public void windowOpened(WindowEvent evt) {
         try {
           FormInitializer.initFlowTable(table);
         } catch (CommandException ex) {
@@ -58,46 +62,43 @@ public class FlowEditForm extends JDialog {
     });
 
     JLabel label = new JLabel("Редактирование/Добавление");
-    label.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     label.setBounds(323, 56, 220, 18);
     contentPanel.add(label);
 
     JButton editButton = new JButton("Изменить");
-    editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    editButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JButton deleteButton = new JButton("Удалить");
-    deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    deleteButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     editButton.setVisible(false);
     editButton.setBounds(323, 126, 100, 26);
     contentPanel.add(editButton);
 
-    editButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
+    editButton.addActionListener(e -> {
 
-        String nameFlow = textField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFlow);
+      String nameFlow = textField.getText();
+      boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFlow);
 
-        if (isTableHasNot) {
+      if (isTableHasNot) {
 
-          try {
-            editButton.setEnabled(false);
-            
-           Flow editingFlow = new FlowBuilder()
-                      .buildId(flow.getIdFlow())
-                      .buildName(nameFlow)
-                      .build();
-            CommandFacade.updateFlow(editingFlow);
-            FormInitializer.initFlowTable(table);
+        try {
+          editButton.setEnabled(false);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            editButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
-          }
+          Flow editingFlow = new FlowBuilder()
+              .buildId(flow.getIdFlow())
+              .buildName(nameFlow)
+              .build();
+          CommandFacade.updateFlow(editingFlow);
+          FormInitializer.initFlowTable(table);
+
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          editButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
         }
       }
     });
@@ -105,60 +106,53 @@ public class FlowEditForm extends JDialog {
     deleteButton.setBounds(388, 163, 89, 23);
     contentPanel.add(deleteButton);
     deleteButton.setVisible(false);
-    deleteButton.addActionListener(new java.awt.event.ActionListener() {
+    deleteButton.addActionListener(e -> {
+      int result = JOptionPane.showConfirmDialog(getContentPane(),
+          "Перед удалением потока, убедитесь, что он не используется в текущем расписании",
+          "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+      if (result == JOptionPane.YES_OPTION) {
+        try {
+          deleteButton.setEnabled(false);
 
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        int result = JOptionPane.showConfirmDialog(getContentPane(),
-            "Перед удалением потока, убедитесь, что он не используется в текущем расписании",
-            "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
-          try {
-            deleteButton.setEnabled(false);
+          CommandFacade.deleteFlow(flow);
+          FormInitializer.initFlowTable(table);
 
-            CommandFacade.deleteFlow(flow);
-            FormInitializer.initFlowTable(table);
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-
-          } finally {
-            deleteButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
-          }
+        } finally {
+          deleteButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
         }
       }
     });
 
     JButton addButton = new JButton("Добавить");
-    addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    addButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     addButton.setBounds(438, 126, 105, 26);
     contentPanel.add(addButton);
 
-    addButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        String nameFlow = textField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFlow);
+    addButton.addActionListener(e -> {
+      String nameFlow = textField.getText();
+      boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFlow);
 
-        if (isTableHasNot) {
-          try {
-            addButton.setEnabled(false);
+      if (isTableHasNot) {
+        try {
+          addButton.setEnabled(false);
 
-            flow = new FlowBuilder().buildName(nameFlow).build();
+          flow = new FlowBuilder().buildName(nameFlow).build();
 
-            CommandFacade.addFlow(flow);
-            FormInitializer.initFlowTable(table);
+          CommandFacade.addFlow(flow);
+          FormInitializer.initFlowTable(table);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            addButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          addButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, textField, groupInFlowTextArea);
         }
       }
     });
@@ -185,15 +179,15 @@ public class FlowEditForm extends JDialog {
     scrollPane.setViewportView(groupInFlowTextArea);
 
     textField = new JTextField();
-    textField.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    textField.setFont(new Font(FONT_NAME, Font.PLAIN, 12));
     textField.setBounds(323, 95, 220, 20);
     contentPanel.add(textField);
     textField.setColumns(10);
 
-    JLabel label_1 = new JLabel("Список групп данного потока");
-    label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-    label_1.setBounds(323, 197, 229, 17);
-    contentPanel.add(label_1);
+    JLabel groupListLabel = new JLabel("Список групп данного потока");
+    groupListLabel.setFont(new Font(FONT_NAME, Font.BOLD, 14));
+    groupListLabel.setBounds(323, 197, 229, 17);
+    contentPanel.add(groupListLabel);
 
     table.addMouseListener(new java.awt.event.MouseAdapter() {
       @Override
@@ -221,25 +215,17 @@ public class FlowEditForm extends JDialog {
       }
     });
 
-    {
-      JPanel buttonPane = new JPanel();
-      buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-      getContentPane().add(buttonPane, BorderLayout.SOUTH);
-      {
-        JButton okButton = new JButton("OK");
-        okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        okButton.setActionCommand("OK");
-        buttonPane.add(okButton);
-        getRootPane().setDefaultButton(okButton);
+    JPanel buttonPane = new JPanel();
+    buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    getContentPane().add(buttonPane, BorderLayout.SOUTH);
 
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            dispose();
-          }
-        });
-      }
-    }
+    JButton okButton = new JButton("OK");
+    okButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
+    okButton.setActionCommand("OK");
+    buttonPane.add(okButton);
+    getRootPane().setDefaultButton(okButton);
+
+    okButton.addActionListener(e -> dispose());
   }
 
   private void resetComponents(JButton editButton, JButton deleteButton, JTextField textField,
@@ -254,7 +240,7 @@ public class FlowEditForm extends JDialog {
   private boolean isTableHasNotAlikeValue(JTable table, String nameFlow) {
     int colCount = table.getColumnCount();
     int rowCount = table.getRowCount();
-    for (int column = 0; column < colCount; column++)
+    for (int column = 0; column < colCount; column++) {
       for (int row = 0; row < rowCount; row++) {
         Flow value = (Flow) table.getValueAt(row, column);
         if (value.getName().equals(nameFlow)) {
@@ -263,6 +249,7 @@ public class FlowEditForm extends JDialog {
           return false;
         }
       }
+    }
     return true;
   }
 }

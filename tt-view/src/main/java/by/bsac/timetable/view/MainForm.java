@@ -294,6 +294,7 @@ public class MainForm extends JFrame {
     /* 27/10/16 was changed */
     showRecordsButton = new JButton(getMessage("mainForm.showBtn"));
     facultySubPanel.add(showRecordsButton);
+    facultySubPanel.getRootPane().setDefaultButton(showRecordsButton);
     showRecordsButton
         .setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/toolbar_find.png")));
     showRecordsButton

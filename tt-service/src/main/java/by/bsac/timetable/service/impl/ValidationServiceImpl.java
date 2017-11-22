@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ValidationServiceImpl implements IValidationService {
+
   private static final String WRONG_IDENTIFIER_MESSAGE = "Неверный идентификатор: ";
 
   @Override
@@ -34,8 +35,8 @@ public class ValidationServiceImpl implements IValidationService {
     }
     Date dateFrom = record.getDateFrom();
     Date dateTo = record.getDateTo();
-    validateDates(dateFrom,dateTo);
-    
+    validateDates(dateFrom, dateTo);
+
     Classroom classroom = record.getClassroom();
     validateClassroom(classroom, true);
 
@@ -257,8 +258,9 @@ public class ValidationServiceImpl implements IValidationService {
 
   @Override
   public void validateEducationLevel(byte educationLevel) throws ServiceValidationException {
-    if (Checker.isEducationLevelInvalid(educationLevel))
+    if (Checker.isEducationLevelInvalid(educationLevel)) {
       throw new ServiceValidationException("wrong educationLevel value: " + educationLevel);
+    }
   }
 
   @Override
@@ -275,7 +277,9 @@ public class ValidationServiceImpl implements IValidationService {
   }
 
   private static class Checker {
-    private Checker() {}
+
+    private Checker() {
+    }
 
     private static final short LOW_ID_BOUND = 1;
 
@@ -323,7 +327,7 @@ public class ValidationServiceImpl implements IValidationService {
     }
 
     static boolean isNameInvalid(String name) {
-      return (isNull(name) /*|| name.isEmpty()*/);
+      return (isNull(name) || name.isEmpty());
     }
 
     static boolean isBuildingInvalid(byte building) {
