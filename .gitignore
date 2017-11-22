@@ -43,3 +43,4 @@ tt-view/logs/*.log
 src/main/resources/
 src/test/resources/
 src/test/
+!/tt-service/.gitignore

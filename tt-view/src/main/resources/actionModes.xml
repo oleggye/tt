@@ -1,11 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
- 		http://www.springframework.org/schema/beans
- 		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
- 		http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+ 		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
 
 	<bean id="GET_FACULTY_LIST"
 		value="#{T(by.bsac.timetable.util.ActionMode).Get_Faculty_List}" />
