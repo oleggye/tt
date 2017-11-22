@@ -1,10 +1,9 @@
 	package by.bsac.timetable.view.contoller;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+  import java.awt.event.WindowAdapter;
+  import java.awt.event.WindowEvent;
+  import javax.swing.JFrame;
+  import javax.swing.JLabel;
 
 /*FIXME: it isn't used*/
 

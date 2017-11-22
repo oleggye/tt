@@ -1,8 +1,5 @@
 package by.bsac.timetable.util;
 
-import java.util.List;
-import java.util.Vector;
-
 import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Faculty;
@@ -10,6 +7,8 @@ import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.IName;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Subject;
+import java.util.List;
+import java.util.Vector;
 
 public class GetNamesClass {
 

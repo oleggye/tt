@@ -1,5 +1,14 @@
 package by.bsac.timetable.view.extra;
 
+import by.bsac.timetable.command.exception.CommandException;
+import by.bsac.timetable.command.util.CommandFacade;
+import by.bsac.timetable.entity.Chair;
+import by.bsac.timetable.entity.Subject;
+import by.bsac.timetable.entity.builder.SubjectBuilder;
+import by.bsac.timetable.view.extra.controller.CoincidenceTextFieldController;
+import by.bsac.timetable.view.util.FormInitializer;
+import components.MyComboBox;
+import components.OneColumnTable;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -7,7 +16,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,19 +28,8 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import by.bsac.timetable.command.exception.CommandException;
-import by.bsac.timetable.command.util.CommandFacade;
-import by.bsac.timetable.entity.Chair;
-import by.bsac.timetable.entity.Subject;
-import by.bsac.timetable.entity.builder.SubjectBuilder;
-import by.bsac.timetable.view.extra.controller.CoincidenceTextFieldController;
-import by.bsac.timetable.view.util.FormInitializer;
-import components.MyComboBox;
-import components.OneColumnTable;
 
 public class SubjectEditForm extends JDialog {
   private static final long serialVersionUID = 1L;

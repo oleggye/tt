@@ -1,11 +1,9 @@
 package components;
 
+import by.bsac.timetable.entity.IName;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JComboBox;
 import javax.swing.ListCellRenderer;
-
-import by.bsac.timetable.entity.IName;
 
 public class MyComboBox<E> extends JComboBox<E> {
 

@@ -1,12 +1,10 @@
 package tableClasses;
 
+import by.bsac.timetable.entity.IName;
 import java.awt.Component;
-
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
-
-import by.bsac.timetable.entity.IName;
 
 class MyTableCellRenderer extends DefaultTableCellRenderer {
 

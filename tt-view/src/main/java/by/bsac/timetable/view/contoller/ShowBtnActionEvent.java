@@ -1,20 +1,5 @@
 package by.bsac.timetable.view.contoller;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.jdatepicker.impl.JDatePickerImpl;
-
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Group;
@@ -22,6 +7,18 @@ import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.util.DateUtil;
 import by.bsac.timetable.util.SupportClass;
 import by.bsac.timetable.view.MainForm;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jdatepicker.impl.JDatePickerImpl;
 import tableClasses.TablesArray;
 
 public class ShowBtnActionEvent implements ActionListener {

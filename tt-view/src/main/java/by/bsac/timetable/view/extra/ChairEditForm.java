@@ -1,10 +1,15 @@
 package by.bsac.timetable.view.extra;
 
+import by.bsac.timetable.command.exception.CommandException;
+import by.bsac.timetable.command.util.CommandFacade;
+import by.bsac.timetable.entity.Chair;
+import by.bsac.timetable.entity.builder.ChairBuilder;
+import by.bsac.timetable.view.util.FormInitializer;
+import components.OneColumnTable;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -14,16 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import by.bsac.timetable.command.exception.CommandException;
-import by.bsac.timetable.command.util.CommandFacade;
-import by.bsac.timetable.entity.Chair;
-import by.bsac.timetable.entity.builder.ChairBuilder;
-import by.bsac.timetable.view.util.FormInitializer;
-import components.OneColumnTable;
 
 public class ChairEditForm extends JDialog {
   private static final long serialVersionUID = 1L;

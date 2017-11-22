@@ -1,8 +1,7 @@
 package by.bsac.timetable.dao;
 
-import java.util.List;
-
 import by.bsac.timetable.entity.Faculty;
+import java.util.List;
 
 public interface IFacultyDAO {
 

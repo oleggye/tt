@@ -1,9 +1,8 @@
 package by.bsac.timetable.entity.builder;
 
-import java.util.Date;
-
 import by.bsac.timetable.entity.Cancellation;
 import by.bsac.timetable.entity.Record;
+import java.util.Date;
 
 public class CancellationBuilder {
 

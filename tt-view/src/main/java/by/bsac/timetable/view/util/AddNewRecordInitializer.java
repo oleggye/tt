@@ -1,14 +1,5 @@
 package by.bsac.timetable.view.util;
 
-import java.util.Date;
-import java.util.Properties;
-
-import javax.swing.JFrame;
-
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
-
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.SubjectFor;
@@ -22,6 +13,12 @@ import by.bsac.timetable.util.LessonPeriod;
 import by.bsac.timetable.util.LessonType;
 import by.bsac.timetable.util.WeekNumber;
 import by.bsac.timetable.view.AddNewRecordForm;
+import java.util.Date;
+import java.util.Properties;
+import javax.swing.JFrame;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 public final class AddNewRecordInitializer {
 

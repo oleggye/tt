@@ -1,9 +1,8 @@
 package by.bsac.timetable.dao;
 
-import java.util.List;
-
 import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.entity.Lecturer;
+import java.util.List;
 
 public interface ILecturerDAO {
 

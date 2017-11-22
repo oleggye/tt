@@ -1,8 +1,7 @@
 package by.bsac.timetable.dao;
 
-import java.util.List;
-
 import by.bsac.timetable.entity.Chair;
+import java.util.List;
 
 public interface IChairDAO {
 

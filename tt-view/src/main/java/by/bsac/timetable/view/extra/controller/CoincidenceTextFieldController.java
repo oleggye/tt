@@ -1,21 +1,18 @@
 package by.bsac.timetable.view.extra.controller;
 
+import by.bsac.timetable.command.exception.CommandException;
+import by.bsac.timetable.entity.IName;
+import by.bsac.timetable.view.util.FormInitializer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import by.bsac.timetable.command.exception.CommandException;
-import by.bsac.timetable.entity.IName;
-import by.bsac.timetable.view.util.FormInitializer;
 
 public class CoincidenceTextFieldController implements KeyListener {
 

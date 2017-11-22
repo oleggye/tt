@@ -3,7 +3,6 @@ package by.bsac.timetable.util;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Before;

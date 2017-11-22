@@ -1,31 +1,6 @@
 package by.bsac.timetable.view;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTabbedPane;
-import javax.swing.border.LineBorder;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.jdatepicker.impl.JDatePickerImpl;
+import static by.bsac.timetable.view.util.LocalizationBundle.getMessage;
 
 import by.bsac.timetable.command.CommandProvider;
 import by.bsac.timetable.command.ICommand;
@@ -48,8 +23,30 @@ import by.bsac.timetable.view.util.AddNewRecordInitializer;
 import by.bsac.timetable.view.util.FormInitializer;
 import components.ClassroomRenderer;
 import components.MyComboBox;
-
-import static by.bsac.timetable.view.util.LocalizationBundle.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTabbedPane;
+import javax.swing.border.LineBorder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jdatepicker.impl.JDatePickerImpl;
 
 public class AddNewRecordForm extends JDialog {
 

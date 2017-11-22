@@ -1,11 +1,15 @@
 package by.bsac.timetable.util;
 
+import by.bsac.timetable.entity.Group;
+import by.bsac.timetable.entity.Lecturer;
+import by.bsac.timetable.entity.Record;
+import by.bsac.timetable.entity.Subject;
+import by.bsac.timetable.entity.SubjectFor;
 import java.awt.Color;
 import java.awt.Window;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -15,15 +19,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import by.bsac.timetable.entity.Group;
-import by.bsac.timetable.entity.Lecturer;
-import by.bsac.timetable.entity.Record;
-import by.bsac.timetable.entity.Subject;
-import by.bsac.timetable.entity.SubjectFor;
 import tableClasses.ArrayPosition;
 import tableClasses.MyMultiSpanCellTable;
 import tableClasses.TablesArray;

@@ -1,8 +1,5 @@
 package by.bsac.timetable.command.impl.update;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
 import by.bsac.timetable.command.ICommand;
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.Request;
@@ -10,6 +7,8 @@ import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.service.ILecturerService;
 import by.bsac.timetable.service.exception.ServiceException;
 import by.bsac.timetable.service.exception.ServiceValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 @Controller
 public class UpdateLecturer implements ICommand {

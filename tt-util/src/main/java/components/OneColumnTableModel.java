@@ -1,12 +1,10 @@
 package components;
 
-import java.util.List;
-import java.util.Vector;
-
-import javax.swing.table.DefaultTableModel;
-
 import by.bsac.timetable.entity.IName;
 import by.bsac.timetable.util.GetNamesClass;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 public class OneColumnTableModel<E> extends DefaultTableModel {
 

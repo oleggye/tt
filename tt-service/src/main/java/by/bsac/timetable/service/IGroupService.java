@@ -1,12 +1,11 @@
 package by.bsac.timetable.service;
 
-import java.util.List;
-
 import by.bsac.timetable.entity.Faculty;
 import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.service.exception.ServiceException;
 import by.bsac.timetable.service.exception.ServiceValidationException;
+import java.util.List;
 
 public interface IGroupService {
 

@@ -1,7 +1,5 @@
 package by.bsac.timetable.entity.builder;
 
-import java.util.Date;
-
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
@@ -9,6 +7,7 @@ import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.Subject;
 import by.bsac.timetable.entity.SubjectFor;
 import by.bsac.timetable.entity.SubjectType;
+import java.util.Date;
 
 public class RecordBuilder {
 

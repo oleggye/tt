@@ -1,13 +1,13 @@
 package by.bsac.timetable.view;
 
-import javax.swing.JDialog;
-import java.awt.Color;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class ChoseEducationLevelForm extends JDialog {
   private static final long serialVersionUID = 1L;

@@ -1,10 +1,5 @@
 package by.bsac.timetable.command.util;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
 import by.bsac.timetable.command.CommandProvider;
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.entity.Chair;
@@ -16,6 +11,10 @@ import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.Subject;
 import by.bsac.timetable.util.ActionMode;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 // FIXME: it's not a good practice!!!
 @SuppressWarnings("unchecked")

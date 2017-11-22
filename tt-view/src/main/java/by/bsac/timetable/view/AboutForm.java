@@ -1,12 +1,12 @@
 package by.bsac.timetable.view;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Color;
-import java.awt.SystemColor;
+import javax.swing.JPanel;
 
 public class AboutForm extends JDialog {
 

@@ -1,11 +1,15 @@
 package by.bsac.timetable.view.extra;
 
+import by.bsac.timetable.command.exception.CommandException;
+import by.bsac.timetable.command.util.CommandFacade;
+import by.bsac.timetable.entity.Classroom;
+import by.bsac.timetable.view.util.FormInitializer;
+import components.MyComboBox;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -13,15 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import by.bsac.timetable.command.exception.CommandException;
-import by.bsac.timetable.command.util.CommandFacade;
-import by.bsac.timetable.entity.Classroom;
-import by.bsac.timetable.view.util.FormInitializer;
-import components.MyComboBox;
 
 public class ChangeClassroomDialog extends JDialog {
 

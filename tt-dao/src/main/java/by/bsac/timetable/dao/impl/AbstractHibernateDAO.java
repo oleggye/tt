@@ -1,18 +1,15 @@
 package by.bsac.timetable.dao.impl;
 
+import by.bsac.timetable.dao.IGenericDAO;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import by.bsac.timetable.dao.IGenericDAO;
 
 @Transactional
 public abstract class AbstractHibernateDAO<E, P extends Serializable> implements IGenericDAO<E, P> {

@@ -1,9 +1,8 @@
 package by.bsac.timetable.dao.impl;
 
-import org.springframework.stereotype.Repository;
-
 import by.bsac.timetable.dao.IChairDAO;
 import by.bsac.timetable.entity.Chair;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class ChairDAOImpl extends AbstractHibernateDAO<Chair,Byte> implements IChairDAO {

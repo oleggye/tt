@@ -1,10 +1,9 @@
 package by.bsac.timetable.dao;
 
-import java.util.List;
-
 import by.bsac.timetable.entity.Faculty;
 import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.entity.Group;
+import java.util.List;
 
 public interface IGroupDAO {
 

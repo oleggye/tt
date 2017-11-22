@@ -1,8 +1,7 @@
 package by.bsac.timetable.command;
 
-import java.util.Map;
-
 import by.bsac.timetable.util.ActionMode;
+import java.util.Map;
 
 public class CommandProvider {
 

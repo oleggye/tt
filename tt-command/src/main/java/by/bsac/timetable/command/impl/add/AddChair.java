@@ -1,10 +1,5 @@
 package by.bsac.timetable.command.impl.add;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
 import by.bsac.timetable.command.ICommand;
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.Request;
@@ -12,6 +7,10 @@ import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.service.IChairService;
 import by.bsac.timetable.service.exception.ServiceException;
 import by.bsac.timetable.service.exception.ServiceValidationException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 @Controller
 public class AddChair implements ICommand {

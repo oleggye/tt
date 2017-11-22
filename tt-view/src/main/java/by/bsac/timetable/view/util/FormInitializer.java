@@ -1,23 +1,5 @@
 package by.bsac.timetable.view.util;
 
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.util.Date;
-import java.util.List;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
-import javax.swing.border.MatteBorder;
-import javax.swing.table.DefaultTableModel;
-
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Chair;
@@ -35,6 +17,22 @@ import by.bsac.timetable.util.SupportClass;
 import by.bsac.timetable.util.VerticalLabelUI;
 import components.MyComboBoxModel;
 import components.OneColumnTableModel;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+import javax.swing.table.DefaultTableModel;
 import tableClasses.TablesArray;
 
 public final class FormInitializer {

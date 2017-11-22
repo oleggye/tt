@@ -1,14 +1,13 @@
 package by.bsac.timetable.dao;
 
-import java.util.Date;
-import java.util.List;
-
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.SubjectFor;
+import java.util.Date;
+import java.util.List;
 
 public interface IRecordDAO {
 

@@ -1,17 +1,15 @@
 package components;
 
+import by.bsac.timetable.entity.IName;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
-
-import by.bsac.timetable.entity.IName;
 
 class MyRenderer<E> implements ListCellRenderer<E> {
 

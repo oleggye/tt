@@ -1,12 +1,9 @@
 package tableClasses;
 
+import by.bsac.timetable.entity.Record;
 import java.awt.Color;
 import java.util.List;
-
 import javax.swing.JPanel;
-
-import by.bsac.timetable.entity.Record;
-import tableClasses.ArrayPosition;
 
 public class TablesArray {
 

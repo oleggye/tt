@@ -1,14 +1,12 @@
 package by.bsac.timetable.view.extra.controller;
 
+import by.bsac.timetable.view.extra.FlowChooseDialog;
+import by.bsac.timetable.view.extra.GroupEditForm;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JLabel;
-
-import by.bsac.timetable.view.extra.FlowChooseDialog;
-import by.bsac.timetable.view.extra.GroupEditForm;
 
 public class FlowLabelMouseController extends MouseAdapter {
   private GroupEditForm frame;

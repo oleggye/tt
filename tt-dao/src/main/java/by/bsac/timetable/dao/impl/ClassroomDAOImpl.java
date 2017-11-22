@@ -1,16 +1,14 @@
 package by.bsac.timetable.dao.impl;
 
-import java.util.Date;
-import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Repository;
-
 import by.bsac.timetable.dao.IClassroomDAO;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Record;
+import java.util.Date;
+import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class ClassroomDAOImpl extends AbstractHibernateDAO<Classroom, Short>

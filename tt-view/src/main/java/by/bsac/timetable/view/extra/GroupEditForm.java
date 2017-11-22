@@ -1,5 +1,16 @@
 package by.bsac.timetable.view.extra;
 
+import by.bsac.timetable.command.exception.CommandException;
+import by.bsac.timetable.command.util.CommandFacade;
+import by.bsac.timetable.entity.Faculty;
+import by.bsac.timetable.entity.Flow;
+import by.bsac.timetable.entity.Group;
+import by.bsac.timetable.entity.builder.GroupBuilder;
+import by.bsac.timetable.view.extra.controller.CoincidenceTextFieldController;
+import by.bsac.timetable.view.extra.controller.FlowLabelMouseController;
+import by.bsac.timetable.view.util.FormInitializer;
+import components.MyComboBox;
+import components.OneColumnTable;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -7,7 +18,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,21 +31,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import by.bsac.timetable.command.exception.CommandException;
-import by.bsac.timetable.command.util.CommandFacade;
-import by.bsac.timetable.entity.Faculty;
-import by.bsac.timetable.entity.Flow;
-import by.bsac.timetable.entity.Group;
-import by.bsac.timetable.entity.builder.GroupBuilder;
-import by.bsac.timetable.view.extra.controller.CoincidenceTextFieldController;
-import by.bsac.timetable.view.extra.controller.FlowLabelMouseController;
-import by.bsac.timetable.view.util.FormInitializer;
-import components.MyComboBox;
-import components.OneColumnTable;
 
 public class GroupEditForm extends JDialog {
   private static final long serialVersionUID = 1L;

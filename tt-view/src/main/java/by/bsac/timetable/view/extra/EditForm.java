@@ -1,29 +1,5 @@
 package by.bsac.timetable.view.extra;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.Vector;
-import javax.swing.DefaultComboBoxModel;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTable;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.table.DefaultTableModel;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Chair;
@@ -35,9 +11,29 @@ import by.bsac.timetable.util.CheckGeneralization;
 import by.bsac.timetable.util.GetNamesClass;
 import by.bsac.timetable.util.SupportClass;
 import components.MyComboBox;
-
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EditForm extends JDialog {
 

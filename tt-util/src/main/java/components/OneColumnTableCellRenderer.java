@@ -1,12 +1,10 @@
 package components;
 
+import by.bsac.timetable.entity.IName;
 import java.awt.Component;
-
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-
-import by.bsac.timetable.entity.IName;
 
 class OneColumnTableCellRenderer extends DefaultTableCellRenderer {
 

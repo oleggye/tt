@@ -1,9 +1,5 @@
 package by.bsac.timetable.service.impl;
 
-import java.util.Date;
-
-import org.springframework.stereotype.Service;
-
 import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Faculty;
@@ -16,6 +12,8 @@ import by.bsac.timetable.entity.SubjectFor;
 import by.bsac.timetable.entity.SubjectType;
 import by.bsac.timetable.service.IValidationService;
 import by.bsac.timetable.service.exception.ServiceValidationException;
+import java.util.Date;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ValidationServiceImpl implements IValidationService {

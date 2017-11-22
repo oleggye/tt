@@ -1,17 +1,5 @@
 package by.bsac.timetable.service.impl;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import by.bsac.timetable.dao.ICancellationDAO;
 import by.bsac.timetable.dao.IGroupDAO;
 import by.bsac.timetable.dao.IRecordDAO;
@@ -30,6 +18,15 @@ import by.bsac.timetable.util.DateUtil;
 import by.bsac.timetable.util.LessonFor;
 import by.bsac.timetable.util.LessonPeriod;
 import by.bsac.timetable.util.WeekNumber;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class RecordServiceImpl implements IRecordService {

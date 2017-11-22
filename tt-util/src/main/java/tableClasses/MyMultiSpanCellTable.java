@@ -1,15 +1,14 @@
 package tableClasses;
 
-import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.util.List;
-
 import by.bsac.component.multiSpanCellTable.AttributiveCellTableModel;
 import by.bsac.component.multiSpanCellTable.CellSpan;
 import by.bsac.component.multiSpanCellTable.MultiSpanCellTable;
 import by.bsac.timetable.entity.IName;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.util.SupportClass;
+import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class MyMultiSpanCellTable extends MultiSpanCellTable {
 	private static final long serialVersionUID = 1L;

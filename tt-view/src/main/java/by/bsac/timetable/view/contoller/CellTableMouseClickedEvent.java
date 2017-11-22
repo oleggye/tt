@@ -1,19 +1,5 @@
 package by.bsac.timetable.view.contoller;
 
-import java.awt.Cursor;
-import java.awt.event.MouseEvent;
-import java.util.Date;
-import java.util.List;
-
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.jdatepicker.impl.JDatePickerImpl;
-
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Group;
@@ -23,6 +9,17 @@ import by.bsac.timetable.util.SupportClass;
 import by.bsac.timetable.view.AddNewRecordForm;
 import by.bsac.timetable.view.MainForm;
 import by.bsac.timetable.view.UpdateOrCancelForm;
+import java.awt.Cursor;
+import java.awt.event.MouseEvent;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jdatepicker.impl.JDatePickerImpl;
 import tableClasses.ArrayPosition;
 import tableClasses.MyMultiSpanCellTable;
 import tableClasses.TablesArray;

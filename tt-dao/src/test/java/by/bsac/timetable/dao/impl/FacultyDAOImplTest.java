@@ -2,8 +2,17 @@ package by.bsac.timetable.dao.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import by.bsac.timetable.dao.IFacultyDAO;
+import by.bsac.timetable.dao.exception.DAOException;
+import by.bsac.timetable.entity.Faculty;
+import by.bsac.timetable.entity.builder.FacultyBuilder;
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
+import com.github.springtestdbunit.annotation.DatabaseOperation;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DatabaseTearDown;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-
-import com.github.springtestdbunit.DbUnitTestExecutionListener;
-import com.github.springtestdbunit.annotation.DatabaseOperation;
-import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.github.springtestdbunit.annotation.DatabaseTearDown;
-import com.github.springtestdbunit.annotation.ExpectedDatabase;
-import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
-
-import by.bsac.timetable.dao.IFacultyDAO;
-import by.bsac.timetable.dao.exception.DAOException;
-import by.bsac.timetable.entity.Faculty;
-import by.bsac.timetable.entity.builder.FacultyBuilder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:springDBUnitContext.xml")

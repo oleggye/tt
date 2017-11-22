@@ -1,12 +1,11 @@
 package by.bsac.timetable.service;
 
-import java.util.Date;
-import java.util.List;
-
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.service.exception.ServiceException;
 import by.bsac.timetable.service.exception.ServiceValidationException;
+import java.util.Date;
+import java.util.List;
 
 public interface IClassroomService {
 
