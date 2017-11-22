@@ -90,7 +90,7 @@ public class Classroom implements java.io.Serializable, Cloneable, IName {
   @Transient
   @JsonIgnore
   public String getFullClassroomName() {
-    String format = "%s (%s)";
+    String format = "%s (к.%s)";
     return String.format(format, this.getName(), this.getBuilding());
   }
 

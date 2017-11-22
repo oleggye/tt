@@ -356,7 +356,7 @@ public class SupportClass {
 
     String lectName = record.getLecturer().getName();
 
-    String classRoom = record.getClassroom().getName();
+    String classRoom = record.getClassroom().getFullClassroomName();
 
     switch (subjType) {
       case 1:

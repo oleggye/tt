@@ -33,3 +33,5 @@ logs/**
 ../logs/*.log
 *.log
 tt-view/logs/*.log
+/logs/
+/tt-view.iml

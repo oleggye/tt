@@ -25,7 +25,8 @@ public class Cancellation implements java.io.Serializable {
   private Date dateTo;
   private Date dateFrom;
 
-  public Cancellation() {}
+  public Cancellation() {
+  }
 
   public Cancellation(Record record, Date dateTo, Date dateFrom) {
     this.record = record;
@@ -87,33 +88,44 @@ public class Cancellation implements java.io.Serializable {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     Cancellation other = (Cancellation) obj;
     if (dateFrom == null) {
-      if (other.dateFrom != null)
+      if (other.dateFrom != null) {
         return false;
-    } else if (!dateFrom.equals(other.dateFrom))
+      }
+    } else if (!dateFrom.equals(other.dateFrom)) {
       return false;
+    }
     if (dateTo == null) {
-      if (other.dateTo != null)
+      if (other.dateTo != null) {
         return false;
-    } else if (!dateTo.equals(other.dateTo))
+      }
+    } else if (!dateTo.equals(other.dateTo)) {
       return false;
+    }
     if (idCancellation == null) {
-      if (other.idCancellation != null)
+      if (other.idCancellation != null) {
         return false;
-    } else if (!idCancellation.equals(other.idCancellation))
+      }
+    } else if (!idCancellation.equals(other.idCancellation)) {
       return false;
+    }
     if (record == null) {
-      if (other.record != null)
+      if (other.record != null) {
         return false;
-    } else if (!record.equals(other.record))
+      }
+    } else if (!record.equals(other.record)) {
       return false;
+    }
     return true;
   }
 

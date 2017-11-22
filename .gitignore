@@ -25,11 +25,21 @@ local.properties
 .externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
-*.launch
-
-hibernate.cfg.xml
 hibernate.reveng.xml
 logs/**
 */logs/*.log
 *.log
 tt-view/logs/*.log
+/.project
+/logs/
+/.idea/
+/tt-view/logs/
+/tt-dao/.project
+/tt-dao/.settings/
+/tt-dao/tt-dao.iml
+/tt-dao/.classpath
+/tt-dao/target/
+/tt.iml
+src/main/resources/
+src/test/resources/
+src/test/

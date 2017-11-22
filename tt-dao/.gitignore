@@ -1,1 +1,5 @@
 /target/
+/.settings/
+/tt-dao.iml
+/.classpath
+/.project

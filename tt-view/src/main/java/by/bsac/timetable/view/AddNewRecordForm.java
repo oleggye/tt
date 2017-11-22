@@ -39,6 +39,7 @@ import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.Subject;
 import by.bsac.timetable.entity.builder.RecordBuilder;
 import by.bsac.timetable.util.ActionMode;
+import by.bsac.timetable.util.ConfigStore;
 import by.bsac.timetable.util.LessonFor;
 import by.bsac.timetable.util.LessonPeriod;
 import by.bsac.timetable.util.LessonType;
@@ -181,11 +182,18 @@ public class AddNewRecordForm extends JDialog {
       addRecord.setDateFrom(date);
       initClassroomComboBox(classroomComboBox, date, addRecord);
     });
-
-    JDatePickerImpl toDatePickerForAdd = initializer.initDatePicker(addRecord.getDateFrom());
-    toDatePickerForAdd.addActionListener((ActionEvent e) -> {
-      Date date = (Date) toDatePickerForAdd.getModel().getValue();
+    
+    Date date = (Date) ConfigStore.getInstance().getValue("toDate");
+    if(date != null) {
       addRecord.setDateTo(date);
+    }else {
+      date = addRecord.getDateFrom();
+    }
+    JDatePickerImpl toDatePickerForAdd = initializer.initDatePicker(date);
+    toDatePickerForAdd.addActionListener((ActionEvent e) -> {
+      Date dateVal = (Date) toDatePickerForAdd.getModel().getValue();
+      addRecord.setDateTo(dateVal);
+      ConfigStore.getInstance().putValue("toDate", dateVal);
     });
 
     JLabel label = new JLabel(getMessage("addNewRecordForm.date"));
@@ -228,10 +236,10 @@ public class AddNewRecordForm extends JDialog {
 
     radioButton.addActionListener((ActionEvent e) -> {
       lessonPeriod = LessonPeriod.FOR_ONE_DATE;
-      Date date = (Date) oneDatePickerForAdding.getModel().getValue();
-      addRecord.setDateFrom(date);
-      addRecord.setDateTo(date);
-      String formatedDate = new SimpleDateFormat(DATE_FORMAT).format(date);
+      Date dateVal = (Date) oneDatePickerForAdding.getModel().getValue();
+      addRecord.setDateFrom(dateVal);
+      addRecord.setDateTo(dateVal);
+      String formatedDate = new SimpleDateFormat(DATE_FORMAT).format(dateVal);
       selectedDateLabel.setText(formatedDate);
 
       duplicateOnWeeksPanel.setVisible(false);
