@@ -1,11 +1,10 @@
 package by.bsac.timetable.view;
 
-import by.bsac.timetable.listener.AppListener;
+import by.bsac.timetable.listener.SpringApplicationContextManager;
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +16,7 @@ public class CustomMainForm extends MainForm {
 
   private static final Logger LOGGER = LogManager.getLogger(CustomMainForm.class.getName());
 
-  private AppListener listener;
+  private SpringApplicationContextManager listener;
 
   /**
    * Create the application.
@@ -30,13 +29,13 @@ public class CustomMainForm extends MainForm {
   @Override
   protected void initialize() throws IOException {
     super.initialize();
-    listener = new AppListener();
-    listener.appStarting();
+    listener = new SpringApplicationContextManager();
+    listener.startApplicationContext();
 
     this.addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {
-        listener.appClosing();
+        listener.closeApplicationContext();
       }
     });
 

@@ -9,13 +9,13 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class AppListener {
+public class SpringApplicationContextManager {
 
-  private static final Logger LOGGER = LogManager.getLogger(AppListener.class.getName());
+  private static final Logger LOGGER = LogManager.getLogger(SpringApplicationContextManager.class.getName());
 
   private ConfigurableApplicationContext applicationContext;
 
-  public void appStarting() {
+  public void startApplicationContext() {
     LOGGER.info("Starting Spring app.....");
     applicationContext = new ClassPathXmlApplicationContext("classpath:springContext.xml");
 
@@ -26,7 +26,7 @@ public class AppListener {
     LOGGER.info("Spring app is started!");
   }
 
-  public void appClosing() {
+  public void closeApplicationContext() {
     if (applicationContext != null) {
       LOGGER.info("Closing Spring app.....");
       applicationContext.close();
