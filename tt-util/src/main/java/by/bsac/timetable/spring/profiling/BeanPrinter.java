@@ -21,8 +21,6 @@ public class BeanPrinter {
   @Autowired
   private ApplicationContext applicationContext;
 
-  public BeanPrinter() {  }
-
   @PostConstruct
   private void printBeanDefinitionNames(){
     logger.debug("\nManaged bean list:");
