@@ -5,11 +5,11 @@ import static by.bsac.timetable.view.util.LocalizationBundle.getMessage;
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.entity.Faculty;
 import by.bsac.timetable.entity.Group;
-import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.exception.ApplicationException;
-import by.bsac.timetable.listener.AppListener;
 import by.bsac.timetable.util.DateLabelFormatter;
 import by.bsac.timetable.util.SupportClass;
+import by.bsac.timetable.view.component.MyComboBox;
+import by.bsac.timetable.view.component.table.TablesArray;
 import by.bsac.timetable.view.contoller.CellTableMouseClickedEvent;
 import by.bsac.timetable.view.contoller.ShowBtnActionEvent;
 import by.bsac.timetable.view.extra.ChairEditForm;
@@ -20,23 +20,21 @@ import by.bsac.timetable.view.extra.GroupEditForm;
 import by.bsac.timetable.view.extra.LecturerEditForm;
 import by.bsac.timetable.view.extra.SubjectEditForm;
 import by.bsac.timetable.view.util.FormInitializer;
-import by.bsac.timetable.view.component.MyComboBox;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -55,7 +53,6 @@ import org.apache.logging.log4j.Logger;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-import by.bsac.timetable.view.component.table.TablesArray;
 
 /**
  * The app's main class
@@ -74,8 +71,6 @@ public class MainForm extends JFrame {
   private final TablesArray tableArray = new TablesArray(7, 4);
 
   private JButton showRecordsButton;
-  private List<Record> mainRecordList; // ������-���-��� ���
-  // ������� ������
   private JComboBox<Faculty> facultyComboBox; // combobox � ����������
   // �����������
   private JComboBox<Group> groupComboBox; // combobox � ���������� �����
@@ -92,13 +87,13 @@ public class MainForm extends JFrame {
     EventQueue.invokeLater(() -> {
       MainForm window = null;
       try {
-        window = new MainForm();
-        window.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        window.mainFrame.setVisible(true);
+        window = new MainForm(getMessage("mainForm.title"));
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        window.setVisible(true);
       } catch (Exception e) {
-        LOGGER.error(e.getCause().getMessage(), e);
-        JOptionPane.showMessageDialog(window.mainFrame.getContentPane(),
-            e.getCause().getMessage());
+        final String errorMessage = e.getCause().getMessage();
+        LOGGER.error(errorMessage, e);
+        JOptionPane.showMessageDialog(window.getContentPane(), errorMessage);
       }
     });
   }
@@ -108,13 +103,22 @@ public class MainForm extends JFrame {
    */
   public MainForm() throws IOException {
     initialize();
+    this.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    this.mainFrame.setVisible(true);
+  }
+
+  public MainForm(String title) throws IOException {
+    super(title);
+    initialize();
+    this.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    this.mainFrame.setVisible(true);
   }
 
   /**
    * Initialize the contents of the frame.
    */
-  private void initialize() throws IOException {
-    mainFrame = new JFrame(getMessage("mainForm.title"));
+  protected void initialize() throws IOException {
+    mainFrame = this/*new JFrame(getMessage("mainForm.title"))*/;
     mainFrame.setBounds(100, 100, 770, 533);
     mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     mainFrame.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -321,11 +325,11 @@ public class MainForm extends JFrame {
         new CellTableMouseClickedEvent(this, tableArray, groupComboBox, datePicker);
 
     // ������ ��������������� �������� ��� ������ � ��������� ������� ������
-    tableArray.initArray(mainRecordList, centralPanel, listener);
+    tableArray.initArray(centralPanel, listener);
     // ********************************************************************************
 
     FormInitializer.initLeftPanel(scrollPane);
-    addWindowListener(new MainFormWindowListener(mainFrame, progressBarLbl, progressBar));
+    this.addWindowListener(new MainFormWindowListener(progressBarLbl, progressBar));
   }
 
   private boolean getEduLevel(boolean isJustStarted) {
@@ -386,67 +390,31 @@ public class MainForm extends JFrame {
     isGroupSelected = false;
   }
 
-  public TablesArray getTablesArray() {
-    return tableArray;
-  }
+  class MainFormWindowListener extends WindowAdapter {
 
-  @Override
-  public void addWindowListener(WindowListener wl) {
-    mainFrame.addWindowListener(wl);
-  }
-
-  public class MainFormWindowListener extends WindowAdapter {
-
-    private JFrame mainFrame;
     private JLabel progressBarLbl;
     private JProgressBar progressBar;
 
-    private AppListener listener;
-
-    MainFormWindowListener(JFrame mainFrame, JLabel progressBarLbl, JProgressBar progressBar) {
-      this.mainFrame = mainFrame;
+    MainFormWindowListener(JLabel progressBarLbl, JProgressBar progressBar) {
       this.progressBarLbl = progressBarLbl;
       this.progressBar = progressBar;
-      listener = new AppListener();
     }
 
     @Override
     public void windowOpened(java.awt.event.WindowEvent evt) {
+      Window window = evt.getWindow();
       try {
-        listener.appStarting();
         showWindow(true, progressBarLbl, progressBar);
+
       } catch (ApplicationException ex) {
         LOGGER.error(ex.getCause().getMessage(), ex);
         JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
         progressBarLbl.setText(getMessage("mainForm.error"));
         progressBar.setValue(progressBar.getMaximum());
       } finally {
-        mainFrame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        window.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
       }
     }
-
-    @Override
-    public void windowClosing(WindowEvent e) {
-      listener.appClosing();
-
-      super.windowClosing(e);
-    }
-  }
-
-  public byte getEducationLevel() {
-    return educationLevel;
-  }
-
-  public void setEducationLevel(byte educationLevel) {
-    this.educationLevel = educationLevel;
-  }
-
-  public boolean isGroupSelected() {
-    return isGroupSelected;
-  }
-
-  public void setGroupSelected(boolean isGroupSelected) {
-    this.isGroupSelected = isGroupSelected;
   }
 
   public Boolean getIsGroupSelected() {
@@ -459,9 +427,5 @@ public class MainForm extends JFrame {
 
   public JFrame getMainFrame() {
     return mainFrame;
-  }
-
-  public void setMainFrame(JFrame mainFrame) {
-    this.mainFrame = mainFrame;
   }
 }

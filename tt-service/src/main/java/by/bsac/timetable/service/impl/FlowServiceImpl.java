@@ -75,7 +75,7 @@ public class FlowServiceImpl implements IFlowService {
       dontRollbackOn = ServiceValidationException.class)
   @Override
   public void deleteFlow(Flow flow) throws ServiceException, ServiceValidationException {
-    service.validateFlow(flow, true);
+    //service.validateFlow(flow, true);
     try {
       recordDao.deleteAllRecordsByFlow(flow);
       dao.delete(flow);

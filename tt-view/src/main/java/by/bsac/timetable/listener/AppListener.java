@@ -16,26 +16,21 @@ public class AppListener {
   private ConfigurableApplicationContext applicationContext;
 
   public void appStarting() {
+    LOGGER.info("Starting Spring app.....");
     applicationContext = new ClassPathXmlApplicationContext("classpath:springContext.xml");
-
-   /* LOGGER.info("\nManaged bean list:");
-    for (String name : applicationContext.getBeanDefinitionNames())
-      LOGGER.info(name);*/
 
     @SuppressWarnings("unchecked")
     Map<ActionMode, ICommand> commandStore =
         (Map<ActionMode, ICommand>) applicationContext.getBean("commandStore");
     CommandProvider.getInstance().setCommandStore(commandStore);
+    LOGGER.info("Spring app is started!");
   }
 
   public void appClosing() {
     if (applicationContext != null) {
+      LOGGER.info("Closing Spring app.....");
       applicationContext.close();
+      LOGGER.info("Spring app is closed!");
     }
   }
-
-  /*
-   * public static void main(String[] args) throws InterruptedException { AppListener appListener =
-   * new AppListener(); appListener.appStarting(); appListener.appClosing(); }
-   */
 }

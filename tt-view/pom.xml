@@ -49,7 +49,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>by.bsac.timetable.view.MainForm</mainClass>
+					<mainClass>by.bsac.timetable.view.CustomMainForm</mainClass>
 				</configuration>
 			</plugin>
 
