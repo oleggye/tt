@@ -22,7 +22,8 @@
 
 		<dbunit.version>2.5.4</dbunit.version>
 		<spring-test-dbunit.version>1.3.0</spring-test-dbunit.version>
-		<slf4j.version>1.7.21</slf4j.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<logback.version>1.2.3</logback.version>
 		<h2database.version>1.4.196</h2database.version>
 		<junit.version>4.12</junit.version>
 		<org.assertj.version>3.8.0</org.assertj.version>
@@ -79,6 +80,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -121,11 +128,16 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- LogBack dependencies -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
+			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${slf4j.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>

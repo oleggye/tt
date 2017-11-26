@@ -20,7 +20,7 @@ import by.bsac.timetable.view.extra.GroupEditForm;
 import by.bsac.timetable.view.extra.LecturerEditForm;
 import by.bsac.timetable.view.extra.SubjectEditForm;
 import by.bsac.timetable.view.util.FormInitializer;
-import components.MyComboBox;
+import by.bsac.timetable.view.component.MyComboBox;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -55,7 +55,7 @@ import org.apache.logging.log4j.Logger;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-import tableClasses.TablesArray;
+import by.bsac.timetable.view.component.table.TablesArray;
 
 /**
  * The app's main class

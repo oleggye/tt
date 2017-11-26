@@ -5,7 +5,7 @@ import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Faculty;
 import by.bsac.timetable.entity.builder.FacultyBuilder;
 import by.bsac.timetable.view.util.FormInitializer;
-import components.OneColumnTable;
+import by.bsac.timetable.view.component.OneColumnTable;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;

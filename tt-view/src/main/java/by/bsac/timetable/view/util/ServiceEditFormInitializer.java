@@ -4,7 +4,7 @@ import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Faculty;
 import by.bsac.timetable.service.exception.ServiceException;
-import components.MyComboBoxModel;
+import by.bsac.timetable.view.component.MyComboBoxModel;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;

@@ -18,7 +18,7 @@ import by.bsac.timetable.util.LessonPeriod;
 import by.bsac.timetable.util.LessonType;
 import by.bsac.timetable.util.WeekNumber;
 import by.bsac.timetable.view.UpdateOrCancelForm;
-import components.MyComboBoxModel;
+import by.bsac.timetable.view.component.MyComboBoxModel;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;

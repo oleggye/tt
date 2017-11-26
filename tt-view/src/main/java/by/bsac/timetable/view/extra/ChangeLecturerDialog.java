@@ -5,7 +5,7 @@ import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.view.util.FormInitializer;
-import components.MyComboBox;
+import by.bsac.timetable.view.component.MyComboBox;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;

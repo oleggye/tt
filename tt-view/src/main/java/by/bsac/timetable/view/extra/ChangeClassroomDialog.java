@@ -4,7 +4,7 @@ import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.view.util.FormInitializer;
-import components.MyComboBox;
+import by.bsac.timetable.view.component.MyComboBox;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;

@@ -21,9 +21,9 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import tableClasses.ArrayPosition;
-import tableClasses.MyMultiSpanCellTable;
-import tableClasses.TablesArray;
+import by.bsac.timetable.view.component.table.ArrayPosition;
+import by.bsac.timetable.view.component.table.MyMultiSpanCellTable;
+import by.bsac.timetable.view.component.table.TablesArray;
 
 public class SupportClass {
 

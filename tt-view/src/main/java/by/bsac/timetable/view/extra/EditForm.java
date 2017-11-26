@@ -10,7 +10,7 @@ import by.bsac.timetable.entity.Subject;
 import by.bsac.timetable.util.CheckGeneralization;
 import by.bsac.timetable.util.GetNamesClass;
 import by.bsac.timetable.util.SupportClass;
-import components.MyComboBox;
+import by.bsac.timetable.view.component.MyComboBox;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;

@@ -18,9 +18,9 @@ public class AppListener {
   public void appStarting() {
     applicationContext = new ClassPathXmlApplicationContext("classpath:springContext.xml");
 
-    LOGGER.info("\nManaged bean list:");
+   /* LOGGER.info("\nManaged bean list:");
     for (String name : applicationContext.getBeanDefinitionNames())
-      LOGGER.info(name);
+      LOGGER.info(name);*/
 
     @SuppressWarnings("unchecked")
     Map<ActionMode, ICommand> commandStore =
