@@ -46,7 +46,7 @@ public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
   public void mouseClicked(MouseEvent event) {
 
     if (mainForm.getIsGroupSelected()) {
-      mainForm.getMainFrame().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+      mainForm.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
       MyMultiSpanCellTable table = (MyMultiSpanCellTable) event.getSource();
 
@@ -76,18 +76,18 @@ public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
       if (value != null) {
         Record record = (Record) value;
 
-        invokeUpdateOrCancelForm(mainForm.getMainFrame(), lessonDate, group, record,
+        invokeUpdateOrCancelForm(mainForm, lessonDate, group, record,
             selectedWeekNumber, selectedWeekDay, selectedLessonOrdinalNumber);
-        mainForm.getMainFrame().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        mainForm.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
       } else {
         LOGGER.debug("It isn't a record:");
-        invokeAddNewRecordForm(mainForm.getMainFrame(), lessonDate, group, selectedWeekNumber,
+        invokeAddNewRecordForm(mainForm, lessonDate, group, selectedWeekNumber,
             selectedWeekDay, selectedLessonOrdinalNumber);
-        mainForm.getMainFrame().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        mainForm.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
       }
       table.clearSelection();
 
-      mainForm.getMainFrame().setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+      mainForm.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
       try {
         List<Record> recordList = CommandFacade.getTimetableForGroup(group, referenceDate);
 
@@ -97,10 +97,10 @@ public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
 
       } catch (CommandException ex) {
         LOGGER.error(ex.getCause().getMessage(), ex);
-        JOptionPane.showMessageDialog(mainForm.getMainFrame().getContentPane(),
+        JOptionPane.showMessageDialog(mainForm.getContentPane(),
             ex.getCause().getMessage());
       } finally {
-        mainForm.getMainFrame().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        mainForm.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
       }
     }
   }

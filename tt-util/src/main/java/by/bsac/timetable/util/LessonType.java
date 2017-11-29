@@ -11,7 +11,7 @@ public enum LessonType {
 
   private String value;
 
-  private LessonType(String value) {
+  LessonType(String value) {
     this.value = value;
   }
 
@@ -19,7 +19,7 @@ public enum LessonType {
    * <table border="1">
    * <caption>{@link SubjectType} mapping</caption>
    * <tr>
-   * <th>{@link SubjectType.getId()} value</th>
+   * <th>{@link SubjectType#getId()} value</th>
    * <th>instance of {@link LessonType}</th>
    * </tr>
    * <tr>
@@ -55,13 +55,14 @@ public enum LessonType {
    * <td>MOVE</td>
    * </tr>
    * </table>
-   * 
-   * @param subjectType
-   * @return
+   *
+   * @param subjectType instance of SubjectType
+   * @return equivalent instance of LessonType for @param
    */
   public static LessonType subjectTypeToLessonType(SubjectType subjectType) {
-    if (subjectType == null)
+    if (subjectType == null) {
       throw new IllegalArgumentException("subjectType is null");
+    }
 
     switch (subjectType.getId()) {
       case 1:
@@ -88,7 +89,6 @@ public enum LessonType {
 
   /**
    * @see #subjectTypeToLessonType(SubjectType)
-   * @return
    */
   public SubjectType lessonTypeToSubjectType() {
     SubjectType subjectType = new SubjectType();

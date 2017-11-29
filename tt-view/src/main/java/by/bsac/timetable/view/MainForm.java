@@ -67,7 +67,6 @@ public class MainForm extends JFrame {
 
   private static final Logger LOGGER = LogManager.getLogger(MainForm.class.getName());
 
-  private JFrame mainFrame;// ���������� �����
   private final TablesArray tableArray = new TablesArray(7, 4);
 
   private JButton showRecordsButton;
@@ -103,33 +102,32 @@ public class MainForm extends JFrame {
    */
   public MainForm() throws IOException {
     initialize();
-    this.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    this.mainFrame.setVisible(true);
+    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    this.setVisible(true);
   }
 
   public MainForm(String title) throws IOException {
     super(title);
     initialize();
-    this.mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    this.mainFrame.setVisible(true);
+    this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    this.setVisible(true);
   }
 
   /**
    * Initialize the contents of the frame.
    */
   protected void initialize() throws IOException {
-    mainFrame = this/*new JFrame(getMessage("mainForm.title"))*/;
-    mainFrame.setBounds(100, 100, 770, 533);
-    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    mainFrame.getContentPane().setLayout(new BorderLayout(0, 0));
-    mainFrame.setIconImage(
+    this.setBounds(100, 100, 770, 533);
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.getContentPane().setLayout(new BorderLayout(0, 0));
+    this.setIconImage(
         new ImageIcon(getClass().getClassLoader().getResource("images/table.png")).getImage());
 
     JLabel progressBarLbl = new JLabel(getMessage("mainForm.progressBarLbl"));
     JProgressBar progressBar = new javax.swing.JProgressBar();
 
     JPanel topPanel = new JPanel();
-    mainFrame.getContentPane().add(topPanel, BorderLayout.NORTH);
+    this.getContentPane().add(topPanel, BorderLayout.NORTH);
     topPanel.setLayout(new GridLayout(2, 1, 0, 0));
     topPanel.setPreferredSize(new Dimension(100, 78));
     topPanel.setMaximumSize(new Dimension(100, 78));
@@ -151,7 +149,7 @@ public class MainForm extends JFrame {
         showWindow(false, progressBarLbl, progressBar);
       } catch (ApplicationException ex) {
         LOGGER.error(ex.getCause().getMessage(), ex);
-        JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
+        JOptionPane.showMessageDialog(this.getContentPane(), ex.getCause().getMessage());
       }
     });
     mnFile.add(mntmNewFile);
@@ -162,13 +160,13 @@ public class MainForm extends JFrame {
     JMenuItem changeFacultyMenuItem = new JMenuItem(getMessage("mainForm.editFaculty"));
     changeFacultyMenuItem.addActionListener((ActionEvent e) -> {
       FacultyEditForm dialog = new FacultyEditForm();
-      dialog.setLocationRelativeTo(mainFrame);
+      dialog.setLocationRelativeTo(this);
       dialog.setVisible(true);
       try {
         FormInitializer.initFacultyComboBox(facultyComboBox);
       } catch (CommandException | ApplicationException ex) {
         LOGGER.error(ex.getCause().getMessage(), ex);
-        JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
+        JOptionPane.showMessageDialog(this.getContentPane(), ex.getCause().getMessage());
       } finally {
         if (groupComboBox.getItemCount() > 0) {
           groupComboBox.setSelectedIndex(0);
@@ -182,7 +180,7 @@ public class MainForm extends JFrame {
     JMenuItem changeFlowMenuItem = new JMenuItem(getMessage("mainForm.editFlow"));
     changeFlowMenuItem.addActionListener((ActionEvent e) -> {
       FlowEditForm edf = new FlowEditForm();
-      edf.setLocationRelativeTo(mainFrame);
+      edf.setLocationRelativeTo(this);
       edf.setVisible(true);
       resetTimetable();
     });
@@ -191,7 +189,7 @@ public class MainForm extends JFrame {
     JMenuItem changeChairMenuItem = new JMenuItem(getMessage("mainForm.editChair"));
     changeChairMenuItem.addActionListener((ActionEvent e) -> {
       ChairEditForm dialog = new ChairEditForm();
-      dialog.setLocationRelativeTo(mainFrame);
+      dialog.setLocationRelativeTo(this);
       dialog.setVisible(true);
       resetTimetable();
     });
@@ -200,7 +198,7 @@ public class MainForm extends JFrame {
     JMenuItem changeGroupMenuItem = new JMenuItem(getMessage("mainForm.editGroup"));
     changeGroupMenuItem.addActionListener((ActionEvent e) -> {
       GroupEditForm edf = new GroupEditForm(educationLevel);
-      edf.setLocationRelativeTo(mainFrame);
+      edf.setLocationRelativeTo(this);
       edf.setVisible(true);
       resetTimetable();
     });
@@ -208,9 +206,9 @@ public class MainForm extends JFrame {
 
     JMenuItem changeSubjectMenuItem = new JMenuItem(getMessage("mainForm.editSubject"));
     changeSubjectMenuItem.addActionListener((ActionEvent e) -> {
-      /* EditForm edf = new EditForm(mainFrame, 2, 1, educationLevel); */
+      /* EditForm edf = new EditForm(this, 2, 1, educationLevel); */
       SubjectEditForm edf = new SubjectEditForm(educationLevel);
-      edf.setLocationRelativeTo(mainFrame);
+      edf.setLocationRelativeTo(this);
       edf.setVisible(true);
       resetTimetable();
     });
@@ -218,9 +216,9 @@ public class MainForm extends JFrame {
 
     JMenuItem changeLecturerMenuItem = new JMenuItem(getMessage("mainForm.editLecturer"));
     changeLecturerMenuItem.addActionListener((ActionEvent e) -> {
-      // EditForm edf = new EditForm(mainFrame, 2, 3, educationLevel);
+      // EditForm edf = new EditForm(this, 2, 3, educationLevel);
       LecturerEditForm edf = new LecturerEditForm();
-      edf.setLocationRelativeTo(mainFrame);
+      edf.setLocationRelativeTo(this);
       edf.setVisible(true);
       resetTimetable();
     });
@@ -229,7 +227,7 @@ public class MainForm extends JFrame {
     JMenuItem changeClassroomMenuItem = new JMenuItem(getMessage("mainForm.editClassroom"));
     changeClassroomMenuItem.addActionListener((ActionEvent e) -> {
       ClassroomEditForm edf = new ClassroomEditForm();
-      edf.setLocationRelativeTo(mainFrame);
+      edf.setLocationRelativeTo(this);
       edf.setVisible(true);
       resetTimetable();
     });
@@ -240,7 +238,7 @@ public class MainForm extends JFrame {
       @Override
       public void mouseClicked(java.awt.event.MouseEvent evt) {
         AboutForm edf = new AboutForm();
-        edf.setLocationRelativeTo(mainFrame);
+        edf.setLocationRelativeTo(evt.getComponent().getParent());
         edf.setVisible(true);
       }
     });
@@ -262,7 +260,7 @@ public class MainForm extends JFrame {
           FormInitializer.initGroupComboBox(facultyComboBox, groupComboBox, educationLevel);
         } catch (CommandException | ApplicationException ex) {
           LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
+          JOptionPane.showMessageDialog(this.getContentPane(), ex.getCause().getMessage());
         } finally {
           if (groupComboBox.getItemCount() > 0) {
             groupComboBox.setSelectedIndex(0);
@@ -308,17 +306,17 @@ public class MainForm extends JFrame {
     centralPanel.setLayout(new GridLayout(7, 4, 10, 10));
 
     JPanel rightPanel = new JPanel();
-    mainFrame.getContentPane().add(rightPanel, BorderLayout.EAST);
+    this.getContentPane().add(rightPanel, BorderLayout.EAST);
 
     JPanel bottomPanel = new JPanel();
-    mainFrame.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
+    this.getContentPane().add(bottomPanel, BorderLayout.SOUTH);
 
     // ��������� progressbar � progresslabel �� ������
     bottomPanel.add(progressBarLbl);
     bottomPanel.add(progressBar);
 
     final JScrollPane scrollPane = new JScrollPane(centralPanel);
-    mainFrame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+    this.getContentPane().add(scrollPane, BorderLayout.CENTER);
     scrollPane.setColumnHeaderView(SupportClass.getJLabelWithPicture(this));
 
     MouseListener listener =
@@ -329,12 +327,12 @@ public class MainForm extends JFrame {
     // ********************************************************************************
 
     FormInitializer.initLeftPanel(scrollPane);
-    this.addWindowListener(new MainFormWindowListener(progressBarLbl, progressBar));
+    this.addWindowListener(new MainFormWindowListener(this, progressBarLbl, progressBar));
   }
 
   private boolean getEduLevel(boolean isJustStarted) {
     ChoseEducationLevelForm edf = new ChoseEducationLevelForm();
-    edf.setLocationRelativeTo(mainFrame);
+    edf.setLocationRelativeTo(this);
     edf.setVisible(true);
     byte newEduLvl = edf.getEduLevel();
     if (newEduLvl != this.educationLevel) {
@@ -346,28 +344,28 @@ public class MainForm extends JFrame {
   }
 
   private void showWindow(boolean isJustStarted, JLabel progressBarLbl, JProgressBar progressBar) {
-    mainFrame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     try {
       // TODO add your handling code here:
       if (getEduLevel(isJustStarted))// ������� �����������
       {
-        mainFrame.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         FormInitializer.initMainForm(facultyComboBox, groupComboBox, progressBarLbl, progressBar,
             educationLevel);
         actOrDeactivateButton();
       }
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
-      JOptionPane.showMessageDialog(mainFrame.getContentPane(),
+      JOptionPane.showMessageDialog(this.getContentPane(),
           ex.getCause().getCause().getMessage());
-      JOptionPane.showMessageDialog(mainFrame.getContentPane(),
+      JOptionPane.showMessageDialog(this.getContentPane(),
           getMessage("mainForm.error.sendToAdmin"));
-      JOptionPane.showMessageDialog(mainFrame.getContentPane(),
+      JOptionPane.showMessageDialog(this.getContentPane(),
           getMessage("mainForm.error.appWillBeClosed"));
-      mainFrame.dispose();
+      this.dispose();
 
     } finally {
-      mainFrame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+      this.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
   }
 
@@ -392,10 +390,11 @@ public class MainForm extends JFrame {
 
   class MainFormWindowListener extends WindowAdapter {
 
+    private JFrame frame;
     private JLabel progressBarLbl;
     private JProgressBar progressBar;
 
-    MainFormWindowListener(JLabel progressBarLbl, JProgressBar progressBar) {
+    MainFormWindowListener(JFrame frame, JLabel progressBarLbl, JProgressBar progressBar) {
       this.progressBarLbl = progressBarLbl;
       this.progressBar = progressBar;
     }
@@ -408,7 +407,7 @@ public class MainForm extends JFrame {
 
       } catch (ApplicationException ex) {
         LOGGER.error(ex.getCause().getMessage(), ex);
-        JOptionPane.showMessageDialog(mainFrame.getContentPane(), ex.getCause().getMessage());
+        JOptionPane.showMessageDialog(frame.getContentPane(), ex.getCause().getMessage());
         progressBarLbl.setText(getMessage("mainForm.error"));
         progressBar.setValue(progressBar.getMaximum());
       } finally {
@@ -425,7 +424,7 @@ public class MainForm extends JFrame {
     this.isGroupSelected = isGroupSelected;
   }
 
-  public JFrame getMainFrame() {
-    return mainFrame;
+  public JFrame getthis() {
+    return this;
   }
 }

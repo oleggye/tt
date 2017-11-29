@@ -25,7 +25,6 @@ public class Flow implements java.io.Serializable, Cloneable, IName {
   public Flow() {
   }
 
-
   public Flow(String name) {
     this.name = name;
   }

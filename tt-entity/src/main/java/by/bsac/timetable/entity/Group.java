@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "`group`", uniqueConstraints = @UniqueConstraint(columnNames = "name_group"))
+@Table(name = "groupp", uniqueConstraints = @UniqueConstraint(columnNames = "name_group"))
 public class Group implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = -4886595455964348534L;

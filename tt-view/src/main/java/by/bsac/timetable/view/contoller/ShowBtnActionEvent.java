@@ -57,7 +57,7 @@ public class ShowBtnActionEvent implements ActionListener {
 
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
-      JOptionPane.showMessageDialog(mainForm.getMainFrame().getContentPane(),
+      JOptionPane.showMessageDialog(mainForm.getContentPane(),
           ex.getCause().getMessage());
       mainForm.setIsGroupSelected(false);
     } finally {

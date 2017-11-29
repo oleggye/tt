@@ -20,7 +20,7 @@ public class FlowServiceImpl implements IFlowService {
   private IValidationService service;
 
   @Autowired
-  private IFlowDAO dao;
+  private IFlowDAO flowDAO;
   
   @Autowired
   private IRecordDAO recordDao;
@@ -31,7 +31,7 @@ public class FlowServiceImpl implements IFlowService {
   public void addFlow(Flow flow) throws ServiceException, ServiceValidationException {
     service.validateFlow(flow, false);
     try {
-      dao.add(flow);
+      flowDAO.add(flow);
     } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при добавлении потока", e);
     }
@@ -43,7 +43,7 @@ public class FlowServiceImpl implements IFlowService {
   public void updateFlow(Flow flow) throws ServiceException, ServiceValidationException {
     service.validateFlow(flow, true);
     try {
-      dao.update(flow);
+      flowDAO.update(flow);
     } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при обновлении потока", e);
     }
@@ -54,7 +54,7 @@ public class FlowServiceImpl implements IFlowService {
   @Override
   public Flow getFlowById(short idFlow) throws ServiceException, ServiceValidationException {
     try {
-      return dao.getById(idFlow);
+      return flowDAO.getById(idFlow);
     } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при получении потока с id: " + idFlow, e);
     }
@@ -65,7 +65,7 @@ public class FlowServiceImpl implements IFlowService {
   @Override
   public List<Flow> getFlowList() throws ServiceException {
     try {
-      return dao.getAll();
+      return flowDAO.getAll();
     } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при получении всех потоков", e);
     }
@@ -78,7 +78,7 @@ public class FlowServiceImpl implements IFlowService {
     //service.validateFlow(flow, true);
     try {
       recordDao.deleteAllRecordsByFlow(flow);
-      dao.delete(flow);
+      flowDAO.delete(flow);
     } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при удалении потока", e);
     }
@@ -91,7 +91,7 @@ public class FlowServiceImpl implements IFlowService {
   public List<Flow> getFlowListByName(String name)
       throws ServiceException, ServiceValidationException {
     try {
-      return dao.getAllWithSimilarName(name);
+      return flowDAO.getAllWithSimilarName(name);
     } catch (RuntimeException e) {
       throw new ServiceException("Ошибка при получении потоков", e);
     }

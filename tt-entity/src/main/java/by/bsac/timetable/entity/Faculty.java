@@ -30,7 +30,6 @@ public class Faculty implements java.io.Serializable, Cloneable, IName {
   public Faculty() {
   }
 
-
   public Faculty(String nameFaculty) {
     this.nameFaculty = nameFaculty;
   }

@@ -3,12 +3,14 @@ package by.bsac.timetable.dao.impl;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import by.bsac.timetable.dao.IClassroomDAO;
+import by.bsac.timetable.dao.IFlowDAO;
 import by.bsac.timetable.dao.IGroupDAO;
 import by.bsac.timetable.dao.ILecturerDAO;
 import by.bsac.timetable.dao.IRecordDAO;
 import by.bsac.timetable.dao.ISubjectDAO;
 import by.bsac.timetable.dao.exception.DAOException;
 import by.bsac.timetable.entity.Classroom;
+import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.entity.Group;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
@@ -45,6 +47,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
     DirtiesContextTestExecutionListener.class, TransactionalTestExecutionListener.class,
     DbUnitTestExecutionListener.class})
 public class RecordDAOImplTest {
+
   private static final DateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
   @Autowired
@@ -58,9 +61,12 @@ public class RecordDAOImplTest {
 
   @Autowired
   private ILecturerDAO lecturerDao;
-  
+
   @Autowired
   private ISubjectDAO subjectDao;
+
+  @Autowired
+  private IFlowDAO flowDao;
 
   @Test
   @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/lecturerSetup.xml",
@@ -196,23 +202,23 @@ public class RecordDAOImplTest {
     final Short idClassroom = 1;
 
     Record record = new RecordBuilder()
-                      .buildId(idRecord)
-                      .buildWeekDay(weekDay)
-                      .buildWeekNumber(weekNumber)
-                      .buildSubjOrdinalNumber(subjectOrdinalNumber)
-                      .buildGroup(groupDao.getById(idGroup))
-                      .buildSubject(subjectDao.getById(idSubject))
-                      .buildLecturer(lecturerDao.getById(idLecturer))
-                      .buildSubjectType(new SubjectTypeBuilder().buildId(idSubjectType).build())
-                      .buildSubjectFor(new SubjectForBuilder().buildId(idSubjectFor).build())
-                      .buildDateFrom(dateFrom)
-                      .buildDateTo(dateTo)
-                      .buildClassroom(classroomDao.getById(idClassroom))
-                      .build();
+        .buildId(idRecord)
+        .buildWeekDay(weekDay)
+        .buildWeekNumber(weekNumber)
+        .buildSubjOrdinalNumber(subjectOrdinalNumber)
+        .buildGroup(groupDao.getById(idGroup))
+        .buildSubject(subjectDao.getById(idSubject))
+        .buildLecturer(lecturerDao.getById(idLecturer))
+        .buildSubjectType(new SubjectTypeBuilder().buildId(idSubjectType).build())
+        .buildSubjectFor(new SubjectForBuilder().buildId(idSubjectFor).build())
+        .buildDateFrom(dateFrom)
+        .buildDateTo(dateTo)
+        .buildClassroom(classroomDao.getById(idClassroom))
+        .build();
 
     dao.add(record);
   }
-  
+
   @Test
   @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/lecturerSetup.xml",
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
@@ -238,23 +244,23 @@ public class RecordDAOImplTest {
     final Short idClassroom = 2;
 
     Record record = new RecordBuilder()
-                      .buildId(idRecord)
-                      .buildWeekDay(weekDay)
-                      .buildWeekNumber(weekNumber)
-                      .buildSubjOrdinalNumber(subjectOrdinalNumber)
-                      .buildGroup(groupDao.getById(idGroup))
-                      .buildSubject(subjectDao.getById(idSubject))
-                      .buildLecturer(lecturerDao.getById(idLecturer))
-                      .buildSubjectType(new SubjectTypeBuilder().buildId(idSubjectType).build())
-                      .buildSubjectFor(new SubjectForBuilder().buildId(idSubjectFor).build())
-                      .buildDateFrom(dateFrom)
-                      .buildDateTo(dateTo)
-                      .buildClassroom(classroomDao.getById(idClassroom))
-                      .build();
+        .buildId(idRecord)
+        .buildWeekDay(weekDay)
+        .buildWeekNumber(weekNumber)
+        .buildSubjOrdinalNumber(subjectOrdinalNumber)
+        .buildGroup(groupDao.getById(idGroup))
+        .buildSubject(subjectDao.getById(idSubject))
+        .buildLecturer(lecturerDao.getById(idLecturer))
+        .buildSubjectType(new SubjectTypeBuilder().buildId(idSubjectType).build())
+        .buildSubjectFor(new SubjectForBuilder().buildId(idSubjectFor).build())
+        .buildDateFrom(dateFrom)
+        .buildDateTo(dateTo)
+        .buildClassroom(classroomDao.getById(idClassroom))
+        .build();
 
     dao.update(record);
   }
-  
+
   @Test
   @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/lecturerSetup.xml",
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
@@ -267,11 +273,11 @@ public class RecordDAOImplTest {
       type = DatabaseOperation.CLEAN_INSERT)
   public void testDeleteRecordWithIdOne() throws DAOException, ParseException {
     final Integer idRecord = 1;
-    
+
     Record record = dao.getById(idRecord);
-    dao.delete(record);    
+    dao.delete(record);
   }
-  
+
   @Test
   @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/lecturerSetup.xml",
       "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
@@ -288,9 +294,26 @@ public class RecordDAOImplTest {
     final Date dateFrom = FORMAT.parse("2017-08-28");
     final Date dateTo = FORMAT.parse("2017-08-28");
 
-    List<Record> recordList = dao.getRecordListByGroupAndDatesWhichNotCancelled(group, dateFrom, dateTo);
+    List<Record> recordList = dao
+        .getRecordListByGroupAndDatesWhichNotCancelled(group, dateFrom, dateTo);
 
     assertThat(recordList).isNotNull();
     assertThat(recordList.size()).isEqualTo(expectedSize);
+  }
+
+  @Test
+  @DatabaseSetup(value = {"/data/setup/chairSetup.xml", "/data/setup/lecturerSetup.xml",
+      "/data/setup/subjectSetup.xml", "/data/setup/classroomSetup.xml",
+      "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
+      "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
+      "/data/setup/recordSetup.xml", "/data/setup/cancellationSetup.xml"})
+  @ExpectedDatabase("/data/record/deleteAllRecordsByFlow.xml")
+  @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
+      type = DatabaseOperation.CLEAN_INSERT)
+  public void testDeleteAllRecordsByFlowWithIdOne() throws DAOException, ParseException {
+    final Short idFlow = 1;
+    final Flow flow = flowDao.getById(idFlow);
+
+    dao.deleteAllRecordsByFlow(flow);
   }
 }
