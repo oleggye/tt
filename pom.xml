@@ -59,12 +59,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>by.bsac.timetable.multiSpanCellTable</groupId>
-			<artifactId>multiSpanCellTable</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>2.8.2</version>

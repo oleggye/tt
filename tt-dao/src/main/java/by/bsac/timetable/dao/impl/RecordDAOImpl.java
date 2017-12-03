@@ -18,6 +18,7 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
 
   private static final Logger LOGGER = LogManager.getLogger(RecordDAOImpl.class.getName());
 
+  private static final String GROUP_PARAM_NAME = "group";
   private static final Byte SUBJECT_FOR_FULL_FLOW_ID = 4;
 
   public RecordDAOImpl() {
@@ -39,10 +40,10 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
             + "OR (:dateTo BETWEEN rec.dateFrom AND rec.dateTo) "
             + "OR (:dateFrom <= rec.dateFrom AND :dateTo >= rec.dateTo))", Record.class)
         .setParameter("dateFrom", dateFrom).setParameter("dateTo", dateTo)
-        .setParameter("group", group).getResultList();
+        .setParameter(GROUP_PARAM_NAME, group).getResultList();
   }
 
-  // FIXME: it is very strange method! Don't exactly know for what...
+  /*it is very strange method! Don't exactly know for what...*/
   @Override
   public Record getRecordForGroupLikeThis(Group group, Record record) {
     LOGGER.debug("getRecordForGroupLikeThis: group=" + group + "record=" + record);
@@ -51,7 +52,7 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
             + "rec.weekNumber =:weekNumber and rec.weekDay =:weekDay and "
             + "rec.subjOrdinalNumber =:subjOrdinalNumber and rec.dateFrom =:dateFrom and "
             + "rec.dateTo =:dateTo", Record.class)
-        .setParameter("group", group).setParameter("weekNumber", record.getWeekNumber())
+        .setParameter(GROUP_PARAM_NAME, group).setParameter("weekNumber", record.getWeekNumber())
         .setParameter("weekDay", record.getWeekDay())
         .setParameter("subjOrdinalNumber", record.getSubjOrdinalNumber())
         .setParameter("dateFrom", record.getDateFrom()).setParameter("dateTo", record.getDateTo())
@@ -65,7 +66,7 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
         .createQuery(
             "select rec from Record rec where rec.group =:group and rec.subjectFor =:subjectFor",
             Record.class)
-        .setParameter("group", group).setParameter("subjectFor", subjectFor).getResultList();
+        .setParameter(GROUP_PARAM_NAME, group).setParameter("subjectFor", subjectFor).getResultList();
   }
 
   @Override
@@ -95,9 +96,10 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
     LOGGER.debug("deleteAllRecordsByFlow: flow=" + flow);
     /**/
     manager.createNativeQuery(
-        "delete from record where record.id_group in (select id_group from groupp join flow where flow.id_flow = 1) and record.id_subject_for = 4")
-        /*.setParameter("idFlow", flow.getIdFlow())
-        .setParameter("subjectFor", SUBJECT_FOR_FULL_FLOW_ID)*/
+        "delete from record where record.id_group " 
+            + "in (select id_group from groupp join flow where flow.id_flow = 1) and record.id_subject_for :=idSubjectFor")
+        .setParameter("idFlow", flow.getIdFlow())
+        .setParameter("subjectFor", SUBJECT_FOR_FULL_FLOW_ID)
         .executeUpdate();
   /*  manager.createQuery("delete from Record rec where rec.group.flow =:flow")
         .setParameter("flow", flow).executeUpdate();*/

@@ -27,6 +27,12 @@
 			<version>0.0.2</version>
 		</dependency>
 
+		<!--<dependency>
+			<groupId>by.bsac.timetable.multiSpanCellTable</groupId>
+			<artifactId>multiSpanCellTable</artifactId>
+			<version>0.0.1</version>
+		</dependency>-->
+
 		<dependency>
 			<groupId>by.bsac.timetable</groupId>
 			<artifactId>tt-util</artifactId>
