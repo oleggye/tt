@@ -52,12 +52,14 @@ import org.jdatepicker.impl.JDatePickerImpl;
  */
 public class UpdateOrCancelForm extends JDialog {
 
-  private static final Logger LOGGER = LogManager.getLogger(UpdateOrCancelForm.class.getName());
+  private static final Logger LOGGER =
+      LogManager.getLogger(UpdateOrCancelForm.class.getName());
 
   private static final long serialVersionUID = 1L;
   private static final String DATE_FORMAT = "dd-MM-yyyy";
 
-  private final UpdateOrCancelInitializer initializer = new UpdateOrCancelInitializer(this);
+  private final UpdateOrCancelInitializer initializer =
+      new UpdateOrCancelInitializer(this);
 
   private JFrame parent;
 
@@ -82,12 +84,6 @@ public class UpdateOrCancelForm extends JDialog {
 
   /**
    * Constructor for editing a record (UPDATE/CANCEL)
-   * 
-   * @param parent
-   * @param lessonDate
-   * @param weekNumber
-   * @param currentWeekDay
-   * @param lessonOrdinalNumber
    */
   public UpdateOrCancelForm(JFrame parent, Date lessonDate, Group group, Record record,
       byte weekNumber, byte currentWeekDay, byte lessonOrdinalNumber) {
@@ -1124,10 +1120,13 @@ public class UpdateOrCancelForm extends JDialog {
   private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate,
       Record updateRecord) {
     try {
-      Record record = new RecordBuilder().buildWeekDay(updateRecord.getWeekDay())
+      Record record = new RecordBuilder()
+          .buildWeekDay(updateRecord.getWeekDay())
           .buildWeekNumber(updateRecord.getWeekNumber())
-          .buildSubjOrdinalNumber(updateRecord.getSubjOrdinalNumber()).build();
-      FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate, record);
+          .buildSubjOrdinalNumber(updateRecord.getSubjOrdinalNumber())
+          .build();
+      FormInitializer.initClassroomComboBox(
+          classroomComboBox, referenceDate, record);
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
       JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());

@@ -273,16 +273,16 @@ public class RecordServiceImpl implements IRecordService {
   }
 
   /* @Transactional(value = TxType.MANDATORY) */
-  private void cancelFlowRecord(Record initalRecord, Record cancelRecord) {
+  private void cancelFlowRecord(Record initialRecord, Record cancelRecord) {
     List<Cancellation> resultList = new LinkedList<>();
     
     Cancellation cancellation = new Cancellation();
     cancellation.setDateFrom(cancelRecord.getDateFrom());
     cancellation.setDateTo(cancelRecord.getDateTo());
 
-    List<Group> groupList = groupDao.getGroupListByFlow(initalRecord.getGroup().getFlow());
+    List<Group> groupList = groupDao.getGroupListByFlow(initialRecord.getGroup().getFlow());
     for (Group group : groupList) {
-      Record thisGroupRecord = recordDAO.getRecordForGroupLikeThis(group, initalRecord);
+      Record thisGroupRecord = recordDAO.getRecordForGroupLikeThis(group, initialRecord);
       if (thisGroupRecord != null) {
         cancellation.setRecord(thisGroupRecord);
         resultList.add(CANCEL_BUILDER.copy(cancellation));

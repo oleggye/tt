@@ -78,12 +78,6 @@ public class AddNewRecordForm extends JDialog {
 
   /**
    * Constructor for adding a record
-   * 
-   * @param parent
-   * @param lessonDate
-   * @param weekNumber
-   * @param currentWeekDay
-   * @param lessonOrdinalNumber
    */
   public AddNewRecordForm(JFrame parent, Date lessonDate, Group group, byte weekNumber,
       byte currentWeekDay, byte lessonOrdinalNumber) {
@@ -150,10 +144,10 @@ public class AddNewRecordForm extends JDialog {
     JPanel addTab = new JPanel();
     tabbedPane.addTab(getMessage("addNewRecordForm.addRecord"), null, addTab, null);
     addTab.setLayout(null);
-    constractAddTab(addTab, date);
+    contractAddTab(addTab, date);
   }
 
-  private void constractAddTab(JPanel addTab, String lessonDate) {
+  private void contractAddTab(JPanel addTab, String lessonDate) {
 
     /* be careful with such attepts! */
     JComboBox<Classroom> classroomComboBox = new MyComboBox<>(new ClassroomRenderer<>());
@@ -179,11 +173,11 @@ public class AddNewRecordForm extends JDialog {
       addRecord.setDateFrom(date);
       initClassroomComboBox(classroomComboBox, date, addRecord);
     });
-    
+
     Date date = (Date) ConfigStore.getInstance().getValue("toDate");
-    if(date != null) {
+    if (date != null) {
       addRecord.setDateTo(date);
-    }else {
+    } else {
       date = addRecord.getDateFrom();
     }
     JDatePickerImpl toDatePickerForAdd = initializer.initDatePicker(date);
@@ -740,10 +734,13 @@ public class AddNewRecordForm extends JDialog {
   private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate,
       Record addRecord) {
     try {
-      Record record = new RecordBuilder().buildWeekDay(addRecord.getWeekDay())
+      Record record = new RecordBuilder()
+          .buildWeekDay(addRecord.getWeekDay())
           .buildWeekNumber(addRecord.getWeekNumber())
-          .buildSubjOrdinalNumber(addRecord.getSubjOrdinalNumber()).build();
-      FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate, record);
+          .buildSubjOrdinalNumber(addRecord.getSubjOrdinalNumber())
+          .build();
+      FormInitializer.initClassroomComboBox(
+          classroomComboBox, referenceDate, record);
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
       JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
