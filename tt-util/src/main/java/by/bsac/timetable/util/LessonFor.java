@@ -4,7 +4,7 @@ import by.bsac.timetable.entity.SubjectFor;
 
 public enum LessonFor {
 
-  FULL_FLOW, FULL_GROUP, FIRST_SUBGROUP, SECOND_SUBGROUP;
+  FIRST_SUBGROUP, SECOND_SUBGROUP, FULL_GROUP, FULL_FLOW;
 
   /**
    * <table border="1">

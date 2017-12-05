@@ -334,6 +334,9 @@ public class AddNewRecordForm extends JDialog {
     JRadioButton radioButton_3 = new JRadioButton(getMessage("addNewRecordForm.forFirstSubgroup"));
     radioButton_3.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_3.setBounds(442, 7, 193, 23);
+    if (lessonFor.equals(LessonFor.FIRST_SUBGROUP)) {
+      radioButton_3.setSelected(true);
+    }
     radioButton_3.addActionListener((ActionEvent e) -> {
       lessonFor = LessonFor.FIRST_SUBGROUP;
       addRecord.setSubjectFor(lessonFor.lessonForToSubjectFor());
@@ -344,6 +347,9 @@ public class AddNewRecordForm extends JDialog {
     JRadioButton radioButton_4 = new JRadioButton(getMessage("addNewRecordForm.forSecondSubgroup"));
     radioButton_4.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_4.setBounds(442, 38, 193, 23);
+    if (lessonFor.equals(LessonFor.SECOND_SUBGROUP)) {
+      radioButton_4.setSelected(true);
+    }
     radioButton_4.addActionListener((ActionEvent e) -> {
       lessonFor = LessonFor.SECOND_SUBGROUP;
       addRecord.setSubjectFor(lessonFor.lessonForToSubjectFor());
