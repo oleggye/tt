@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-	<chair />
-	<faculty />
-	<classroom />
-	<faculty />
-	<flow />
-	<lecturer />
-	<subject />
-	<groupp />
-	<subject_type />
-	<subject_for />
-	<record />
-	<cancellation />
+  <chair/>
+  <faculty/>
+  <classroom/>
+  <faculty/>
+  <flow/>
+  <lecturer/>
+  <subject/>
+  <groupp/>
+  <subject_type/>
+  <subject_for/>
+  <record/>
+  <cancellation/>
 </dataset>

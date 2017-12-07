@@ -2,8 +2,8 @@ package by.bsac.timetable.view.extra;
 
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.entity.Flow;
-import by.bsac.timetable.view.util.FormInitializer;
 import by.bsac.timetable.view.component.MyComboBox;
+import by.bsac.timetable.view.util.FormInitializer;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;

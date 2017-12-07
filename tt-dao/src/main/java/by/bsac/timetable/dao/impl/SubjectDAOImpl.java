@@ -4,14 +4,14 @@ import by.bsac.timetable.dao.ISubjectDAO;
 import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.entity.Subject;
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class SubjectDAOImpl extends AbstractHibernateDAO<Subject, Short> implements ISubjectDAO {
 
-  private static final Logger LOGGER = LogManager.getLogger(SubjectDAOImpl.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(SubjectDAOImpl.class.getName());
 
   private static final String LIKE_CONST = "%";
 

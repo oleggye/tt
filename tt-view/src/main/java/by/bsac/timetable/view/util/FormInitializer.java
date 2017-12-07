@@ -17,6 +17,7 @@ import by.bsac.timetable.util.SupportClass;
 import by.bsac.timetable.util.VerticalLabelUI;
 import by.bsac.timetable.view.component.MyComboBoxModel;
 import by.bsac.timetable.view.component.OneColumnTableModel;
+import by.bsac.timetable.view.component.table.TablesArray;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Date;
@@ -33,7 +34,6 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
-import by.bsac.timetable.view.component.table.TablesArray;
 
 public final class FormInitializer {
 

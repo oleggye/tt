@@ -13,19 +13,20 @@ import java.util.List;
 public class MyMultiSpanCellTable extends MultiSpanCellTable {
 
   private static final long serialVersionUID = 1L;
+  private static final String FONT_NAME = "Tahoma";
 
   public MyMultiSpanCellTable() {
     super();
-    this.setFont(new Font("Tahoma", Font.BOLD, 14));
+    this.setFont(new Font(FONT_NAME, Font.BOLD, 14));
   }
 
   public MyMultiSpanCellTable(AttributiveCellTableModel model) {
     super(model);
-    this.setFont(new Font("Tahoma", Font.BOLD, 14));
+    this.setFont(new Font(FONT_NAME, Font.BOLD, 14));
   }
 
   // добавленный метод к изначальному
-  public void changeTableModel(Record record) {
+  private void changeTableModel(Record record) {
     int[] rows = new int[]{record.getSubjOrdinalNumber()
         - 1}; /* т.к. в таблице индексы с 0 */
     int[] cols = SupportClass.getColsFromSubgroup(record.getSubjectFor().getId());

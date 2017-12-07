@@ -1,7 +1,6 @@
 package by.bsac.timetable.entity;
 
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +34,7 @@ public class Cancellation implements java.io.Serializable {
   }
 
   @Id
-  /*@GeneratedValue(strategy = GenerationType.IDENTITY)*/
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id_cancellation", unique = true, nullable = false)
   public Integer getIdCancellation() {
     return this.idCancellation;

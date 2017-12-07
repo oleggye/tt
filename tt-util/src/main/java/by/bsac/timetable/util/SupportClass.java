@@ -5,6 +5,9 @@ import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.Subject;
 import by.bsac.timetable.entity.SubjectFor;
+import by.bsac.timetable.view.component.table.ArrayPosition;
+import by.bsac.timetable.view.component.table.MyMultiSpanCellTable;
+import by.bsac.timetable.view.component.table.TablesArray;
 import java.awt.Color;
 import java.awt.Window;
 import java.io.IOException;
@@ -19,17 +22,14 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import by.bsac.timetable.view.component.table.ArrayPosition;
-import by.bsac.timetable.view.component.table.MyMultiSpanCellTable;
-import by.bsac.timetable.view.component.table.TablesArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SupportClass {
 
   private SupportClass() {}
 
-  private static final Logger LOGGER = LogManager.getLogger(SupportClass.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(SupportClass.class);
 
   private static final String RECORD_CONFLICT_MESSAGE = "Данная запись конфликтует с существующей";
   private static final String RECORD_TIP_CONSTANT = "%s(%s), %s [%s]";
@@ -138,7 +138,7 @@ public class SupportClass {
    * <table border="1">
    * <caption>{@link SubjectFor} mapping</caption>
    * <tr>
-   * <th>{@link SubjectFor.getId()}</th>
+   * <th>{@link SubjectFor#getId()}</th>
    * <th>description</th>
    * </tr>
    * <tr>

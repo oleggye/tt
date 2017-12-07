@@ -4,14 +4,14 @@ import by.bsac.timetable.dao.ILecturerDAO;
 import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.entity.Lecturer;
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class LecturerDAOImpl extends AbstractHibernateDAO<Lecturer, Short> implements ILecturerDAO {
 
-  private static final Logger LOGGER = LogManager.getLogger(LecturerDAOImpl.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(LecturerDAOImpl.class.getName());
 
   private static final String LIKE_CONST = "%";
 

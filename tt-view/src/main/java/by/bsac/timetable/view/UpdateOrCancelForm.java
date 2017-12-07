@@ -17,10 +17,10 @@ import by.bsac.timetable.util.LessonPeriod;
 import by.bsac.timetable.util.LessonType;
 import by.bsac.timetable.util.UtilityClass;
 import by.bsac.timetable.util.WeekNumber;
-import by.bsac.timetable.view.util.FormInitializer;
-import by.bsac.timetable.view.util.UpdateOrCancelInitializer;
 import by.bsac.timetable.view.component.ClassroomRenderer;
 import by.bsac.timetable.view.component.MyComboBox;
+import by.bsac.timetable.view.util.FormInitializer;
+import by.bsac.timetable.view.util.UpdateOrCancelInitializer;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -57,6 +57,7 @@ public class UpdateOrCancelForm extends JDialog {
 
   private static final long serialVersionUID = 1L;
   private static final String DATE_FORMAT = "dd-MM-yyyy";
+  private static final String FONT_NAME = "Tahoma";
 
   private final UpdateOrCancelInitializer initializer =
       new UpdateOrCancelInitializer(this);
@@ -105,7 +106,7 @@ public class UpdateOrCancelForm extends JDialog {
     getContentPane().add(buttonPane);
     {
       JButton okButton = new JButton("OK");
-      okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+      okButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
       okButton.setActionCommand("OK");
       buttonPane.add(okButton);
       getRootPane().setDefaultButton(okButton);
@@ -136,7 +137,7 @@ public class UpdateOrCancelForm extends JDialog {
 
     {
       JButton cancelButton = new JButton("Cancel");
-      cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+      cancelButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
       cancelButton.setActionCommand("Cancel");
       buttonPane.add(cancelButton);
       cancelButton.addActionListener((ActionEvent e) -> {
@@ -162,16 +163,16 @@ public class UpdateOrCancelForm extends JDialog {
       JPanel updateTab = new JPanel();
       tabbedPane.addTab("Обновить запись", null, updateTab, null);
       updateTab.setLayout(null);
-      constactUpdateTab(updateTab, date);
+      constructUpdateTab(updateTab, date);
 
       JPanel cancelTab = new JPanel();
       tabbedPane.addTab("Отменить запись", null, cancelTab, null);
       cancelTab.setLayout(null);
-      constractCancelTab(cancelTab, lessonDate, date);
+      constructCancelTab(cancelTab, lessonDate, date);
     }
   }
 
-  private void constactUpdateTab(JPanel updatePanel, String lessonDate) {
+  private void constructUpdateTab(JPanel updatePanel, String lessonDate) {
 
     JComboBox<Classroom> classroomComboBox = new MyComboBox<>(new ClassroomRenderer<>());
     classroomComboBox.setBounds(10, 11, 159, 27);
@@ -202,32 +203,32 @@ public class UpdateOrCancelForm extends JDialog {
     toDatePickerForUpdate.addActionListener((ActionEvent e) -> {
       // FIXME: проверка на то, чтобы dateTo >= dateFrom
       Date value = (Date) toDatePickerForUpdate.getModel().getValue();
-      System.out.println("selected date to:" + value);
+      LOGGER.info("selected date to:" + value);
       updateRecord.setDateTo(value);
     });
 
     JLabel label = new JLabel("Дата:");
-    label.setFont(new Font("Tahoma", Font.BOLD, 16));
+    label.setFont(new Font(FONT_NAME, Font.BOLD, 16));
     label.setBounds(30, 20, 77, 20);
     updatePanel.add(label);
 
     JLabel lblNewLabel = new JLabel("Выбраная дата:");
-    lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    lblNewLabel.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     lblNewLabel.setBounds(206, 11, 125, 19);
     updatePanel.add(lblNewLabel);
 
     selectedDateLabel.setForeground(Color.RED);
-    selectedDateLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+    selectedDateLabel.setFont(new Font(FONT_NAME, Font.BOLD, 16));
     selectedDateLabel.setBounds(344, 13, 115, 14);
     updatePanel.add(selectedDateLabel);
 
     JLabel label_1 = new JLabel("Пара назначается:");
-    label_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+    label_1.setFont(new Font(FONT_NAME, Font.BOLD, 16));
     label_1.setBounds(30, 118, 166, 20);
     updatePanel.add(label_1);
 
     JLabel label_2 = new JLabel("Тип пары:");
-    label_2.setFont(new Font("Tahoma", Font.BOLD, 16));
+    label_2.setFont(new Font(FONT_NAME, Font.BOLD, 16));
     label_2.setBounds(30, 210, 166, 20);
     updatePanel.add(label_2);
 
@@ -242,7 +243,7 @@ public class UpdateOrCancelForm extends JDialog {
     ButtonGroup periodBtnGroup = new ButtonGroup();
 
     JRadioButton radioButton = new JRadioButton("Пара на выбранную дату");
-    radioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton.setBounds(6, 7, 227, 23);
 
     if (updateLessonPeriod.equals(LessonPeriod.FOR_ONE_DATE)) {
@@ -265,7 +266,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_3.add(radioButton);
 
     JRadioButton radioButton_1 = new JRadioButton("Пара на промежуток");
-    radioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_1.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_1.setBounds(6, 44, 190, 23);
 
     if (updateLessonPeriod.equals(LessonPeriod.FOR_THE_PERIOD)) {
@@ -283,7 +284,7 @@ public class UpdateOrCancelForm extends JDialog {
     periodBtnGroup.add(radioButton_1);
 
     JLabel label_3 = new JLabel("выбрать другую дату:");
-    label_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label_3.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     label_3.setBounds(273, 10, 180, 17);
     panel_3.add(label_3);
 
@@ -302,11 +303,11 @@ public class UpdateOrCancelForm extends JDialog {
     panel_2.add(toDatePickerForUpdate);
     panel_3.add(panel_2);
 
-    fromDateLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+    fromDateLabel.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     fromDateLabel.setBounds(200, 48, 18, 14);
     panel_3.add(fromDateLabel);
 
-    toDateLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+    toDateLabel.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     toDateLabel.setBounds(435, 48, 18, 14);
     panel_3.add(toDateLabel);
 
@@ -319,7 +320,7 @@ public class UpdateOrCancelForm extends JDialog {
     ButtonGroup classForBtnGroup = new ButtonGroup();
 
     JRadioButton rdbtnNewRadioButton = new JRadioButton("для всего потока");
-    rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    rdbtnNewRadioButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     rdbtnNewRadioButton.setBounds(6, 7, 166, 23);
 
     if (lessonFor.equals(LessonFor.FULL_FLOW)) {
@@ -334,7 +335,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_4.add(rdbtnNewRadioButton);
 
     JRadioButton radioButton_2 = new JRadioButton("для всей группы");
-    radioButton_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_2.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_2.setBounds(226, 7, 152, 23);
 
     if (lessonFor.equals(LessonFor.FULL_GROUP)) {
@@ -349,7 +350,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_4.add(radioButton_2);
 
     JRadioButton radioButton_3 = new JRadioButton("для первой подгруппы");
-    radioButton_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_3.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_3.setBounds(442, 7, 193, 23);
 
     if (lessonFor.equals(LessonFor.FIRST_SUBGROUP)) {
@@ -364,7 +365,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_4.add(radioButton_3);
 
     JRadioButton radioButton_4 = new JRadioButton("для второй подгруппы");
-    radioButton_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_4.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_4.setBounds(442, 38, 193, 23);
 
     if (lessonFor.equals(LessonFor.SECOND_SUBGROUP)) {
@@ -379,7 +380,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_4.add(radioButton_4);
 
     JLabel label_11 = new JLabel("(поточная пара)");
-    label_11.setFont(new Font("Tahoma", Font.ITALIC, 14));
+    label_11.setFont(new Font(FONT_NAME, Font.ITALIC, 14));
     label_11.setBounds(27, 28, 135, 14);
     panel_4.add(label_11);
 
@@ -392,7 +393,7 @@ public class UpdateOrCancelForm extends JDialog {
     ButtonGroup classTypeBtnGroup = new ButtonGroup();
 
     JRadioButton radioButton_5 = new JRadioButton("Лекция");
-    radioButton_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_5.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_5.setBounds(6, 3, 94, 23);
 
     if (lessonType.equals(LessonType.LECTURE)) {
@@ -406,7 +407,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_5.add(radioButton_5);
 
     JRadioButton radioButton_6 = new JRadioButton("Практическая");
-    radioButton_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_6.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_6.setBounds(124, 7, 131, 23);
 
     if (lessonType.equals(LessonType.PRACTICE_WORK)) {
@@ -420,7 +421,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_5.add(radioButton_6);
 
     JRadioButton radioButton_7 = new JRadioButton("Консультация");
-    radioButton_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_7.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_7.setBounds(257, 7, 140, 23);
 
     if (lessonType.equals(LessonType.CONSULTATION)) {
@@ -434,7 +435,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_5.add(radioButton_7);
 
     JRadioButton radioButton_8 = new JRadioButton("Зачет");
-    radioButton_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_8.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_8.setBounds(422, 7, 74, 23);
 
     if (lessonType.equals(LessonType.CREDIT)) {
@@ -448,7 +449,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_5.add(radioButton_8);
 
     JRadioButton radioButton_9 = new JRadioButton("Экзамен");
-    radioButton_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_9.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_9.setBounds(361, 25, 94, 23);
 
     if (lessonType.equals(LessonType.EXAM)) {
@@ -462,7 +463,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_5.add(radioButton_9);
 
     JRadioButton radioButton_10 = new JRadioButton("Лабораторная");
-    radioButton_10.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_10.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_10.setBounds(52, 25, 131, 23);
 
     if (lessonType.equals(LessonType.LABORATORY_WORK)) {
@@ -476,7 +477,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_5.add(radioButton_10);
 
     JRadioButton radioButton_11 = new JRadioButton("Учебное занятие");
-    radioButton_11.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_11.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_11.setBounds(521, 5, 149, 23);
 
     if (lessonType.equals(LessonType.TRAINING_SESSION)) {
@@ -490,7 +491,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_5.add(radioButton_11);
 
     JRadioButton radioButton_12 = new JRadioButton("Переезд");
-    radioButton_12.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    radioButton_12.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     radioButton_12.setBounds(521, 27, 149, 23);
 
     if (lessonType.equals(LessonType.MOVE)) {
@@ -515,7 +516,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_6.add(updateChairComboBox);
 
     JLabel lblNewLabel_2 = new JLabel("Кафедра");
-    lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    lblNewLabel_2.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     lblNewLabel_2.setBounds(20, 11, 112, 20);
     panel_6.add(lblNewLabel_2);
 
@@ -531,12 +532,12 @@ public class UpdateOrCancelForm extends JDialog {
     panel_6.add(updateLecturerComboBox);
 
     JLabel label_7 = new JLabel("Преподаватель");
-    label_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    label_7.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     label_7.setBounds(246, 11, 112, 20);
     panel_6.add(label_7);
 
     JLabel label_8 = new JLabel("Предмет");
-    label_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    label_8.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     label_8.setBounds(450, 11, 112, 20);
     panel_6.add(label_8);
 
@@ -573,7 +574,7 @@ public class UpdateOrCancelForm extends JDialog {
     });
 
     JLabel label_6 = new JLabel("Дисциплина:");
-    label_6.setFont(new Font("Tahoma", Font.BOLD, 16));
+    label_6.setFont(new Font(FONT_NAME, Font.BOLD, 16));
     label_6.setBounds(30, 289, 166, 20);
     updatePanel.add(label_6);
 
@@ -590,7 +591,7 @@ public class UpdateOrCancelForm extends JDialog {
     }
 
     JCheckBox firstWeekForAdd = new JCheckBox("1");
-    firstWeekForAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    firstWeekForAdd.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     firstWeekForAdd.setBounds(10, 10, 42, 23);
     if (updateWeekSet.contains(WeekNumber.FIRST)) {
       firstWeekForAdd.setSelected(true);
@@ -607,7 +608,7 @@ public class UpdateOrCancelForm extends JDialog {
     weekPanel.add(firstWeekForAdd);
 
     JCheckBox secondWeekForAdd = new JCheckBox("2");
-    secondWeekForAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    secondWeekForAdd.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     secondWeekForAdd.setBounds(65, 10, 42, 23);
     if (updateWeekSet.contains(WeekNumber.SECOND)) {
       secondWeekForAdd.setSelected(true);
@@ -623,7 +624,7 @@ public class UpdateOrCancelForm extends JDialog {
     weekPanel.add(secondWeekForAdd);
 
     JCheckBox thirdWeekForAdd = new JCheckBox("3");
-    thirdWeekForAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    thirdWeekForAdd.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     thirdWeekForAdd.setBounds(128, 10, 42, 23);
     if (updateWeekSet.contains(WeekNumber.THIRD)) {
       thirdWeekForAdd.setSelected(true);
@@ -639,7 +640,7 @@ public class UpdateOrCancelForm extends JDialog {
     weekPanel.add(thirdWeekForAdd);
 
     JCheckBox fourthWeekForAdd = new JCheckBox("4");
-    fourthWeekForAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    fourthWeekForAdd.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     fourthWeekForAdd.setBounds(195, 10, 42, 23);
     if (updateWeekSet.contains(WeekNumber.FOURTH)) {
       fourthWeekForAdd.setSelected(true);
@@ -660,7 +661,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_10.setBounds(480, 420, 197, 46);
     updatePanel.add(panel_10);
 
-    dublicateOnWeekLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+    dublicateOnWeekLabel.setFont(new Font(FONT_NAME, Font.BOLD, 16));
     dublicateOnWeekLabel.setBounds(55, 394, 215, 20);
     updatePanel.add(dublicateOnWeekLabel);
 
@@ -673,7 +674,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_10.add(classroomComboBox);
 
     JLabel label_10 = new JLabel("Аудитория:");
-    label_10.setFont(new Font("Tahoma", Font.BOLD, 16));
+    label_10.setFont(new Font(FONT_NAME, Font.BOLD, 16));
     label_10.setBounds(480, 403, 166, 20);
     updatePanel.add(label_10);
 
@@ -684,7 +685,7 @@ public class UpdateOrCancelForm extends JDialog {
       FormInitializer.initChairComboBox(updateChairComboBox);
       if (updateChairComboBox.getItemCount() != 0) {
         Chair chair = updateRecord.getLecturer().getChair();
-        System.out.println("idChair:" + chair.getIdChair());
+        LOGGER.info("idChair:" + chair.getIdChair());
         // updateChairComboBox.setSelectedItem(chair);
         UtilityClass.selectCBItemById(updateChairComboBox, chair);
 
@@ -693,18 +694,18 @@ public class UpdateOrCancelForm extends JDialog {
         FormInitializer.initLecturerComboBox(updateLecturerComboBox, updateChairComboBox);
 
         Subject subject = updateRecord.getSubject();
-        System.out.println("idSubject:" + subject.getIdSubject());
+        LOGGER.info("idSubject:" + subject.getIdSubject());
         UtilityClass.selectCBItemById(updateSubjectComboBox, subject);
 
         Lecturer lecturer = updateRecord.getLecturer();
-        System.out.println("idLecturer:" + lecturer.getIdLecturer());
+        LOGGER.info("idLecturer:" + lecturer.getIdLecturer());
         UtilityClass.selectCBItemById(updateLecturerComboBox, lecturer);
       }
       Date dateValue = parseDate(updateRecord.getDateFrom().getTime());
       initClassroomComboBox(classroomComboBox, dateValue, updateRecord);
 
       Classroom classroom = updateRecord.getClassroom();
-      System.out.println("classroom:" + classroom.getName());
+      LOGGER.info("classroom:" + classroom.getName());
       UtilityClass.selectCBItemById(classroomComboBox, classroom);
       isInitialized = true;
 
@@ -714,7 +715,7 @@ public class UpdateOrCancelForm extends JDialog {
     }
   }
 
-  private void constractCancelTab(JPanel cancelTab, Date lessonDate, String date) {
+  private void constructCancelTab(JPanel cancelTab, Date lessonDate, String date) {
     /*-------------------------------------------------*/
     /*----------панель для отмены расписания-----------*/
     /*-------------------------------------------------*/
@@ -722,7 +723,7 @@ public class UpdateOrCancelForm extends JDialog {
     JDatePickerImpl oneDatePickerForCanceling = initializer.initDatePicker(lessonDate);
     oneDatePickerForCanceling.addActionListener((ActionEvent e) -> {
       Date value = (Date) oneDatePickerForCanceling.getModel().getValue();
-      System.out.println("selected date:" + value);
+      LOGGER.info("selected date:" + value);
       cancelRecord.setDateFrom(value);
       cancelRecord.setDateTo(value);
     });
@@ -731,30 +732,30 @@ public class UpdateOrCancelForm extends JDialog {
         initializer.initDatePicker(cancelRecord.getDateFrom());
     fromDatePickerForCanceling.addActionListener((ActionEvent e) -> {
       Date value = (Date) fromDatePickerForCanceling.getModel().getValue();
-      System.out.println("selected date:" + value);
+      LOGGER.info("selected date:" + value);
       cancelRecord.setDateFrom(value);
     });
     JDatePickerImpl toDatePickerForCanceling = initializer.initDatePicker(cancelRecord.getDateTo());
     toDatePickerForCanceling.addActionListener((ActionEvent e) -> {
       Date value = (Date) toDatePickerForCanceling.getModel().getValue();
-      System.out.println("selected date:" + value);
+      LOGGER.info("selected date:" + value);
       cancelRecord.setDateTo(value);
     });
     ButtonGroup periodBtnGroup = new ButtonGroup();
 
     JLabel label_13 = new JLabel("Выбраная дата:");
-    label_13.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    label_13.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     label_13.setBounds(206, 11, 125, 19);
     cancelTab.add(label_13);
 
     JLabel label_14 = new JLabel(date);
     label_14.setForeground(Color.RED);
-    label_14.setFont(new Font("Tahoma", Font.BOLD, 16));
+    label_14.setFont(new Font(FONT_NAME, Font.BOLD, 16));
     label_14.setBounds(344, 13, 115, 14);
     cancelTab.add(label_14);
 
     JLabel label_15 = new JLabel("Пара отменяется:");
-    label_15.setFont(new Font("Tahoma", Font.BOLD, 16));
+    label_15.setFont(new Font(FONT_NAME, Font.BOLD, 16));
     label_15.setBounds(30, 194, 166, 20);
     cancelTab.add(label_15);
 
@@ -764,52 +765,53 @@ public class UpdateOrCancelForm extends JDialog {
     panel_11.setBounds(30, 225, 676, 69);
     cancelTab.add(panel_11);
 
-    JRadioButton radioButton_11 = new JRadioButton("для всего потока");
-    radioButton_11.setFont(new Font("Tahoma", Font.PLAIN, 16));
-    radioButton_11.setBounds(6, 7, 166, 23);
+    JRadioButton forFullFlowRadioButton = new JRadioButton("для всего потока");
+    forFullFlowRadioButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
+    forFullFlowRadioButton.setBounds(6, 7, 166, 23);
 
     if (lessonFor.equals(LessonFor.FULL_FLOW)) {
-      radioButton_11.setSelected(true);
+      forFullFlowRadioButton.setSelected(true);
     } else {
-      radioButton_11.setEnabled(false);
+      forFullFlowRadioButton.setEnabled(false);
     }
-    panel_11.add(radioButton_11);
+    panel_11.add(forFullFlowRadioButton);
 
-    JRadioButton radioButton_12 = new JRadioButton("для всей группы");
-    radioButton_12.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton forFirstGroupRadioButton = new JRadioButton("для всей группы");
+    forFirstGroupRadioButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
 
     if (lessonFor.equals(LessonFor.FULL_GROUP)) {
-      radioButton_12.setSelected(true);
+      forFirstGroupRadioButton.setSelected(true);
     } else {
-      radioButton_12.setEnabled(false);
+      forFirstGroupRadioButton.setEnabled(false);
     }
-    radioButton_12.setBounds(226, 7, 152, 23);
-    panel_11.add(radioButton_12);
 
-    JRadioButton radioButton_13 = new JRadioButton("для первой подгруппы");
-    radioButton_13.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    forFirstGroupRadioButton.setBounds(226, 7, 152, 23);
+    panel_11.add(forFirstGroupRadioButton);
+
+    JRadioButton forFirstSubgroupRadioButton = new JRadioButton("для первой подгруппы");
+    forFirstSubgroupRadioButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
 
     if (lessonFor.equals(LessonFor.FIRST_SUBGROUP)) {
-      radioButton_13.setSelected(true);
+      forFirstSubgroupRadioButton.setSelected(true);
     } else {
-      radioButton_13.setEnabled(false);
+      forFirstSubgroupRadioButton.setEnabled(false);
     }
-    radioButton_13.setBounds(442, 7, 193, 23);
-    panel_11.add(radioButton_13);
+    forFirstSubgroupRadioButton.setBounds(442, 7, 193, 23);
+    panel_11.add(forFirstSubgroupRadioButton);
 
-    JRadioButton radioButton_14 = new JRadioButton("для второй подгруппы");
-    radioButton_14.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    JRadioButton forSecondSubgroupRadioButton = new JRadioButton("для второй подгруппы");
+    forSecondSubgroupRadioButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
 
     if (lessonFor.equals(LessonFor.SECOND_SUBGROUP)) {
-      radioButton_14.setSelected(true);
+      forSecondSubgroupRadioButton.setSelected(true);
     } else {
-      radioButton_14.setEnabled(false);
+      forSecondSubgroupRadioButton.setEnabled(false);
     }
-    radioButton_14.setBounds(442, 38, 193, 23);
-    panel_11.add(radioButton_14);
+    forSecondSubgroupRadioButton.setBounds(442, 38, 193, 23);
+    panel_11.add(forSecondSubgroupRadioButton);
 
     JLabel label_16 = new JLabel("(поточная пара)");
-    label_16.setFont(new Font("Tahoma", Font.ITALIC, 14));
+    label_16.setFont(new Font(FONT_NAME, Font.ITALIC, 14));
     label_16.setBounds(27, 28, 135, 14);
     panel_11.add(label_16);
 
@@ -828,8 +830,7 @@ public class UpdateOrCancelForm extends JDialog {
         forRangeDateCancelRadioButton = new JRadioButton("На промежуток"),
         forWeekNumberCancelRadioButton = new JRadioButton("По номеру недели");
 
-    // forOneDateCancelRadioButton = new JRadioButton("На выбранную дату");
-    forOneDateCancelRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    forOneDateCancelRadioButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     forOneDateCancelRadioButton.setBounds(6, 7, 227, 23);
 
     if (cancelLessonPeriod.equals(LessonPeriod.FOR_ONE_DATE)) {
@@ -864,7 +865,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_12.add(forOneDateCancelRadioButton);
 
     // forRangeDateCancelRadioButton= new JRadioButton("На промежуток") ;
-    forRangeDateCancelRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    forRangeDateCancelRadioButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     forRangeDateCancelRadioButton.setBounds(6, 54, 190, 23);
 
     if (cancelLessonPeriod.equals(LessonPeriod.FOR_THE_PERIOD)) {
@@ -892,7 +893,7 @@ public class UpdateOrCancelForm extends JDialog {
     periodBtnGroup.add(forRangeDateCancelRadioButton);
     panel_12.add(forRangeDateCancelRadioButton);
 
-    selectAnotherCancelDateLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+    selectAnotherCancelDateLabel.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     selectAnotherCancelDateLabel.setBounds(273, 10, 180, 17);
     panel_12.add(selectAnotherCancelDateLabel);
 
@@ -910,12 +911,12 @@ public class UpdateOrCancelForm extends JDialog {
     // cancelToTheDatePanel.setVisible(false);
     panel_12.add(cancelToTheDatePanel);
 
-    cancelFromLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+    cancelFromLabel.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     cancelFromLabel.setBounds(200, 58, 18, 14);
     // cancelFromLabel.setVisible(false);
     panel_12.add(cancelFromLabel);
 
-    cancelToLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+    cancelToLabel.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     cancelToLabel.setBounds(435, 58, 18, 14);
     // cancelToLabel.setVisible(false);
     panel_12.add(cancelToLabel);
@@ -927,7 +928,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_12.add(cancelByWeekNumberPanel);
 
     JCheckBox firstWeekCBForCancel = new JCheckBox("1");
-    firstWeekCBForCancel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    firstWeekCBForCancel.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
 
     if (cancelWeekSet.contains(WeekNumber.FIRST)) {
       firstWeekCBForCancel.setSelected(true);
@@ -945,7 +946,7 @@ public class UpdateOrCancelForm extends JDialog {
     cancelByWeekNumberPanel.add(firstWeekCBForCancel);
 
     JCheckBox secondWeekCBForCancel = new JCheckBox("2");
-    secondWeekCBForCancel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    secondWeekCBForCancel.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
 
     if (cancelWeekSet.contains(WeekNumber.SECOND)) {
       secondWeekCBForCancel.setSelected(true);
@@ -962,7 +963,7 @@ public class UpdateOrCancelForm extends JDialog {
     cancelByWeekNumberPanel.add(secondWeekCBForCancel);
 
     JCheckBox thirdWeekCBForCancel = new JCheckBox("3");
-    thirdWeekCBForCancel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    thirdWeekCBForCancel.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
 
     if (cancelWeekSet.contains(WeekNumber.THIRD)) {
       thirdWeekCBForCancel.setSelected(true);
@@ -979,7 +980,7 @@ public class UpdateOrCancelForm extends JDialog {
     cancelByWeekNumberPanel.add(thirdWeekCBForCancel);
 
     JCheckBox fourthWeekCBForCancel = new JCheckBox("4");
-    fourthWeekCBForCancel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    fourthWeekCBForCancel.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
 
     if (cancelWeekSet.contains(WeekNumber.FOURTH)) {
       fourthWeekCBForCancel.setSelected(true);
@@ -997,7 +998,7 @@ public class UpdateOrCancelForm extends JDialog {
 
     // JRadioButton forWeekNumberCancelRadioButton = new JRadioButton("По
     // номеру недели");
-    forWeekNumberCancelRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+    forWeekNumberCancelRadioButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
     forWeekNumberCancelRadioButton.setBounds(6, 104, 190, 23);
 
     if (cancelLessonPeriod.equals(LessonPeriod.FOR_WEEK_NUMBER)) {
@@ -1020,7 +1021,7 @@ public class UpdateOrCancelForm extends JDialog {
     panel_12.add(forWeekNumberCancelRadioButton);
 
     JLabel label_19 = new JLabel("Дата:");
-    label_19.setFont(new Font("Tahoma", Font.BOLD, 16));
+    label_19.setFont(new Font(FONT_NAME, Font.BOLD, 16));
     label_19.setBounds(30, 20, 77, 20);
     cancelTab.add(label_19);
   }

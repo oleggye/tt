@@ -1,6 +1,6 @@
 package by.bsac.timetable.util;
 
-import static java.util.Objects.*;
+import static java.util.Objects.isNull;
 
 import java.awt.Dimension;
 import java.awt.FontMetrics;
@@ -9,7 +9,6 @@ import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
-import java.util.Objects;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;

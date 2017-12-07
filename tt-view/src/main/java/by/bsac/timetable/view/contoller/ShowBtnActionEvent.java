@@ -7,6 +7,7 @@ import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.util.DateUtil;
 import by.bsac.timetable.util.SupportClass;
 import by.bsac.timetable.view.MainForm;
+import by.bsac.timetable.view.component.table.TablesArray;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,6 @@ import javax.swing.JTable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jdatepicker.impl.JDatePickerImpl;
-import by.bsac.timetable.view.component.table.TablesArray;
 
 public class ShowBtnActionEvent implements ActionListener {
 

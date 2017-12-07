@@ -15,7 +15,6 @@ public class DateUtilTest {
 
   private Date date;
 
-  @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("STCAL_INVOKE_ON_STATIC_DATE_FORMAT_INSTANCE")
   @Before
   public void setUp() throws Exception {
     date = FORMAT.parse(dateString);

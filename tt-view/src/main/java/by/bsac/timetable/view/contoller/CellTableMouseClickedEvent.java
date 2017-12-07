@@ -9,6 +9,9 @@ import by.bsac.timetable.util.SupportClass;
 import by.bsac.timetable.view.AddNewRecordForm;
 import by.bsac.timetable.view.MainForm;
 import by.bsac.timetable.view.UpdateOrCancelForm;
+import by.bsac.timetable.view.component.table.ArrayPosition;
+import by.bsac.timetable.view.component.table.MyMultiSpanCellTable;
+import by.bsac.timetable.view.component.table.TablesArray;
 import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.util.Date;
@@ -20,9 +23,6 @@ import javax.swing.JOptionPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jdatepicker.impl.JDatePickerImpl;
-import by.bsac.timetable.view.component.table.ArrayPosition;
-import by.bsac.timetable.view.component.table.MyMultiSpanCellTable;
-import by.bsac.timetable.view.component.table.TablesArray;
 
 public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
 

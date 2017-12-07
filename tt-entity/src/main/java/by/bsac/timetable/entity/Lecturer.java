@@ -1,5 +1,7 @@
 package by.bsac.timetable.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
@@ -7,6 +9,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -45,7 +48,7 @@ public class Lecturer implements java.io.Serializable, Cloneable, IName {
   }
 
   @Id
-  /*@GeneratedValue(strategy = IDENTITY)*/
+  @GeneratedValue(strategy = IDENTITY)
   @Column(name = "id_lecturer", unique = true, nullable = false)
   public Short getIdLecturer() {
     return this.idLecturer;

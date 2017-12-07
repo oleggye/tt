@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RecordServiceImpl implements IRecordService {
+
   private static final RecordBuilder RECORD_BUILDER = new RecordBuilder();
   private static final CancellationBuilder CANCEL_BUILDER = new CancellationBuilder();
   @Autowired
@@ -151,7 +152,7 @@ public class RecordServiceImpl implements IRecordService {
     try {
       recordDAO.delete(record);
     } catch (RuntimeException e) {
-      throw new ServiceException("Ошибка при получении занятия", e);
+      throw new ServiceException("Ошибка при удалении занятия", e);
     }
   }
 
@@ -182,8 +183,11 @@ public class RecordServiceImpl implements IRecordService {
        * удаление по номеру недели или это пара на одну дату, то удаляем данную запись
        */
       LessonFor lessonFor = LessonFor.subjectForToLessonFor(cancelRecord.getSubjectFor());
+      Date dateFrom = initialRecord.getDateFrom();
+      Date dateTo = initialRecord.getDateTo();
+
       if (cancelLessonPeriod.equals(LessonPeriod.FOR_WEEK_NUMBER)
-          || initialRecord.getDateFrom().equals(initialRecord.getDateTo())) {
+          || dateFrom.equals(dateTo)) {
 
         /* если это пара для всего потока, то нужно обновить у всех */
         if (lessonFor.equals(LessonFor.FULL_FLOW)) {
@@ -275,7 +279,7 @@ public class RecordServiceImpl implements IRecordService {
   /* @Transactional(value = TxType.MANDATORY) */
   private void cancelFlowRecord(Record initialRecord, Record cancelRecord) {
     List<Cancellation> resultList = new LinkedList<>();
-    
+
     Cancellation cancellation = new Cancellation();
     cancellation.setDateFrom(cancelRecord.getDateFrom());
     cancellation.setDateTo(cancelRecord.getDateTo());
@@ -307,10 +311,6 @@ public class RecordServiceImpl implements IRecordService {
 
   /**
    * Method checks whether the passed instance of {@link Record} conflicts with similar records
-   * 
-   * @param record
-   * @throws ServiceException
-   * @throws ServiceValidationException
    */
   /* @Transactional(value = TxType.MANDATORY) */
   private void checkRecordForConflict(Record record)
