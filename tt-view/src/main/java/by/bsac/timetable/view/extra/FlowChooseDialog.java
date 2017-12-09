@@ -17,12 +17,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FlowChooseDialog extends JDialog {
 
-  private static final Logger LOGGER = LogManager.getLogger(FlowChooseDialog.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(FlowChooseDialog.class.getName());
 
   private static final long serialVersionUID = 1L;
 
@@ -84,7 +84,7 @@ public class FlowChooseDialog extends JDialog {
         JButton okButton = new JButton("OK");
         okButton.setActionCommand("OK");
 
-        okButton.addActionListener(ItemEvent -> {
+        okButton.addActionListener(itemEvent -> {
           frame.setNeedUpdate(true);
           frame.setFlow(flow);
           dispose();
@@ -97,7 +97,7 @@ public class FlowChooseDialog extends JDialog {
       if (this.flow != null) {
 
         JButton button = new JButton("Удалить");
-        button.addActionListener(ItemEvent -> {
+        button.addActionListener(itemEvent -> {
           frame.setFlow(null);
           frame.setNeedUpdate(true);
           dispose();

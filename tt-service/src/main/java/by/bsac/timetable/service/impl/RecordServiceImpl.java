@@ -1,5 +1,7 @@
 package by.bsac.timetable.service.impl;
 
+import static java.util.Objects.equals;
+
 import by.bsac.timetable.dao.ICancellationDAO;
 import by.bsac.timetable.dao.IGroupDAO;
 import by.bsac.timetable.dao.IRecordDAO;
@@ -22,6 +24,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
@@ -319,11 +322,13 @@ public class RecordServiceImpl implements IRecordService {
         getAllRecordListForGroup(record.getGroup(), record.getDateFrom(), record.getDateTo());
 
     for (Record elem : recordList) {
-      if (elem.getIdRecord() != record.getIdRecord()
-          && elem.getWeekNumber() == record.getWeekNumber()
-          && elem.getWeekDay() == record.getWeekDay()
-          && elem.getSubjOrdinalNumber() == record.getSubjOrdinalNumber()
-          && elem.getSubjectFor().equals(record.getSubjectFor())) {
+      if (
+          !Objects.equals(elem.getIdRecord(), record.getIdRecord())
+              && elem.getWeekNumber() == record.getWeekNumber()
+              && elem.getWeekDay() == record.getWeekDay()
+              && elem.getSubjOrdinalNumber() == record.getSubjOrdinalNumber()
+              &&
+              Objects.equals(elem.getSubjectFor(), record.getSubjectFor())) {
 
         throw new ServiceValidationException("Запись конфликтует с другой!");
       }

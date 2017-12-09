@@ -20,14 +20,14 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jdatepicker.impl.JDatePickerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
 
-  private static final Logger LOGGER =
-      LogManager.getLogger(CellTableMouseClickedEvent.class.getName());
+  private static final Logger LOGGER = LoggerFactory
+      .getLogger(CellTableMouseClickedEvent.class.getName());
 
   private MainForm mainForm;
   private TablesArray tableArray;
@@ -55,8 +55,9 @@ public class CellTableMouseClickedEvent extends java.awt.event.MouseAdapter {
       int column = table.columnAtPoint(event.getPoint());
       LOGGER.debug("column:" + column);
 
-      if (column == 0)
+      if (column == 0) {
         return;
+      }
 
       Object value = table.getValueAt(row, column);
       LOGGER.debug("selected value:" + value);

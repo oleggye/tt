@@ -9,7 +9,6 @@ import by.bsac.timetable.view.util.FormInitializer;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -19,14 +18,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ChairEditForm extends JDialog {
+
   private static final long serialVersionUID = 1L;
 
-  private static final Logger LOGGER = LogManager.getLogger(ChairEditForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(ChairEditForm.class.getName());
 
+  private static final String FONT_NAME = "Tahoma";
   private JTable table;
   private Chair chair;
 
@@ -56,18 +57,18 @@ public class ChairEditForm extends JDialog {
     });
 
     JLabel label = new JLabel("Редактирование/Добавление");
-    label.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     label.setBounds(323, 56, 220, 18);
     contentPanel.add(label);
 
     JButton editButton = new JButton("Изменить");
-    editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    editButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JButton deleteButton = new JButton("Удалить");
-    deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    deleteButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JTextArea textField = new JTextArea(1, 1);
-    textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    textField.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JScrollPane scrollPane = new JScrollPane(textField);
     scrollPane.setBounds(323, 85, 220, 46);
@@ -79,31 +80,28 @@ public class ChairEditForm extends JDialog {
     editButton.setBounds(323, 142, 100, 26);
     contentPanel.add(editButton);
 
-    editButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        String nameChair = textField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, nameChair);
+    editButton.addActionListener(e -> {
+      String nameChair = textField.getText();
+      boolean isTableHasNot = isTableHasNotAlikeValue(table, nameChair);
 
-        if (isTableHasNot) {
+      if (isTableHasNot) {
 
-          try {
-            editButton.setEnabled(false);
+        try {
+          editButton.setEnabled(false);
 
-            Chair editingChair = new ChairBuilder()
-                              .buildId(chair.getIdChair())
-                              .buildNameChair(textField.getText())
-                              .build();
-            CommandFacade.updateChair(editingChair);
-            FormInitializer.initChairTable(table);
+          Chair editingChair = new ChairBuilder()
+              .buildId(chair.getIdChair())
+              .buildNameChair(textField.getText())
+              .build();
+          CommandFacade.updateChair(editingChair);
+          FormInitializer.initChairTable(table);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            editButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, textField);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          editButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, textField);
         }
       }
     });
@@ -111,59 +109,53 @@ public class ChairEditForm extends JDialog {
     deleteButton.setBounds(391, 179, 89, 23);
     contentPanel.add(deleteButton);
     deleteButton.setVisible(false);
-    deleteButton.addActionListener(new java.awt.event.ActionListener() {
 
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        int result = JOptionPane.showConfirmDialog(getContentPane(),
-            "Удаление кафедры повлечен за собой удаление всех связанных с ней преподавателей и предметов, которые, в свою очередь, приведут к удалению связанных с ними занятий",
-            "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
-          try {
-            deleteButton.setEnabled(false);
+    deleteButton.addActionListener(e -> {
+      int result = JOptionPane.showConfirmDialog(getContentPane(),
+          "Удаление кафедры повлечен за собой удаление всех связанных с ней преподавателей и предметов, которые, в свою очередь, приведут к удалению связанных с ними занятий",
+          "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+      if (result == JOptionPane.YES_OPTION) {
+        try {
+          deleteButton.setEnabled(false);
 
-            CommandFacade.deleteChair(chair);
-            FormInitializer.initChairTable(table);
+          CommandFacade.deleteChair(chair);
+          FormInitializer.initChairTable(table);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
 
-          } finally {
-            deleteButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, textField);
-          }
+        } finally {
+          deleteButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, textField);
         }
       }
     });
 
     JButton addButton = new JButton("Добавить");
-    addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    addButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     addButton.setBounds(438, 142, 105, 26);
     contentPanel.add(addButton);
 
-    addButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        String nameChair = textField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, nameChair);
+    addButton.addActionListener(e -> {
+      String nameChair = textField.getText();
+      boolean isTableHasNot = isTableHasNotAlikeValue(table, nameChair);
 
-        if (isTableHasNot) {
-          try {
-            addButton.setEnabled(false);
-            chair = new ChairBuilder().buildNameChair(textField.getText()).build();
+      if (isTableHasNot) {
+        try {
+          addButton.setEnabled(false);
+          chair = new ChairBuilder().buildNameChair(textField.getText()).build();
 
-            CommandFacade.addChair(chair);
-            FormInitializer.initChairTable(table);
+          CommandFacade.addChair(chair);
+          FormInitializer.initChairTable(table);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            addButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, textField);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          addButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, textField);
         }
       }
     });
@@ -203,17 +195,12 @@ public class ChairEditForm extends JDialog {
       getContentPane().add(buttonPane, BorderLayout.SOUTH);
       {
         JButton okButton = new JButton("OK");
-        okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        okButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
         okButton.setActionCommand("OK");
         buttonPane.add(okButton);
         getRootPane().setDefaultButton(okButton);
 
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            dispose();
-          }
-        });
+        okButton.addActionListener(e -> dispose());
       }
     }
   }
@@ -227,15 +214,16 @@ public class ChairEditForm extends JDialog {
   private boolean isTableHasNotAlikeValue(JTable table, String nameChair) {
     int colCount = table.getColumnCount();
     int rowCount = table.getRowCount();
-    for (int column = 0; column < colCount; column++)
+    for (int column = 0; column < colCount; column++) {
       for (int row = 0; row < rowCount; row++) {
         Chair value = (Chair) table.getValueAt(row, column);
         if (value.getNameChair().equals(nameChair)) {
-          LOGGER.warn("try to dublicete nameChair:" + nameChair);
+          LOGGER.warn("try to duplicate nameChair: {}", nameChair);
           JOptionPane.showMessageDialog(getContentPane(), "Кафедра с таким именем уже есть");
           return false;
         }
       }
+    }
     return true;
   }
 }

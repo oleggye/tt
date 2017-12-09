@@ -32,14 +32,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EditForm extends JDialog {
 
   private static final long serialVersionUID = 1L;
 
-  private static final Logger LOGGER = LogManager.getLogger(EditForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(EditForm.class.getName());
 
   private final JPanel contentPanel = new JPanel();
   private JTextField textField;// текстовое поле
@@ -53,13 +53,13 @@ public class EditForm extends JDialog {
   private List<Faculty> facultiesCollection;// массив-кол-ция всех факультетов
   private List<Chair> chairsCollection;// массив всех кафедр
   private List<Group> groupsCollection; // массив-кол-ция групп, в зависимости
-                                        // от выбранного факультета
+  // от выбранного факультета
   private List<Subject> subjectsCollection; // массив предметов, в зависимости
-                                            // от выбранной кафедры
+  // от выбранной кафедры
   private List<Lecturer> lecturersCollection; // массив преподавателей, в
-                                              // зависимости от выбранной
-                                              // кафедры
-  private byte edu_level = 1;
+  // зависимости от выбранной
+  // кафедры
+  private byte educationLevel = 1;
 
   private int selItemIndex = -1;
   private int cBoxMode = 0;
@@ -78,21 +78,17 @@ public class EditForm extends JDialog {
     }
   }
 
-  public EditForm() {}
+  public EditForm() {
+  }
 
   /**
    * Create the dialog.
-   *
-   * @param parent
-   * @param cBoxMode
-   * @param tableMode
-   * @param edu_level
    */
-  public EditForm(JFrame parent, int cBoxMode, int tableMode, byte edu_level) {
+  public EditForm(JFrame parent, int cBoxMode, int tableMode, byte educationLevel) {
     super(parent, true);
     this.cBoxMode = cBoxMode;
     this.tableMode = tableMode;
-    this.edu_level = edu_level;
+    this.educationLevel = educationLevel;
 
     setBounds(100, 100, 590, 380);
     setResizable(false);
@@ -127,16 +123,13 @@ public class EditForm extends JDialog {
     this.comboBox.setBounds(300, 40, 255, 23);
     contentPanel.add(this.comboBox);
 
-    this.comboBox.addItemListener(new java.awt.event.ItemListener() {
-      @Override
-      public void itemStateChanged(java.awt.event.ItemEvent evt) {
-        try {
-          chooseTableByMode();
-          editButton.setVisible(false);
-        } catch (CommandException ex) {
-          LOGGER.error(ex.getCause().getMessage(), ex);
-          JOptionPane.showMessageDialog(getContentPane(), ex);
-        }
+    this.comboBox.addItemListener(evt -> {
+      try {
+        chooseTableByMode();
+        editButton.setVisible(false);
+      } catch (CommandException ex) {
+        LOGGER.error(ex.getCause().getMessage(), ex);
+        JOptionPane.showMessageDialog(getContentPane(), ex);
       }
     });
 
@@ -170,7 +163,7 @@ public class EditForm extends JDialog {
 
         try {
           editButton.setEnabled(false);
-          addOrUpdateRecord(ActionMode.Update);
+          addOrUpdateRecord(ActionMode.UPDATE);
           chooseTableByMode();
         } catch (CommandException ex) {
           LOGGER.error(ex.getCause().getMessage(), ex);
@@ -193,7 +186,7 @@ public class EditForm extends JDialog {
         if (!textField.getText().equals("")) {
           try {
             addButton.setEnabled(false);
-            addOrUpdateRecord(ActionMode.Add);
+            addOrUpdateRecord(ActionMode.ADD);
             chooseTableByMode();
             editButton.setVisible(false);
           } catch (CommandException ex) {
@@ -208,11 +201,12 @@ public class EditForm extends JDialog {
 
     this.table = new JTable() {
       /**
-       * 
+       *
        */
       private static final long serialVersionUID = 1L;
 
       // Implement table cell tool tips.
+      @Override
       public String getToolTipText(MouseEvent e) {
         String tip = null;
         java.awt.Point p = e.getPoint();
@@ -228,18 +222,18 @@ public class EditForm extends JDialog {
     };
 
     this.table
-        .setModel(new javax.swing.table.DefaultTableModel(new Object[][] {{}}, new String[] {}) {
-          /**
-           * 
-           */
-          private static final long serialVersionUID = 1L;
-          Class[] types = new Class[] {java.lang.String.class};
-          boolean[] canEdit = new boolean[] {false};
+        .setModel(new javax.swing.table.DefaultTableModel(new Object[][]{{}}, new String[]{}) {
 
+          private static final long serialVersionUID = 1L;
+          Class[] types = new Class[]{java.lang.String.class};
+          boolean[] canEdit = new boolean[]{false};
+
+          @Override
           public Class getColumnClass(int columnIndex) {
             return types[columnIndex];
           }
 
+          @Override
           public boolean isCellEditable(int rowIndex, int columnIndex) {
             return canEdit[columnIndex];
           }
@@ -250,7 +244,6 @@ public class EditForm extends JDialog {
     JScrollPane scrollPane = new JScrollPane(table);
 
     scrollPane.setBounds(25, 40, 259, 245);
-    // scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
     contentPanel.add(scrollPane);
 
     this.table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -357,7 +350,8 @@ public class EditForm extends JDialog {
         break;
       default:
         this.dispose();
-    };
+    }
+    ;
   }
 
   private void initTextFieldBy() {
@@ -375,7 +369,8 @@ public class EditForm extends JDialog {
         break;
       default:
         this.dispose();
-    };
+    }
+    ;
   }
 
   private void initTextFieldBySubjectN(List<Subject> collection) {
@@ -402,14 +397,14 @@ public class EditForm extends JDialog {
     // т.к. есть разделение по уровню образования, то изменен запрос
     //
     int CB_index = this.comboBox.getSelectedIndex(); // передаем index
-                                                     // выбранного
-                                                     // элемента в
-                                                     // ComboBox
+    // выбранного
+    // элемента в
+    // ComboBox
     // subjectsCollection = (ArrayList)
     // Factory.getInstance().getSubjectsDAO().getSubjectsRecordsByChairId(chairsCollection.get(CB_index));
 
     Chair chair = chairsCollection.get(CB_index);
-    subjectsCollection = CommandFacade.getSubjectListByChairAndEduLevel(chair, this.edu_level);
+    subjectsCollection = CommandFacade.getSubjectListByChairAndEduLevel(chair, this.educationLevel);
 
     /*
      * использовалась для автоматического генерирования аббревиатур предметов subjectsCollection =
@@ -421,19 +416,19 @@ public class EditForm extends JDialog {
   private void getGroupsCollection() throws CommandException {
     //
     int CB_index = this.comboBox.getSelectedIndex(); // передаем index
-                                                     // выбранного
-                                                     // элемента в
-                                                     // ComboBox
+    // выбранного
+    // элемента в
+    // ComboBox
     Faculty faculty = facultiesCollection.get(CB_index);
-    groupsCollection = CommandFacade.getGroupListByFacultyAndEduLevel(faculty, this.edu_level);
+    groupsCollection = CommandFacade.getGroupListByFacultyAndEduLevel(faculty, this.educationLevel);
   }
 
   private void getLecturersCollection() throws CommandException {
     //
     int CB_index = this.comboBox.getSelectedIndex(); // передаем index
-                                                     // выбранного
-                                                     // элемента в
-                                                     // ComboBox
+    // выбранного
+    // элемента в
+    // ComboBox
     Chair chair = chairsCollection.get(CB_index);
     lecturersCollection = CommandFacade.getLecturerListByChair(chair);
     initTableByLecturers(lecturersCollection);
@@ -489,17 +484,17 @@ public class EditForm extends JDialog {
 
   private void addOrUpdateSubjects(ActionMode mode) throws CommandException {
     switch (mode) {
-      case Add:
+      case ADD:
         Chair chair = chairsCollection.get(comboBox.getSelectedIndex());
         String subjName = textField.getText();
         Subject newSubj;
         if (textFieldForAbbr.getText().equals("")) {// если поле пустое, то
-                                                    // генерируем
-                                                    // автоматически
-          newSubj = new Subject(chair, subjName, this.edu_level);
+          // генерируем
+          // автоматически
+          newSubj = new Subject(chair, subjName, this.educationLevel);
         } else {
           String abrName = textFieldForAbbr.getText();
-          newSubj = new Subject(chair, subjName, this.edu_level, abrName);
+          newSubj = new Subject(chair, subjName, this.educationLevel, abrName);
         }
 
         // if (SupportClass.checkSubjectsRecBeforeAdd(subjectsCollection,
@@ -510,7 +505,7 @@ public class EditForm extends JDialog {
           CommandFacade.addSubject(newSubj);
         }
         break;
-      case Update:
+      case UPDATE:
         Subject subj = subjectsCollection.get(this.selItemIndex);
         subj.setNameSubject(textField.getText());
         subj.setAbnameSubject(textFieldForAbbr.getText());
@@ -525,16 +520,16 @@ public class EditForm extends JDialog {
   private void addOrUpdateGroups(ActionMode mode) throws CommandException {
 
     switch (mode) {
-      case Add:
+      case ADD:
         Faculty facult = facultiesCollection.get(comboBox.getSelectedIndex());
         String groupName = textField.getText();
 
         // FIXME: change!!!
         Group newGroup = new Group();
-        // facult, groupName, this.edu_level
+        // facult, groupName, this.educationLevel
         newGroup.setFaculty(facult);
         newGroup.setNameGroup(groupName);
-        newGroup.setEduLevel(this.edu_level);
+        newGroup.setEduLevel(this.educationLevel);
 
         // if (SupportClass.checkGroupsRecBeforeAdd((ArrayList<Group>)
         // groupsCollection, newGroup)) {
@@ -544,7 +539,7 @@ public class EditForm extends JDialog {
           CommandFacade.addGroup(newGroup);
         }
         break;
-      case Update:
+      case UPDATE:
         Group group = groupsCollection.get(this.selItemIndex);
         group.setNameGroup(textField.getText());
         CommandFacade.updateGroup(group);
@@ -558,7 +553,7 @@ public class EditForm extends JDialog {
   private void addOrUpdateLecturers(ActionMode mode) throws CommandException {
 
     switch (mode) {
-      case Add:
+      case ADD:
         Chair chair = chairsCollection.get(comboBox.getSelectedIndex());
         String lectName = textField.getText();
         Lecturer newLect = new Lecturer(chair, lectName);
@@ -571,7 +566,7 @@ public class EditForm extends JDialog {
           CommandFacade.addLecturer(newLect);
         }
         break;
-      case Update:
+      case UPDATE:
         Lecturer lect = lecturersCollection.get(this.selItemIndex);
         lect.setNameLecturer(textField.getText());
         CommandFacade.updateLecturer(lect);
@@ -592,25 +587,24 @@ public class EditForm extends JDialog {
         } finally {
           textField.setText("");
           textFieldForAbbr.setText("");
-          break;
         }
-
+        break;
       case 2:
         try {
           addOrUpdateGroups(mode);
         } finally {
           textField.setText("");
           textFieldForAbbr.setText("");
-          break;
         }
+        break;
       case 3:
         try {
           addOrUpdateLecturers(mode);
         } finally {
           textField.setText("");
           textFieldForAbbr.setText("");
-          break;
         }
+        break;
       default:
         dispose();
     }
@@ -618,6 +612,6 @@ public class EditForm extends JDialog {
   }
 
   enum ActionMode {
-    Add, Update, Delete;
+    ADD, UPDATE, DELETE;
   }
 }

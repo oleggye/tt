@@ -28,14 +28,15 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SubjectEditForm extends JDialog {
+
   private static final long serialVersionUID = 1L;
 
-  private static final Logger LOGGER = LogManager.getLogger(GroupEditForm.class.getName());
-
+  private static final Logger LOGGER = LoggerFactory.getLogger(GroupEditForm.class.getName());
+  private static final String FONT_NAME = "Tahoma";
   private JTable table;
   private Subject subject;
 
@@ -52,22 +53,22 @@ public class SubjectEditForm extends JDialog {
     setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
     JComboBox<Chair> chairComboBox = new MyComboBox<>();
-    chairComboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    chairComboBox.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JButton addButton = new JButton("Добавить");
-    addButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    addButton.setFont(new Font(FONT_NAME, Font.PLAIN, 12));
 
     JButton editButton = new JButton("Изменить");
-    editButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    editButton.setFont(new Font(FONT_NAME, Font.PLAIN, 12));
 
     JButton deleteButton = new JButton("Удалить");
-    deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+    deleteButton.setFont(new Font(FONT_NAME, Font.PLAIN, 12));
 
     JTextField subjectNameTextField = new JTextField();
-    subjectNameTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    subjectNameTextField.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JLabel coincidenceLabel = new JLabel("Совпадения");
-    coincidenceLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    coincidenceLabel.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JTextArea coincidenceTextArea = new JTextArea();
     coincidenceTextArea.setEditable(false);
@@ -93,13 +94,13 @@ public class SubjectEditForm extends JDialog {
     });
 
     JLabel lblNewLabel = new JLabel("Кафедра");
-    lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+    lblNewLabel.setFont(new Font(FONT_NAME, Font.BOLD, 14));
 
     lblNewLabel.setBounds(334, 11, 78, 18);
     contentPanel.add(lblNewLabel);
 
     JLabel label = new JLabel("Редактирование/Добавление");
-    label.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     label.setBounds(334, 74, 234, 18);
     contentPanel.add(label);
 
@@ -107,29 +108,26 @@ public class SubjectEditForm extends JDialog {
     contentPanel.add(chairComboBox);
     chairComboBox.setToolTipText("");
 
-    chairComboBox.addItemListener(new java.awt.event.ItemListener() {
-      @Override
-      public void itemStateChanged(java.awt.event.ItemEvent evt) {
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-          try {
-            Chair chair = (Chair) chairComboBox.getSelectedItem();
+    chairComboBox.addItemListener(evt -> {
+      if (evt.getStateChange() == ItemEvent.SELECTED) {
+        try {
+          Chair chair = (Chair) chairComboBox.getSelectedItem();
 
-            FormInitializer.initSubjectTable(table, chair, educationLevel);
+          FormInitializer.initSubjectTable(table, chair, educationLevel);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
         }
       }
     });
 
     ImageIcon icon = new ImageIcon("C:\\Users\\hello\\Desktop\\add-icon.png");
     Image img = icon.getImage();
-    Image newimg = img.getScaledInstance(37, 23, java.awt.Image.SCALE_SMOOTH);
-    icon = new ImageIcon(newimg);
+    Image addIcon = img.getScaledInstance(37, 23, java.awt.Image.SCALE_SMOOTH);
+    icon = new ImageIcon(addIcon);
 
     table = new OneColumnTable();
     table.setCellSelectionEnabled(true);
@@ -154,6 +152,7 @@ public class SubjectEditForm extends JDialog {
     panel.add(editButton);
 
     addButton.setBounds(130, 67, 95, 23);
+    addButton.setIcon(icon);
     panel.add(addButton);
 
     deleteButton.setBounds(130, 101, 95, 23);
@@ -174,107 +173,97 @@ public class SubjectEditForm extends JDialog {
     panel.add(abbrTextField);
     abbrTextField.setColumns(10);
 
-    JLabel label_1 = new JLabel("Аббревиатура");
-    label_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
-    label_1.setBounds(20, 50, 100, 14);
-    panel.add(label_1);
+    JLabel abbrLabel = new JLabel("Аббревиатура");
+    abbrLabel.setFont(new Font(FONT_NAME, Font.BOLD | Font.ITALIC, 12));
+    abbrLabel.setBounds(20, 50, 100, 14);
+    panel.add(abbrLabel);
 
-    JLabel label_2 = new JLabel("Название");
-    label_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
-    label_2.setBounds(20, 5, 100, 14);
-    panel.add(label_2);
+    JLabel titleLabel = new JLabel("Название");
+    titleLabel.setFont(new Font(FONT_NAME, Font.BOLD | Font.ITALIC, 12));
+    titleLabel.setBounds(20, 5, 100, 14);
+    panel.add(titleLabel);
 
     coincidenceLabel.setForeground(Color.RED);
     coincidenceLabel.setBounds(334, 226, 91, 14);
     coincidenceLabel.setVisible(false);
     contentPanel.add(coincidenceLabel);
 
-    addButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        String subjectName = subjectNameTextField.getText();
-        String abbrName = abbrTextField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName, false);
+    addButton.addActionListener(e -> {
+      String subjectName = subjectNameTextField.getText();
+      String abbrName = abbrTextField.getText();
+      boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName, false);
 
-        if (isTableHasNot) {
-          try {
-            addButton.setEnabled(false);
+      if (isTableHasNot) {
+        try {
+          addButton.setEnabled(false);
 
-            Chair chair = (Chair) chairComboBox.getSelectedItem();
-            Subject newSubject = new SubjectBuilder().buildChair(chair).buildAbname(abbrName)
-                .buildEduLevel(educationLevel).buildNameSubject(subjectName).build();
+          Chair chair = (Chair) chairComboBox.getSelectedItem();
+          Subject newSubject = new SubjectBuilder().buildChair(chair).buildAbname(abbrName)
+              .buildEduLevel(educationLevel).buildNameSubject(subjectName).build();
 
-            CommandFacade.addSubject(newSubject);
-            FormInitializer.initSubjectTable(table, chair, educationLevel);
+          CommandFacade.addSubject(newSubject);
+          FormInitializer.initSubjectTable(table, chair, educationLevel);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            addButton.setEnabled(true);
-            refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          addButton.setEnabled(true);
+          refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
         }
       }
     });
 
     editButton.setVisible(false);
-    editButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        String subjectName = subjectNameTextField.getText();
-        String abbrName = abbrTextField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName, true);
+    editButton.addActionListener(e -> {
+      String subjectName = subjectNameTextField.getText();
+      String abbrName = abbrTextField.getText();
+      boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName, true);
 
-        if (isTableHasNot) {
-          try {
-            editButton.setEnabled(false);
+      if (isTableHasNot) {
+        try {
+          editButton.setEnabled(false);
 
-            Chair chair = (Chair) chairComboBox.getSelectedItem();
-            Subject newSubject = new SubjectBuilder()
-                            .buildId(subject.getIdSubject())
-                            .buildChair(subject.getChair())
-                            .buildAbname(abbrName)
-                            .buildEduLevel(subject.getEduLevel())
-                            .buildNameSubject(subjectName)
-                            .build();
+          Chair chair = (Chair) chairComboBox.getSelectedItem();
+          Subject newSubject = new SubjectBuilder()
+              .buildId(subject.getIdSubject())
+              .buildChair(subject.getChair())
+              .buildAbname(abbrName)
+              .buildEduLevel(subject.getEduLevel())
+              .buildNameSubject(subjectName)
+              .build();
 
-            CommandFacade.updateSubject(newSubject);
-            FormInitializer.initSubjectTable(table, chair, educationLevel);
+          CommandFacade.updateSubject(newSubject);
+          FormInitializer.initSubjectTable(table, chair, educationLevel);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            editButton.setEnabled(true);
-            refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          editButton.setEnabled(true);
+          refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
         }
       }
     });
 
-    deleteButton.addActionListener(new java.awt.event.ActionListener() {
+    deleteButton.addActionListener(e -> {
 
-      @Override
-      public void actionPerformed(ActionEvent e) {
+      int result = JOptionPane.showConfirmDialog(getContentPane(),
+          "Убедитесь, что удаляемая дисциплина не связана с записями текущего расписания",
+          "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+      if (result == JOptionPane.YES_OPTION) {
+        deleteButton.setEnabled(false);
+        try {
+          CommandFacade.deleteSubject(subject);
+          Chair chair = (Chair) chairComboBox.getSelectedItem();
+          FormInitializer.initSubjectTable(table, chair, educationLevel);
 
-        int result = JOptionPane.showConfirmDialog(getContentPane(),
-            "Убедитесь, что удаляемая дисциплина не связана с записями текущего расписания",
-            "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
-          deleteButton.setEnabled(false);
-          try {
-            CommandFacade.deleteSubject(subject);
-            Chair chair = (Chair) chairComboBox.getSelectedItem();
-            FormInitializer.initSubjectTable(table, chair, educationLevel);
-
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            deleteButton.setEnabled(true);
-            refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          deleteButton.setEnabled(true);
+          refreshFormField(editButton, deleteButton, subjectNameTextField, abbrTextField);
         }
       }
     });
@@ -306,17 +295,12 @@ public class SubjectEditForm extends JDialog {
       getContentPane().add(buttonPane, BorderLayout.SOUTH);
       {
         JButton okButton = new JButton("OK");
-        okButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        okButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
         okButton.setActionCommand("OK");
         buttonPane.add(okButton);
         getRootPane().setDefaultButton(okButton);
 
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            dispose();
-          }
-        });
+        okButton.addActionListener(e -> dispose());
       }
     }
   }
@@ -344,15 +328,16 @@ public class SubjectEditForm extends JDialog {
 
     int colCount = table.getColumnCount();
     int rowCount = table.getRowCount();
-    for (int column = 0; column < colCount; column++)
+    for (int column = 0; column < colCount; column++) {
       for (int row = 0; row < rowCount; row++) {
         Subject value = (Subject) table.getValueAt(row, column);
         if (value.getNameSubject().equals(nameSubject)) {
-          LOGGER.warn("try to dublicete nameSubject:" + nameSubject);
+          LOGGER.warn("try to duplicate nameSubject: {}", nameSubject);
           JOptionPane.showMessageDialog(getContentPane(), "Дисциплина с таким именем уже есть");
           return false;
         }
       }
+    }
     return true;
   }
 }

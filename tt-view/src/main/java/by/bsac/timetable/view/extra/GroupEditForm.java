@@ -31,13 +31,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GroupEditForm extends JDialog {
   private static final long serialVersionUID = 1L;
 
-  private static final Logger LOGGER = LogManager.getLogger(GroupEditForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(GroupEditForm.class.getName());
 
   private GroupEditForm frame = this;
 
@@ -137,8 +137,8 @@ public class GroupEditForm extends JDialog {
 
     ImageIcon icon = new ImageIcon("C:\\Users\\hello\\Desktop\\add-icon.png");
     Image img = icon.getImage();
-    Image newimg = img.getScaledInstance(37, 23, java.awt.Image.SCALE_SMOOTH);
-    icon = new ImageIcon(newimg);
+    Image addImage = img.getScaledInstance(37, 23, java.awt.Image.SCALE_SMOOTH);
+    icon = new ImageIcon(addImage);
 
     table = new OneColumnTable();
     table.setCellSelectionEnabled(true);
@@ -181,6 +181,7 @@ public class GroupEditForm extends JDialog {
     panel.add(editButton);
 
     addButton.setBounds(125, 69, 95, 23);
+    addButton.setIcon(icon);
     panel.add(addButton);
 
     deleteButton.setBounds(78, 103, 100, 23);

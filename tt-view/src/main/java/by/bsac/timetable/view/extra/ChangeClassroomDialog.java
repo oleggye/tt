@@ -17,12 +17,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class ChangeClassroomDialog extends JDialog {
+class ChangeClassroomDialog extends JDialog {
 
-  private static final Logger LOGGER = LogManager.getLogger(ChangeClassroomDialog.class.getName());
+  private static final Logger LOGGER = LoggerFactory
+      .getLogger(ChangeClassroomDialog.class.getName());
 
   private static final long serialVersionUID = 1L;
 

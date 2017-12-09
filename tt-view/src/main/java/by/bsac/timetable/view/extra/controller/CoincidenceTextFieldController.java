@@ -11,13 +11,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CoincidenceTextFieldController implements KeyListener {
 
-  private static final Logger LOGGER =
-      LogManager.getLogger(CoincidenceTextFieldController.class.getName());
+  private static final Logger LOGGER = LoggerFactory
+      .getLogger(CoincidenceTextFieldController.class.getName());
 
   private JDialog frame;
   private JTextArea coincidenceTextArea;

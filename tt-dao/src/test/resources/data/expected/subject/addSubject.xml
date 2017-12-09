@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 	<subject id_subject="1" name_subject="Высшая математика"
-		id_chair="1" edu_level="1" abname_subject="ВМ" />
+		id_chair="1" educationLevel="1" abname_subject="ВМ" />
 	<subject id_subject="2" name_subject="Физика" id_chair="1"
-		edu_level="1" abname_subject="Физика" />
+		educationLevel="1" abname_subject="Физика" />
 
 	<subject id_subject="3" name_subject="Основы алгоритмизации и программирования"
-		id_chair="2" edu_level="1" abname_subject="ОАиП" />
+		id_chair="2" educationLevel="1" abname_subject="ОАиП" />
 
 	<subject id_subject="4" name_subject="Физика" id_chair="1"
-		edu_level="2" abname_subject="Физика" />
+		educationLevel="2" abname_subject="Физика" />
 	<subject id_subject="5" name_subject="Элементарная физика"
-		id_chair="1" edu_level="2" abname_subject="Физика" />
+		id_chair="1" educationLevel="2" abname_subject="Физика" />
 		
 	<subject id_subject="6" name_subject="Конструирование программ и языки программирования"
-		id_chair="2" edu_level="1" abname_subject="КПиЯП" />
+		id_chair="2" educationLevel="1" abname_subject="КПиЯП" />
 </dataset>

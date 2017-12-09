@@ -42,9 +42,9 @@ import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jdatepicker.impl.JDatePickerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*
  * FIXME: можно добавить флаг, которые будет использоваться для проверки того, что ничего не
@@ -52,8 +52,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
  */
 public class UpdateOrCancelForm extends JDialog {
 
-  private static final Logger LOGGER =
-      LogManager.getLogger(UpdateOrCancelForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(UpdateOrCancelForm.class.getName());
 
   private static final long serialVersionUID = 1L;
   private static final String DATE_FORMAT = "dd-MM-yyyy";
