@@ -209,7 +209,7 @@ public class ValidationServiceImpl implements IValidationService {
     StringBuilder builder = new StringBuilder();
 
     if (Checker.isNull(group)) {
-      throw new ServiceValidationException("Group is null");
+      throw new ServiceValidationException("group is null");
     }
 
     int idGroup = group.getIdGroup();

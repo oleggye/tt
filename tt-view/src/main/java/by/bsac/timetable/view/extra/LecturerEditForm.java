@@ -184,7 +184,7 @@ public class LecturerEditForm extends JDialog {
 
             Chair chair = (Chair) chairComboBox.getSelectedItem();
             Lecturer newLecturer =
-                new LecturerBuilder().buildChair(chair).buildNameLecturer(lecturerName).build();
+                new LecturerBuilder().chair(chair).name(lecturerName).build();
 
             CommandFacade.addLecturer(newLecturer);
             FormInitializer.initLecturerTable(table, chair);
@@ -213,9 +213,9 @@ public class LecturerEditForm extends JDialog {
 
             Chair chair = (Chair) chairComboBox.getSelectedItem();
             Lecturer editingLecturer = new LecturerBuilder()
-                                    .buildId(lecturer.getIdLecturer())
-                                    .buildChair(lecturer.getChair())
-                                    .buildNameLecturer(lecturerName)
+                                    .id(lecturer.getIdLecturer())
+                                    .chair(lecturer.getChair())
+                                    .name(lecturerName)
                                     .build();
 
             CommandFacade.updateLecturer(editingLecturer);

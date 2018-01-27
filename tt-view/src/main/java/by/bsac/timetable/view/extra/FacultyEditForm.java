@@ -89,8 +89,8 @@ public class FacultyEditForm extends JDialog {
             editButton.setEnabled(false);
 
             Faculty editingFaculty = new FacultyBuilder()
-                                .buildId(faculty.getIdFaculty())
-                                .buildName(nameFaculty)
+                                .id(faculty.getIdFaculty())
+                                .name(nameFaculty)
                                 .build();
             CommandFacade.updateFaculty(editingFaculty);
             FormInitializer.initFacultyTable(table);
@@ -149,7 +149,7 @@ public class FacultyEditForm extends JDialog {
         if (isTableHasNot) {
           try {
             addButton.setEnabled(false);
-            faculty = new FacultyBuilder().buildName(nameFaculty).build();
+            faculty = new FacultyBuilder().name(nameFaculty).build();
 
             CommandFacade.addFaculty(faculty);
             FormInitializer.initFacultyTable(table);

@@ -66,11 +66,11 @@ public class SubjectDAOImplTest {
 
     Chair chair = chairDao.getById(idChair);
 
-    Subject expectedSubject = new SubjectBuilder().buildId(idSubject)
-                        .buildChair(chair)
-                        .buildNameSubject(nameSubject)
-                        .buildEduLevel(educationLevel)
-                        .buildAbname(abnameSubject)
+    Subject expectedSubject = new SubjectBuilder().id(idSubject)
+                        .chair(chair)
+                        .name(nameSubject)
+                        .eduLevel(educationLevel)
+                        .abName(abnameSubject)
                         .build();
 
     List<Subject> subjectList = dao.getSubjectListByChair(chair);
@@ -103,11 +103,11 @@ public class SubjectDAOImplTest {
     Chair chair = chairDao.getById(idChair);
 
     Subject expectedSubject = new SubjectBuilder()
-                        .buildId(idSubject)
-                        .buildChair(chair)
-                        .buildNameSubject(nameSubject)
-                        .buildEduLevel(educationLevel)
-                        .buildAbname(abnameSubject)
+                        .id(idSubject)
+                        .chair(chair)
+                        .name(nameSubject)
+                        .eduLevel(educationLevel)
+                        .abName(abnameSubject)
                         .build();
 
     List<Subject> subjectList = dao.getSubjectListByChairAndEduLevel(chair, educationLevel);
@@ -157,11 +157,11 @@ public class SubjectDAOImplTest {
     Chair chair = chairDao.getById(idChair);
 
     Subject subject = new SubjectBuilder()
-                        .buildId(idSubject)
-                        .buildChair(chair)
-                        .buildNameSubject(nameSubject)
-                        .buildEduLevel(educationLevel)
-                        .buildAbname(abnameSubject)
+                        .id(idSubject)
+                        .chair(chair)
+                        .name(nameSubject)
+                        .eduLevel(educationLevel)
+                        .abName(abnameSubject)
                         .build();
 
     dao.add(subject);

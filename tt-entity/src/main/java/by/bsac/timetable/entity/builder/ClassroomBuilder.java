@@ -8,17 +8,17 @@ public class ClassroomBuilder {
   private String name;
   private byte building;
 
-  public ClassroomBuilder buildId(short idClassroom) {
+  public ClassroomBuilder id(short idClassroom) {
     this.idClassroom = idClassroom;
     return this;
   }
 
-  public ClassroomBuilder buildName(String name) {
+  public ClassroomBuilder name(String name) {
     this.name = name;
     return this;
   }
 
-  public ClassroomBuilder buildBuilding(byte building) {
+  public ClassroomBuilder building(byte building) {
     this.building = building;
     return this;
   }

@@ -86,8 +86,8 @@ public class FlowEditForm extends JDialog {
           editButton.setEnabled(false);
 
           Flow editingFlow = new FlowBuilder()
-              .buildId(flow.getIdFlow())
-              .buildName(nameFlow)
+              .id(flow.getIdFlow())
+              .name(nameFlow)
               .build();
           CommandFacade.updateFlow(editingFlow);
           FormInitializer.initFlowTable(table);
@@ -141,7 +141,7 @@ public class FlowEditForm extends JDialog {
         try {
           addButton.setEnabled(false);
 
-          flow = new FlowBuilder().buildName(nameFlow).build();
+          flow = new FlowBuilder().name(nameFlow).build();
 
           CommandFacade.addFlow(flow);
           FormInitializer.initFlowTable(table);

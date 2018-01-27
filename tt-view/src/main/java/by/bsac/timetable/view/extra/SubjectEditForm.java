@@ -201,8 +201,8 @@ public class SubjectEditForm extends JDialog {
             addButton.setEnabled(false);
 
             Chair chair = (Chair) chairComboBox.getSelectedItem();
-            Subject newSubject = new SubjectBuilder().buildChair(chair).buildAbname(abbrName)
-                .buildEduLevel(educationLevel).buildNameSubject(subjectName).build();
+            Subject newSubject = new SubjectBuilder().chair(chair).abName(abbrName)
+                .eduLevel(educationLevel).name(subjectName).build();
 
             CommandFacade.addSubject(newSubject);
             FormInitializer.initSubjectTable(table, chair, educationLevel);
@@ -232,11 +232,11 @@ public class SubjectEditForm extends JDialog {
 
             Chair chair = (Chair) chairComboBox.getSelectedItem();
             Subject newSubject = new SubjectBuilder()
-                            .buildId(subject.getIdSubject())
-                            .buildChair(subject.getChair())
-                            .buildAbname(abbrName)
-                            .buildEduLevel(subject.getEduLevel())
-                            .buildNameSubject(subjectName)
+                            .id(subject.getIdSubject())
+                            .chair(subject.getChair())
+                            .abName(abbrName)
+                            .eduLevel(subject.getEduLevel())
+                            .name(subjectName)
                             .build();
 
             CommandFacade.updateSubject(newSubject);

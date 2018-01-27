@@ -4,32 +4,13 @@ import by.bsac.timetable.entity.SubjectFor;
 
 public enum LessonFor {
 
-  FULL_FLOW, FULL_GROUP, FIRST_SUBGROUP, SECOND_SUBGROUP;
+  FIRST_SUBGROUP, SECOND_SUBGROUP, FULL_GROUP, FULL_FLOW;
 
   /**
-   * <table border="1">
-   * <caption>{@link SubjectFor} mapping</caption>
-   * <tr>
-   * <th>{@link SubjectFor#getId()}</th>
-   * <th>instance of {@link LessonFor}</th>
-   * </tr>
-   * <tr>
-   * <td>1</td>
-   * <td>FIRST_SUBGROUP</td>
-   * </tr>
-   * <tr>
-   * <td>2</td>
-   * <td>SECOND_SUBGROUP</td>
-   * </tr>
-   * <tr>
-   * <td>3</td>
-   * <td>FULL_GROUP</td>
-   * </tr>
-   * <tr>
-   * <td>4</td>
-   * <td>FULL_FLOW</td>
-   * </tr>
-   * </table>
+   * <table border="1"> <caption>{@link SubjectFor} mapping</caption> <tr> <th>{@link
+   * SubjectFor#getId()}</th> <th>instance of {@link LessonFor}</th> </tr> <tr> <td>1</td>
+   * <td>FIRST_SUBGROUP</td> </tr> <tr> <td>2</td> <td>SECOND_SUBGROUP</td> </tr> <tr> <td>3</td>
+   * <td>FULL_GROUP</td> </tr> <tr> <td>4</td> <td>FULL_FLOW</td> </tr> </table>
    *
    * @param subjectFor instance of SubjectFor
    * @return equivalent instance of LessonFor for @param

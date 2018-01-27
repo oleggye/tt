@@ -32,8 +32,9 @@ import org.springframework.stereotype.Service;
 public class RecordServiceImpl implements IRecordService {
   private static final RecordBuilder RECORD_BUILDER = new RecordBuilder();
   private static final CancellationBuilder CANCEL_BUILDER = new CancellationBuilder();
+
   @Autowired
-  private IValidationService service;
+  private IValidationService validationService;
 
   @Autowired
   private IRecordDAO recordDAO;
@@ -48,7 +49,7 @@ public class RecordServiceImpl implements IRecordService {
       dontRollbackOn = ServiceValidationException.class)
   @Override
   public void addRecord(Record record) throws ServiceException, ServiceValidationException {
-    service.validateRecord(record, false);
+    validationService.validateRecord(record, false);
 
     LessonFor lessonFor = LessonFor.subjectForToLessonFor(record.getSubjectFor());
     try {
@@ -69,7 +70,7 @@ public class RecordServiceImpl implements IRecordService {
   @Override
   public void addRecordByAtWeekSet(Record record, Set<WeekNumber> weekSet)
       throws ServiceException, ServiceValidationException {
-    service.validateRecord(record, false);
+    validationService.validateRecord(record, false);
 
     List<Record> resultList = new LinkedList<>();
 
@@ -102,8 +103,8 @@ public class RecordServiceImpl implements IRecordService {
   @Override
   public void updateRecord(Record initialRecord, Record updateRecord)
       throws ServiceException, ServiceValidationException {
-    service.validateRecord(initialRecord, true);
-    service.validateRecord(updateRecord, false);
+    validationService.validateRecord(initialRecord, true);
+    validationService.validateRecord(updateRecord, false);
 
     /*
      * если это пара на одну дату и дату изменили, то нужно обновить номер недели и дня
@@ -147,7 +148,7 @@ public class RecordServiceImpl implements IRecordService {
       dontRollbackOn = ServiceValidationException.class)
   @Override
   public void deleteRecord(Record record) throws ServiceException, ServiceValidationException {
-    service.validateRecord(record, true);
+    validationService.validateRecord(record, true);
     try {
       recordDAO.delete(record);
     } catch (RuntimeException e) {
@@ -160,7 +161,7 @@ public class RecordServiceImpl implements IRecordService {
   @Override
   public List<Record> getAllRecordListForGroup(Group group, Date dateFrom, Date dateTo)
       throws ServiceException, ServiceValidationException {
-    service.validateGroup(group, true);
+    validationService.validateGroup(group, true);
     try {
       return recordDAO.getRecordListByGroupAndDatesWhichNotCancelled(group, dateFrom, dateTo);
     } catch (RuntimeException e) {
@@ -174,8 +175,8 @@ public class RecordServiceImpl implements IRecordService {
   public void cancelRecord(Record initialRecord, Record cancelRecord,
       LessonPeriod cancelLessonPeriod) throws ServiceException, ServiceValidationException {
 
-    service.validateRecord(initialRecord, true);
-    service.validateRecord(cancelRecord, false);
+    validationService.validateRecord(initialRecord, true);
+    validationService.validateRecord(cancelRecord, false);
 
     try {
       /*
@@ -336,8 +337,8 @@ public class RecordServiceImpl implements IRecordService {
   @Override
   public void changeClassroomForAllRecords(Classroom oldClassroom, Classroom newClassroom)
       throws ServiceException, ServiceValidationException {
-    service.validateClassroom(oldClassroom, true);
-    service.validateClassroom(newClassroom, true);
+    validationService.validateClassroom(oldClassroom, true);
+    validationService.validateClassroom(newClassroom, true);
     try {
       recordDAO.replaceClassroomForAllRecords(oldClassroom, newClassroom);
     } catch (RuntimeException e) {
@@ -350,8 +351,8 @@ public class RecordServiceImpl implements IRecordService {
   @Override
   public void changeLecturerForAllRecords(Lecturer oldLecturer, Lecturer newLecturer)
       throws ServiceException, ServiceValidationException {
-    service.validateLecturer(oldLecturer, true);
-    service.validateLecturer(newLecturer, true);
+    validationService.validateLecturer(oldLecturer, true);
+    validationService.validateLecturer(newLecturer, true);
     try {
       recordDAO.replaceLecturerForAllRecords(oldLecturer, newLecturer);
     } catch (RuntimeException e) {

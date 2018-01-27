@@ -44,7 +44,7 @@
 		<entry key="Get_Flow_List" value-ref="getFlowList" />
 		<entry key="Get_Flow_List_By_Name" value-ref="getFlowListByName" />
 
-		<!-- Group -->
+		<!-- group -->
 		<entry key="Add_Group" value-ref="addGroup" />
 		<entry key="Update_Group" value-ref="updateGroup" />
 		<entry key="Delete_Group" value-ref="deleteGroup" />

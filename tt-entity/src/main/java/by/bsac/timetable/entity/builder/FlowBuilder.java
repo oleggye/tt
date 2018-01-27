@@ -7,12 +7,12 @@ public class FlowBuilder {
 	private short idFlow;
 	private String name;
 
-	public FlowBuilder buildId(short idFlow) {
+	public FlowBuilder id(short idFlow) {
 		this.idFlow = idFlow;
 		return this;
 	}
 
-	public FlowBuilder buildName(String name) {
+	public FlowBuilder name(String name) {
 		this.name = name;
 		return this;
 	}

@@ -160,8 +160,8 @@ public class GroupDAOImplTest {
     final byte eduLevel = 2;
 
     Faculty faculty = facultyDao.getById(idFaculty);
-    Group group = new GroupBuilder().buildId(idGroup).buildFaculty(faculty).buildName(nameGroup)
-        .buildEduLevel(eduLevel).build();
+    Group group = new GroupBuilder().id(idGroup).faculty(faculty).name(nameGroup)
+        .eduLevel(eduLevel).build();
 
     dao.add(group);
   }

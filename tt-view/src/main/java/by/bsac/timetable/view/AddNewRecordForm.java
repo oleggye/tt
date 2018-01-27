@@ -734,9 +734,9 @@ public class AddNewRecordForm extends JDialog {
   private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate,
       Record addRecord) {
     try {
-      Record record = new RecordBuilder().buildWeekDay(addRecord.getWeekDay())
-          .buildWeekNumber(addRecord.getWeekNumber())
-          .buildSubjOrdinalNumber(addRecord.getSubjOrdinalNumber()).build();
+      Record record = new RecordBuilder().weekDay(addRecord.getWeekDay())
+          .weekNumber(addRecord.getWeekNumber())
+          .subjOrdinalNumber(addRecord.getSubjOrdinalNumber()).build();
       FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate, record);
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);

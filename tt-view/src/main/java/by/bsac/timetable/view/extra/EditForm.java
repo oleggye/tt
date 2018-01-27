@@ -536,7 +536,7 @@ public class EditForm extends JDialog {
         newGroup.setNameGroup(groupName);
         newGroup.setEduLevel(this.edu_level);
 
-        // if (SupportClass.checkGroupsRecBeforeAdd((ArrayList<Group>)
+        // if (SupportClass.checkGroupsRecBeforeAdd((ArrayList<group>)
         // groupsCollection, newGroup)) {
         /* !!!!!временна мера, чтобы попробывать обобщения!!!!! */
         CheckGeneralization<Group> obj = new CheckGeneralization<Group>();

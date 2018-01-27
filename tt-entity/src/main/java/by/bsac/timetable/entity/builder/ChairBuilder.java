@@ -7,12 +7,12 @@ public class ChairBuilder {
 	private byte idChair;
 	private String nameChair;
 
-	public ChairBuilder buildId(byte idChair) {
+	public ChairBuilder id(byte idChair) {
 		this.idChair = idChair;
 		return this;
 	}
 
-	public ChairBuilder buildNameChair(String nameChair) {
+	public ChairBuilder name(String nameChair) {
 		this.nameChair = nameChair;
 		return this;
 	}

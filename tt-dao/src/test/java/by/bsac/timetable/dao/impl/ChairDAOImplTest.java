@@ -64,7 +64,7 @@ public class ChairDAOImplTest extends ChairDAOImpl {
   public void testGetByIdOne() throws DAOException {
     final Byte id = 1;
     Chair expectedChair =
-        new ChairBuilder().buildId(id).buildNameChair("Кафедра математики").build();
+        new ChairBuilder().id(id).name("Кафедра математики").build();
 
     Chair takenChair = dao.getById(id);
 
@@ -81,7 +81,7 @@ public class ChairDAOImplTest extends ChairDAOImpl {
   public void testGetByIdTwo() throws DAOException {
     final Byte id = 2;
     Chair expectedChair =
-        new ChairBuilder().buildId(id).buildNameChair("Кафедра программного обеспечения").build();
+        new ChairBuilder().id(id).name("Кафедра программного обеспечения").build();
 
     Chair takenChair = dao.getById(id);
 
@@ -101,7 +101,7 @@ public class ChairDAOImplTest extends ChairDAOImpl {
     byte chairId = 3;
     String chairName = "Кафедра заочного образования";
 
-    Chair expectedChair = new ChairBuilder().buildId(chairId).buildNameChair(chairName).build();
+    Chair expectedChair = new ChairBuilder().id(chairId).name(chairName).build();
 
     dao.add(expectedChair);
   }
@@ -114,7 +114,7 @@ public class ChairDAOImplTest extends ChairDAOImpl {
     byte chairId = 1;
     String chairName = "Кафедра заочного образования";
 
-    Chair chair = new ChairBuilder().buildId(chairId).buildNameChair(chairName).build();
+    Chair chair = new ChairBuilder().id(chairId).name(chairName).build();
     dao.update(chair);
   }
 
@@ -126,7 +126,7 @@ public class ChairDAOImplTest extends ChairDAOImpl {
     byte chairId = 1;
     String chairName = "Кафедра заочного образования";
 
-    Chair chair = new ChairBuilder().buildId(chairId).buildNameChair(chairName).build();
+    Chair chair = new ChairBuilder().id(chairId).name(chairName).build();
     dao.delete(chair);
   }
 }

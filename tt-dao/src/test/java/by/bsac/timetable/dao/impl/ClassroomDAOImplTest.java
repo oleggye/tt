@@ -74,7 +74,7 @@ public class ClassroomDAOImplTest {
     final byte building = 1;
 
     Classroom expectedClassroom =
-        new ClassroomBuilder().buildId(id).buildName(name).buildBuilding(building).build();
+        new ClassroomBuilder().id(id).name(name).building(building).build();
 
     Classroom takenClassroom = dao.getById(id);
 
@@ -95,7 +95,7 @@ public class ClassroomDAOImplTest {
     final byte building = 1;
 
     Classroom expectedClassroom =
-        new ClassroomBuilder().buildId(id).buildName(name).buildBuilding(building).build();
+        new ClassroomBuilder().id(id).name(name).building(building).build();
 
     Classroom takenClassroom = dao.getById(id);
 
@@ -118,7 +118,7 @@ public class ClassroomDAOImplTest {
     final byte building = 1;
 
     Classroom classroom =
-        new ClassroomBuilder().buildId(id).buildName(name).buildBuilding(building).build();
+        new ClassroomBuilder().id(id).name(name).building(building).build();
 
     dao.add(classroom);
   }
@@ -133,7 +133,7 @@ public class ClassroomDAOImplTest {
     final byte building = 2;
 
     Classroom classroom =
-        new ClassroomBuilder().buildId(id).buildName(name).buildBuilding(building).build();
+        new ClassroomBuilder().id(id).name(name).building(building).build();
     dao.update(classroom);
   }
 
@@ -147,7 +147,7 @@ public class ClassroomDAOImplTest {
     final byte building = 1;
 
     Classroom classroom =
-        new ClassroomBuilder().buildId(id).buildName(name).buildBuilding(building).build();
+        new ClassroomBuilder().id(id).name(name).building(building).build();
     dao.delete(classroom);
   }
   
@@ -167,9 +167,9 @@ public class ClassroomDAOImplTest {
     byte weekDay = 1;
     byte subjectOrdinalNumber = 1;
     Record record = new RecordBuilder()
-                      .buildWeekNumber(weekNumber)
-                      .buildWeekDay(weekDay)
-                      .buildSubjOrdinalNumber(subjectOrdinalNumber)
+                      .weekNumber(weekNumber)
+                      .weekDay(weekDay)
+                      .subjOrdinalNumber(subjectOrdinalNumber)
                       .build();
 
     List<Classroom> classroomList = dao.getReservedClassroomListByDatesAndRecord(dateFrom, dateTo, record);

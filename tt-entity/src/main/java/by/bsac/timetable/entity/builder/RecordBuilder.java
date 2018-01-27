@@ -24,62 +24,62 @@ public class RecordBuilder {
   private Date dateFrom;
   private Date dateTo;
 
-  public RecordBuilder buildId(int idRecord) {
+  public RecordBuilder id(int idRecord) {
     this.idRecord = idRecord;
     return this;
   }
 
-  public RecordBuilder buildClassroom(Classroom classroom) {
+  public RecordBuilder classroom(Classroom classroom) {
     this.classroom = classroom;
     return this;
   }
 
-  public RecordBuilder buildGroup(Group group) {
+  public RecordBuilder group(Group group) {
     this.group = group;
     return this;
   }
 
-  public RecordBuilder buildLecturer(Lecturer lecturer) {
+  public RecordBuilder lecturer(Lecturer lecturer) {
     this.lecturer = lecturer;
     return this;
   }
 
-  public RecordBuilder buildSubject(Subject subject) {
+  public RecordBuilder subject(Subject subject) {
     this.subject = subject;
     return this;
   }
 
-  public RecordBuilder buildSubjectFor(SubjectFor subjectFor) {
+  public RecordBuilder subjectFor(SubjectFor subjectFor) {
     this.subjectFor = subjectFor;
     return this;
   }
 
-  public RecordBuilder buildSubjectType(SubjectType subjectType) {
+  public RecordBuilder subjectType(SubjectType subjectType) {
     this.subjectType = subjectType;
     return this;
   }
 
-  public RecordBuilder buildWeekNumber(byte weekNumber) {
+  public RecordBuilder weekNumber(byte weekNumber) {
     this.weekNumber = weekNumber;
     return this;
   }
 
-  public RecordBuilder buildWeekDay(byte weekDay) {
+  public RecordBuilder weekDay(byte weekDay) {
     this.weekDay = weekDay;
     return this;
   }
 
-  public RecordBuilder buildSubjOrdinalNumber(byte subjOrdinalNumber) {
+  public RecordBuilder subjOrdinalNumber(byte subjOrdinalNumber) {
     this.subjOrdinalNumber = subjOrdinalNumber;
     return this;
   }
 
-  public RecordBuilder buildDateFrom(Date dateFrom) {
+  public RecordBuilder dateFrom(Date dateFrom) {
     this.dateFrom = dateFrom;
     return this;
   }
 
-  public RecordBuilder buildDateTo(Date dateTo) {
+  public RecordBuilder dateTo(Date dateTo) {
     this.dateTo = dateTo;
     return this;
   }

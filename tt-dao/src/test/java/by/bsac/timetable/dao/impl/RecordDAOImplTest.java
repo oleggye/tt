@@ -202,18 +202,18 @@ public class RecordDAOImplTest {
     final Short idClassroom = 1;
 
     Record record = new RecordBuilder()
-        .buildId(idRecord)
-        .buildWeekDay(weekDay)
-        .buildWeekNumber(weekNumber)
-        .buildSubjOrdinalNumber(subjectOrdinalNumber)
-        .buildGroup(groupDao.getById(idGroup))
-        .buildSubject(subjectDao.getById(idSubject))
-        .buildLecturer(lecturerDao.getById(idLecturer))
-        .buildSubjectType(new SubjectTypeBuilder().buildId(idSubjectType).build())
-        .buildSubjectFor(new SubjectForBuilder().buildId(idSubjectFor).build())
-        .buildDateFrom(dateFrom)
-        .buildDateTo(dateTo)
-        .buildClassroom(classroomDao.getById(idClassroom))
+        .id(idRecord)
+        .weekDay(weekDay)
+        .weekNumber(weekNumber)
+        .subjOrdinalNumber(subjectOrdinalNumber)
+        .group(groupDao.getById(idGroup))
+        .subject(subjectDao.getById(idSubject))
+        .lecturer(lecturerDao.getById(idLecturer))
+        .subjectType(new SubjectTypeBuilder().id(idSubjectType).build())
+        .subjectFor(new SubjectForBuilder().id(idSubjectFor).build())
+        .dateFrom(dateFrom)
+        .dateTo(dateTo)
+        .classroom(classroomDao.getById(idClassroom))
         .build();
 
     dao.add(record);
@@ -244,18 +244,18 @@ public class RecordDAOImplTest {
     final Short idClassroom = 2;
 
     Record record = new RecordBuilder()
-        .buildId(idRecord)
-        .buildWeekDay(weekDay)
-        .buildWeekNumber(weekNumber)
-        .buildSubjOrdinalNumber(subjectOrdinalNumber)
-        .buildGroup(groupDao.getById(idGroup))
-        .buildSubject(subjectDao.getById(idSubject))
-        .buildLecturer(lecturerDao.getById(idLecturer))
-        .buildSubjectType(new SubjectTypeBuilder().buildId(idSubjectType).build())
-        .buildSubjectFor(new SubjectForBuilder().buildId(idSubjectFor).build())
-        .buildDateFrom(dateFrom)
-        .buildDateTo(dateTo)
-        .buildClassroom(classroomDao.getById(idClassroom))
+        .id(idRecord)
+        .weekDay(weekDay)
+        .weekNumber(weekNumber)
+        .subjOrdinalNumber(subjectOrdinalNumber)
+        .group(groupDao.getById(idGroup))
+        .subject(subjectDao.getById(idSubject))
+        .lecturer(lecturerDao.getById(idLecturer))
+        .subjectType(new SubjectTypeBuilder().id(idSubjectType).build())
+        .subjectFor(new SubjectForBuilder().id(idSubjectFor).build())
+        .dateFrom(dateFrom)
+        .dateTo(dateTo)
+        .classroom(classroomDao.getById(idClassroom))
         .build();
 
     dao.update(record);

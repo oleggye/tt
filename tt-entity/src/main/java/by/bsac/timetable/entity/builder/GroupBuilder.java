@@ -12,27 +12,27 @@ public class GroupBuilder {
 	private String nameGroup;
 	private byte eduLevel;
 
-	public GroupBuilder buildId(short idGroup) {
+	public GroupBuilder id(short idGroup) {
 		this.idGroup = idGroup;
 		return this;
 	}
 
-	public GroupBuilder buildFaculty(Faculty faculty) {
+	public GroupBuilder faculty(Faculty faculty) {
 		this.faculty = faculty;
 		return this;
 	}
 
-	public GroupBuilder buildFlow(Flow flow) {
+	public GroupBuilder flow(Flow flow) {
 		this.flow = flow;
 		return this;
 	}
 
-	public GroupBuilder buildName(String nameGroup) {
+	public GroupBuilder name(String nameGroup) {
 		this.nameGroup = nameGroup;
 		return this;
 	}
 
-	public GroupBuilder buildEduLevel(byte eduLevel) {
+	public GroupBuilder eduLevel(byte eduLevel) {
 		this.eduLevel = eduLevel;
 		return this;
 	}

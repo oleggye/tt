@@ -55,7 +55,7 @@ public class FlowDAOImplTest {
     final Short idFlow = 1;
     final String name = "СТ_СП_44";
 
-    Flow expectedFlow = new FlowBuilder().buildId(idFlow).buildName(name).build();
+    Flow expectedFlow = new FlowBuilder().id(idFlow).name(name).build();
 
     Flow takenFlow = dao.getById(idFlow);
 
@@ -71,7 +71,7 @@ public class FlowDAOImplTest {
     final Short idFlow = 2;
     final String name = "Сарк_44";
 
-    Flow expectedFlow = new FlowBuilder().buildId(idFlow).buildName(name).build();
+    Flow expectedFlow = new FlowBuilder().id(idFlow).name(name).build();
 
     Flow takenFlow = dao.getById(idFlow);
 
@@ -89,7 +89,7 @@ public class FlowDAOImplTest {
     final Short idFlow = 4;
     final String name = "ТЕСТ";
 
-    Flow flow = new FlowBuilder().buildId(idFlow).buildName(name).build();
+    Flow flow = new FlowBuilder().id(idFlow).name(name).build();
 
     dao.add(flow);
   }

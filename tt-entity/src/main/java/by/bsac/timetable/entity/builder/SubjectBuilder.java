@@ -11,27 +11,27 @@ public class SubjectBuilder {
 	private byte eduLevel;
 	private String abnameSubject;
 
-	public SubjectBuilder buildId(short idSubject) {
+	public SubjectBuilder id(short idSubject) {
 		this.idSubject = idSubject;
 		return this;
 	}
 
-	public SubjectBuilder buildChair(Chair chair) {
+	public SubjectBuilder chair(Chair chair) {
 		this.chair = chair;
 		return this;
 	}
 
-	public SubjectBuilder buildNameSubject(String nameSubject) {
+	public SubjectBuilder name(String nameSubject) {
 		this.nameSubject = nameSubject;
 		return this;
 	}
 
-	public SubjectBuilder buildEduLevel(byte eduLevel) {
+	public SubjectBuilder eduLevel(byte eduLevel) {
 		this.eduLevel = eduLevel;
 		return this;
 	}
 
-	public SubjectBuilder buildAbname(String abnameSubject) {
+	public SubjectBuilder abName(String abnameSubject) {
 		this.abnameSubject = abnameSubject;
 		return this;
 	}

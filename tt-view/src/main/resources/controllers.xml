@@ -37,7 +37,7 @@
 	<bean id="getFlowList" class="by.bsac.timetable.command.impl.get.GetFlowList" />
 	<bean id="getFlowListByName" class="by.bsac.timetable.command.impl.get.GetFlowListByName" />
 
-	<!-- Group -->
+	<!-- group -->
 	<bean id="addGroup" class="by.bsac.timetable.command.impl.add.AddGroup" />
 	<bean id="updateGroup" class="by.bsac.timetable.command.impl.update.UpdateGroup" />
 	<bean id="deleteGroup" class="by.bsac.timetable.command.impl.delete.DeleteGroup" />

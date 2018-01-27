@@ -7,12 +7,12 @@ public class FacultyBuilder {
 	private short idFaculty;
 	private String nameFaculty;
 
-	public FacultyBuilder buildId(short idFaculty) {
+	public FacultyBuilder id(short idFaculty) {
 		this.idFaculty = idFaculty;
 		return this;
 	}
 
-	public FacultyBuilder buildName(String nameFaculty) {
+	public FacultyBuilder name(String nameFaculty) {
 		this.nameFaculty = nameFaculty;
 		return this;
 	}

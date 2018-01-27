@@ -120,7 +120,7 @@ public class Group implements java.io.Serializable, Cloneable, IName {
 
   @Override
   public String toString() {
-    return "Group [idGroup=" + idGroup + ", faculty=" + faculty + ", flow=" + flow + ", nameGroup="
+    return "group [idGroup=" + idGroup + ", faculty=" + faculty + ", flow=" + flow + ", nameGroup="
         + nameGroup + ", eduLevel=" + eduLevel + "]";
   }
 

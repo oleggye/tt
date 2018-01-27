@@ -9,17 +9,17 @@ public class LecturerBuilder {
 	private Chair chair;
 	private String nameLecturer;
 
-	public LecturerBuilder buildId(short idLecturer) {
+	public LecturerBuilder id(short idLecturer) {
 		this.idLecturer = idLecturer;
 		return this;
 	}
 
-	public LecturerBuilder buildChair(Chair chair) {
+	public LecturerBuilder chair(Chair chair) {
 		this.chair = chair;
 		return this;
 	}
 
-	public LecturerBuilder buildNameLecturer(String nameLecturer) {
+	public LecturerBuilder name(String nameLecturer) {
 		this.nameLecturer = nameLecturer;
 		return this;
 	}

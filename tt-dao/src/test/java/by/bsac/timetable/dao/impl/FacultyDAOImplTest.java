@@ -70,7 +70,7 @@ public class FacultyDAOImplTest {
 
     String nameFaculty = "Факультет электросвязи";
     Faculty expectedFaculty =
-        new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
+        new FacultyBuilder().id(idFaculty).name(nameFaculty).build();
 
     Faculty takenFaculty = dao.getById(idFaculty);
     assertThat(takenFaculty).isNotNull();
@@ -86,7 +86,7 @@ public class FacultyDAOImplTest {
 
     String nameFaculty = "Факультет инжиниринга и технологий связи";
     Faculty expectedFaculty =
-        new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
+        new FacultyBuilder().id(idFaculty).name(nameFaculty).build();
 
     Faculty takenFaculty = dao.getById(idFaculty);
     assertThat(takenFaculty).isNotNull();
@@ -103,7 +103,7 @@ public class FacultyDAOImplTest {
     final Byte idFaculty = 3;
 
     String nameFaculty = "Факультет довузовской подготовки";
-    Faculty faculty = new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
+    Faculty faculty = new FacultyBuilder().id(idFaculty).name(nameFaculty).build();
 
     dao.add(faculty);
   }
@@ -118,7 +118,7 @@ public class FacultyDAOImplTest {
     final Byte idFaculty = 3;
 
     String nameFaculty = "Факультет подготовки";
-    Faculty faculty = new FacultyBuilder().buildId(idFaculty).buildName(nameFaculty).build();
+    Faculty faculty = new FacultyBuilder().id(idFaculty).name(nameFaculty).build();
 
     dao.update(faculty);
   }

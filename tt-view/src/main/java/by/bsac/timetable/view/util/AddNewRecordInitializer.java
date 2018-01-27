@@ -64,9 +64,9 @@ public final class AddNewRecordInitializer {
     SubjectFor subjectFor = form.getLessonFor().lessonForToSubjectFor();
 
     Record addRecord =
-        new RecordBuilder().buildDateFrom(lessonDate).buildDateTo(lessonDate).buildGroup(group)
-            .buildSubjectFor(subjectFor).buildSubjectType(subjectType).buildWeekNumber(weekNumber)
-            .buildWeekDay(weekDay).buildSubjOrdinalNumber(lessonOrdinalNumber).build();
+        new RecordBuilder().dateFrom(lessonDate).dateTo(lessonDate).group(group)
+            .subjectFor(subjectFor).subjectType(subjectType).weekNumber(weekNumber)
+            .weekDay(weekDay).subjOrdinalNumber(lessonOrdinalNumber).build();
     form.setAddRecord(addRecord);
     // HibernateUtil.closeSession();
   }

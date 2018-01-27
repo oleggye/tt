@@ -63,10 +63,10 @@ public class LecturerDAOImplTest {
     final short idLecturer = 3;
     final String nameLecturer = "Петров Петр Петрович";
 
-    Chair chair = new ChairBuilder().buildId(idChair).buildNameChair(nameChair).build();
+    Chair chair = new ChairBuilder().id(idChair).name(nameChair).build();
 
-    Lecturer expectedLecturer = new LecturerBuilder().buildId(idLecturer).buildChair(chair)
-        .buildNameLecturer(nameLecturer).build();
+    Lecturer expectedLecturer = new LecturerBuilder().id(idLecturer).chair(chair)
+        .name(nameLecturer).build();
 
 
     List<Lecturer> lecturerList = dao.getLecturerListByChair(chair);
@@ -108,8 +108,8 @@ public class LecturerDAOImplTest {
     final byte idChair = 2;
 
     Chair chair = chairDao.getById(idChair);
-    Lecturer lecturer = new LecturerBuilder().buildId(idLecturer).buildNameLecturer(nameLecturer)
-        .buildChair(chair).build();
+    Lecturer lecturer = new LecturerBuilder().id(idLecturer).name(nameLecturer)
+        .chair(chair).build();
 
     dao.add(lecturer);
   }

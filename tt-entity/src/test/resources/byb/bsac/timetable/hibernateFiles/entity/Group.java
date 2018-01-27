@@ -31,10 +31,10 @@ public class Group implements java.io.Serializable, Cloneable, IName {
   public Group() {}
 
   /*
-   * public Group(Faculty faculty, String nameGroup, byte eduLevel) { this.faculty = faculty;
+   * public group(Faculty faculty, String nameGroup, byte eduLevel) { this.faculty = faculty;
    * this.nameGroup = nameGroup; this.eduLevel = eduLevel; }
    * 
-   * public Group(Faculty faculty, Flow flow, String nameGroup, byte eduLevel, Set<Record> records)
+   * public group(Faculty faculty, Flow flow, String nameGroup, byte eduLevel, Set<Record> records)
    * { this.faculty = faculty; this.flow = flow; this.nameGroup = nameGroup; this.eduLevel =
    * eduLevel; this.records = records; }
    */

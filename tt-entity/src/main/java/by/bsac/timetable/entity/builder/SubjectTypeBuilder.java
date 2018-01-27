@@ -7,12 +7,12 @@ public class SubjectTypeBuilder {
 	private byte id;
 	private String name;
 
-	public SubjectTypeBuilder buildId(byte id) {
+	public SubjectTypeBuilder id(byte id) {
 		this.id = id;
 		return this;
 	}
 
-	public SubjectTypeBuilder buildName(String name) {
+	public SubjectTypeBuilder name(String name) {
 		this.name = name;
 		return this;
 	}
