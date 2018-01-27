@@ -1,6 +1,7 @@
 package by.bsac.timetable.view;
 
 import static by.bsac.timetable.view.util.LocalizationBundle.getMessage;
+import static java.util.Objects.*;
 
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.entity.Faculty;
@@ -32,9 +33,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -48,11 +49,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The app's main class
@@ -65,7 +66,7 @@ public class MainForm extends JFrame {
 
   private static final long serialVersionUID = -8883696845828234226L;
 
-  private static final Logger LOGGER = LogManager.getLogger(MainForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(MainForm.class.getName());
 
   private final TablesArray tableArray = new TablesArray(7, 4);
 
@@ -406,8 +407,10 @@ public class MainForm extends JFrame {
         showWindow(true, progressBarLbl, progressBar);
 
       } catch (ApplicationException ex) {
-        LOGGER.error(ex.getCause().getMessage(), ex);
-        JOptionPane.showMessageDialog(frame.getContentPane(), ex.getCause().getMessage());
+        final Throwable cause = ex.getCause();
+        final String errorMessage = isNull(cause) ? "" : cause.getMessage();
+        LOGGER.error(errorMessage, ex);
+        JOptionPane.showMessageDialog(frame.getContentPane(), errorMessage);
         progressBarLbl.setText(getMessage("mainForm.error"));
         progressBar.setValue(progressBar.getMaximum());
       } finally {

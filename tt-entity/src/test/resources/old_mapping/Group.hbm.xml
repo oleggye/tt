@@ -30,7 +30,7 @@
 		</property>
 		<property generated="never" lazy="false" name="eduLevel"
 			optimistic-lock="true" type="byte" unique="false">
-			<column name="edu_level" not-null="true" />
+			<column name="educationLevel" not-null="true" />
 		</property>
 		<set embed-xml="true" fetch="select" inverse="true" lazy="true"
 			mutable="true" name="records" optimistic-lock="true" sort="unsorted"

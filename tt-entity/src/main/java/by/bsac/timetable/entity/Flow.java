@@ -1,11 +1,14 @@
 package by.bsac.timetable.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -35,7 +38,7 @@ public class Flow implements java.io.Serializable, Cloneable, IName {
   }
 
   @Id
-  /* @GeneratedValue(strategy = IDENTITY) */
+  @GeneratedValue(strategy = IDENTITY)
   @Column(name = "id_flow", unique = true, nullable = false)
   public Short getIdFlow() {
     return this.idFlow;

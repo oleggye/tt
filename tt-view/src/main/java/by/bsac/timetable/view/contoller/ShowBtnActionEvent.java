@@ -7,6 +7,7 @@ import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.util.DateUtil;
 import by.bsac.timetable.util.SupportClass;
 import by.bsac.timetable.view.MainForm;
+import by.bsac.timetable.view.component.table.TablesArray;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,14 +17,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jdatepicker.impl.JDatePickerImpl;
-import by.bsac.timetable.view.component.table.TablesArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ShowBtnActionEvent implements ActionListener {
 
-  private static final Logger LOGGER = LogManager.getLogger(MainForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(MainForm.class.getName());
 
   private MainForm mainForm;
   private TablesArray tableArray;

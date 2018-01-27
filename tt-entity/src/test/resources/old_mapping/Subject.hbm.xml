@@ -21,7 +21,7 @@
 		</property>
 		<property generated="never" lazy="false" name="eduLevel"
 			optimistic-lock="true" type="byte" unique="false">
-			<column name="edu_level" not-null="true" />
+			<column name="educationLevel" not-null="true" />
 		</property>
 		<property generated="never" lazy="false" name="abnameSubject"
 			optimistic-lock="true" type="string" unique="false">

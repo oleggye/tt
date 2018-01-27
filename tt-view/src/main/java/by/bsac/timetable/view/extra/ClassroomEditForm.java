@@ -4,8 +4,8 @@ import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Classroom;
 import by.bsac.timetable.entity.builder.ClassroomBuilder;
-import by.bsac.timetable.view.util.FormInitializer;
 import by.bsac.timetable.view.component.OneColumnTable;
+import by.bsac.timetable.view.util.FormInitializer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -23,13 +23,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClassroomEditForm extends JDialog {
+
   private static final long serialVersionUID = 1L;
 
-  private static final Logger LOGGER = LogManager.getLogger(ClassroomEditForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(ClassroomEditForm.class.getName());
+  private static final String FONT_NAME = "Tahoma";
 
   private JDialog frame;
   private JTable table;
@@ -61,15 +63,15 @@ public class ClassroomEditForm extends JDialog {
     });
 
     JLabel label = new JLabel("Редактирование/Добавление");
-    label.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     label.setBounds(319, 39, 220, 18);
     contentPanel.add(label);
 
     JButton editButton = new JButton("Изменить");
-    editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    editButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JButton deleteButton = new JButton("Удалить");
-    deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    deleteButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     NumberFormat numberFormat = NumberFormat.getNumberInstance();
     DecimalFormat decimalFormat = (DecimalFormat) numberFormat;
@@ -78,26 +80,26 @@ public class ClassroomEditForm extends JDialog {
     JFormattedTextField classroomNameField = new JFormattedTextField(/*decimalFormat*/);
     contentPanel.add(classroomNameField);
     classroomNameField.setColumns(3);
-    classroomNameField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    classroomNameField.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
     classroomNameField.setBounds(339, 117, 94, 26);
 
     JLabel buildingLabel = new JLabel("<html>Номер<br>корпуса</html>");
     buildingLabel.setForeground(Color.BLUE);
-    buildingLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+    buildingLabel.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     buildingLabel.setBounds(470, 68, 79, 38);
     contentPanel.add(buildingLabel);
 
     JFormattedTextField buildingField = new JFormattedTextField(decimalFormat);
-    buildingField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    buildingField.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
     buildingField.setColumns(1);
     buildingField.setBounds(470, 117, 65, 26);
     contentPanel.add(buildingField);
 
-    JLabel label_1 = new JLabel("<html>Название<br>аудитории</html>");
-    label_1.setForeground(new Color(0, 128, 0));
-    label_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-    label_1.setBounds(341, 68, 79, 38);
-    contentPanel.add(label_1);
+    JLabel classroomNameLabel = new JLabel("<html>Название<br>аудитории</html>");
+    classroomNameLabel.setForeground(new Color(0, 128, 0));
+    classroomNameLabel.setFont(new Font(FONT_NAME, Font.BOLD, 14));
+    classroomNameLabel.setBounds(341, 68, 79, 38);
+    contentPanel.add(classroomNameLabel);
 
     classroomNameField.setColumns(1);
 
@@ -105,103 +107,22 @@ public class ClassroomEditForm extends JDialog {
     editButton.setBounds(333, 169, 100, 26);
     contentPanel.add(editButton);
 
-    editButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        byte building = Byte.parseByte(buildingField.getText());
-        String name = classroomNameField.getText();
+    editButton.addActionListener(e -> {
+      byte building = Byte.parseByte(buildingField.getText());
+      String name = classroomNameField.getText();
 
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, building, name);
+      boolean isTableHasNot = isTableHasNotAlikeValue(table, building, name);
 
-        if (isTableHasNot) {
-          try {
-            editButton.setEnabled(false);
-
-            Classroom editingClassroom = new ClassroomBuilder().id(classroom.getIdClassroom())
-                .building(building).name(name).build();
-
-            CommandFacade.updateClassroom(editingClassroom);
-            FormInitializer.initClassroomTable(table);
-
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } catch (NumberFormatException ex) {
-            LOGGER.warn(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
-          } finally {
-            editButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, classroomNameField, buildingField);
-          }
-        }
-      }
-    });
-
-    deleteButton.setBounds(394, 206, 89, 23);
-    contentPanel.add(deleteButton);
-    deleteButton.setVisible(false);
-    deleteButton.addActionListener(new java.awt.event.ActionListener() {
-
-      @Override
-      public void actionPerformed(ActionEvent e) {
-
-        int result = JOptionPane.showConfirmDialog(getContentPane(),
-            "Перед удалением, вам необходимо переназначить аудиторию для занятий в текущем расписании",
-            "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
-          deleteButton.setEnabled(false);
-
-          ChangeClassroomDialog dialog = new ChangeClassroomDialog(classroom);
-          dialog.setLocationRelativeTo(frame);
-          dialog.setVisible(true);
-
-          try {
-
-            /*
-             * ICommand command = CommandProvider.getInstance().getCommand(ActionMode.
-             * Delete_Classroom); Request request = new Request(); request.putParam("classroom",
-             * classroom); command.execute(request);
-             */
-
-            FormInitializer.initClassroomTable(table);
-
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            deleteButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, classroomNameField, buildingField);
-          }
-        }
-      }
-    });
-
-    JButton addButton = new JButton("Добавить");
-    addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-
-    addButton.setBounds(444, 169, 105, 26);
-    contentPanel.add(addButton);
-
-    addButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
+      if (isTableHasNot) {
         try {
+          editButton.setEnabled(false);
 
-          byte building = Byte.parseByte(buildingField.getText());
-          String name = classroomNameField.getText();
+          Classroom editingClassroom = new ClassroomBuilder().buildId(classroom.getIdClassroom())
+              .buildBuilding(building).buildName(name).build();
 
-          boolean isTableHasNot = isTableHasNotAlikeValue(table, building, name);
+          CommandFacade.updateClassroom(editingClassroom);
+          FormInitializer.initClassroomTable(table);
 
-          if (isTableHasNot) {
-
-            addButton.setEnabled(false);
-
-            classroom = new ClassroomBuilder().building(building).name(name).build();
-
-            CommandFacade.addClassroom(classroom);
-            FormInitializer.initClassroomTable(table);
-
-          }
         } catch (CommandException ex) {
           LOGGER.error(ex.getCause().getMessage(), ex);
           JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
@@ -209,9 +130,80 @@ public class ClassroomEditForm extends JDialog {
           LOGGER.warn(ex.getCause().getMessage(), ex);
           JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
         } finally {
-          addButton.setEnabled(true);
+          editButton.setEnabled(true);
           resetComponents(editButton, deleteButton, classroomNameField, buildingField);
         }
+      }
+    });
+
+    deleteButton.setBounds(394, 206, 89, 23);
+    contentPanel.add(deleteButton);
+    deleteButton.setVisible(false);
+
+    deleteButton.addActionListener(e -> {
+      int result = JOptionPane.showConfirmDialog(getContentPane(),
+          "Перед удалением, вам необходимо переназначить аудиторию для занятий в текущем расписании",
+          "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+      if (result == JOptionPane.YES_OPTION) {
+        deleteButton.setEnabled(false);
+
+        ChangeClassroomDialog dialog = new ChangeClassroomDialog(classroom);
+        dialog.setLocationRelativeTo(frame);
+        dialog.setVisible(true);
+
+        try {
+
+          /*
+           * ICommand command = CommandProvider.getInstance().getCommand(ActionMode.
+           * Delete_Classroom); Request request = new Request(); request.putParam("classroom",
+           * classroom); command.execute(request);
+           */
+
+          FormInitializer.initClassroomTable(table);
+
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          deleteButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, classroomNameField, buildingField);
+        }
+      }
+    });
+
+    JButton addButton = new JButton("Добавить");
+    addButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
+
+    addButton.setBounds(444, 169, 105, 26);
+    contentPanel.add(addButton);
+
+    addButton.addActionListener(e -> {
+      try {
+
+        byte building = Byte.parseByte(buildingField.getText());
+        String name = classroomNameField.getText();
+
+        boolean isTableHasNot = isTableHasNotAlikeValue(table, building, name);
+
+        if (isTableHasNot) {
+
+          addButton.setEnabled(false);
+
+          classroom = new ClassroomBuilder().buildBuilding(building).buildName(name).build();
+
+          CommandFacade.addClassroom(classroom);
+          FormInitializer.initClassroomTable(table);
+
+        }
+      } catch (CommandException ex) {
+        LOGGER.error(ex.getCause().getMessage(), ex);
+        JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+      } catch (NumberFormatException ex) {
+        LOGGER.warn(ex.getCause().getMessage(), ex);
+        JOptionPane.showMessageDialog(getContentPane(), "Введены не верные числа");
+      } finally {
+        addButton.setEnabled(true);
+        resetComponents(editButton, deleteButton, classroomNameField, buildingField);
       }
     });
 
@@ -254,20 +246,14 @@ public class ClassroomEditForm extends JDialog {
       getContentPane().add(buttonPane, BorderLayout.SOUTH);
       {
         JButton okButton = new JButton("OK");
-        okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        okButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
         okButton.setActionCommand("OK");
         buttonPane.add(okButton);
         getRootPane().setDefaultButton(okButton);
 
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            dispose();
-          }
-        });
+        okButton.addActionListener(e -> dispose());
       }
     }
-
   }
 
   private void resetComponents(JButton editButton, JButton deleteButton, JTextField numberTextFiled,
@@ -281,15 +267,16 @@ public class ClassroomEditForm extends JDialog {
   private boolean isTableHasNotAlikeValue(JTable table, byte building, String name) {
     int colCount = table.getColumnCount();
     int rowCount = table.getRowCount();
-    for (int column = 0; column < colCount; column++)
+    for (int column = 0; column < colCount; column++) {
       for (int row = 0; row < rowCount; row++) {
         Classroom value = (Classroom) table.getValueAt(row, column);
         if (value.getName().equals(name) && value.getBuilding() == building) {
-          LOGGER.warn("try to dublicete classroom:" + value);
+          LOGGER.warn("try to duplicate classroom: {}", value);
           JOptionPane.showMessageDialog(getContentPane(), "Такая аудитория уже есть");
           return false;
         }
       }
+    }
     return true;
   }
 }

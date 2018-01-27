@@ -5,10 +5,10 @@ import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.builder.LecturerBuilder;
-import by.bsac.timetable.view.extra.controller.CoincidenceTextFieldController;
-import by.bsac.timetable.view.util.FormInitializer;
 import by.bsac.timetable.view.component.MyComboBox;
 import by.bsac.timetable.view.component.OneColumnTable;
+import by.bsac.timetable.view.extra.controller.CoincidenceTextFieldController;
+import by.bsac.timetable.view.util.FormInitializer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -28,13 +28,13 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LecturerEditForm extends JDialog {
   private static final long serialVersionUID = 1L;
 
-  private static final Logger LOGGER = LogManager.getLogger(GroupEditForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(LecturerEditForm.class.getName());
 
   private JDialog frame;
   private JTable table;
@@ -126,8 +126,8 @@ public class LecturerEditForm extends JDialog {
 
     ImageIcon icon = new ImageIcon("C:\\Users\\hello\\Desktop\\add-icon.png");
     Image img = icon.getImage();
-    Image newimg = img.getScaledInstance(37, 23, java.awt.Image.SCALE_SMOOTH);
-    icon = new ImageIcon(newimg);
+    Image addIcon = img.getScaledInstance(37, 23, java.awt.Image.SCALE_SMOOTH);
+    icon = new ImageIcon(addIcon);
 
     table = new OneColumnTable();
     table.setCellSelectionEnabled(true);
@@ -152,6 +152,7 @@ public class LecturerEditForm extends JDialog {
     panel.add(editButton);
 
     addButton.setBounds(130, 45, 95, 23);
+    addButton.setIcon(icon);
     panel.add(addButton);
 
     deleteButton.setBounds(81, 79, 100, 23);

@@ -1,27 +1,27 @@
 package by.bsac.timetable.view;
 
+import static java.util.Objects.*;
+
 import by.bsac.timetable.listener.SpringApplicationContextManager;
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.Objects;
 import javax.swing.JOptionPane;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Created by hello on 26.11.17.
- */
 public class CustomMainForm extends MainForm {
 
-  private static final Logger LOGGER = LogManager.getLogger(CustomMainForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(CustomMainForm.class.getName());
 
   private SpringApplicationContextManager listener;
 
   /**
    * Create the application.
    */
-  public CustomMainForm() throws IOException {
+  private CustomMainForm() throws IOException {
     super();
 
   }
@@ -54,7 +54,9 @@ public class CustomMainForm extends MainForm {
       } catch (Exception e) {
         final String errorMessage = e.getCause().getMessage();
         LOGGER.error(errorMessage, e);
-        JOptionPane.showMessageDialog(window.getContentPane(), errorMessage);
+        if (!isNull(window)) {
+          JOptionPane.showMessageDialog(window.getContentPane(), errorMessage);
+        }
       }
     });
   }

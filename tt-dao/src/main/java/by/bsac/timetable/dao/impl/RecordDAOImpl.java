@@ -9,14 +9,14 @@ import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.SubjectFor;
 import java.util.Date;
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> implements IRecordDAO {
 
-  private static final Logger LOGGER = LogManager.getLogger(RecordDAOImpl.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(RecordDAOImpl.class.getName());
 
   private static final String GROUP_PARAM_NAME = "group";
   private static final Byte SUBJECT_FOR_FULL_FLOW_ID = 4;
@@ -95,13 +95,32 @@ public class RecordDAOImpl extends AbstractHibernateDAO<Record, Integer> impleme
   public void deleteAllRecordsByFlow(Flow flow) {
     LOGGER.debug("deleteAllRecordsByFlow: flow=" + flow);
     /**/
+/*<<<<<<< HEAD
+    manager.createQuery("delete from Record rec where"
+        + " rec.group"
+        + " in(select gr from Group gr where gr.flow =:flow)"
+       *//* + " and rec.subjectFor =:id_subjectFor"*//*)
+        .setParameter("flow", flow)
+        //.setParameter("id_subjectFor", SUBJECT_FOR_FULL_FLOW_ID)
+=======*/
     manager.createNativeQuery(
         "delete from record where record.id_group " 
-            + "in (select id_group from groupp join flow where flow.id_flow = 1) and record.id_subject_for :=idSubjectFor")
+            + "in (select id_group from `group` join flow where flow.id_flow = 1) and record.id_subject_for :=idSubjectFor")
         .setParameter("idFlow", flow.getIdFlow())
         .setParameter("subjectFor", SUBJECT_FOR_FULL_FLOW_ID)
         .executeUpdate();
-  /*  manager.createQuery("delete from Record rec where rec.group.flow =:flow")
-        .setParameter("flow", flow).executeUpdate();*/
+    /*manager.createNativeQuery(
+        "delete from record where record.id_group "
+            + "in(select id_group from groupp join flow where flow.id_flow =:idFlow) "
+            + "and record.id_subject_for =:subjectFor")*/
+
+      /*  .setParameter("flow", flow)
+        .setParameter("subjectFor", SUBJECT_FOR_FULL_FLOW_ID)     .executeUpdate();*/
+
+   /* manager.createQuery("delete from Record rec "
+        + "where rec.group.flow =:flow and rec.subjectFor.id =:id_subjectFor")
+        .setParameter("flow", flow)
+        .setParameter("id_subjectFor", SUBJECT_FOR_FULL_FLOW_ID)
+        .executeUpdate();*/
   }
 }

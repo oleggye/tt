@@ -3,26 +3,20 @@ package by.bsac.timetable.view.util;
 import java.util.ResourceBundle;
 
 public class LocalizationBundle {
-  private LocalizationBundle() {}
 
-  private static final String FILE_PATH = "locale/locale";
-
-  private static ResourceBundle bundle;
+  private LocalizationBundle() {
+  }
 
   public static String getMessage(String key) {
-    if (bundle == null) {
-      synchronized (ResourceBundle.class) {
-        if (bundle == null) {
-          bundle = ResourceBundle.getBundle(FILE_PATH);
-        }
-      }
+    return SingletonHolder.bundle.getString(key);
+  }
+
+  private static class SingletonHolder {
+
+    private SingletonHolder() {
     }
-    return bundle.getString(key);
-  }
 
-  public static void main(String[] args) {
-    String message = 
-        getMessage("mainForm.title");
+    private static final String FILE_PATH = "locale/locale";
+    private static final ResourceBundle bundle = ResourceBundle.getBundle(FILE_PATH);
   }
-
 }

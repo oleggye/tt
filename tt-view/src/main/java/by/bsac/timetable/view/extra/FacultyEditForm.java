@@ -4,8 +4,8 @@ import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Faculty;
 import by.bsac.timetable.entity.builder.FacultyBuilder;
-import by.bsac.timetable.view.util.FormInitializer;
 import by.bsac.timetable.view.component.OneColumnTable;
+import by.bsac.timetable.view.util.FormInitializer;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -19,14 +19,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FacultyEditForm extends JDialog {
+
   private static final long serialVersionUID = 1L;
 
-  private static final Logger LOGGER = LogManager.getLogger(FacultyEditForm.class.getName());
-
+  private static final Logger LOGGER = LoggerFactory.getLogger(FacultyEditForm.class.getName());
+  private static final String FONT_NAME = "Tahoma";
   private JTable table;
   private Faculty faculty;
 
@@ -55,18 +56,18 @@ public class FacultyEditForm extends JDialog {
     });
 
     JLabel label = new JLabel("Редактирование/Добавление");
-    label.setFont(new Font("Tahoma", Font.BOLD, 14));
+    label.setFont(new Font(FONT_NAME, Font.BOLD, 14));
     label.setBounds(323, 56, 220, 18);
     contentPanel.add(label);
 
     JButton editButton = new JButton("Изменить");
-    editButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    editButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JButton deleteButton = new JButton("Удалить");
-    deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    deleteButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JTextArea textField = new JTextArea(1, 1);
-    textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    textField.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     JScrollPane scrollPane = new JScrollPane(textField);
     scrollPane.setBounds(323, 85, 220, 46);
@@ -78,30 +79,27 @@ public class FacultyEditForm extends JDialog {
     editButton.setBounds(323, 142, 100, 26);
     contentPanel.add(editButton);
 
-    editButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        String nameFaculty = textField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFaculty);
+    editButton.addActionListener(e -> {
+      String nameFaculty = textField.getText();
+      boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFaculty);
 
-        if (isTableHasNot) {
-          try {
-            editButton.setEnabled(false);
+      if (isTableHasNot) {
+        try {
+          editButton.setEnabled(false);
 
-            Faculty editingFaculty = new FacultyBuilder()
-                                .id(faculty.getIdFaculty())
-                                .name(nameFaculty)
-                                .build();
-            CommandFacade.updateFaculty(editingFaculty);
-            FormInitializer.initFacultyTable(table);
+          Faculty editingFaculty = new FacultyBuilder()
+              .buildId(faculty.getIdFaculty())
+              .buildName(nameFaculty)
+              .build();
+          CommandFacade.updateFaculty(editingFaculty);
+          FormInitializer.initFacultyTable(table);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            editButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, textField);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          editButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, textField);
         }
       }
     });
@@ -109,58 +107,52 @@ public class FacultyEditForm extends JDialog {
     deleteButton.setBounds(395, 179, 89, 23);
     contentPanel.add(deleteButton);
     deleteButton.setVisible(false);
-    deleteButton.addActionListener(new java.awt.event.ActionListener() {
 
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        int result = JOptionPane.showConfirmDialog(getContentPane(),
-            "Удаление факультета повлечен за собой удаление всех связанных с ним групп, которые, в свою очередь, приведут к удалению связанных с ними занятий",
-            "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (result == JOptionPane.YES_OPTION) {
-          try {
-            deleteButton.setEnabled(false);
+    deleteButton.addActionListener(e -> {
+      int result = JOptionPane.showConfirmDialog(getContentPane(),
+          "Удаление факультета повлечен за собой удаление всех связанных с ним групп, которые, в свою очередь, приведут к удалению связанных с ними занятий",
+          "Внимание!", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+      if (result == JOptionPane.YES_OPTION) {
+        try {
+          deleteButton.setEnabled(false);
 
-            CommandFacade.deleteFaculty(faculty);
-            FormInitializer.initFacultyTable(table);
+          CommandFacade.deleteFaculty(faculty);
+          FormInitializer.initFacultyTable(table);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            deleteButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, textField);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          deleteButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, textField);
         }
       }
     });
 
     JButton addButton = new JButton("Добавить");
-    addButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    addButton.setFont(new Font(FONT_NAME, Font.PLAIN, 14));
 
     addButton.setBounds(438, 142, 105, 26);
     contentPanel.add(addButton);
 
-    addButton.addActionListener(new java.awt.event.ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        String nameFaculty = textField.getText();
-        boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFaculty);
+    addButton.addActionListener(e -> {
+      String nameFaculty = textField.getText();
+      boolean isTableHasNot = isTableHasNotAlikeValue(table, nameFaculty);
 
-        if (isTableHasNot) {
-          try {
-            addButton.setEnabled(false);
-            faculty = new FacultyBuilder().name(nameFaculty).build();
+      if (isTableHasNot) {
+        try {
+          addButton.setEnabled(false);
+          faculty = new FacultyBuilder().buildName(nameFaculty).build();
 
-            CommandFacade.addFaculty(faculty);
-            FormInitializer.initFacultyTable(table);
+          CommandFacade.addFaculty(faculty);
+          FormInitializer.initFacultyTable(table);
 
-          } catch (CommandException ex) {
-            LOGGER.error(ex.getCause().getMessage(), ex);
-            JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
-          } finally {
-            addButton.setEnabled(true);
-            resetComponents(editButton, deleteButton, textField);
-          }
+        } catch (CommandException ex) {
+          LOGGER.error(ex.getCause().getMessage(), ex);
+          JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());
+        } finally {
+          addButton.setEnabled(true);
+          resetComponents(editButton, deleteButton, textField);
         }
       }
     });
@@ -200,17 +192,12 @@ public class FacultyEditForm extends JDialog {
       getContentPane().add(buttonPane, BorderLayout.SOUTH);
       {
         JButton okButton = new JButton("OK");
-        okButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        okButton.setFont(new Font(FONT_NAME, Font.PLAIN, 16));
         okButton.setActionCommand("OK");
         buttonPane.add(okButton);
         getRootPane().setDefaultButton(okButton);
 
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            dispose();
-          }
-        });
+        okButton.addActionListener(e -> dispose());
       }
     }
   }
@@ -224,15 +211,16 @@ public class FacultyEditForm extends JDialog {
   private boolean isTableHasNotAlikeValue(JTable table, String nameFaculty) {
     int colCount = table.getColumnCount();
     int rowCount = table.getRowCount();
-    for (int column = 0; column < colCount; column++)
+    for (int column = 0; column < colCount; column++) {
       for (int row = 0; row < rowCount; row++) {
         Faculty value = (Faculty) table.getValueAt(row, column);
         if (value.getNameFaculty().equals(nameFaculty)) {
-          LOGGER.warn("try to dublicete nameFaculty:" + nameFaculty);
+          LOGGER.warn("try to duplicate nameFaculty: {}", nameFaculty);
           JOptionPane.showMessageDialog(getContentPane(), "Факультет с таким именем уже есть");
           return false;
         }
       }
+    }
     return true;
   }
 }

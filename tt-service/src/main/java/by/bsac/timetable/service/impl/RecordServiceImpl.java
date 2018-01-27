@@ -1,5 +1,7 @@
 package by.bsac.timetable.service.impl;
 
+import static java.util.Objects.equals;
+
 import by.bsac.timetable.dao.ICancellationDAO;
 import by.bsac.timetable.dao.IGroupDAO;
 import by.bsac.timetable.dao.IRecordDAO;
@@ -22,6 +24,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
@@ -30,6 +33,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RecordServiceImpl implements IRecordService {
+
   private static final RecordBuilder RECORD_BUILDER = new RecordBuilder();
   private static final CancellationBuilder CANCEL_BUILDER = new CancellationBuilder();
 
@@ -152,7 +156,7 @@ public class RecordServiceImpl implements IRecordService {
     try {
       recordDAO.delete(record);
     } catch (RuntimeException e) {
-      throw new ServiceException("Ошибка при получении занятия", e);
+      throw new ServiceException("Ошибка при удалении занятия", e);
     }
   }
 
@@ -183,8 +187,11 @@ public class RecordServiceImpl implements IRecordService {
        * удаление по номеру недели или это пара на одну дату, то удаляем данную запись
        */
       LessonFor lessonFor = LessonFor.subjectForToLessonFor(cancelRecord.getSubjectFor());
+      Date dateFrom = initialRecord.getDateFrom();
+      Date dateTo = initialRecord.getDateTo();
+
       if (cancelLessonPeriod.equals(LessonPeriod.FOR_WEEK_NUMBER)
-          || initialRecord.getDateFrom().equals(initialRecord.getDateTo())) {
+          || dateFrom.equals(dateTo)) {
 
         /* если это пара для всего потока, то нужно обновить у всех */
         if (lessonFor.equals(LessonFor.FULL_FLOW)) {
@@ -274,16 +281,16 @@ public class RecordServiceImpl implements IRecordService {
   }
 
   /* @Transactional(value = TxType.MANDATORY) */
-  private void cancelFlowRecord(Record initalRecord, Record cancelRecord) {
+  private void cancelFlowRecord(Record initialRecord, Record cancelRecord) {
     List<Cancellation> resultList = new LinkedList<>();
-    
+
     Cancellation cancellation = new Cancellation();
     cancellation.setDateFrom(cancelRecord.getDateFrom());
     cancellation.setDateTo(cancelRecord.getDateTo());
 
-    List<Group> groupList = groupDao.getGroupListByFlow(initalRecord.getGroup().getFlow());
+    List<Group> groupList = groupDao.getGroupListByFlow(initialRecord.getGroup().getFlow());
     for (Group group : groupList) {
-      Record thisGroupRecord = recordDAO.getRecordForGroupLikeThis(group, initalRecord);
+      Record thisGroupRecord = recordDAO.getRecordForGroupLikeThis(group, initialRecord);
       if (thisGroupRecord != null) {
         cancellation.setRecord(thisGroupRecord);
         resultList.add(CANCEL_BUILDER.copy(cancellation));
@@ -308,10 +315,6 @@ public class RecordServiceImpl implements IRecordService {
 
   /**
    * Method checks whether the passed instance of {@link Record} conflicts with similar records
-   * 
-   * @param record
-   * @throws ServiceException
-   * @throws ServiceValidationException
    */
   /* @Transactional(value = TxType.MANDATORY) */
   private void checkRecordForConflict(Record record)
@@ -320,11 +323,13 @@ public class RecordServiceImpl implements IRecordService {
         getAllRecordListForGroup(record.getGroup(), record.getDateFrom(), record.getDateTo());
 
     for (Record elem : recordList) {
-      if (elem.getIdRecord() != record.getIdRecord()
-          && elem.getWeekNumber() == record.getWeekNumber()
-          && elem.getWeekDay() == record.getWeekDay()
-          && elem.getSubjOrdinalNumber() == record.getSubjOrdinalNumber()
-          && elem.getSubjectFor().equals(record.getSubjectFor())) {
+      if (
+          !Objects.equals(elem.getIdRecord(), record.getIdRecord())
+              && elem.getWeekNumber() == record.getWeekNumber()
+              && elem.getWeekDay() == record.getWeekDay()
+              && elem.getSubjOrdinalNumber() == record.getSubjOrdinalNumber()
+              &&
+              Objects.equals(elem.getSubjectFor(), record.getSubjectFor())) {
 
         throw new ServiceValidationException("Запись конфликтует с другой!");
       }

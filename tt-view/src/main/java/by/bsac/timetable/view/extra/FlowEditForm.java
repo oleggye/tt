@@ -4,8 +4,8 @@ import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Flow;
 import by.bsac.timetable.entity.builder.FlowBuilder;
-import by.bsac.timetable.view.util.FormInitializer;
 import by.bsac.timetable.view.component.OneColumnTable;
+import by.bsac.timetable.view.util.FormInitializer;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -21,14 +21,14 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FlowEditForm extends JDialog {
 
   private static final long serialVersionUID = 1L;
 
-  private static final Logger LOGGER = LogManager.getLogger(FlowEditForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(FlowEditForm.class.getName());
   private static final String FONT_NAME = "Tahoma";
 
   private JTable table;
@@ -243,7 +243,7 @@ public class FlowEditForm extends JDialog {
       for (int row = 0; row < rowCount; row++) {
         Flow value = (Flow) table.getValueAt(row, column);
         if (value.getName().equals(nameFlow)) {
-          LOGGER.warn("try to dublicete nameFlow:" + nameFlow);
+          LOGGER.warn("try to duplicate nameFlow: {}", nameFlow);
           JOptionPane.showMessageDialog(getContentPane(), "Поток с таким именем уже есть");
           return false;
         }

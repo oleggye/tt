@@ -1,5 +1,7 @@
 package by.bsac.timetable.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
@@ -7,6 +9,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,25 +19,26 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "groupp", uniqueConstraints = @UniqueConstraint(columnNames = "name_group"))
+@Table(name = "group", uniqueConstraints = @UniqueConstraint(columnNames = "name_group"))
 public class Group implements java.io.Serializable, Cloneable, IName {
 
   private static final long serialVersionUID = -4886595455964348534L;
 
-  @JsonProperty(value="id")
+  @JsonProperty(value = "id")
   private Short idGroup;
   @JsonIgnore
   private Faculty faculty;
   @JsonIgnore
   private Flow flow;
-  @JsonProperty(value="name")
+  @JsonProperty(value = "name")
   private String nameGroup;
-  @JsonProperty(value="educationLevel")
+  @JsonProperty(value = "educationLevel")
   private byte eduLevel;
   @JsonIgnore
   private Set<Record> records = new HashSet<>(0);
 
-  public Group() {}
+  public Group() {
+  }
 
 
   public Group(Faculty faculty, String nameGroup, byte eduLevel) {
@@ -52,7 +56,7 @@ public class Group implements java.io.Serializable, Cloneable, IName {
   }
 
   @Id
-  /* @GeneratedValue(strategy = IDENTITY) */
+  @GeneratedValue(strategy = IDENTITY)
   @Column(name = "id_group", unique = true, nullable = false)
   public Short getIdGroup() {
     return this.idGroup;
@@ -151,35 +155,47 @@ public class Group implements java.io.Serializable, Cloneable, IName {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (getClass() != obj.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
     Group other = (Group) obj;
-    if (eduLevel != other.eduLevel)
+    if (eduLevel != other.eduLevel) {
       return false;
+    }
     if (faculty == null) {
-      if (other.faculty != null)
+      if (other.faculty != null) {
         return false;
-    } else if (!faculty.equals(other.faculty))
+      }
+    } else if (!faculty.equals(other.faculty)) {
       return false;
+    }
     if (flow == null) {
-      if (other.flow != null)
+      if (other.flow != null) {
         return false;
-    } else if (!flow.equals(other.flow))
+      }
+    } else if (!flow.equals(other.flow)) {
       return false;
+    }
     if (idGroup == null) {
-      if (other.idGroup != null)
+      if (other.idGroup != null) {
         return false;
-    } else if (!idGroup.equals(other.idGroup))
+      }
+    } else if (!idGroup.equals(other.idGroup)) {
       return false;
+    }
     if (nameGroup == null) {
-      if (other.nameGroup != null)
+      if (other.nameGroup != null) {
         return false;
-    } else if (!nameGroup.equals(other.nameGroup))
+      }
+    } else if (!nameGroup.equals(other.nameGroup)) {
       return false;
+    }
     return true;
   }
 }

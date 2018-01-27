@@ -27,16 +27,58 @@
 			<version>0.0.2</version>
 		</dependency>
 
-		<!--<dependency>
-			<groupId>by.bsac.timetable.multiSpanCellTable</groupId>
-			<artifactId>multiSpanCellTable</artifactId>
-			<version>0.0.1</version>
-		</dependency>-->
-
 		<dependency>
 			<groupId>by.bsac.timetable</groupId>
 			<artifactId>tt-util</artifactId>
 			<version>0.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jdatepicker</groupId>
+			<artifactId>jdatepicker</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -19,10 +19,10 @@ import by.bsac.timetable.util.LessonFor;
 import by.bsac.timetable.util.LessonPeriod;
 import by.bsac.timetable.util.LessonType;
 import by.bsac.timetable.util.WeekNumber;
-import by.bsac.timetable.view.util.AddNewRecordInitializer;
-import by.bsac.timetable.view.util.FormInitializer;
 import by.bsac.timetable.view.component.ClassroomRenderer;
 import by.bsac.timetable.view.component.MyComboBox;
+import by.bsac.timetable.view.util.AddNewRecordInitializer;
+import by.bsac.timetable.view.util.FormInitializer;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -44,15 +44,15 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jdatepicker.impl.JDatePickerImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AddNewRecordForm extends JDialog {
 
   private static final long serialVersionUID = 1L;
 
-  private static final Logger LOGGER = LogManager.getLogger(AddNewRecordForm.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(AddNewRecordForm.class.getName());
   private static final String DATE_FORMAT = "dd-MM-yyyy";
   private static final String FONT_CONSTANT = "Tahoma";
 
@@ -78,12 +78,6 @@ public class AddNewRecordForm extends JDialog {
 
   /**
    * Constructor for adding a record
-   * 
-   * @param parent
-   * @param lessonDate
-   * @param weekNumber
-   * @param currentWeekDay
-   * @param lessonOrdinalNumber
    */
   public AddNewRecordForm(JFrame parent, Date lessonDate, Group group, byte weekNumber,
       byte currentWeekDay, byte lessonOrdinalNumber) {
@@ -150,10 +144,10 @@ public class AddNewRecordForm extends JDialog {
     JPanel addTab = new JPanel();
     tabbedPane.addTab(getMessage("addNewRecordForm.addRecord"), null, addTab, null);
     addTab.setLayout(null);
-    constractAddTab(addTab, date);
+    contractAddTab(addTab, date);
   }
 
-  private void constractAddTab(JPanel addTab, String lessonDate) {
+  private void contractAddTab(JPanel addTab, String lessonDate) {
 
     /* be careful with such attepts! */
     JComboBox<Classroom> classroomComboBox = new MyComboBox<>(new ClassroomRenderer<>());
@@ -179,11 +173,11 @@ public class AddNewRecordForm extends JDialog {
       addRecord.setDateFrom(date);
       initClassroomComboBox(classroomComboBox, date, addRecord);
     });
-    
+
     Date date = (Date) ConfigStore.getInstance().getValue("toDate");
-    if(date != null) {
+    if (date != null) {
       addRecord.setDateTo(date);
-    }else {
+    } else {
       date = addRecord.getDateFrom();
     }
     JDatePickerImpl toDatePickerForAdd = initializer.initDatePicker(date);
@@ -334,6 +328,9 @@ public class AddNewRecordForm extends JDialog {
     JRadioButton radioButton_3 = new JRadioButton(getMessage("addNewRecordForm.forFirstSubgroup"));
     radioButton_3.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_3.setBounds(442, 7, 193, 23);
+    if (lessonFor.equals(LessonFor.FIRST_SUBGROUP)) {
+      radioButton_3.setSelected(true);
+    }
     radioButton_3.addActionListener((ActionEvent e) -> {
       lessonFor = LessonFor.FIRST_SUBGROUP;
       addRecord.setSubjectFor(lessonFor.lessonForToSubjectFor());
@@ -344,6 +341,9 @@ public class AddNewRecordForm extends JDialog {
     JRadioButton radioButton_4 = new JRadioButton(getMessage("addNewRecordForm.forSecondSubgroup"));
     radioButton_4.setFont(new Font(FONT_CONSTANT, Font.PLAIN, 16));
     radioButton_4.setBounds(442, 38, 193, 23);
+    if (lessonFor.equals(LessonFor.SECOND_SUBGROUP)) {
+      radioButton_4.setSelected(true);
+    }
     radioButton_4.addActionListener((ActionEvent e) -> {
       lessonFor = LessonFor.SECOND_SUBGROUP;
       addRecord.setSubjectFor(lessonFor.lessonForToSubjectFor());
@@ -734,10 +734,13 @@ public class AddNewRecordForm extends JDialog {
   private void initClassroomComboBox(JComboBox<Classroom> classroomComboBox, Date referenceDate,
       Record addRecord) {
     try {
-      Record record = new RecordBuilder().weekDay(addRecord.getWeekDay())
-          .weekNumber(addRecord.getWeekNumber())
-          .subjOrdinalNumber(addRecord.getSubjOrdinalNumber()).build();
-      FormInitializer.initClassroomComboBox(classroomComboBox, referenceDate, record);
+      Record record = new RecordBuilder()
+          .buildWeekDay(addRecord.getWeekDay())
+          .buildWeekNumber(addRecord.getWeekNumber())
+          .buildSubjOrdinalNumber(addRecord.getSubjOrdinalNumber())
+          .build();
+      FormInitializer.initClassroomComboBox(
+          classroomComboBox, referenceDate, record);
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
       JOptionPane.showMessageDialog(getContentPane(), ex.getCause().getMessage());

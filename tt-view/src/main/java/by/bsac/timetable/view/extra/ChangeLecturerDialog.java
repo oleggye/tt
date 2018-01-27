@@ -4,8 +4,8 @@ import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Chair;
 import by.bsac.timetable.entity.Lecturer;
-import by.bsac.timetable.view.util.FormInitializer;
 import by.bsac.timetable.view.component.MyComboBox;
+import by.bsac.timetable.view.util.FormInitializer;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -18,12 +18,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ChangeLecturerDialog extends JDialog {
 
-  private static final Logger LOGGER = LogManager.getLogger(ChangeLecturerDialog.class.getName());
+  private static final Logger LOGGER = LoggerFactory.getLogger(ChangeLecturerDialog.class.getName());
 
   private static final long serialVersionUID = 1L;
 
@@ -79,7 +79,7 @@ public class ChangeLecturerDialog extends JDialog {
         JButton okButton = new JButton("OK");
         okButton.setActionCommand("OK");
 
-        okButton.addActionListener(ItemEvent -> {
+        okButton.addActionListener(itemEvent -> {
           Lecturer newLecturer = (Lecturer) lecturerComboBox.getSelectedItem();
           LOGGER.debug("newLecturer:" + newLecturer);
 

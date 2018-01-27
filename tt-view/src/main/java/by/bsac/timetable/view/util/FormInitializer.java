@@ -17,6 +17,7 @@ import by.bsac.timetable.util.SupportClass;
 import by.bsac.timetable.util.VerticalLabelUI;
 import by.bsac.timetable.view.component.MyComboBoxModel;
 import by.bsac.timetable.view.component.OneColumnTableModel;
+import by.bsac.timetable.view.component.table.TablesArray;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Date;
@@ -33,11 +34,11 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
-import by.bsac.timetable.view.component.table.TablesArray;
 
 public final class FormInitializer {
 
-  private FormInitializer() {}
+  private FormInitializer() {
+  }
 
   public static void initMainForm(JComboBox<Faculty> facultyComboBox,
       JComboBox<Group> groupComboBox, JLabel progressBarLbl, JProgressBar progressBar,
@@ -73,8 +74,7 @@ public final class FormInitializer {
   /**
    * Инициализация ComboBox строками с названиями факультетов
    *
-   * @exception при ошибке SQL-запроса
-   * @throws ServiceException
+   * @throws CommandException ошибке SQL-запроса
    */
   public static void initFacultyComboBox(JComboBox<Faculty> facultyComboBox)
       throws CommandException {
@@ -95,8 +95,7 @@ public final class FormInitializer {
   /**
    * Инициализация ComboBox строками с названиями кафедр
    *
-   * @exception при ошибке SQL-запроса
-   * @throws ServiceException
+   * @throws CommandException ошибке SQL-запроса
    */
   public static void initChairComboBox(JComboBox<Chair> chairComboBox) throws CommandException {
 
@@ -115,11 +114,6 @@ public final class FormInitializer {
 
   /**
    * Method gets the list of {@link Subject} instances and inits JComboBox param
-   * 
-   * @param subjectComboBox
-   * @param chairComboBox
-   * @throws ServiceException
-   * @throws ServiceValidationException
    */
   public static void initSubjectComboBox(JComboBox<Subject> subjectComboBox,
       JComboBox<Chair> chairComboBox, byte educationLevel) throws CommandException {
@@ -143,11 +137,6 @@ public final class FormInitializer {
 
   /**
    * Method gets the list of {@link Lecturer} instances and inits JComboBox param
-   * 
-   * @param lecturerComboBox
-   * @param chairComboBox
-   * @throws ServiceException
-   * @throws ServiceValidationException
    */
   public static void initLecturerComboBox(JComboBox<Lecturer> lecturerComboBox,
       JComboBox<Chair> chairComboBox) throws CommandException {
@@ -170,11 +159,6 @@ public final class FormInitializer {
 
   /**
    * Method gets the list of {@link Lecturer} instances and inits JComboBox param
-   * 
-   * @param lecturerComboBox
-   * @param chair
-   * @throws ServiceException
-   * @throws ServiceValidationException
    */
   public static void initLecturerComboBox(JComboBox<Lecturer> lecturerComboBox, Chair chair)
       throws CommandException {
@@ -195,10 +179,6 @@ public final class FormInitializer {
 
   /**
    * Method gets the list of {@link Classroom} instances and inits JComboBox param
-   * 
-   * @param lecturerComboBox
-   * @param chairComboBox
-   * @throws ServiceException
    */
   public static void initClassroomComboBox(JComboBox<Classroom> classroomComboBox)
       throws CommandException {
@@ -216,10 +196,6 @@ public final class FormInitializer {
 
   /**
    * Method gets the list of {@link Classroom} instances and inits JComboBox param
-   * 
-   * @param lecturerComboBox
-   * @param chairComboBox
-   * @throws ServiceException
    */
   public static void initClassroomComboBox(JComboBox<Classroom> classroomComboBox,
       Date referenceDate, Record record) throws CommandException {
@@ -239,8 +215,7 @@ public final class FormInitializer {
   /**
    * Инициализация ComboBox строками с названиями потоков
    *
-   * @exception при ошибке SQL-запроса
-   * @throws ServiceException
+   * @throws CommandException ошибке SQL-запроса
    */
   public static void initFlowComboBox(JComboBox<Flow> flowComboBox) throws CommandException {
 
@@ -260,9 +235,7 @@ public final class FormInitializer {
   /**
    * Инициализация ComboBox строками с названиями групп, в зависимости от выбранного факультета
    *
-   * @exception при ошибке SQL-запроса
-   * @throws ServiceException
-   * @see ServiceException
+   * @throws CommandException ошибке SQL-запроса
    */
   public static void initGroupComboBox(JComboBox<Faculty> facultyComboBox,
       JComboBox<Group> groupComboBox, byte educationLevel) throws CommandException {
@@ -286,11 +259,8 @@ public final class FormInitializer {
 
   /**
    * Получаем коллекцию с расписанием для выбранной группы и заполняем записями таблицу
-   * 
-   * @throws ServiceValidationException
    *
-   * @exception при ошибке SQL-запроса
-   * @see ServiceException
+   * @throws CommandException ошибке SQL-запроса
    */
   public static void getGroupTimeTable(JComboBox<Group> groupComboBox, TablesArray tableArray,
       Date referenceDate) throws CommandException {
@@ -307,8 +277,9 @@ public final class FormInitializer {
         }
 
         // } else if (!someFlag) {
-      } else
+      } else {
         JOptionPane.showMessageDialog(null, "Пожалуйста, выберите группу");
+      }
     } finally {
       // HibernateUtil.closeSession();
     }
@@ -325,7 +296,7 @@ public final class FormInitializer {
     JPanel leftPanel = new JPanel();
     leftPanel.setBorder(new MatteBorder(0, 0, 0, 1, (Color) new Color(0, 0, 0)));
     leftPanel.setLayout(new GridLayout(7, 1, 0, 0));
-    JLabel[] jLbls = new JLabel[] {new JLabel("Понедельник"), new JLabel("Вторник"),
+    JLabel[] jLbls = new JLabel[]{new JLabel("Понедельник"), new JLabel("Вторник"),
         new JLabel("Среда"), new JLabel("Четверг"), new JLabel("Пятница"), new JLabel("Суббота"),
         new JLabel("Воскресенье")};
     for (JLabel lbl : jLbls) {
@@ -340,9 +311,6 @@ public final class FormInitializer {
 
   /**
    * Получаем коллецию всех факультетов, добавляем в модель и задаем её переданной таблице
-   * 
-   * @param table
-   * @throws ServiceException
    */
   public static void initFacultyTable(JTable table) throws CommandException {
     // HibernateUtil.getSession();
@@ -357,9 +325,6 @@ public final class FormInitializer {
 
   /**
    * Получаем коллецию всех кафедр, добавляем в модель и задаем её переданной таблице
-   * 
-   * @param table
-   * @throws ServiceException
    */
   public static void initChairTable(JTable table) throws CommandException {
     // HibernateUtil.getSession();
@@ -374,9 +339,6 @@ public final class FormInitializer {
 
   /**
    * Получаем аудиторий всех кафедр, добавляем в модель и задаем её переданной таблице
-   * 
-   * @param table
-   * @throws ServiceException
    */
   public static void initClassroomTable(JTable table) throws CommandException {
     // HibernateUtil.getSession();
@@ -391,9 +353,6 @@ public final class FormInitializer {
 
   /**
    * Получаем коллецию всех потоков, добавляем в модель и задаем её переданной таблице
-   * 
-   * @param table
-   * @throws ServiceException
    */
   public static void initFlowTable(JTable table) throws CommandException {
     // HibernateUtil.getSession();
@@ -408,9 +367,6 @@ public final class FormInitializer {
 
   /**
    * Получаем коллецию всех групп факультета, добавляем в модель и задаем её переданной таблице
-   * 
-   * @param table
-   * @throws ServiceException
    */
   public static void initGroupTable(JTable table, Faculty faculty, byte educationLevel)
       throws CommandException {
@@ -432,10 +388,6 @@ public final class FormInitializer {
   /**
    * Получаем коллецию всех преподавателей кафедры, добавляем в модель и задаем её переданной
    * таблице
-   * 
-   * @param table
-   * @throws ServiceException
-   * @throws ServiceValidationException
    */
   public static void initLecturerTable(JTable table, Chair chair) throws CommandException {
     // HibernateUtil.getSession();
@@ -454,10 +406,6 @@ public final class FormInitializer {
   /**
    * Получаем коллецию всех преподавателей кафедры, добавляем в модель и задаем её переданной
    * таблице
-   * 
-   * @param table
-   * @throws ServiceException
-   * @throws ServiceValidationException
    */
   public static void initSubjectTable(JTable table, Chair chair, byte educationLevel)
       throws CommandException {
@@ -477,9 +425,6 @@ public final class FormInitializer {
 
   /**
    * Generic-метод который задает модель составленной из списка переданной таблице
-   * 
-   * @param table
-   * @throws ServiceException
    */
   private static <E> void initTable(JTable table, List<? extends IName> list, Class<E> clazz,
       String tableTitle) {
@@ -494,11 +439,6 @@ public final class FormInitializer {
 
   /**
    * Инициализирует преденный компонент списком групп переданного потока
-   * 
-   * @param groupInFlowTextArea
-   * @param flow
-   * @throws ServiceException
-   * @throws ServiceValidationException
    */
   public static void initFlowGroupTextArea(JTextArea groupInFlowTextArea, Flow flow)
       throws CommandException {
@@ -521,7 +461,7 @@ public final class FormInitializer {
     }
   }
 
-  public static <E> void getAllComparedRecordList(Class<?> clazz, String name, StringBuilder result)
+  public static void getAllComparedRecordList(Class<?> clazz, String name, StringBuilder result)
       throws CommandException {
 
     List<?> resultList = null;

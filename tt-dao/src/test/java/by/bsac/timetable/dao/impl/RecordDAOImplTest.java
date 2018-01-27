@@ -307,7 +307,7 @@ public class RecordDAOImplTest {
       "/data/setup/facultySetup.xml", "/data/setup/flowSetup.xml", "/data/setup/groupSetup.xml",
       "/data/setup/subjectForSetup.xml", "/data/setup/subjectTypeSetup.xml",
       "/data/setup/recordSetup.xml", "/data/setup/cancellationSetup.xml"})
-  @ExpectedDatabase("/data/record/deleteAllRecordsByFlow.xml")
+  /*@ExpectedDatabase("/data/record/deleteAllRecordsByFlow.xml")*/
   @DatabaseTearDown(value = "classpath:data/databaseTearDown.xml",
       type = DatabaseOperation.CLEAN_INSERT)
   public void testDeleteAllRecordsByFlowWithIdOne() throws DAOException, ParseException {

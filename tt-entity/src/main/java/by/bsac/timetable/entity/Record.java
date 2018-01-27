@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,7 +27,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   private static final long serialVersionUID = -6066965208149766799L;
   private static final String FORMAT_CONST = "%s(%s)";
 
-  @JsonProperty(value="id")
+  @JsonProperty(value = "id")
   private Integer idRecord;
   private Classroom classroom;
   private Group group;
@@ -36,16 +37,17 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   private SubjectType subjectType;
   private byte weekNumber;
   private byte weekDay;
-  @JsonProperty(value="ordinalNumber")
+  @JsonProperty(value = "ordinalNumber")
   private byte subjOrdinalNumber;
-  @JsonProperty(value="from")
+  @JsonProperty(value = "from")
   private Date dateFrom;
-  @JsonProperty(value="to")
+  @JsonProperty(value = "to")
   private Date dateTo;
   @JsonIgnore
   private Set<Cancellation> cancellations = new HashSet<>(0);
 
-  public Record() {}
+  public Record() {
+  }
 
 
   public Record(Classroom classroom, Group group, Lecturer lecturer, Subject subject,
@@ -202,7 +204,7 @@ public class Record implements java.io.Serializable, Cloneable, IName {
     this.dateTo = dateTo;
   }
 
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "record")
+  @OneToMany(mappedBy = "record", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
   public Set<Cancellation> getCancellations() {
     return this.cancellations;
   }
@@ -260,7 +262,6 @@ public class Record implements java.io.Serializable, Cloneable, IName {
   public String toString() {
     return getSubjAndSubjType(false);
   }
-
 
 
   @Override
