@@ -14,9 +14,6 @@ public abstract class GenericServiceImplTest {
   protected IValidationService validationService;
 
   @Mock
-  protected IRecordDAO recordDAO;
-
-  @Mock
   protected ICancellationDAO cancellationDao;
 
   @Mock

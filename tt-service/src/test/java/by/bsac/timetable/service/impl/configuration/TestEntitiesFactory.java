@@ -30,6 +30,9 @@ import java.util.ResourceBundle;
 
 public class TestEntitiesFactory {
 
+  private TestEntitiesFactory() {
+  }
+
   public static TestEntitiesFactory getInstance() {
     return SingletonHolder.instance;
   }

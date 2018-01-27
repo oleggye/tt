@@ -1,7 +1,5 @@
 package by.bsac.timetable.service.impl;
 
-import static java.util.Objects.equals;
-
 import by.bsac.timetable.dao.ICancellationDAO;
 import by.bsac.timetable.dao.IGroupDAO;
 import by.bsac.timetable.dao.IRecordDAO;
@@ -117,7 +115,6 @@ public class RecordServiceImpl implements IRecordService {
         && !updateRecord.getDateFrom().equals(initialRecord.getDateFrom())
         && !updateRecord.getDateTo().equals(initialRecord.getDateTo())) {
 
-      /*System.out.println(updateRecord.getDateFrom().getClass());*/
       byte weekDay = DateUtil.getWeekDay(updateRecord.getDateFrom());
       byte weekNumber = DateUtil.getWeekNumber(updateRecord.getDateFrom());
       updateRecord.setWeekDay(weekDay);
@@ -334,7 +331,6 @@ public class RecordServiceImpl implements IRecordService {
         throw new ServiceValidationException("Запись конфликтует с другой!");
       }
     }
-
   }
 
   @Transactional(value = TxType.REQUIRED, rollbackOn = ServiceException.class,
