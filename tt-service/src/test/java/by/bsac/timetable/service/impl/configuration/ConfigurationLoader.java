@@ -2,7 +2,6 @@ package by.bsac.timetable.service.impl.configuration;
 
 import by.bsac.timetable.entity.Cancellation;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -15,7 +14,7 @@ import java.util.stream.Stream;
 public class ConfigurationLoader {
 
   public static void main(String[] args) throws IOException, URISyntaxException {
-    File file = new File("simple_bean.xml");
+    //File file = new File("simple_bean.xml");
     final String fileName = "cancellationSetup.xml";
 
     String xml = "";

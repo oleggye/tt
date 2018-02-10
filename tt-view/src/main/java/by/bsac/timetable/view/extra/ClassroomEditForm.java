@@ -10,7 +10,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import javax.swing.JButton;
@@ -117,8 +116,11 @@ public class ClassroomEditForm extends JDialog {
         try {
           editButton.setEnabled(false);
 
-          Classroom editingClassroom = new ClassroomBuilder().buildId(classroom.getIdClassroom())
-              .buildBuilding(building).buildName(name).build();
+          Classroom editingClassroom = new ClassroomBuilder()
+              .id(classroom.getIdClassroom())
+              .building(building)
+              .name(name)
+              .build();
 
           CommandFacade.updateClassroom(editingClassroom);
           FormInitializer.initClassroomTable(table);
@@ -189,7 +191,10 @@ public class ClassroomEditForm extends JDialog {
 
           addButton.setEnabled(false);
 
-          classroom = new ClassroomBuilder().buildBuilding(building).buildName(name).build();
+          classroom = new ClassroomBuilder()
+              .building(building)
+              .name(name)
+              .build();
 
           CommandFacade.addClassroom(classroom);
           FormInitializer.initClassroomTable(table);

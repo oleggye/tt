@@ -11,8 +11,6 @@ import by.bsac.timetable.entity.IName;
 import by.bsac.timetable.entity.Lecturer;
 import by.bsac.timetable.entity.Record;
 import by.bsac.timetable.entity.Subject;
-import by.bsac.timetable.service.exception.ServiceException;
-import by.bsac.timetable.service.exception.ServiceValidationException;
 import by.bsac.timetable.util.SupportClass;
 import by.bsac.timetable.util.VerticalLabelUI;
 import by.bsac.timetable.view.component.MyComboBoxModel;
@@ -461,8 +459,9 @@ public final class FormInitializer {
     }
   }
 
-  public static void getAllComparedRecordList(Class<?> clazz, String name, StringBuilder result)
+  public static String getAllComparedRecordList(Class<?> clazz, String name)
       throws CommandException {
+    final StringBuilder result = new StringBuilder();
 
     List<?> resultList = null;
 
@@ -486,5 +485,6 @@ public final class FormInitializer {
       result.append(coincidenceName);
       result.append("\n");
     }
+    return result.toString();
   }
 }

@@ -62,7 +62,7 @@ public class CoincidenceTextFieldController implements KeyListener {
 
       String name = textField.getText();
 
-      String tip = getAllComparedRecords(name);
+      final String tip = getAllComparedRecords(name);
       if (!tip.isEmpty()) {
         jPane.setVisible(true);
         coincidenceLabel.setVisible(true);
@@ -75,15 +75,14 @@ public class CoincidenceTextFieldController implements KeyListener {
   }
 
   private String getAllComparedRecords(String comparableString) {
-    StringBuilder result = new StringBuilder();
-
+    String result = "";
     try {
-      FormInitializer.getAllComparedRecordList(clazz, comparableString, result);
+      result = FormInitializer.getAllComparedRecordList(clazz, comparableString);
 
     } catch (CommandException ex) {
       LOGGER.error(ex.getCause().getMessage(), ex);
       JOptionPane.showMessageDialog(frame.getContentPane(), ex.getCause().getMessage());
     }
-    return result.toString();
+    return result;
   }
 }

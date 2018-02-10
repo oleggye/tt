@@ -1,7 +1,7 @@
 package by.bsac.timetable.view;
 
 import static by.bsac.timetable.view.util.LocalizationBundle.getMessage;
-import static java.util.Objects.*;
+import static java.util.Objects.isNull;
 
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.entity.Faculty;
@@ -35,7 +35,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Objects;
 import java.util.Properties;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -409,8 +408,10 @@ public class MainForm extends JFrame {
       } catch (ApplicationException ex) {
         final Throwable cause = ex.getCause();
         final String errorMessage = isNull(cause) ? "" : cause.getMessage();
+
         LOGGER.error(errorMessage, ex);
-        JOptionPane.showMessageDialog(frame.getContentPane(), errorMessage);
+        JOptionPane.showMessageDialog(getContentPane(), errorMessage);
+
         progressBarLbl.setText(getMessage("mainForm.error"));
         progressBar.setValue(progressBar.getMaximum());
       } finally {

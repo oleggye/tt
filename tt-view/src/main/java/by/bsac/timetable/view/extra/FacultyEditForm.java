@@ -9,7 +9,6 @@ import by.bsac.timetable.view.util.FormInitializer;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -88,8 +87,8 @@ public class FacultyEditForm extends JDialog {
           editButton.setEnabled(false);
 
           Faculty editingFaculty = new FacultyBuilder()
-              .buildId(faculty.getIdFaculty())
-              .buildName(nameFaculty)
+              .id(faculty.getIdFaculty())
+              .name(nameFaculty)
               .build();
           CommandFacade.updateFaculty(editingFaculty);
           FormInitializer.initFacultyTable(table);
@@ -142,7 +141,9 @@ public class FacultyEditForm extends JDialog {
       if (isTableHasNot) {
         try {
           addButton.setEnabled(false);
-          faculty = new FacultyBuilder().buildName(nameFaculty).build();
+          faculty = new FacultyBuilder()
+              .name(nameFaculty)
+              .build();
 
           CommandFacade.addFaculty(faculty);
           FormInitializer.initFacultyTable(table);

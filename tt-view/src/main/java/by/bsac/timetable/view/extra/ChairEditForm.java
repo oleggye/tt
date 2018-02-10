@@ -90,8 +90,8 @@ public class ChairEditForm extends JDialog {
           editButton.setEnabled(false);
 
           Chair editingChair = new ChairBuilder()
-              .buildId(chair.getIdChair())
-              .buildNameChair(textField.getText())
+              .id(chair.getIdChair())
+              .name(textField.getText())
               .build();
           CommandFacade.updateChair(editingChair);
           FormInitializer.initChairTable(table);
@@ -145,7 +145,9 @@ public class ChairEditForm extends JDialog {
       if (isTableHasNot) {
         try {
           addButton.setEnabled(false);
-          chair = new ChairBuilder().buildNameChair(textField.getText()).build();
+          chair = new ChairBuilder()
+              .name(textField.getText())
+              .build();
 
           CommandFacade.addChair(chair);
           FormInitializer.initChairTable(table);

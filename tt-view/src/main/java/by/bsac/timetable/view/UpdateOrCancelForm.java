@@ -1121,9 +1121,9 @@ public class UpdateOrCancelForm extends JDialog {
       Record updateRecord) {
     try {
       Record record = new RecordBuilder()
-          .buildWeekDay(updateRecord.getWeekDay())
-          .buildWeekNumber(updateRecord.getWeekNumber())
-          .buildSubjOrdinalNumber(updateRecord.getSubjOrdinalNumber())
+          .weekDay(updateRecord.getWeekDay())
+          .weekNumber(updateRecord.getWeekNumber())
+          .subjOrdinalNumber(updateRecord.getSubjOrdinalNumber())
           .build();
       FormInitializer.initClassroomComboBox(
           classroomComboBox, referenceDate, record);

@@ -1,13 +1,12 @@
 package by.bsac.timetable.view;
 
-import static java.util.Objects.*;
+import static java.util.Objects.isNull;
 
 import by.bsac.timetable.listener.SpringApplicationContextManager;
 import java.awt.EventQueue;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.Objects;
 import javax.swing.JOptionPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

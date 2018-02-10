@@ -41,7 +41,7 @@ public class EditForm extends JDialog {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EditForm.class.getName());
 
-  private final JPanel contentPanel = new JPanel();
+  private JPanel contentPanel = new JPanel();
   private JTextField textField;// текстовое поле
   private JTextField textFieldForAbbr;// специально для аббревиатур
   private JTable table;

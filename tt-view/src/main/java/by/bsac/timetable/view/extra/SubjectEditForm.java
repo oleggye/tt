@@ -14,7 +14,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -198,8 +197,8 @@ public class SubjectEditForm extends JDialog {
           addButton.setEnabled(false);
 
           Chair chair = (Chair) chairComboBox.getSelectedItem();
-          Subject newSubject = new SubjectBuilder().buildChair(chair).buildAbname(abbrName)
-              .buildEduLevel(educationLevel).buildNameSubject(subjectName).build();
+          Subject newSubject = new SubjectBuilder().chair(chair).abName(abbrName)
+              .eduLevel(educationLevel).name(subjectName).build();
 
           CommandFacade.addSubject(newSubject);
           FormInitializer.initSubjectTable(table, chair, educationLevel);
@@ -218,7 +217,7 @@ public class SubjectEditForm extends JDialog {
     editButton.addActionListener(e -> {
       String subjectName = subjectNameTextField.getText();
       String abbrName = abbrTextField.getText();
-      boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName, true);
+      final boolean isTableHasNot = isTableHasNotAlikeValue(table, subjectName, true);
 
       if (isTableHasNot) {
         try {
@@ -226,11 +225,11 @@ public class SubjectEditForm extends JDialog {
 
           Chair chair = (Chair) chairComboBox.getSelectedItem();
           Subject newSubject = new SubjectBuilder()
-              .buildId(subject.getIdSubject())
-              .buildChair(subject.getChair())
-              .buildAbname(abbrName)
-              .buildEduLevel(subject.getEduLevel())
-              .buildNameSubject(subjectName)
+              .id(subject.getIdSubject())
+              .chair(subject.getChair())
+              .abName(abbrName)
+              .eduLevel(subject.getEduLevel())
+              .name(subjectName)
               .build();
 
           CommandFacade.updateSubject(newSubject);

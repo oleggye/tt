@@ -20,8 +20,8 @@ public class AddRecord implements ICommand {
 
   @Override
   public void execute(Request request) throws CommandException {
-    Record record = (Record) request.getValue("addRecord");
-    Set<WeekNumber> weekSet = (Set<WeekNumber>) request.getValue("weekSet");
+    final Record record = (Record) request.getValue("addRecord");
+    final Set<WeekNumber> weekSet = (Set<WeekNumber>) request.getValue("weekSet");
 
     try {
       if (weekSet != null) {
