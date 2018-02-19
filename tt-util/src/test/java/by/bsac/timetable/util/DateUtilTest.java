@@ -1,9 +1,11 @@
 package by.bsac.timetable.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +33,7 @@ public class DateUtilTest {
 
     byte takenWeekNumber = DateUtil.getWeekNumber(date);
 
-    Assertions.assertThat(takenWeekNumber).isEqualTo(expectedWeekNumber);
+    assertThat(takenWeekNumber).isEqualTo(expectedWeekNumber);
   }
 
   @Test
@@ -40,6 +42,22 @@ public class DateUtilTest {
 
     byte takenWeekDay = DateUtil.getWeekDay(date);
 
-    Assertions.assertThat(takenWeekDay).isEqualTo(expectedWeekDay);
+    assertThat(takenWeekDay).isEqualTo(expectedWeekDay);
+  }
+
+  @Test
+  public void testGetDateFromAndDateToByReferenceDate() throws ParseException {
+    final Date expectedDateFrom = FORMAT.parse("2017-08-28");
+    final Date expectedDateTo = FORMAT.parse("2017-09-24");
+    final int expectedArraySize = 2;
+
+    Date[] dates = DateUtil.getDateFromAndDateToByReferenceDate(date);
+
+    assertThat(dates).isNotNull();
+    assertThat(dates).isNotEmpty();
+    assertThat(dates).isNotEmpty();
+    assertThat(dates.length).isEqualTo(expectedArraySize);
+    assertThat(expectedDateFrom).isEqualTo(dates[0]);
+    assertThat(expectedDateTo).isEqualTo(dates[1]);
   }
 }

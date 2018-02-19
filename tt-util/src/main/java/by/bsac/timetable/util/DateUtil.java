@@ -15,24 +15,28 @@ public final class DateUtil {
   private static final byte WEEK_DAY_LOW_BOUND = 1;
   private static final byte WEEK_DAY_TOP_BOUND = 7;
 
+  private static final byte MONDAY_ORDINAL_NUMBER = 1;
+
+  private DateUtil() {
+  }
+
   public static int whatWeekNumberIs(LocalDate date) {
 
     if (date != null) {
 
-      int date_dayOfYear = 0;
-      int date_dayOfWeek = date.get(ChronoField.DAY_OF_WEEK);
+      int dateDayOfYear;
+      int dateDayOfWeek = date.get(ChronoField.DAY_OF_WEEK);
 
       /**
        * если полученная дата не является ПН, то нужно сместиться к понедельнику этой недели, т.е.
        * date - будет всегда ПН
        */
       if (date.get(ChronoField.DAY_OF_WEEK) != 1) {
-        date = date.minusDays(date_dayOfWeek - 1);
-        // System.out.println(date);
+        date = date.minusDays((long) (dateDayOfWeek - 1));
 
-        date_dayOfYear = date.get(ChronoField.DAY_OF_YEAR);
+        dateDayOfYear = date.get(ChronoField.DAY_OF_YEAR);
       } else {
-        date_dayOfYear = date.get(ChronoField.DAY_OF_YEAR);
+        dateDayOfYear = date.get(ChronoField.DAY_OF_YEAR);
       }
 
       /**
@@ -56,56 +60,58 @@ public final class DateUtil {
       /** задаем дату для 1 сентября */
 
       LocalDate firstSeptDate = LocalDate.of(yearOfSeptember, Month.SEPTEMBER, 1);
-      int firstSeptDate_dayOfYear = firstSeptDate.get(ChronoField.DAY_OF_YEAR);
-      int firstSeptDate_dayOfWeek = firstSeptDate.get(ChronoField.DAY_OF_WEEK);
+      int firstSeptemberDateDayOfYear = firstSeptDate.get(ChronoField.DAY_OF_YEAR);
+      int firstSeptemberDateDayOfWeek = firstSeptDate.get(ChronoField.DAY_OF_WEEK);
 
       /**
        * начинаем подсчитывать номер недели
        *
        */
 
-      int weekNumb = 0; // номер недели;
+      int weekNumber;
       boolean needWeekOffset = false; /**
        * смещение, если 1-ое сентября не пн, то начинаем с // пн
        * 2-ой недели и weekOffset=true;
        */
-      int daysDiff = 0; // разница в количестве дней между двумя датами;
+
+      int daysDifferenceBetweenTwoDates;
 
       /**
        * если 1-ое сентября не понедельник //изменить!!! т.е мы переходим к ПН следующей недели
        * сентября чтобы вести отсчет от него и задаем это в переменной needWeekOffset
        */
       if (firstSeptDate.get(ChronoField.DAY_OF_WEEK) != 1) {
-        LocalDate secWeekOfSeptMondayDate = firstSeptDate.plusDays(7 - firstSeptDate_dayOfWeek + 1);
-        int secWeekOfSeptMondayDate_dayOfYear =
-            secWeekOfSeptMondayDate.get(ChronoField.DAY_OF_YEAR);
+        LocalDate secondWeekMondayOfSeptemberDate = firstSeptDate
+            .plusDays((long) (7 - firstSeptemberDateDayOfWeek + 1));
+        int secondWeekMondayOfSeptemberDateDayOfYear =
+            secondWeekMondayOfSeptemberDate.get(ChronoField.DAY_OF_YEAR);
 
         if (yearOfSeptember != date.get(ChronoField.YEAR)) {
           /**
            * т.к. две даты в разных года, то нужно пересчитать количество дней
            */
           LocalDate temp = LocalDate.of(yearOfSeptember, Month.DECEMBER, 31);
-          date_dayOfYear = date_dayOfYear + temp.get(ChronoField.DAY_OF_YEAR);
+          dateDayOfYear = dateDayOfYear + temp.get(ChronoField.DAY_OF_YEAR);
         }
 
-        daysDiff = date_dayOfYear - secWeekOfSeptMondayDate_dayOfYear;
+        daysDifferenceBetweenTwoDates = dateDayOfYear - secondWeekMondayOfSeptemberDateDayOfYear;
         needWeekOffset = true;
       } else {
-        daysDiff = date_dayOfYear - firstSeptDate_dayOfYear;
+        daysDifferenceBetweenTwoDates = dateDayOfYear - firstSeptemberDateDayOfYear;
 
       }
 
-      int weeksCount = daysDiff / 7;
-      weekNumb = weeksCount % 4;
+      int weeksCount = daysDifferenceBetweenTwoDates / 7;
+      weekNumber = weeksCount % 4;
       if (needWeekOffset) {
-        if (weekNumb != 3) {
-          weekNumb = weekNumb + 2;
+        if (weekNumber != 3) {
+          weekNumber = weekNumber + 2;
         } else {
-          weekNumb = 1;
+          weekNumber = 1;
         }
       }
 
-      return weekNumb;
+      return weekNumber;
     } else {
       throw new IllegalArgumentException("date is null");
     }
@@ -127,10 +133,10 @@ public final class DateUtil {
       LocalDate[] mondays = new LocalDate[4];
       LocalDate bearingMonday;
 
-      int bearingDate_dayOfWeek = referenceDate.get(ChronoField.DAY_OF_WEEK);
+      long bearingDateDayOfWeek = referenceDate.get(ChronoField.DAY_OF_WEEK);
 
       if (referenceDate.get(ChronoField.DAY_OF_WEEK) != 1) {
-        bearingMonday = referenceDate.minusDays(bearingDate_dayOfWeek - 1);
+        bearingMonday = referenceDate.minusDays(bearingDateDayOfWeek - 1);
       } else {
         bearingMonday = referenceDate;
       }
@@ -145,22 +151,23 @@ public final class DateUtil {
           mondays[3] = DateUtil.getNextMonday(mondays[2]);
           break;
         case 2:// 1-ый индекс в массиве
-          mondays[0] = DateUtil.getPrivMonday(bearingMonday);
+          mondays[0] = DateUtil.getPreviousMonday(bearingMonday);
           mondays[2] = DateUtil.getNextMonday(bearingMonday);
           mondays[3] = DateUtil.getNextMonday(mondays[2]);
           break;
         case 3:
-          mondays[1] = DateUtil.getPrivMonday(bearingMonday);
-          mondays[0] = DateUtil.getPrivMonday(mondays[1]);
+          mondays[1] = DateUtil.getPreviousMonday(bearingMonday);
+          mondays[0] = DateUtil.getPreviousMonday(mondays[1]);
           mondays[3] = DateUtil.getNextMonday(bearingMonday);
           break;
         case 4:
-          mondays[2] = DateUtil.getPrivMonday(bearingMonday);
-          mondays[1] = DateUtil.getPrivMonday(mondays[2]);
-          mondays[0] = DateUtil.getPrivMonday(mondays[1]);
+          mondays[2] = DateUtil.getPreviousMonday(bearingMonday);
+          mondays[1] = DateUtil.getPreviousMonday(mondays[2]);
+          mondays[0] = DateUtil.getPreviousMonday(mondays[1]);
           break;
         default:
-          throw new IllegalArgumentException(String.format("Wrong weeknumber value = %s",weekNumb ));
+          throw new IllegalArgumentException(
+              String.format("Wrong weeknumber value = %s", weekNumb));
       }
       return mondays;
     } else {
@@ -176,7 +183,7 @@ public final class DateUtil {
     }
   }
 
-  public static LocalDate getPrivMonday(LocalDate referenceMonday) {
+  public static LocalDate getPreviousMonday(LocalDate referenceMonday) {
     if (referenceMonday != null && isMonday(referenceMonday)) {
       return referenceMonday.minusDays(7);
     } else {
@@ -205,11 +212,7 @@ public final class DateUtil {
     }
 
     int dayOfWeek = date.get(ChronoField.DAY_OF_WEEK);
-    if (dayOfWeek == 1) {// это ПН
-      return true;
-    } else {
-      return false;
-    }
+    return dayOfWeek == MONDAY_ORDINAL_NUMBER;
   }
 
   /**
@@ -242,14 +245,12 @@ public final class DateUtil {
           + ",weekNumber=" + weekNumber + ", weekDay=" + weekDay);
     }
 
-    Date result = null;
     LocalDate localDate = referenceDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     LocalDate[] fourMondays = get4Mondays(localDate);
     LocalDate weekMonday = fourMondays[weekNumber - 1];
     LocalDate resultLocalDate = getDateByMondayDate(weekMonday, weekDay);
-    result = Date.from(resultLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
-    return result;
+    return Date.from(resultLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
   }
 
   private static LocalDate getDateByMondayDate(LocalDate mondayDate, byte weekDay) {
@@ -259,15 +260,15 @@ public final class DateUtil {
     if (weekDay == 1) {
       return mondayDate;
     }
-    return mondayDate.plusDays(weekDay - 1);
+    return mondayDate.plusDays((long) (weekDay - 1));
   }
 
-  public static byte getWeekNumber(java.util.Date date) {
+  public static byte getWeekNumber(Date date) {
     LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     return (byte) whatWeekNumberIs(localDate);
   }
 
-  public static byte getWeekDay(java.util.Date date) {
+  public static byte getWeekDay(Date date) {
     LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     return (byte) localDate.getDayOfWeek().getValue();
   }

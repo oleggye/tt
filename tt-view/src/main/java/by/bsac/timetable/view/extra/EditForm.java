@@ -1,5 +1,6 @@
 package by.bsac.timetable.view.extra;
 
+import by.bsac.timetable.annotations.Legacy;
 import by.bsac.timetable.command.exception.CommandException;
 import by.bsac.timetable.command.util.CommandFacade;
 import by.bsac.timetable.entity.Chair;
@@ -35,6 +36,7 @@ import javax.swing.table.DefaultTableModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Legacy
 public class EditForm extends JDialog {
 
   private static final long serialVersionUID = 1L;
